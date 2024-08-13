@@ -20,6 +20,7 @@ class StartPageHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: StartPageWidget(),
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
         colorScheme: ColorScheme.light(
@@ -32,6 +33,7 @@ class StartPageHome extends StatelessWidget {
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Color(0xfff0f0f0),
         ),
+        fontFamily: 'MPlus1p',
       ),
     );
   }
