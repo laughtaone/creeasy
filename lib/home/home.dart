@@ -32,15 +32,28 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '今月の使用状況',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+            Row(
+              children: [
+                Icon(Icons.equalizer, size: 25, color: Colors.black),
+                SizedBox(width: 4),
+                Text(
+                  '今月の使用状況',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 10),
-            HomeCardTile(card_name: '三井住友カード', month_price: 2987,)
+            HomeCardTile(card_name: '三井住友カード', month_price: 2987),
+            HomeCardTile(card_name: 'メルカード', month_price: 7102),
+            HomeCardTile(card_name: 'LINEクレカ(P+)', month_price: 10183),
+            HomeCardTile(card_name: 'ビューカード', month_price: 36090),
+            HomeCardTile(card_name: 'PayPayカード', month_price: 1529),
+          //   HomeCardTile(card_name: '楽天カード', month_price: 5625),
+          //   HomeCardTile(card_name: 'auPAYカード', month_price: 1025),
+          //   HomeCardTile(card_name: 'dカード', month_price: 423),
           ],
         ),
       ),
