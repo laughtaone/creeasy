@@ -4,6 +4,7 @@ import 'package:creeasy/cart_manage/card_manage.dart';
 import 'package:creeasy/add/add.dart';
 import 'package:creeasy/calender/calender.dart';
 import 'package:creeasy/settings/settings.dart';
+import 'package:flutter/cupertino.dart';
 
 
 
@@ -56,14 +57,56 @@ class _StartPageWidgetState extends State<StartPageWidget> {
     AddPage(),
     CalenderPage(),
     SettingsPage()
-
   ];
+
   void _onTap(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+    if (index == 2) { // "追加" ボタンが押されたとき
+      _showCupertinoActionSheet(context);
+    } else {
+      setState(() {
+        _currentIndex = index;
+      });
+    }
   }
 
+  void _showCupertinoActionSheet(BuildContext context) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) => CupertinoActionSheet(
+        title: Text('追加する項目を選択'),
+        actions: <CupertinoActionSheetAction>[
+          CupertinoActionSheetAction(
+            child: Text('💸利用履歴を追加'),
+            onPressed: () {
+              Navigator.pop(context);
+              // Option 1 のアクション
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: Text('🤲臨時支払いを追加'),
+            onPressed: () {
+              Navigator.pop(context);
+              // Option 2 のアクション
+            },
+          ),
+          CupertinoActionSheetAction(
+            child: Text('🤑ポイント割当を追加'),
+            onPressed: () {
+              Navigator.pop(context);
+              // Option 2 のアクション
+            },
+          ),
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          child: Text('キャンセル'),
+          isDestructiveAction: true,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,29 +116,31 @@ class _StartPageWidgetState extends State<StartPageWidget> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'ホーム',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.credit_card),
-            label: 'カード管理',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_outlined),
-            label: '追加',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.date_range_outlined),
-            label: 'カレンダー',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: '設定',
+            label: '',
           ),
         ],
         currentIndex: _currentIndex, // 現在のインデックスを設定
         onTap: _onTap, // タップ時に呼ばれるメソッドを設定
         unselectedIconTheme: const IconThemeData(size: 25, color: Colors.black54),
         selectedIconTheme: const IconThemeData(color: Colors.black),
+        // showSelectedLabels: false,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }

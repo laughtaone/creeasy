@@ -18,11 +18,12 @@ class _CalenderPageState extends State<CalenderPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.shopping_bag,
+              Icons.date_range_outlined,
+              color: Colors.black
             ),
             SizedBox(width: 5),
             Text(
-              '置き勉管理',
+              'カレンダー',
             ),
           ],
         ),

@@ -23,7 +23,7 @@ class HomeCardTile extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          fixedSize: Size.fromHeight(75)
+          fixedSize: Size.fromHeight(80)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,7 +42,7 @@ class HomeCardTile extends StatelessWidget {
             ),
             Text(
               formatYen(month_price),
-              style: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w700),
+              style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w700),
             ),
           ],
         ),

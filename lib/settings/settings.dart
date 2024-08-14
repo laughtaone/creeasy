@@ -18,11 +18,12 @@ class _SettingsPageState extends State<SettingsPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.shopping_bag,
+              Icons.settings,
+              color: Colors.black
             ),
             SizedBox(width: 5),
             Text(
-              '置き勉管理',
+              '設定',
             ),
           ],
         ),

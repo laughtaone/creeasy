@@ -13,25 +13,32 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        backgroundColor: Colors.white,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 0),
-          child: Text(
-            'こんにちは',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 30,
-            ),
-          ),
-        ),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: false,
+      //   backgroundColor: Colors.white,
+      //   title: Padding(
+      //     padding: const EdgeInsets.only(left: 0),
+      //     child: Text(
+      //       'こんにちは',
+      //       style: TextStyle(
+      //         fontWeight: FontWeight.bold,
+      //         fontSize: 30,
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
+            Text(
+              'こんにちは',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 33,
+              ),
+            ),
+            SizedBox(height: 10),
             Row(
               children: [
                 Icon(Icons.equalizer, size: 25, color: Colors.black),
@@ -40,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                   '今月の使用状況',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 22,
                   ),
                 ),
               ],
@@ -51,9 +58,9 @@ class _HomePageState extends State<HomePage> {
             HomeCardTile(card_name: 'LINEクレカ(P+)', month_price: 10183),
             HomeCardTile(card_name: 'ビューカード', month_price: 36090),
             HomeCardTile(card_name: 'PayPayカード', month_price: 1529),
-          //   HomeCardTile(card_name: '楽天カード', month_price: 5625),
-          //   HomeCardTile(card_name: 'auPAYカード', month_price: 1025),
-          //   HomeCardTile(card_name: 'dカード', month_price: 423),
+            HomeCardTile(card_name: '楽天カード', month_price: 5625),
+            HomeCardTile(card_name: 'auPAYカード', month_price: 1025),
+            HomeCardTile(card_name: 'dカード', month_price: 423),
           ],
         ),
       ),

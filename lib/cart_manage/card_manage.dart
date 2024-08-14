@@ -18,14 +18,12 @@ class _CardManagePageState extends State<CardManagePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.shopping_bag,
-              color: Theme.of(context).brightness == Brightness.light
-                  ? Colors.black // ライトモードの色
-                  : Colors.white, // ダークモードの色
+              Icons.credit_card,
+              color: Colors.black
             ),
             SizedBox(width: 5),
             Text(
-              '置き勉管理',
+              'カード管理',
             ),
           ],
         ),
