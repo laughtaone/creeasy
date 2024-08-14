@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/home/home.dart';
 import 'package:creeasy/cart_manage/card_manage.dart';
-import 'package:creeasy/add/add.dart';
+import 'package:creeasy/add/add_payment.dart';
+import 'package:creeasy/add/add_special-payment.dart';
+import 'package:creeasy/add/add_use-point.dart';
 import 'package:creeasy/calender/calender.dart';
 import 'package:creeasy/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,7 +56,6 @@ class _StartPageWidgetState extends State<StartPageWidget> {
   var _pages = <Widget>[
     HomePage(),
     CardManagePage(),
-    AddPage(),
     CalenderPage(),
     SettingsPage()
   ];
@@ -73,27 +74,66 @@ class _StartPageWidgetState extends State<StartPageWidget> {
     showCupertinoModalPopup(
       context: context,
       builder: (context) => CupertinoActionSheet(
-        title: Text('追加する項目を選択'),
+        title: Text('追加する項目を選択：'),
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
-            child: Text('💸利用履歴を追加'),
-            onPressed: () {
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.credit_score_outlined, size: 20),
+                SizedBox(width: 5),
+                Text('利用履歴を追加'),
+              ],
+            ),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddPaymentPage(),
+                  fullscreenDialog: true,
+                ),
+              );
               Navigator.pop(context);
-              // Option 1 のアクション
             },
           ),
           CupertinoActionSheetAction(
-            child: Text('🤲臨時支払いを追加'),
-            onPressed: () {
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.account_balance, size: 20),
+                SizedBox(width: 5),
+                Text('臨時支払いを追加'),
+              ],
+            ),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddSpecialPaymentPage(),
+                  fullscreenDialog: true,
+                ),
+              );
               Navigator.pop(context);
-              // Option 2 のアクション
             },
           ),
           CupertinoActionSheetAction(
-            child: Text('🤑ポイント割当を追加'),
-            onPressed: () {
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.stars_outlined, size: 20),
+                SizedBox(width: 5),
+                Text('ポイント割当を追加'),
+              ],
+            ),
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddUsePointPage(),
+                  fullscreenDialog: true,
+                ),
+              );
               Navigator.pop(context);
-              // Option 2 のアクション
             },
           ),
         ],

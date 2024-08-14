@@ -1,32 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/main.dart';
 
-class AddPage extends StatefulWidget {
+class AddSpecialPaymentPage extends StatefulWidget {
   @override
-  _AddPageState createState() => _AddPageState();
+  _AddSpecialPaymentPageState createState() => _AddSpecialPaymentPageState();
 }
 
 
-class _AddPageState extends State<AddPage> {
+class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.add_outlined,
+              Icons.account_balance,
               color: Colors.black
             ),
             SizedBox(width: 5),
             Text(
-              '追加',
+              '臨時支払いを追加',
             ),
           ],
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.close,
+              color: Colors.black,
+            ))
+        ],
         backgroundColor:
             Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
       ),
