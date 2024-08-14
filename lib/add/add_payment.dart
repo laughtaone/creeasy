@@ -126,73 +126,37 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
   }
 }
 
+
+
+
 // ②金額を入力の入力フィールドで0を連続して入力できないようにするクラス
 class ZeroLimitFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue, // 以前のテキストフィールドの値
-    TextEditingValue newValue, // ユーザーが入力した新しい値
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
   ) {
-    print('oldValueは　$oldValue');
-    print('newValueは　$newValue');
-    // print(newValue.text.runtimeType);
-
-    if (oldValue.text.length == 1 && oldValue.text[0] == '0') {
-      // 「0」が入力されていて
-      if (newValue.text == '') {
-        // 「0」が入力されていて、その0を消そうとした時
-        print('条件分岐1');
-        print('');
-        return newValue;
-      } else if (newValue.text != '' && newValue.text != '0') {
-        return newValue;
-      } else {
-        // 「0」が入力されていて、その0の後ろに数字を追加しようとした時
-        print('条件分岐2');
-        print('');
-        return oldValue;
-      }
-    } else if (oldValue.text == '') {
-      // 何も入力されていなくて、何か数字を入れようとした時
-      print('条件分岐3');
-      print('');
-      return newValue;
-    } else if (oldValue.text.isNotEmpty &&
-        oldValue.text[0] != 0 &&
-        newValue.text[0] == '0') {
-      // 「0」以外の数字が入力されていて
-      if (newValue.text.length == 1) {
-        // 「0」以外の数字が入力されていて、oldTextを全選択して0にしようとした時
-        return newValue;
-      } else {
-        // 「0」以外の数字が入力されていて、先頭に0を入れようとした時
-        return oldValue;
-      }
-      // 先頭に0を入れようとした時
-      print('条件分岐4');
-      print('');
-      return oldValue;
-    } else {
-      print('条件分岐5');
-      print('');
+    // 新しい値が空の場合、そのまま新しい値を返す
+    if (newValue.text.isEmpty) {
       return newValue;
     }
 
-    // // ユーザーが入力した新しい値が0 and 文字数が1　の場合
-    // if (newValue.text == '0' && newValue.text.length == 1) {
-    //   print('条件分岐1');
-    //   print('');
-    //   return newValue;
-    // }
-    // // ユーザーが入力した新しい値が0 and 文字数が2以上　の場合
-    // if (newValue.text.contains('0') && newValue.text.length > 1) {
-    //   print('条件分岐2');
-    //   print('');
-    //   return oldValue;
-    // }
-    // // それ以外の場合
-    // print('条件分岐3');
-    // print('');
-    // return newValue;
+    // 数値が '0' ならそのまま許可（最初の入力として）
+    if (newValue.text == '0') {
+      return newValue;
+    }
+
+    // '0' で始まるが、'0'単独ではない場合は前の値に戻す
+    if (newValue.text.startsWith('0') && newValue.text.length > 1) {
+      return oldValue;
+    }
+
+    // 整数に変換して0以上の値のみ許可
+    final int? value = int.tryParse(newValue.text);
+    if (value == null || value < 0) {
+      return oldValue;
+    }
+
+    return newValue;
   }
 }
