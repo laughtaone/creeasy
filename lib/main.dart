@@ -56,6 +56,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
   var _pages = <Widget>[
     HomePage(),
     CardManagePage(),
+    AddPaymentPage(),
     CalenderPage(),
     SettingsPage()
   ];
