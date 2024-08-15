@@ -58,23 +58,43 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
             // ========================================== ①支払いカード選択 ==========================================
             SizedBox(height: 5),
             addButtonPageTitleText('① 支払いカードを選択'),
-            DropdownButton<String>(
-              value: _selectedItem,
-              hint: Text('Select an item'),
-              items: _items.map((String item) {
-                return DropdownMenuItem<String>(
-                  value: item,
-                  child: Text(item),
+            Text(
+              '選択されたカード: ${_selectedItem ?? '未選択'}',
+            ),
+            TextButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('支払いカードを選択：'),
+                      content: Container(
+                        width: double.maxFinite,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: _items.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text(_items[index]),
+                              onTap: () {
+                                setState(() {
+                                  _selectedItem = _items[index];
+                                });
+                                Navigator.pop(context);
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                  );
+                  },
                 );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  _selectedItem = newValue;
-                });
               },
-              underline: SizedBox(), // 下線を非表示
-              icon: Icon(Icons.arrow_drop_down, color: Colors.black), // アイコンを黒に
-              style: TextStyle(color: Colors.black), // テキストスタイルを黒に
+              child: const Text(
+                '支払いカードを選択',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             // ====================================================================================================
 
@@ -128,9 +148,6 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
     );
   }
 }
-
-
-
 
 // ②金額を入力の入力フィールドで0を連続して入力できないようにするクラス
 class ZeroLimitFormatter extends TextInputFormatter {
