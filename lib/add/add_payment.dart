@@ -12,7 +12,14 @@ class AddPaymentPage extends StatefulWidget {
 
 class _AddPaymentPageState extends State<AddPaymentPage> {
   // ドロップダウンメニューで選択するアイテムのリスト
-  final List<String> _items = ['三井住友カード', 'メルカード', 'ビューカード', 'PayPayカード'];
+  final List<String> _items = [
+    '三井住友カード',
+    'メルカード',
+    'ビューカード',
+    'PayPayカード',
+    'LINEクレカ(P+)',
+    'エポスカード'
+  ];
 
   // ================================ 変数処理 ================================
   String? _selectedItem; // ①で選択されたカードを保持する変数
@@ -51,98 +58,173 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
         backgroundColor:
             Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-        child: ListView(
-          children: [
-            // ========================================== ①支払いカード選択 ==========================================
-            SizedBox(height: 5),
-            addButtonPageTitleText('① 支払いカードを選択'),
-            Text(
-              '選択されたカード: ${_selectedItem ?? '未選択'}',
-            ),
-            TextButton(
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('支払いカードを選択：'),
-                      content: Container(
-                        width: double.maxFinite,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: _items.length,
-                          itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Text(_items[index]),
-                              onTap: () {
-                                setState(() {
-                                  _selectedItem = _items[index];
-                                });
-                                Navigator.pop(context);
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                  );
+      body: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+          child: ListView(
+            children: [
+              // ========================================== ①支払いカード選択 ==========================================
+              SizedBox(height: 5),
+              addButtonPageTitleText('① 支払いカードを選択'),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      fixedSize: Size(double.infinity, 70)),
+                  child: ListTile(
+                    title: Text('${_selectedItem ?? '未選択'}',
+                        style: TextStyle(fontSize: 20)),
+                    trailing: Icon(Icons.edit),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('支払いカードを選択：'),
+                          backgroundColor: Color(0xffffffff),
+                          content: Container(
+                            width: double.maxFinite,
+                            height: 300,
+                            decoration: BoxDecoration(
+                              // color: Color(0xffdddddd),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Scrollbar(
+                                thumbVisibility: true,
+                                thickness: 2,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: _items.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin: const EdgeInsets.only(
+                                          top: 5, bottom: 5, right: 10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(7),
+                                        color: Color(0xffeeeeee),
+                                      ),
+                                      child: ListTile(
+                                        title: Text(_items[index],
+                                            style: TextStyle(fontSize: 18)),
+                                        onTap: () {
+                                          setState(() {
+                                            _selectedItem = _items[index];
+                                          });
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text(
+                                'キャンセル',
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
-                );
-              },
-              child: const Text(
-                '支払いカードを選択',
-                style: TextStyle(color: Colors.black),
+                ),
               ),
-            ),
-            // ====================================================================================================
+              // ====================================================================================================
 
-            // =============================================== ②金額 ==============================================
-            SizedBox(height: 10),
-            addButtonPageTitleText('② 金額を入力'),
-            TextField(
-              controller: _controller,
-              decoration: InputDecoration(
-                labelText: 'カードでの支払い金額をそのまま入力',
-                border: OutlineInputBorder(),
+              // =============================================== ②金額 ==============================================
+              SizedBox(height: 10),
+              addButtonPageTitleText('② 金額を入力'),
+              Container(
+                margin: EdgeInsets.all(10),
+                height: 70,
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    labelText: '支払い金額をそのまま入力',
+                    contentPadding: EdgeInsets.all(30),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    ZeroLimitFormatter(),
+                  ],
+                ),
               ),
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                ZeroLimitFormatter(),
-              ],
-            ),
-            // ====================================================================================================
 
-            // =============================================== ③日付 ==============================================
-            SizedBox(height: 10),
-            addButtonPageTitleText('③ 使用日を入力'),
-            if (_selectedDate != null)
-              Text(
-                '選択された日付: ${_selectedDate!.toLocal().toString().split(' ')[0]}', // 日付のフォーマットを変更
+              // Container(
+              //   margin: EdgeInsets.all(10),
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(10),
+              //     border: Border.all(color: Colors.black),
+              //   ),
+              //   height: 70,
+              //   child: TextField(
+              //     controller: _controller,
+              //     decoration: InputDecoration(
+              //       labelText: 'カードでの支払い金額をそのまま入力',
+              //     ),
+              //     keyboardType: TextInputType.number,
+              //     inputFormatters: [
+              //       FilteringTextInputFormatter.digitsOnly,
+              //       ZeroLimitFormatter(),
+              //     ],
+              //   ),
+              // ),
+              // ====================================================================================================
+
+              // =============================================== ③日付 ==============================================
+              SizedBox(height: 10),
+              addButtonPageTitleText('③ 使用日を入力'),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                    fixedSize: Size(double.infinity, 70)),
+                  child: ListTile(
+                    title: Text(
+                      _selectedDate == null
+                        ? '未選択'
+                        : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    trailing: Icon(Icons.edit),
+                  ),
+                  onPressed: () async {
+                    DateTime? date = await showDatePicker(
+                      context: context,
+                      initialDate: _selectedDate ?? DateTime.now(),
+                      firstDate: DateTime(2023, 1, 1),
+                      lastDate: DateTime.now(),
+                    );
+                    if (date != null) {
+                      setState(() {
+                        _selectedDate = date;
+                      });
+                    }
+                  },
+                ),
               ),
-            TextButton(
-              onPressed: () {
-                DatePicker.showDatePicker(context,
-                    showTitleActions: true,
-                    minTime: DateTime(2023, 1, 1),
-                    maxTime: DateTime.now(), // 今日
-                    onChanged: (date) {
-                  print(date);
-                }, onConfirm: (date) {
-                  setState(() {
-                    _selectedDate = date;
-                  });
-                }, currentTime: DateTime.now(), locale: LocaleType.jp);
-              },
-              child: const Text(
-                '日付を選択',
-                style: TextStyle(color: Colors.blue),
-              ),
-            ),
-            // ====================================================================================================
-          ],
+              // ====================================================================================================
+            ],
+          ),
         ),
       ),
     );
