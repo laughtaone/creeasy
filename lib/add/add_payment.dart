@@ -72,6 +72,9 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   _selectedItem = newValue;
                 });
               },
+              underline: SizedBox(), // 下線を非表示
+              icon: Icon(Icons.arrow_drop_down, color: Colors.black), // アイコンを黒に
+              style: TextStyle(color: Colors.black), // テキストスタイルを黒に
             ),
             // ====================================================================================================
 
