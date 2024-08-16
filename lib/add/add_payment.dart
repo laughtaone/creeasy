@@ -303,119 +303,49 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                         ),
                       ],
                     ),
-                    // TextButton(
-                    //   style: TextButton.styleFrom(
-                    //     fixedSize: Size(120, 120),
-                    //     backgroundColor: Color(0xffdfdfdf),
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(20),
-                    //     )
-                    //   ),
-                    //   child: Column(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: [
-                    //       // ===================== 上部分 =====================
-                    //       Expanded(
-                    //         flex: 1,
-                    //         child: Center(
-                    //           child: Text(
-                    //             'ポイント\n進呈',
-                    //             style: TextStyle(fontSize: 17,color: Color(0xff444444), fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
-                    //         ),
-                    //       ),
-                    //       // =================================================
-
-                    //       // ===================== 下部分 =====================
-                    //       Expanded(
-                    //         flex: 1,
-                    //         child: Column(
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           children: [
-                    //             Expanded(
-                    //               flex: 3,
-                    //               child: Text(
-                    //                 '対象',
-                    //                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 30)
-                    //               ),
-                    //             ),
-                    //             Expanded(
-                    //               flex: 1,
-                    //               child: Text(
-                    //                 'タップで変更',
-                    //                 style: TextStyle(fontSize: 9, color: Color(0xff999999), fontWeight: FontWeight.w700),
-                    //               ),
-                    //             )
-                    //           ],
-                    //         ),
-                    //       ),
-                    //       // =================================================
-                    //     ],
-                    //     ),
-                    //   onPressed: null,
-                    // ),
-                    // =====================================================================
                   ],
                 ),
-                // child: Row(
-                //   children: [
-                //     // ========================= 「還元率?%」の正方形  =========================
-                //     Expanded(
-                //       flex: 1,
-                //       child: Container(
-                //         height: 80,
-                //         width: 80,
-                //         decoration: BoxDecoration(
-                //           borderRadius: BorderRadius.circular(12),
-                //           color: Color(0xffdddddd),
-                //         ),
-                //         child: Center(
-                //           child: Column(
-                //             mainAxisSize: MainAxisSize.min,
-                //             children: [
-                //               Text('還元率', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
-                //               Text('1%', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17))
-                //             ],
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //     // =========================================================================
-
-                //     // ============================ チェックマーク部分  ============================
-                //     SizedBox(width: 7),
-                //     Expanded(
-                //       flex: 3,
-                //       child: Column(
-                //         mainAxisAlignment: MainAxisAlignment.start,
-                //         children: [
-                //           Container(
-                //             child: CheckboxListTile(
-                //               // activeColor: Colors.blue,
-                //               // title: Text('ポイント進呈対象外'),
-                //               title: Transform.translate(
-                //                 offset: Offset(-12, 0), // ここで間隔を調整
-                //                 child: Text('ポイント進呈対象外'),
-                //               ),
-                //               // contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                //               subtitle: Text('チェックで対象外、未チェックで対象', style: TextStyle(fontSize: 9),),
-                //               controlAffinity: ListTileControlAffinity.leading,
-                //               value: _isExcluded,
-                //               onChanged: (newValue) {
-                //                 setState(() {
-                //                   _isExcluded = newValue!;
-                //                 });
-                //               },
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //     // =========================================================================
-                //   ],
-                // ),
               ),
-
               // =======================================================================================================
+
+              SizedBox(height: 80),
+
+              // =============================================== 保存ボタン ==============================================
+              Container(
+                margin: EdgeInsets.only(left: 10, right: 10),
+                height: 55,
+                child: OutlinedButton(
+                  onPressed: null,
+                  style: OutlinedButton.styleFrom(
+                    backgroundColor: Color(0xfffff3f3),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    side: BorderSide(
+                      color: Color(0xffffaaaa),
+                      width: 1,
+                    )
+                  ),
+                  child: Text(
+                    '保存して閉じる',
+                    style: TextStyle(color: Color(0xffff8888), fontSize: 16),
+                  )
+                ),
+              ),
+              // =======================================================================================================
+
+              SizedBox(height: 10),
+              Text(
+                '保存せずに閉じるには右上の×ボタンを押してください',
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Colors.black38,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 23),
+
             ],
           ),
         ),
@@ -423,6 +353,10 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
     );
   }
 }
+
+
+
+
 
 // ②金額を入力の入力フィールドで0を連続して入力できないようにするクラス
 class ZeroLimitFormatter extends TextInputFormatter {
