@@ -4,6 +4,7 @@ import 'package:creeasy/main.dart';
 import 'package:creeasy/add/add_common_component.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
+import 'package:creeasy/add/add_payment_option_button/add_payment_option_button.dart';
 
 class AddPaymentPage extends StatefulWidget {
   @override
@@ -274,66 +275,84 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                     SizedBox(height: 10),
 
                     // =========================== 選択フィールド  ===========================
-                    TextButton(
-                      style: TextButton.styleFrom(
-                          fixedSize: Size(120, 120),
-                          backgroundColor: Color(0xffdfdfdf),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          )),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        child: Column(
-                          children: [
-                            // ===================== 上部分 =====================
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('ポイント',
-                                      style: selectFieldUpTextStyle(17,Color(0xff444444))),
-                                  Text('進呈', style: selectFieldUpTextStyle(17,Color(0xff444444)))
-                                ],
-                              ),
-                            ),
-                            // =================================================
-
-                            // ===================== 下部分 =====================
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        flex: 3,
-                                        child: Text(
-                                          '対象',
-                                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 30)
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Text(
-                                          'タップで変更',
-                                          style: TextStyle(fontSize: 9, color: Color(0xff999999), fontWeight: FontWeight.w500),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            // =================================================
-                          ],
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OptionTextButton(
+                            upperText: 'ポイント\n進呈',
+                            trueLowerText: '対象',
+                            falseLowerText: '対象外',
+                            initialBoolLowerText: true,
+                          ),
                         ),
-                      ),
-                      onPressed: null,
+                        Expanded(
+                          child: OptionTextButton(
+                            upperText: 'VPU\nプログラム',
+                            trueLowerText: '対象',
+                            falseLowerText: '対象外',
+                            initialBoolLowerText: false,
+                          ),
+                        ),
+                        Expanded(
+                          child: OptionTextButton(
+                            upperText: 'LINE Pay\n経由',
+                            trueLowerText: '対象',
+                            falseLowerText: '対象外',
+                            initialBoolLowerText: false,
+                          ),
+                        ),
+                      ],
                     ),
+                    // TextButton(
+                    //   style: TextButton.styleFrom(
+                    //     fixedSize: Size(120, 120),
+                    //     backgroundColor: Color(0xffdfdfdf),
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(20),
+                    //     )
+                    //   ),
+                    //   child: Column(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       // ===================== 上部分 =====================
+                    //       Expanded(
+                    //         flex: 1,
+                    //         child: Center(
+                    //           child: Text(
+                    //             'ポイント\n進呈',
+                    //             style: TextStyle(fontSize: 17,color: Color(0xff444444), fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
+                    //         ),
+                    //       ),
+                    //       // =================================================
+
+                    //       // ===================== 下部分 =====================
+                    //       Expanded(
+                    //         flex: 1,
+                    //         child: Column(
+                    //           mainAxisAlignment: MainAxisAlignment.center,
+                    //           children: [
+                    //             Expanded(
+                    //               flex: 3,
+                    //               child: Text(
+                    //                 '対象',
+                    //                 style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 30)
+                    //               ),
+                    //             ),
+                    //             Expanded(
+                    //               flex: 1,
+                    //               child: Text(
+                    //                 'タップで変更',
+                    //                 style: TextStyle(fontSize: 9, color: Color(0xff999999), fontWeight: FontWeight.w700),
+                    //               ),
+                    //             )
+                    //           ],
+                    //         ),
+                    //       ),
+                    //       // =================================================
+                    //     ],
+                    //     ),
+                    //   onPressed: null,
+                    // ),
                     // =====================================================================
                   ],
                 ),
