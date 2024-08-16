@@ -198,6 +198,8 @@ class _StartPageWidgetState extends State<StartPageWidget> {
   }
 }
 
+
+
 // addボタンを押した後の項目のテキスト部分のTextStyle
 TextStyle addButtonItemTextStyle() {
   return TextStyle(
