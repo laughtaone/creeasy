@@ -30,9 +30,9 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
   DateTime? _selectedDate; // ③で入力された日付を保持する変数
 
   final TextEditingController _storeName =
-      TextEditingController();     // ④で入力された使用場所を保持する変数
+      TextEditingController(); // ④で入力された使用場所を保持する変数
 
-  var _isExcluded = false;      // ⑤でポイント進呈対象外かどうかの真偽値を保持する変数（true: 進呈対象外）
+  var _isExcluded = false; // ⑤でポイント進呈対象外かどうかの真偽値を保持する変数（true: 進呈対象外）
   // =========================================================================
 
   @override
@@ -260,8 +260,12 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('現在の還元率：', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
-                          Text('1%', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22))
+                          Text('現在の還元率：',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 17)),
+                          Text('1%',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 22))
                         ],
                       ),
                     ),
@@ -272,12 +276,11 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                     // =========================== 選択フィールド  ===========================
                     TextButton(
                       style: TextButton.styleFrom(
-                        fixedSize: Size(120, 120),
-                        backgroundColor: Color(0xffdddddd),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        )
-                      ),
+                          fixedSize: Size(120, 120),
+                          backgroundColor: Color(0xffdfdfdf),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          )),
                       child: Container(
                         height: 100,
                         width: 100,
@@ -289,8 +292,9 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text('ポイント', style: TextStyle(fontWeight: FontWeight.bold)),
-                                  Text('進呈', style: TextStyle(fontWeight: FontWeight.bold))
+                                  Text('ポイント',
+                                      style: selectFieldUpTextStyle(17,Color(0xff444444))),
+                                  Text('進呈', style: selectFieldUpTextStyle(17,Color(0xff444444)))
                                 ],
                               ),
                             ),
@@ -301,7 +305,27 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                               flex: 1,
                               child: Container(
                                 alignment: Alignment.center,
-                                child: Text('対象', style: TextStyle(fontWeight: FontWeight.bold)),
+                                child: Container(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        flex: 3,
+                                        child: Text(
+                                          '対象',
+                                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 30)
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          'タップで変更',
+                                          style: TextStyle(fontSize: 9, color: Color(0xff999999), fontWeight: FontWeight.w500),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                             // =================================================
@@ -372,7 +396,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 // ),
               ),
 
-               // =======================================================================================================
+              // =======================================================================================================
             ],
           ),
         ),
@@ -413,3 +437,17 @@ class ZeroLimitFormatter extends TextInputFormatter {
   }
 }
 
+TextStyle selectFieldUpTextStyle(double doubleFontSize, Color receivedColor) {
+  if (doubleFontSize == 0) {
+    return TextStyle(
+      fontWeight: FontWeight.bold,
+      color: receivedColor,
+    );
+  } else {
+    return TextStyle(
+      fontSize: doubleFontSize,
+      fontWeight: FontWeight.bold,
+      color: receivedColor,
+    );
+  }
+}
