@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 
-
 // 追加の各ページのサブタイトル
-Text addButtonPageTitleText(String originalText) {
-  // 元のテキストの内容を取得
-  String textContent = originalText;
-
-  // 新しいTextウィジェットを生成
-  return Text(
-    textContent,
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 18
-    )
+Row addButtonPageTitleText(IconData receivedIcon, String originalText) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+      SizedBox(width: 2),
+      Icon(
+        receivedIcon,
+        size: 23,
+      ),
+      SizedBox(width: 5),
+      Text(
+        originalText,
+        style: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 18,
+        ),
+      ),
+    ],
   );
 }

@@ -44,7 +44,7 @@ class _OptionTextButtonState extends State<OptionTextButton> {
       child: TextButton(
         style: TextButton.styleFrom(
           fixedSize: Size(120, 120),
-          backgroundColor: Color(0xffdfdfdf),
+          backgroundColor: Color(0xfffefefe),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

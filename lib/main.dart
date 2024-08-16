@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:creeasy/home/home.dart';
 import 'package:creeasy/cart_manage/card_manage.dart';
 import 'package:creeasy/add/add_payment.dart';
@@ -7,7 +8,6 @@ import 'package:creeasy/add/add_use-point.dart';
 import 'package:creeasy/calender/calender.dart';
 import 'package:creeasy/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
-
 
 
 void main() {
@@ -24,6 +24,14 @@ class StartPageHome extends StatelessWidget {
     return MaterialApp(
       home: StartPageWidget(),
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale("en"),
+        const Locale("ja"),
+      ],
       theme: ThemeData(
         brightness: Brightness.light,
         colorScheme: ColorScheme.light(
