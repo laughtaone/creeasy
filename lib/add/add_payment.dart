@@ -23,9 +23,16 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
 
   // ================================ 変数処理 ================================
   String? _selectedItem; // ①で選択されたカードを保持する変数
+
   final TextEditingController _controller =
       TextEditingController(); // ②で入力された金額を保持する変数
+
   DateTime? _selectedDate; // ③で入力された日付を保持する変数
+
+  final TextEditingController _storeName =
+      TextEditingController();     // ④で入力された使用場所を保持する変数
+
+  var _isExcluded = false;      // ⑤でポイント進呈対象外かどうかの真偽値を保持する変数（true: 進呈対象外）
   // =========================================================================
 
   @override
@@ -151,14 +158,18 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 margin: EdgeInsets.all(10),
                 height: 70,
                 child: TextField(
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 22,
+                  ),
                   controller: _controller,
                   decoration: InputDecoration(
-                    labelText: '支払い金額をそのまま入力',
-                    contentPadding: EdgeInsets.all(30),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
+                      labelText: '',
+                      contentPadding: EdgeInsets.all(30),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      prefixText: '¥　'),
                   keyboardType: TextInputType.number,
                   inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
@@ -166,26 +177,6 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   ],
                 ),
               ),
-
-              // Container(
-              //   margin: EdgeInsets.all(10),
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(10),
-              //     border: Border.all(color: Colors.black),
-              //   ),
-              //   height: 70,
-              //   child: TextField(
-              //     controller: _controller,
-              //     decoration: InputDecoration(
-              //       labelText: 'カードでの支払い金額をそのまま入力',
-              //     ),
-              //     keyboardType: TextInputType.number,
-              //     inputFormatters: [
-              //       FilteringTextInputFormatter.digitsOnly,
-              //       ZeroLimitFormatter(),
-              //     ],
-              //   ),
-              // ),
               // ====================================================================================================
 
               // =============================================== ③日付 ==============================================
@@ -195,14 +186,14 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 margin: EdgeInsets.all(10),
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                    fixedSize: Size(double.infinity, 70)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      fixedSize: Size(double.infinity, 70)),
                   child: ListTile(
                     title: Text(
                       _selectedDate == null
-                        ? '未選択'
-                        : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
+                          ? '未選択'
+                          : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
                       style: TextStyle(fontSize: 20),
                     ),
                     trailing: Icon(Icons.edit),
@@ -223,6 +214,99 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 ),
               ),
               // ====================================================================================================
+
+              // =============================================== ④使用場所 ==============================================
+              SizedBox(height: 10),
+              addButtonPageTitleText('④ 使用場所を入力'),
+              Container(
+                margin: EdgeInsets.all(10),
+                height: 70,
+                child: TextField(
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 22,
+                  ),
+                  controller: _storeName,
+                  decoration: InputDecoration(
+                    labelText: '',
+                    contentPadding: EdgeInsets.all(30),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  keyboardType: TextInputType.text,
+                  // inputFormatters: [
+                  //   FilteringTextInputFormatter.digitsOnly,
+                  // ],
+                ),
+              ),
+              // =======================================================================================================
+
+              // =============================================== ⑤オプション ==============================================
+              SizedBox(height: 10),
+              addButtonPageTitleText('⑤ オプション'),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Row(
+                  children: [
+                    // ========================= 「還元率?%」の正方形  =========================
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 80,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Color(0xffdddddd),
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('還元率', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                              Text('1%', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    // =========================================================================
+
+                    // ============================ チェックマーク部分  ============================
+                    SizedBox(width: 7),
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            child: CheckboxListTile(
+                              // activeColor: Colors.blue,
+                              // title: Text('ポイント進呈対象外'),
+                              title: Transform.translate(
+                                offset: Offset(-12, 0), // ここで間隔を調整
+                                child: Text('ポイント進呈対象外'),
+                              ),
+                              // contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                              subtitle: Text('チェックで対象外、未チェックで対象', style: TextStyle(fontSize: 9),),
+                              controlAffinity: ListTileControlAffinity.leading,
+                              value: _isExcluded,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  _isExcluded = newValue!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // =========================================================================
+                  ],
+                ),
+              ),
+
+               // =======================================================================================================
             ],
           ),
         ),
