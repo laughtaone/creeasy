@@ -247,63 +247,129 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               addButtonPageTitleText('⑤ オプション'),
               Container(
                 margin: EdgeInsets.all(10),
-                child: Row(
+                child: Column(
                   children: [
-                    // ========================= 「還元率?%」の正方形  =========================
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        height: 80,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          color: Color(0xffdddddd),
-                        ),
-                        child: Center(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text('還元率', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
-                              Text('1%', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17))
-                            ],
-                          ),
-                        ),
+                    // ========================= 「還元率?%」の長方形  =========================
+                    Container(
+                      height: 60,
+                      // width: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xffeeeeee),
                       ),
-                    ),
-                    // =========================================================================
-
-                    // ============================ チェックマーク部分  ============================
-                    SizedBox(width: 7),
-                    Expanded(
-                      flex: 3,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            child: CheckboxListTile(
-                              // activeColor: Colors.blue,
-                              // title: Text('ポイント進呈対象外'),
-                              title: Transform.translate(
-                                offset: Offset(-12, 0), // ここで間隔を調整
-                                child: Text('ポイント進呈対象外'),
-                              ),
-                              // contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                              subtitle: Text('チェックで対象外、未チェックで対象', style: TextStyle(fontSize: 9),),
-                              controlAffinity: ListTileControlAffinity.leading,
-                              value: _isExcluded,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  _isExcluded = newValue!;
-                                });
-                              },
-                            ),
-                          ),
+                          Text('現在の還元率：', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                          Text('1%', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22))
                         ],
                       ),
                     ),
-                    // =========================================================================
+                    // ====================================================================
+
+                    SizedBox(height: 10),
+
+                    // =========================== 選択フィールド  ===========================
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        fixedSize: Size(120, 120),
+                        backgroundColor: Color(0xffdddddd),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        )
+                      ),
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        child: Column(
+                          children: [
+                            // ===================== 上部分 =====================
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('ポイント', style: TextStyle(fontWeight: FontWeight.bold)),
+                                  Text('進呈', style: TextStyle(fontWeight: FontWeight.bold))
+                                ],
+                              ),
+                            ),
+                            // =================================================
+
+                            // ===================== 下部分 =====================
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: Text('対象', style: TextStyle(fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                            // =================================================
+                          ],
+                        ),
+                      ),
+                      onPressed: null,
+                    ),
+                    // =====================================================================
                   ],
                 ),
+                // child: Row(
+                //   children: [
+                //     // ========================= 「還元率?%」の正方形  =========================
+                //     Expanded(
+                //       flex: 1,
+                //       child: Container(
+                //         height: 80,
+                //         width: 80,
+                //         decoration: BoxDecoration(
+                //           borderRadius: BorderRadius.circular(12),
+                //           color: Color(0xffdddddd),
+                //         ),
+                //         child: Center(
+                //           child: Column(
+                //             mainAxisSize: MainAxisSize.min,
+                //             children: [
+                //               Text('還元率', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
+                //               Text('1%', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17))
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     // =========================================================================
+
+                //     // ============================ チェックマーク部分  ============================
+                //     SizedBox(width: 7),
+                //     Expanded(
+                //       flex: 3,
+                //       child: Column(
+                //         mainAxisAlignment: MainAxisAlignment.start,
+                //         children: [
+                //           Container(
+                //             child: CheckboxListTile(
+                //               // activeColor: Colors.blue,
+                //               // title: Text('ポイント進呈対象外'),
+                //               title: Transform.translate(
+                //                 offset: Offset(-12, 0), // ここで間隔を調整
+                //                 child: Text('ポイント進呈対象外'),
+                //               ),
+                //               // contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                //               subtitle: Text('チェックで対象外、未チェックで対象', style: TextStyle(fontSize: 9),),
+                //               controlAffinity: ListTileControlAffinity.leading,
+                //               value: _isExcluded,
+                //               onChanged: (newValue) {
+                //                 setState(() {
+                //                   _isExcluded = newValue!;
+                //                 });
+                //               },
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //     ),
+                //     // =========================================================================
+                //   ],
+                // ),
               ),
 
                // =======================================================================================================
@@ -346,3 +412,4 @@ class ZeroLimitFormatter extends TextInputFormatter {
     return newValue;
   }
 }
+
