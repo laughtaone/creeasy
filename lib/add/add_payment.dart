@@ -354,7 +354,6 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                           SizedBox(height: 12),
 
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.info_outline,
@@ -367,6 +366,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                               ),
                             ],
                           ),
+
 
                           SizedBox(height: 12),
 

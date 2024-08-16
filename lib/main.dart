@@ -9,11 +9,8 @@ import 'package:creeasy/calender/calender.dart';
 import 'package:creeasy/settings/settings.dart';
 import 'package:flutter/cupertino.dart';
 
-
 void main() {
-  runApp(
-    StartPageHome()
-  );
+  runApp(StartPageHome());
 }
 
 class StartPageHome extends StatelessWidget {
@@ -57,7 +54,6 @@ class StartPageWidget extends StatefulWidget {
   State<StartPageWidget> createState() => _StartPageWidgetState();
 }
 
-
 class _StartPageWidgetState extends State<StartPageWidget> {
   // const _StartPageWidgetState({Key? key}) : super(key: key);
   var _currentIndex = 0;
@@ -70,7 +66,8 @@ class _StartPageWidgetState extends State<StartPageWidget> {
   ];
 
   void _onTap(int index) {
-    if (index == 2) { // "追加" ボタンが押されたとき
+    if (index == 2) {
+      // "追加" ボタンが押されたとき
       _showCupertinoActionSheet(context);
     } else {
       setState(() {
@@ -83,15 +80,20 @@ class _StartPageWidgetState extends State<StartPageWidget> {
     showCupertinoModalPopup(
       context: context,
       builder: (context) => CupertinoActionSheet(
-        title: Text('追加する項目を選択：'),
+        title: Text(
+          '追加する項目を選択：',
+          style: TextStyle(
+              fontSize: 17, color: Colors.black, fontWeight: FontWeight.w400),
+        ),
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.credit_score_outlined, size: 20),
-                SizedBox(width: 5),
-                Text('利用履歴を追加'),
+                Icon(Icons.credit_score_outlined,
+                    size: addButtonItemIconSize()),
+                addButtonItemBetweenIconText(),
+                Text('利用履歴', style: addButtonItemTextStyle()),
               ],
             ),
             onPressed: () async {
@@ -109,9 +111,9 @@ class _StartPageWidgetState extends State<StartPageWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.account_balance, size: 20),
-                SizedBox(width: 5),
-                Text('臨時支払いを追加'),
+                Icon(Icons.account_balance, size: addButtonItemIconSize()),
+                addButtonItemBetweenIconText(),
+                Text('臨時支払い', style: addButtonItemTextStyle()),
               ],
             ),
             onPressed: () async {
@@ -129,9 +131,9 @@ class _StartPageWidgetState extends State<StartPageWidget> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.stars_outlined, size: 20),
-                SizedBox(width: 5),
-                Text('ポイント割当を追加'),
+                Icon(Icons.stars_outlined, size: addButtonItemIconSize()),
+                addButtonItemBetweenIconText(),
+                Text('ポイント割当', style: addButtonItemTextStyle()),
               ],
             ),
             onPressed: () async {
@@ -186,11 +188,33 @@ class _StartPageWidgetState extends State<StartPageWidget> {
         ],
         currentIndex: _currentIndex, // 現在のインデックスを設定
         onTap: _onTap, // タップ時に呼ばれるメソッドを設定
-        unselectedIconTheme: const IconThemeData(size: 25, color: Colors.black54),
+        unselectedIconTheme:
+            const IconThemeData(size: 25, color: Colors.black54),
         selectedIconTheme: const IconThemeData(color: Colors.black),
         // showSelectedLabels: false,
         type: BottomNavigationBarType.fixed,
       ),
     );
   }
+}
+
+// addボタンを押した後の項目のテキスト部分のTextStyle
+TextStyle addButtonItemTextStyle() {
+  return TextStyle(
+    fontSize: 19,
+    color: Colors.black,
+    fontWeight: FontWeight.w600,
+  );
+}
+
+// addボタンを押した後の項目のアイコンのサイズ
+double addButtonItemIconSize() {
+  return 24;
+}
+
+// addボタンを押した後の項目のアイコンとテキストの間隔
+SizedBox addButtonItemBetweenIconText() {
+  return SizedBox(
+    width: 12
+  );
 }
