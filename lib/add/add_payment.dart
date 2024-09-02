@@ -412,7 +412,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // =============================================== 保存ボタン ==============================================
               Container(
                 margin: EdgeInsets.only(left: 10, right: 10),
-                height: 55,
+                height: 57,
                 child: OutlinedButton(
                     onPressed: () {
                       showDialog(
@@ -447,7 +447,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                         ),
                         side: BorderSide(
                           color: Color(0xffff7777),
-                          width: 1.5,
+                          width: 1.7,
                         )),
                     child: Text(
                       '保存して閉じる',

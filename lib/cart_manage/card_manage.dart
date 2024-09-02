@@ -70,7 +70,7 @@ class _CardManagePageState extends State<CardManagePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.info_outline),
-                  SizedBox(width: 10),
+                  SizedBox(width: 6),
                   Text('編集するには各カードの枠内をタップ', style: TextStyle(fontWeight: FontWeight.w400),)
                 ],
               ),
