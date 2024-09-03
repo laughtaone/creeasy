@@ -44,10 +44,15 @@ class _OptionTextButtonState extends State<OptionTextButton> {
       child: TextButton(
         style: TextButton.styleFrom(
           fixedSize: Size(120, 120),
-          backgroundColor: Color(0xfffefefe),
+          backgroundColor:
+            (isBoolLowerText)
+            ? Color(0xfffefefe)
+            : Color(0xffdedede),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
+        ).copyWith(
+          overlayColor: WidgetStateProperty.all(Colors.transparent),
         ),
         onPressed: () {
           toggleText();

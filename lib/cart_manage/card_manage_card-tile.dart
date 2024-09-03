@@ -10,10 +10,10 @@ class CardManageCardTile extends StatelessWidget {
     required this.pay_date,
   });
 
-  final String card_name;
-  final double return_rate;
-  final String target_range;
-  final String pay_date;
+  final String card_name;       // カード名
+  final double return_rate;     // 還元率
+  final String target_range;    // 支払対象期間
+  final String pay_date;        // 引き落とし日
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,38 @@ class CardManageCardTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                card_name,
-                style: TextStyle(color: Colors.black, fontSize: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    card_name,
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  Container(
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.auto_awesome_outlined,
+                          size: 15,
+                          color: Colors.black54,
+                        ),
+                        SizedBox(width: 2),
+                        Text(
+                          'ポイントアップあり',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                          ),
+                        )
+                      ],
+                    ),
+                    padding: EdgeInsets.fromLTRB(6, 4, 6, 4),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  )
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
@@ -54,7 +83,7 @@ class CardManageCardTile extends StatelessWidget {
                     Column(
                       children: [
                         Text('支払対象期間', style: TextStyle(color: Colors.black),),
-                        Text('1日-末日', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 17),)
+                        Text('$target_range', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 17),)
                       ],
                     ),
                     SizedBox(width: 5),
@@ -63,7 +92,7 @@ class CardManageCardTile extends StatelessWidget {
                     Column(
                       children: [
                         Text('引き落とし日', style: TextStyle(color: Colors.black),),
-                        Text('翌月26日', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 17),)
+                        Text('$pay_date', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: 17),)
                       ],
                     ),
                   ],
