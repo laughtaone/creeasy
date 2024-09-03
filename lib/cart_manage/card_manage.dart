@@ -78,8 +78,8 @@ class _CardManagePageState extends State<CardManagePage> {
             // =======================================================================================
 
 
-            CardManageCardTile(card_name: '三井住友カード', return_rate: 0.5, target_range: '1日-末日', pay_date: '翌月26日',),
-            CardManageCardTile(card_name: 'メルカード', return_rate: 1, target_range: '1日-末日', pay_date: '自由',),
+            CardManageCardTile(card_name: '三井住友カード', return_rate_unit: 200, return_rate: 0.5, target_range: '1日-末日', pay_date: '翌月26日', bool_pointup: true),
+            CardManageCardTile(card_name: 'メルカード', return_rate_unit: 100, return_rate: 1, target_range: '1日-末日', pay_date: '自由', bool_pointup: false),
 
           ],
         ),
