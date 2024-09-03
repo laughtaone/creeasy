@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:creeasy/cart_manage/add_card/add_card_preset-card.dart';
+import 'package:creeasy/cart_manage/add_card/add_card_direct-input-card.dart';
+
 
 class AddCardPage extends StatefulWidget {
   @override
@@ -168,21 +171,29 @@ class _AddCardPageState extends State<AddCardPage> {
                 margin: EdgeInsets.only(left: 10, right: 10),
                 height: 57,
                 child: OutlinedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                        backgroundColor: Color(0xff333333),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        // side: BorderSide(
-                        //   color: Color(0xffff7777),
-                        //   width: 1.7,
-                        // )
-                    ),
-                    child: Text(
-                      '次へ',
-                      style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
-                    )),
+                  onPressed: () {
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AddCardPagePresetCard(),
+                      ),
+                    );
+                  },
+                  style: OutlinedButton.styleFrom(
+                      backgroundColor: Color(0xff333333),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      // side: BorderSide(
+                      //   color: Color(0xffff7777),
+                      //   width: 1.7,
+                      // )
+                  ),
+                  child: Text(
+                    '次へ',
+                    style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
+                  )
+                ),
               ),
               // =======================================================================================================
 
@@ -193,7 +204,14 @@ class _AddCardPageState extends State<AddCardPage> {
                 margin: EdgeInsets.only(left: 10, right: 10),
                 height: 57,
                 child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                        Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddCardPageDirectInputCard(),
+                        ),
+                      );
+                    },
                     style: OutlinedButton.styleFrom(
                         backgroundColor: Color(0xffeeeeee),
                         shape: RoundedRectangleBorder(
