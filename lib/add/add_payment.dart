@@ -84,8 +84,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(
-                        Icons.credit_card_outlined, '支払いカードを選択'),
+                    addButtonPageTitleText(Icons.credit_card_outlined, '支払いカードを選択'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(

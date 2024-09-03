@@ -230,7 +230,7 @@ class _AddCardPageState extends State<AddCardPage> {
               // =======================================================================================================
 
 
-              SizedBox(height: 15),
+              SizedBox(height: 10),
 
               Text(
                 '保存せずに閉じるには右上の×ボタンを押してください',
