@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class OptionTextButton extends StatefulWidget {
   final List textList;
+  final Function(int?) onItemSelected;
 
   OptionTextButton({
     required this.textList,
+    required this.onItemSelected,
   });
 
   @override
@@ -12,7 +14,7 @@ class OptionTextButton extends StatefulWidget {
 }
 
 class _OptionTextButtonState extends State<OptionTextButton> {
-  int? selectedIndex;      // 選択中の要素のインデックス
+  int? selectedIndex; // 選択中の要素のインデックス
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,9 @@ class _OptionTextButtonState extends State<OptionTextButton> {
             child: TextButton(
               style: TextButton.styleFrom(
                 minimumSize: Size(130, 5),
-                backgroundColor: (selectedIndex==index)
-                  ? Color(0xffdedede)
-                  : Color(0xfffefefe),
+                backgroundColor: (selectedIndex == index)
+                    ? Color(0xffdedede)
+                    : Color(0xfffefefe),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25),
                 ),
@@ -39,15 +41,17 @@ class _OptionTextButtonState extends State<OptionTextButton> {
               ),
               onPressed: () {
                 setState(() {
-                  selectedIndex=index;
+                  selectedIndex = index;
                 });
+                widget.onItemSelected(index);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.check,
-                    color: (selectedIndex==index) ? Colors.black : Colors.white,
+                    color:
+                        (selectedIndex == index) ? Colors.black : Colors.white,
                   ),
                   SizedBox(width: 4),
                   Text(
