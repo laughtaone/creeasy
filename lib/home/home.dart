@@ -53,6 +53,12 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SizedBox(height: 10),
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.all(6),
+              child: Text('全カード合計金額：¥31,289', style: TextStyle(fontSize: 22),)
+            ),
+            SizedBox(height: 10),
             HomeCardTile(card_name: '三井住友カード', month_price: 2987),
             HomeCardTile(card_name: 'メルカード', month_price: 7102),
             HomeCardTile(card_name: 'LINEクレカ(P+)', month_price: 10183),
