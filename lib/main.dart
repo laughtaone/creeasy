@@ -164,25 +164,47 @@ class _StartPageWidgetState extends State<StartPageWidget> {
     return Scaffold(
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.home,
+              color: (_currentIndex == 0) ? Colors.black : Colors.black26,
+              size: (_currentIndex == 0) ? selectedTabIconSize() : unselectedTabIconSize(),
+            ),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.wallet_outlined),
+            icon: Icon(
+              Icons.wallet_outlined,
+              color: (_currentIndex == 1) ? Colors.black : Colors.black26,
+              size: (_currentIndex == 1) ? selectedTabIconSize() : unselectedTabIconSize(),
+            ),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_outlined),
+            icon: Icon(
+              Icons.add_outlined,
+              color: (_currentIndex == 2) ? Colors.black : Colors.black26,
+              size: (_currentIndex == 2) ? selectedTabIconSize() : unselectedTabIconSize(),
+            ),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.date_range_outlined),
+            icon: Icon(
+              Icons.date_range_outlined,
+              color: (_currentIndex == 3) ? Colors.black : Colors.black26,
+              size: (_currentIndex == 3) ? selectedTabIconSize() : unselectedTabIconSize(),
+            ),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(
+              Icons.settings,
+              color: (_currentIndex == 4) ? Colors.black : Colors.black26,
+              size: (_currentIndex == 4) ? selectedTabIconSize() : unselectedTabIconSize(),
+            ),
             label: '',
           ),
         ],
@@ -197,8 +219,6 @@ class _StartPageWidgetState extends State<StartPageWidget> {
     );
   }
 }
-
-
 
 // addボタンを押した後の項目のテキスト部分のTextStyle
 TextStyle addButtonItemTextStyle() {
@@ -216,7 +236,13 @@ double addButtonItemIconSize() {
 
 // addボタンを押した後の項目のアイコンとテキストの間隔
 SizedBox addButtonItemBetweenIconText() {
-  return SizedBox(
-    width: 12
-  );
+  return SizedBox(width: 12);
+}
+
+double selectedTabIconSize() {
+  return 29;
+}
+
+double unselectedTabIconSize() {
+  return 25;
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/add/add_common_component.dart';
+import 'package:creeasy/cart_manage/add_bank/add_bank_main.dart';
 
 class AddCardPageDirectInputCard extends StatefulWidget {
   @override
@@ -42,11 +43,7 @@ class _AddCardPageDirectInputCardState
     '末日'
   ];
 
-  final List<String> _bankList = [
-    '三菱UFJ銀行',
-    'みんなの銀行',
-    '三井住友銀行'
-  ];
+  final List<String> _bankList = ['三菱UFJ銀行', 'みんなの銀行', '三井住友銀行'];
 
   // ================================ 変数処理 ================================
   final TextEditingController _storeName =
@@ -387,7 +384,6 @@ class _AddCardPageDirectInputCardState
                     ),
                     // ====================================================================================================
 
-
                     // ========================================== ⑤引き落とし銀行 ==========================================
                     betweenAddPaymentSection(),
                     Container(
@@ -402,6 +398,51 @@ class _AddCardPageDirectInputCardState
                         children: [
                           addButtonPageTitleText(
                               Icons.account_balance_outlined, '引き落とし銀行を入力'),
+
+                          // --------------------------- 「銀行を追加する場合はこちら」 -----------------------------------
+                          Container(
+                            padding:
+                                EdgeInsets.only(top: 2, bottom: 5, left: 4),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(
+                                  Icons.info_outline,
+                                  size: 15,
+                                ),
+                                SizedBox(width: 4),
+                                Text('銀行を新規追加する場合は ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 13)),
+                                RichText(
+                                    text: TextSpan(children: [
+                                  WidgetSpan(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        // 銀行新規追加画面へ遷移
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AddBankPage()),
+                                          (Route<dynamic> route) => false,
+                                        );
+                                      },
+                                      child: Text(
+                                        'こちら',
+                                        style: TextStyle(
+                                            color: Colors.indigo[500],
+                                            // decoration: TextDecoration.underline,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ),
+                                ])),
+                              ],
+                            ),
+                          ),
+                          // ---------------------------------------------------------------------------------
+
                           Container(
                             margin: EdgeInsets.all(5),
                             child: OutlinedButton(
@@ -412,8 +453,7 @@ class _AddCardPageDirectInputCardState
                                 backgroundColor: Color(0xfffefefe),
                               ),
                               child: ListTile(
-                                title: Text(
-                                    '${_selectedBank ?? '未選択'}',
+                                title: Text('${_selectedBank ?? '未選択'}',
                                     style: TextStyle(fontSize: 20)),
                                 trailing: Icon(Icons.edit),
                               ),
@@ -454,12 +494,14 @@ class _AddCardPageDirectInputCardState
                                                     color: Color(0xffeeeeee),
                                                   ),
                                                   child: ListTile(
-                                                    title: Text(_bankList[index],
+                                                    title: Text(
+                                                        _bankList[index],
                                                         style: TextStyle(
                                                             fontSize: 18)),
                                                     onTap: () {
                                                       setState(() {
-                                                        _selectedBank = _bankList[index];
+                                                        _selectedBank =
+                                                            _bankList[index];
                                                       });
                                                       Navigator.pop(context);
                                                     },
@@ -491,8 +533,6 @@ class _AddCardPageDirectInputCardState
                     ),
                     // ====================================================================================================
 
-
-
                     SizedBox(height: 80),
 
                     // =============================================== 保存ボタン ==============================================
@@ -502,29 +542,30 @@ class _AddCardPageDirectInputCardState
                       child: OutlinedButton(
                           onPressed: () {
                             showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    '本当に保存しますか？',
-                                    style: TextStyle(
-                                      fontSize: 20,
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                      '本当に保存しますか？',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
                                     ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text('キャンセル',
-                                          style: TextStyle(color: Colors.red)),
-                                    ),
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text('保存'),
-                                    ),
-                                  ],
-                                );
-                            });
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: Text('キャンセル',
+                                            style:
+                                                TextStyle(color: Colors.red)),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: Text('保存'),
+                                      ),
+                                    ],
+                                  );
+                                });
                           },
                           style: OutlinedButton.styleFrom(
                               backgroundColor: Color(0xfffff3f3),
@@ -537,7 +578,8 @@ class _AddCardPageDirectInputCardState
                               )),
                           child: Text(
                             '保存して閉じる',
-                            style: TextStyle(color: Color(0xffff7777), fontSize: 16),
+                            style: TextStyle(
+                                color: Color(0xffff7777), fontSize: 16),
                           )),
                     ),
                     // =======================================================================================================
