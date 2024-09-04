@@ -23,6 +23,7 @@ class _OptionTextButtonState extends State<OptionTextButton> {
       child: ListView.builder(
         padding: const EdgeInsets.all(10),
         scrollDirection: Axis.horizontal,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: widget.textList.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
