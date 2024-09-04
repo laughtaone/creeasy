@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:creeasy/cart_manage/add_card/add_card_preset-card.dart';
 import 'package:creeasy/cart_manage/add_card/add_card_direct-input-card.dart';
 import 'package:creeasy/add/add_common_component.dart';
+import 'package:creeasy/cart_manage/add_bank/select_bank-type_component.dart';
 
 
 
@@ -16,6 +17,11 @@ class _AddBankPageState extends State<AddBankPage> {
     'みんなの銀行',
     '三菱UFJ銀行',
     '三井住友銀行',
+  ];
+
+  final List<String> _bankTypeList = [
+    '通常口座',
+    '口座内のボックス',
   ];
 
   // ================================ 変数処理 ================================
@@ -97,6 +103,57 @@ class _AddBankPageState extends State<AddBankPage> {
                         //   FilteringTextInputFormatter.digitsOnly,
                         // ],
                       ),
+                    ),
+                  ],
+                ),
+              ),
+              // =======================================================================================================
+
+              SizedBox(height: 20),
+
+              // =============================================== ②銀行タイプ ==============================================
+              betweenAddPaymentSection(),
+              Container(
+                padding: EdgeInsets.only(
+                    left: 9, right: 9, top: 15, bottom: 15),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color(0xffededed),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    addButtonPageTitleText(Icons.local_offer_outlined, '銀行のタイプを選択'),
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      height: 70,
+                      child: Container(
+                        // decoration: BoxDecoration(
+                        //   border: Border.all(color: Colors.blue),
+                        //   borderRadius: BorderRadius.circular(10), //追加
+                        // ),
+                        child: OptionTextButton(textList: _bankTypeList),
+                      ),
+                      // child: TextField(
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.w500,
+                      //     fontSize: 22,
+                      //   ),
+                      //   controller: _bankName,
+                      //   decoration: InputDecoration(
+                      //     labelText: '',
+                      //     contentPadding: EdgeInsets.all(30),
+                      //     border: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(10),
+                      //     ),
+                      //     fillColor: Color(0xfffefefe),
+                      //     filled: true,
+                      //   ),
+                      //   keyboardType: TextInputType.text,
+                      //   // inputFormatters: [
+                      //   //   FilteringTextInputFormatter.digitsOnly,
+                      //   // ],
+                      // ),
                     ),
                   ],
                 ),
