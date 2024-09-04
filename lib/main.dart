@@ -170,7 +170,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.credit_card),
+            icon: Icon(Icons.wallet_outlined),
             label: '',
           ),
           BottomNavigationBarItem(

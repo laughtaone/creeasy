@@ -3,6 +3,7 @@ import 'package:creeasy/main.dart';
 import 'package:creeasy/cart_manage/add_card/add_card_main.dart';
 import 'package:creeasy/cart_manage/card_manage_card-tile.dart';
 import 'package:creeasy/cart_manage/card_manage_bank-tile.dart';
+import 'package:creeasy/cart_manage/add_bank/add_bank_main.dart';
 
 
 
@@ -12,7 +13,29 @@ class CardManagePage extends StatefulWidget {
   _CardManagePageState createState() => _CardManagePageState();
 }
 
-class _CardManagePageState extends State<CardManagePage> {
+class _CardManagePageState extends State<CardManagePage> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+
+    // Tabが変更されたときにインデックスを取得する
+    _tabController.addListener(() {
+      if (!_tabController.indexIsChanging) {
+        print("現在のインデックス: ${_tabController.index}");
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -25,7 +48,7 @@ class _CardManagePageState extends State<CardManagePage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
-                Icons.fact_check_outlined,
+                Icons.wallet_outlined,
                 color: Colors.black
               ),
               SizedBox(width: 5),
@@ -40,14 +63,15 @@ class _CardManagePageState extends State<CardManagePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddCardPage(),
+                  builder: (context) => (_tabController.index == 0) ?AddCardPage() :AddBankPage(),
                   fullscreenDialog: true,
                 ),
               );
             },
           )],
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
-          bottom: const TabBar(
+          bottom: TabBar(
+            controller: _tabController,
             tabs: [
               Tab(
                 child: Row(
@@ -73,6 +97,7 @@ class _CardManagePageState extends State<CardManagePage> {
           ),
         ),
         body: TabBarView(
+          controller: _tabController,
           children: [
             // ===================================== カード タブ =========================================
             Padding(
