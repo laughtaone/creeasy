@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:creeasy/add/add_common_component.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 
@@ -144,8 +145,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(
-                              Icons.percent_outlined, '還元率を入力'),
+                          addButtonPageTitleText(Icons.percent_outlined, '還元率を入力'),
                           Container(
                             margin: EdgeInsets.all(10),
                             height: 70,
@@ -165,10 +165,11 @@ class _AddCardPageDirectInputCardState
                                 fillColor: Color(0xfffefefe),
                                 filled: true,
                               ),
-                              keyboardType: TextInputType.text,
-                              // inputFormatters: [
-                              //   FilteringTextInputFormatter.digitsOnly,
-                              // ],
+                              keyboardType: TextInputType.numberWithOptions(decimal: true),
+                              inputFormatters: [
+                                DecimalTextInputFormatter(),
+                                ZeroLimitFormatterForDouble(),
+                              ],
                             ),
                           ),
                         ],
@@ -600,3 +601,6 @@ class _AddCardPageDirectInputCardState
                 ))));
   }
 }
+
+
+

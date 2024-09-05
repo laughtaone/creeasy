@@ -180,8 +180,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(
-                        Icons.currency_yen_outlined, '金額を入力'),
+                    addButtonPageTitleText(Icons.currency_yen_outlined, '金額を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       height: 70,
