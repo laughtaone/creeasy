@@ -124,7 +124,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 betweenAddPaymentSection(customHeight: 13),
                 Container(
                   padding:
-                      EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
+                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Color(0xffededed),
@@ -137,17 +137,16 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                           resvText: '締日/引き落とし日を選択'),
                       SizedBox(height: 3),
                       miniInfo(passText: '公式サイトの情報を基に作成しています'),
-                      miniInfo(
-                          passText:
-                              '設定できるはずの日付が用意されていない場合は、お手数ですが開発者までご連絡ください'),
+                      miniInfo(passText:'設定できるはずの日付が用意されていない場合は、お手数ですが開発者までご連絡ください'),
                       Container(
                         margin: EdgeInsets.all(10),
                         height: 140,
                         child: Container(
                           child: OptionTextButtonOneLine(
-                              textList: _smcnlPayRule,
-                              onItemSelected: _onSelectSmcnlPayRuleIndex,
-                              textFontSize: 17),
+                            textList: _smcnlPayRule,
+                            onItemSelected: _onSelectSmcnlPayRuleIndex,
+                            textFontSize: 17
+                          ),
                         ),
                       ),
                     ],
@@ -524,6 +523,13 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                   ),
                 ),
                 // =======================================================================================================
+
+                SaveButtonComp(
+                  onSave: () {
+                    print('保存されました');
+                  },
+                  isCanOnpress: true,
+                ),
 
               ]))),
     );
