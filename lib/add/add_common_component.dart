@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 // 追加の各ページのサブタイトル
 Row addButtonPageTitleText({
@@ -79,8 +81,8 @@ TextStyle selectFieldUpTextStyle(double doubleFontSize, Color receivedColor) {
   }
 }
 
-SizedBox betweenAddPaymentSection() {
-  return SizedBox(height: 20);
+SizedBox betweenAddPaymentSection({double customHeight = 20}) {
+  return SizedBox(height: customHeight);
 }
 
 // ------------------------------- card_manage/add_card/add_card_direct-input-card.dartで使用 -------------------------------
@@ -139,8 +141,7 @@ class ZeroLimitFormatterForDouble extends TextInputFormatter {
 }
 
 
-// ↓ 下のこれで利用
-// 各選択フィールドの上の小さい注意書きの文字スタイルを一括指定
+// ---------------------------------------- 各選択フィールドの上の小さい注意書き ----------------------------------------
 Container miniInfo({
     String passText='',     // 表示するテキスト
     IconData customIcon = Icons.info_outline,  // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
@@ -215,15 +216,15 @@ class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
         itemCount: widget.textList.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: EdgeInsets.only(top: (index==0) ? 0 : 7, bottom: 7, right: 10, left: 10),
             child: TextButton(
               style: TextButton.styleFrom(
-                minimumSize: Size(130, 52),
+                minimumSize: Size(130, 58),
                 backgroundColor: (selectedIndex == index)
                     ? Color(0xffdedede)
                     : Color(0xfffefefe),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(18),
                 ),
               ).copyWith(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
@@ -241,7 +242,7 @@ class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
                     Icons.check,
                     color: (selectedIndex == index) ? Colors.black : Colors.white,
                   ),
-                  SizedBox(width: 4),
+                  SizedBox(width: 6),
                   Text(
                     widget.textList[index],
                     style: TextStyle(
@@ -260,3 +261,79 @@ class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
   }
 }
 // --------------------------------------------------------------------------------------------------------------------------
+
+
+
+// --------------------------------------------------- URLを受け取り画面遷移 ---------------------------------------------------
+Future viewWebsite(String recvUrl) async {
+  final url = Uri.parse(recvUrl);
+  launchUrl(url);
+}
+// --------------------------------------------------------------------------------------------------------------------------
+
+
+
+// ------------------------------------------- 末尾の「こちら」で画面遷移できるminiInfo -------------------------------------------
+Container miniInfoEndJump({
+    String passText='',     // 表示するテキスト
+    IconData customIcon = Icons.info_outline,  // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
+    bool needsIcon = true,   // アイコンが必要かどうか
+    bool needsTBPadding = true,   // topとbottomに余白が必要か
+    double customTextSize = 13,    // テキストサイズ(デフォは13)
+    Color customColor = Colors.black,
+    String passUrl = ''     // 遷移したいURL
+  }) {
+  return Container(
+    padding: EdgeInsets.only(
+      left: 4,
+      top: (needsTBPadding) ? 2 : 0,
+      right: 7,
+      bottom: (needsTBPadding) ? 2 : 0,
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(2),
+          child: Icon(
+            customIcon,
+            size: (customTextSize==13) ? 15 : customTextSize*1.1538,
+            color: (needsIcon) ? customColor : Color(0xffededed),
+          ),
+        ),
+        SizedBox(width: 4),
+        Flexible(child: Text(
+          passText,
+          style: TextStyle(
+            color: customColor,
+            fontSize: customTextSize,
+          )
+        )),
+        RichText(
+          text: TextSpan(children: [
+            WidgetSpan(
+              child: GestureDetector(
+                onTap: () {
+                  // VPAPの公式サイトへ遷移
+                  viewWebsite(passUrl);
+                },
+                child: Text(
+                  'こちら',
+                  style: TextStyle(
+                    color: Colors.indigo[500],
+                    // decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
+              ),
+            ),
+          ])
+        ),
+      ],
+    ),
+  );
+}
+// --------------------------------------------------------------------------------------------------------------------------
+
+

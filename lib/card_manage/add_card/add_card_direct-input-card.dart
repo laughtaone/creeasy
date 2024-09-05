@@ -400,7 +400,7 @@ class _AddCardPageDirectInputCardState
                     ),
                     // ====================================================================================================
 
-                    // ========================================== ⑤引き落とし銀行 ==========================================
+                    // ========================================== ⑤引き落とし口座 ==========================================
                     betweenAddPaymentSection(),
                     Container(
                       padding: EdgeInsets.only(
@@ -412,7 +412,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし銀行を入力'),
+                          addButtonPageTitleText(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
                           // --------------------------- 「銀行を追加する場合はこちら」 -----------------------------------
                           Container(
                             padding:
