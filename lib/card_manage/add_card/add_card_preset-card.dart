@@ -16,19 +16,29 @@ class AddCardPagePresetCard extends StatefulWidget {
 class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
   final List<String> _smcnlPayRule = ['15日締め / 翌月10日払い', '月末締め / 翌月26日払い'];
   final List<String> _bankList = ['三菱UFJ銀行', 'みんなの銀行', '三井住友銀行'];
+  final List<String> _isVpup = ['設定しない', '設定する'];
 
   // ================================ 変数処理 ================================
   int? _selectedSmcnlPayRuleIndex; // ①で選択されたポイントアップの有無を保持する変数
   String? _selectedBank; // ②で選択された銀行を保持する変数
+  int? _selectedVpupIndex;  // ③で入力されたVPUPの有無を保持する変数
   final TextEditingController _inputVpupReturnRate = TextEditingController(); // ③で入力された還元率[%]を保持する変数
   // =========================================================================
 
+
+
+  void _onBoolVpupSelected(int? index) {
+    setState(() {
+      _selectedVpupIndex = index;
+    });
+  }
   void _onSelectSmcnlPayRuleIndex(int? index) {
     setState(() {
       _selectedSmcnlPayRuleIndex = index;
     });
-    print("_selectedSmcnlPayRuleIndex: $_selectedSmcnlPayRuleIndex");
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -280,7 +290,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 ),
                 // ====================================================================================================
 
-                // =============================================== ②ポイントアップの選択 ==============================================
+                // =============================================== ③ポイントアップの選択 ==============================================
                 betweenAddPaymentSection(),
                 Container(
                   padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -297,47 +307,157 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                         resvTextSize: 16
                       ),
                       SizedBox(height: 3),
-                      // --------------------------- VPUP還元率に設定できる値の注意書き -----------------------------------
-                      miniInfoEndJump(
-                        passText: 'Vポイントアッププログラムの詳細は',
-                        passUrl: 'https://www.smbc-card.com/mem/wp/vpoint_up_program/index.jsp'
-                      ),
-                      miniInfo(passText: 'Vpassアプリに表示されているVポイントアッププログラムの還元率をそのまま入力'),
-                      miniInfo(
-                        passText: '（表示されている還元率は基本還元率0.5%を含みますが、無視してそのまま入力してください）',
-                        customTextSize: 10,
-                        needsIcon: false,
-                        needsTBPadding: false
-                      ),
-                      miniInfo(passText: '0-20[%] の 整数または小数 が設定可能'),
-                      // ----------------------------------------------------------------------------------------------
+                      miniInfo(passText: 'ポイント還元も詳細に管理することが可能'),
+                      miniInfo(passText: '利用金額のみを管理したい場合はこの設定は不要', customIcon: Icons.tips_and_updates_outlined),
+                      miniInfo(passText: 'ポイントも細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined),
+                      // --------------------------- VPUP還元率を設定するかどうかの確認 -----------------------------------
                       Container(
-                        margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+                        margin: EdgeInsets.all(10),
                         height: 70,
-                        child: TextField(
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 22,
+                        child: Container(
+                          child: OptionTextButton(
+                            textList: _isVpup,
+                            onItemSelected: _onBoolVpupSelected,
+                            textFontSize: 17
                           ),
-                          controller: _inputVpupReturnRate,
-                          decoration: InputDecoration(
-                            labelText: '',
-                            contentPadding: EdgeInsets.all(30),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            suffixText: '%',
-                            fillColor: Color(0xfffefefe),
-                            filled: true,
-                          ),
-                          keyboardType: TextInputType.numberWithOptions(
-                              decimal: true),
-                          inputFormatters: [
-                            DecimalTextInputFormatter(),
-                            ZeroLimitFormatterForDouble(),
-                          ],
                         ),
                       ),
+                      // ----------------------------------------------------------------------------------------------
+                      (_selectedVpupIndex == 1)
+                      ? Container(
+                        child: Column(
+                          children: [
+                            // --------------------------- 【展開時】VPUP還元率の注意書き -----------------------------------
+                            miniInfoEndJump(
+                              passText: 'Vポイントアッププログラムの詳細は',
+                              passUrl: 'https://www.smbc-card.com/mem/wp/vpoint_up_program/index.jsp'
+                            ),
+                            miniInfo(passText: 'Vpassアプリに表示されているVポイントアッププログラムの還元率をそのまま入力'),
+                            miniInfo(
+                              passText: '（表示されている還元率は基本還元率0.5%を含みますが、無視してそのまま入力してください）',
+                              customTextSize: 10,
+                              needsIcon: false,
+                              needsTBPadding: false
+                            ),
+                            miniInfo(passText: '0-20[%] の 整数または小数 が設定可能'),
+                            // ----------------------------------------------------------------------------------------------
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+                              height: 70,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 22,
+                                ),
+                                controller: _inputVpupReturnRate,
+                                decoration: InputDecoration(
+                                  labelText: '',
+                                  contentPadding: EdgeInsets.all(30),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  suffixText: '%',
+                                  fillColor: Color(0xfffefefe),
+                                  filled: true,
+                                ),
+                                keyboardType: TextInputType.numberWithOptions(
+                                    decimal: true),
+                                inputFormatters: [
+                                  DecimalTextInputFormatter(),
+                                  ZeroLimitFormatterForDouble(),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      : SizedBox.shrink()
+                      ,
+                    ],
+                  ),
+                ),
+                // =======================================================================================================
+
+                // =============================================== ④学生ポイントの有無 ==============================================
+                betweenAddPaymentSection(),
+                Container(
+                  padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(0xffededed),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      addButtonPageTitleText(resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
+                      SizedBox(height: 3),
+                      miniInfoEndJump(passText: '学生ポイントの詳細は', passUrl: 'https://www.smbc-card.com/mem/wp/student-point/index.jsp'),
+                      miniInfo(passText: '学生ポイント還元も詳細に管理することが可能'),
+                      miniInfo(passText: '利用金額のみを管理したい場合はこの設定は不要', customIcon: Icons.tips_and_updates_outlined),
+                      miniInfo(passText: 'ポイントも細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined),
+                      // --------------------------- VPUP還元率を設定するかどうかの確認 -----------------------------------
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        height: 70,
+                        child: Container(
+                          child: OptionTextButton(
+                            textList: _isVpup,
+                            onItemSelected: _onBoolVpupSelected,
+                            textFontSize: 17
+                          ),
+                        ),
+                      ),
+                      // ----------------------------------------------------------------------------------------------
+                      (_selectedVpupIndex == 1)
+                      ? Container(
+                        child: Column(
+                          children: [
+                            // --------------------------- 【展開時】VPUP還元率の注意書き -----------------------------------
+                            miniInfoEndJump(
+                              passText: 'Vポイントアッププログラムの詳細は',
+                              passUrl: 'https://www.smbc-card.com/mem/wp/vpoint_up_program/index.jsp'
+                            ),
+                            miniInfo(passText: 'Vpassアプリに表示されているVポイントアッププログラムの還元率をそのまま入力'),
+                            miniInfo(
+                              passText: '（表示されている還元率は基本還元率0.5%を含みますが、無視してそのまま入力してください）',
+                              customTextSize: 10,
+                              needsIcon: false,
+                              needsTBPadding: false
+                            ),
+                            miniInfo(passText: '0-20[%] の 整数または小数 が設定可能'),
+                            // ----------------------------------------------------------------------------------------------
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+                              height: 70,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 22,
+                                ),
+                                controller: _inputVpupReturnRate,
+                                decoration: InputDecoration(
+                                  labelText: '',
+                                  contentPadding: EdgeInsets.all(30),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  suffixText: '%',
+                                  fillColor: Color(0xfffefefe),
+                                  filled: true,
+                                ),
+                                keyboardType: TextInputType.numberWithOptions(
+                                    decimal: true),
+                                inputFormatters: [
+                                  DecimalTextInputFormatter(),
+                                  ZeroLimitFormatterForDouble(),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                      : SizedBox.shrink()
+                      ,
                     ],
                   ),
                 ),

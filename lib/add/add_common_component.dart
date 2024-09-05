@@ -187,7 +187,6 @@ Container miniInfo({
 
 
 // ------------------------------- card_manage/add_card/add_card_preset-card.dartで使用 -------------------------------
-
 class OptionTextButtonOneLine extends StatefulWidget {
   final List textList;
   final Function(int?) onItemSelected;
@@ -310,6 +309,7 @@ Container miniInfoEndJump({
             fontSize: customTextSize,
           )
         )),
+        SizedBox(width: 2),
         RichText(
           text: TextSpan(children: [
             WidgetSpan(
