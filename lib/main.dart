@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:creeasy/home/home.dart';
-import 'package:creeasy/cart_manage/card_manage.dart';
+import 'package:creeasy/card_manage/card_manage.dart';
 import 'package:creeasy/add/add_payment.dart';
 import 'package:creeasy/add/add_special-payment.dart';
 import 'package:creeasy/add/add_use-point.dart';
@@ -240,9 +240,9 @@ SizedBox addButtonItemBetweenIconText() {
 }
 
 double selectedTabIconSize() {
-  return 29;
+  return 30;
 }
 
 double unselectedTabIconSize() {
-  return 25;
+  return 24;
 }

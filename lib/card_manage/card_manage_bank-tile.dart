@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/cart_manage/card_manage.dart';
+import 'package:creeasy/card_manage/card_manage.dart';
 import 'package:intl/intl.dart';
 
 class CardManageBankTile extends StatelessWidget {

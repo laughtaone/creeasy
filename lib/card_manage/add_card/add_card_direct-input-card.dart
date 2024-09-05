@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/add/add_common_component.dart';
-import 'package:creeasy/cart_manage/add_bank/add_bank_main.dart';
+import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 
 class AddCardPageDirectInputCard extends StatefulWidget {
   @override
@@ -189,7 +189,7 @@ class _AddCardPageDirectInputCardState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           addButtonPageTitleText(
-                              Icons.credit_card_outlined, '締め日を入力'),
+                              Icons.event_outlined, '締め日を入力'),
                           Container(
                             margin: EdgeInsets.all(5),
                             child: OutlinedButton(
@@ -293,7 +293,7 @@ class _AddCardPageDirectInputCardState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           addButtonPageTitleText(
-                              Icons.credit_card_outlined, '引き落とし日を入力'),
+                              Icons.event_outlined, '引き落とし日を入力'),
                           Container(
                             margin: EdgeInsets.all(5),
                             child: OutlinedButton(
@@ -420,12 +420,13 @@ class _AddCardPageDirectInputCardState
                                     child: GestureDetector(
                                       onTap: () {
                                         // 銀行新規追加画面へ遷移
-                                        Navigator.pushAndRemoveUntil(
+                                        // Navigator.pushAndRemoveUntil(
+                                        Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AddBankPage()),
-                                          (Route<dynamic> route) => false,
+                                            builder: (context) => AddBankPage(),
+                                            fullscreenDialog: true,
+                                          ),
                                         );
                                       },
                                       child: Text(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/cart_manage/add_card/add_card_preset-card.dart';
-import 'package:creeasy/cart_manage/add_card/add_card_direct-input-card.dart';
+import 'package:creeasy/card_manage/add_card/add_card_preset-card.dart';
+import 'package:creeasy/card_manage/add_card/add_card_direct-input-card.dart';
 
 
 class AddCardPage extends StatefulWidget {
