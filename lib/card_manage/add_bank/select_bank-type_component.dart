@@ -53,8 +53,7 @@ class _OptionTextButtonState extends State<OptionTextButton> {
                 children: [
                   Icon(
                     Icons.check,
-                    color:
-                        (selectedIndex == index) ? Colors.black : Colors.white,
+                    color: (selectedIndex == index) ? Colors.black : Colors.white,
                   ),
                   SizedBox(width: 4),
                   Text(

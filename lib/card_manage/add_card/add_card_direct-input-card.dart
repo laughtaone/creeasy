@@ -162,8 +162,7 @@ class _AddCardPageDirectInputCardState
                           // --------------------------- 還元率に設定できる値の注意書き -----------------------------------
                           // miniInfo(passText: '還元率には 0-10[%] の整数or小数が設定可能'),
                           miniInfo(passText: '0-10[%] の 整数または小数 が設定可能'),
-                          miniInfo(
-                              passText: '特定の店や日付での特別な還元率ではなく、どこの利用でも共通である基本還元率を入力'),
+                          miniInfo(passText: '特定の店や日付での特別な還元率ではなく、どこの利用でも共通である基本還元率を入力', needsTBPadding: false),
                           // ---------------------------------------------------------------------------------
                           Container(
                             margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
@@ -572,7 +571,22 @@ class _AddCardPageDirectInputCardState
                               Icons.local_offer_outlined, 'ポイントアップの有無'),
                           SizedBox(height: 3),
                           miniInfo(passText: '「ポイントアップ」とは特定の店や日付での利用でポイントが上乗せされることを指します'),
-                          miniInfo(needsIcon: false, passText: '（例：みんなの銀行の貯蓄預金「ボックス」）'),
+                          miniInfo(
+                            passText: '例：三井住友カードは「ポイントアッププログラム」があるので「あり」を選択 *1',
+                            needsTBPadding: false,
+                            customIcon: Icons.tips_and_updates_outlined
+                          ),
+                          miniInfo(
+                            passText: '例：Paidyカードはポイントアップがないので「ない」を選択  *1',
+                            needsTBPadding: false,
+                            customIcon: Icons.tips_and_updates_outlined
+                          ),
+                          miniInfo(
+                            passText: '*1 2024年9月5日調べ・各カードを批判/優遇/宣伝する意図は無くあくまで例として列挙',
+                            customTextSize: 9,
+                            needsIcon: false,
+                            customColor: Colors.black54
+                          ),
                           Container(
                             margin: EdgeInsets.all(10),
                             height: 70,

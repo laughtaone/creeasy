@@ -131,27 +131,23 @@ class ZeroLimitFormatterForDouble extends TextInputFormatter {
   }
 }
 
-// 各選択フィールドの上の小さい注意書きの文字スタイルを一括指定
-TextStyle miniInfoTextStyle = TextStyle(
-  color: Colors.black,
-  fontSize: 13,
-);
+
 // ↓ 下のこれで利用
 // 各選択フィールドの上の小さい注意書きの文字スタイルを一括指定
-// 「\i/　ああああ」のように一行だけなら needsIcon=true(デフォルト値でtrueと設定済)
-// 複数行あるならmain→sub→last
-// ||top|bottom
-// |---|---|---|---|---|---|---|
-// |main|2|0|
-// |sub|0|0|
-// |last|0|2|
-Container miniInfo({bool needsIcon = true, String passText=''}) {
+Container miniInfo({
+    String passText='',     // 表示するテキスト
+    IconData customIcon = Icons.info_outline,  // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
+    bool needsIcon = true,   // アイコンが必要かどうか
+    bool needsTBPadding = true,   // topとbottomに余白が必要か
+    double customTextSize = 13,    // テキストサイズ(デフォは13)
+    Color customColor = Colors.black
+  }) {
   return Container(
     padding: EdgeInsets.only(
-      top: (needsIcon== 'main') ? 2 : 0,
-      bottom: (needsIcon== 'last') ? 2 : 0,
       left: 4,
-      right: 7
+      top: (needsTBPadding) ? 2 : 0,
+      right: 7,
+      bottom: (needsTBPadding) ? 2 : 0,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -160,13 +156,19 @@ Container miniInfo({bool needsIcon = true, String passText=''}) {
         Padding(
           padding: const EdgeInsets.all(2),
           child: Icon(
-            Icons.info_outline,
-            size: 15,
-            color: (needsIcon) ? Colors.black : Color(0xffededed),
+            customIcon,
+            size: (customTextSize==13) ? 15 : customTextSize*1.1538,
+            color: (needsIcon) ? customColor : Color(0xffededed),
           ),
         ),
         SizedBox(width: 4),
-        Flexible(child: Text(passText, style: miniInfoTextStyle)),
+        Flexible(child: Text(
+          passText,
+          style: TextStyle(
+            color: customColor,
+            fontSize: customTextSize,
+          )
+        )),
       ],
     ),
   );
