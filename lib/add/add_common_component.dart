@@ -146,6 +146,7 @@ Container miniInfo({
     String passText='',     // 表示するテキスト
     IconData customIcon = Icons.info_outline,  // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
     bool needsIcon = true,   // アイコンが必要かどうか
+    Color doukaColor = const Color(0xffededed),   // アイコンが不要な時に背景色と同じにして同化できる色
     bool needsTBPadding = true,   // topとbottomに余白が必要か
     double customTextSize = 13,    // テキストサイズ(デフォは13)
     Color customColor = Colors.black
@@ -166,7 +167,7 @@ Container miniInfo({
           child: Icon(
             customIcon,
             size: (customTextSize==13) ? 15 : customTextSize*1.1538,
-            color: (needsIcon) ? customColor : Color(0xffededed),
+            color: (needsIcon) ? customColor : doukaColor,
           ),
         ),
         SizedBox(width: 4),
@@ -220,8 +221,8 @@ class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
               style: TextButton.styleFrom(
                 minimumSize: Size(130, 58),
                 backgroundColor: (selectedIndex == index)
-                    ? Color(0xffdedede)
-                    : Color(0xfffefefe),
+                  ? Color(0xffdedede)
+                  : Color(0xfffefefe),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),
@@ -272,15 +273,16 @@ Future viewWebsite(String recvUrl) async {
 
 
 
-// ------------------------------------------- 末尾の「こちら」で画面遷移できるminiInfo -------------------------------------------
+// ------------------------------------------- 末尾の「こちら」で画面遷移できるminiInfoEndJump -------------------------------------------
 Container miniInfoEndJump({
     String passText='',     // 表示するテキスト
     IconData customIcon = Icons.info_outline,  // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
     bool needsIcon = true,   // アイコンが必要かどうか
+    Color doukaColor = const Color(0xffededed),      // アイコンが不要な時に背景色と同じにして同化できる色
     bool needsTBPadding = true,   // topとbottomに余白が必要か
     double customTextSize = 13,    // テキストサイズ(デフォは13)
     Color customColor = Colors.black,
-    String passUrl = ''     // 遷移したいURL
+    String passUrl = '',     // 遷移したいURL
   }) {
   return Container(
     padding: EdgeInsets.only(
@@ -298,7 +300,7 @@ Container miniInfoEndJump({
           child: Icon(
             customIcon,
             size: (customTextSize==13) ? 15 : customTextSize*1.1538,
-            color: (needsIcon) ? customColor : Color(0xffededed),
+            color: (needsIcon) ? customColor : doukaColor,
           ),
         ),
         SizedBox(width: 4),
