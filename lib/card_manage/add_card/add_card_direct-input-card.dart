@@ -133,7 +133,7 @@ class _AddCardPageDirectInputCardState
                     ),
                     // =======================================================================================================
 
-                    // =============================================== ②還元率 ==============================================
+                    // =============================================== ②通常還元率 ==============================================
                     betweenAddPaymentSection(),
                     Container(
                       padding: EdgeInsets.only(
@@ -145,9 +145,15 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(Icons.percent_outlined, '還元率を入力'),
+                          addButtonPageTitleText(Icons.percent_outlined, '基本還元率を入力'),
+                          // --------------------------- 還元率に設定できる値の注意書き -----------------------------------
+                          // miniInfo(passText: '還元率には 0-10[%] の整数or小数が設定可能'),
+                          miniInfo(passText: '0-10[%] の 整数または小数 が設定可能'),
+                          miniInfo(passText: '特定の店や日付での特別な還元率ではなく', isSingleLine: 'main'),
+                          miniInfo(passText: 'どこの利用でも共通である基本還元率を入力' ,isSingleLine: 'last'),
+                          // ---------------------------------------------------------------------------------
                           Container(
-                            margin: EdgeInsets.all(10),
+                            margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
                             height: 70,
                             child: TextField(
                               style: TextStyle(

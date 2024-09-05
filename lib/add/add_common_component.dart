@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter/services.dart';
 
-
 // 追加の各ページのサブタイトル
 Row addButtonPageTitleText(IconData receivedIcon, String originalText) {
   return Row(
@@ -24,7 +23,6 @@ Row addButtonPageTitleText(IconData receivedIcon, String originalText) {
     ],
   );
 }
-
 
 // 「②金額を入力」の入力フィールドで0を連続して入力できないようにするクラス
 // 整数だけを受け付ける入力フィールドで、最初に0を1つしか最初に入力できないようにするもの
@@ -78,7 +76,6 @@ SizedBox betweenAddPaymentSection() {
   return SizedBox(height: 20);
 }
 
-
 // ------------------------------- card_manage/add_card/add_card_direct-input-card.dartで使用 -------------------------------
 // 整数と小数を受け取るフォーマッター
 class DecimalTextInputFormatter extends TextInputFormatter {
@@ -95,6 +92,7 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     return oldValue;
   }
 }
+
 // 前述したページの「還元率を入力」の入力フィールドで0を連続して入力できないようにするクラス
 // 整数と小数だけを受け付ける入力フィールドで、最初に0を1つしか最初に入力できないようにするもの
 class ZeroLimitFormatterForDouble extends TextInputFormatter {
@@ -132,4 +130,44 @@ class ZeroLimitFormatterForDouble extends TextInputFormatter {
     return newValue;
   }
 }
+
+// 各選択フィールドの上の小さい注意書きの文字スタイルを一括指定
+TextStyle miniInfoTextStyle = TextStyle(
+  color: Colors.black,
+  fontSize: 13,
+);
+// ↓ 下のこれで利用
+// 各選択フィールドの上の小さい注意書きの文字スタイルを一括指定
+// 「\i/　ああああ」のように一行だけなら isSingleLine=true(デフォルト値でtrueと設定済)
+// 複数行あるならmain→sub→last
+// ||top|bottom
+// |---|---|---|---|---|---|---|
+// |main|2|0|
+// |sub|0|0|
+// |last|0|2|
+Container miniInfo({String isSingleLine = 'true', String passText=''}) {
+  return Container(
+    padding: EdgeInsets.only(
+      top: (isSingleLine== 'main') ? 2 : 0,
+      bottom: (isSingleLine== 'last') ? 2 : 0,
+      left: 4,
+      right: 7
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Icon(
+          Icons.info_outline,
+          size: 15,
+          color: (isSingleLine=='true' || isSingleLine=='main') ? Colors.black : Color(0xffededed),
+        ),
+        SizedBox(width: 4),
+        Flexible(child: Text(passText, style: miniInfoTextStyle)),
+      ],
+    ),
+  );
+}
+
 // --------------------------------------------------------------------------------------------------------------------------
+
+
