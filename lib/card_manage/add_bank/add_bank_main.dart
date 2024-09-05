@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/card_manage/add_card/add_card_preset-card.dart';
 import 'package:creeasy/card_manage/add_card/add_card_direct-input-card.dart';
-import 'package:creeasy/add/add_common_component.dart';
+import 'package:creeasy/add/common_component.dart';
 import 'package:creeasy/card_manage/add_bank/select_bank-type_component.dart';
 
 class AddBankPage extends StatefulWidget {

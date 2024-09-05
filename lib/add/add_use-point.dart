@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/main.dart';
-import 'package:creeasy/add/add_common_component.dart';
+import 'package:creeasy/add/common_component.dart';
 import 'package:flutter/services.dart';
 
 

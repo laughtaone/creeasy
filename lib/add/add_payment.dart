@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:creeasy/main.dart';
-import 'package:creeasy/add/add_common_component.dart';
+import 'package:creeasy/add/common_component.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:creeasy/add/add_payment_option_button/add_payment_option_button.dart';
 
