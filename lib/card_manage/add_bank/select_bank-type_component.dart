@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 class OptionTextButton extends StatefulWidget {
   final List textList;
   final Function(int?) onItemSelected;
+  final double textFontSize;
 
   OptionTextButton({
     required this.textList,
     required this.onItemSelected,
+    this.textFontSize = 15,        // textFonSizeだけデフォ値を設定
   });
 
   @override
@@ -58,7 +60,7 @@ class _OptionTextButtonState extends State<OptionTextButton> {
                   Text(
                     widget.textList[index],
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: widget.textFontSize,
                       color: Color(0xff444444),
                       fontWeight: FontWeight.bold,
                     ),

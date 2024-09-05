@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:creeasy/add/add_common_component.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
+import 'package:creeasy/card_manage/add_bank/select_bank-type_component.dart';
+
 
 class AddCardPageDirectInputCard extends StatefulWidget {
   @override
@@ -46,6 +48,8 @@ class _AddCardPageDirectInputCardState
 
   final List<String> _bankList = ['三菱UFJ銀行', 'みんなの銀行', '三井住友銀行'];
 
+  final List<String> _isPointUp = ['なし', 'あり'];
+
   // ================================ 変数処理 ================================
   final TextEditingController _storeName =
       TextEditingController(); // ①で入力されたカード名を保持する変数
@@ -54,6 +58,14 @@ class _AddCardPageDirectInputCardState
   String? _closingDate; // ③で入力された締め日を保持する変数
   String? _payDate; // ④で入力された引き落とし日を保持する変数
   String? _selectedBank; // ⑤で選択された銀行を保持する変数
+  int? _selectedPointUpIndex;   // ⑥で選択されたポイントアップの有無を保持する変数
+
+  void _onBoolPointUpSelected(int? index) {
+    setState(() {
+      _selectedPointUpIndex = index;
+    });
+    print("Selected index: $_selectedPointUpIndex");
+  }
   // =========================================================================
 
   @override
@@ -145,12 +157,13 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(Icons.percent_outlined, '基本還元率を入力'),
+                          addButtonPageTitleText(
+                              Icons.percent_outlined, '基本還元率を入力'),
                           // --------------------------- 還元率に設定できる値の注意書き -----------------------------------
                           // miniInfo(passText: '還元率には 0-10[%] の整数or小数が設定可能'),
                           miniInfo(passText: '0-10[%] の 整数または小数 が設定可能'),
-                          miniInfo(passText: '特定の店や日付での特別な還元率ではなく', isSingleLine: 'main'),
-                          miniInfo(passText: 'どこの利用でも共通である基本還元率を入力' ,isSingleLine: 'last'),
+                          miniInfo(
+                              passText: '特定の店や日付での特別な還元率ではなく、どこの利用でも共通である基本還元率を入力'),
                           // ---------------------------------------------------------------------------------
                           Container(
                             margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
@@ -171,7 +184,8 @@ class _AddCardPageDirectInputCardState
                                 fillColor: Color(0xfffefefe),
                                 filled: true,
                               ),
-                              keyboardType: TextInputType.numberWithOptions(decimal: true),
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
                               inputFormatters: [
                                 DecimalTextInputFormatter(),
                                 ZeroLimitFormatterForDouble(),
@@ -541,6 +555,40 @@ class _AddCardPageDirectInputCardState
                     ),
                     // ====================================================================================================
 
+                    // !NOW!
+                    // =============================================== ⑥ポイントアップの選択 ==============================================
+                    betweenAddPaymentSection(),
+                    Container(
+                      padding: EdgeInsets.only(
+                          left: 9, right: 9, top: 15, bottom: 15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Color(0xffededed),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          addButtonPageTitleText(
+                              Icons.local_offer_outlined, 'ポイントアップの有無'),
+                          SizedBox(height: 3),
+                          miniInfo(passText: '「ポイントアップ」とは特定の店や日付での利用でポイントが上乗せされることを指します'),
+                          miniInfo(needsIcon: false, passText: '（例：みんなの銀行の貯蓄預金「ボックス」）'),
+                          Container(
+                            margin: EdgeInsets.all(10),
+                            height: 70,
+                            child: Container(
+                              child: OptionTextButton(
+                                textList: _isPointUp,
+                                onItemSelected: _onBoolPointUpSelected,
+                                textFontSize: 17
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // =======================================================================================================
+
                     SizedBox(height: 80),
 
                     // =============================================== 保存ボタン ==============================================
@@ -607,6 +655,3 @@ class _AddCardPageDirectInputCardState
                 ))));
   }
 }
-
-
-

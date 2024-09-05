@@ -138,28 +138,32 @@ TextStyle miniInfoTextStyle = TextStyle(
 );
 // ↓ 下のこれで利用
 // 各選択フィールドの上の小さい注意書きの文字スタイルを一括指定
-// 「\i/　ああああ」のように一行だけなら isSingleLine=true(デフォルト値でtrueと設定済)
+// 「\i/　ああああ」のように一行だけなら needsIcon=true(デフォルト値でtrueと設定済)
 // 複数行あるならmain→sub→last
 // ||top|bottom
 // |---|---|---|---|---|---|---|
 // |main|2|0|
 // |sub|0|0|
 // |last|0|2|
-Container miniInfo({String isSingleLine = 'true', String passText=''}) {
+Container miniInfo({bool needsIcon = true, String passText=''}) {
   return Container(
     padding: EdgeInsets.only(
-      top: (isSingleLine== 'main') ? 2 : 0,
-      bottom: (isSingleLine== 'last') ? 2 : 0,
+      top: (needsIcon== 'main') ? 2 : 0,
+      bottom: (needsIcon== 'last') ? 2 : 0,
       left: 4,
       right: 7
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(
-          Icons.info_outline,
-          size: 15,
-          color: (isSingleLine=='true' || isSingleLine=='main') ? Colors.black : Color(0xffededed),
+        Padding(
+          padding: const EdgeInsets.all(2),
+          child: Icon(
+            Icons.info_outline,
+            size: 15,
+            color: (needsIcon) ? Colors.black : Color(0xffededed),
+          ),
         ),
         SizedBox(width: 4),
         Flexible(child: Text(passText, style: miniInfoTextStyle)),

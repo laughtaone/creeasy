@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AddCardPagePresetCard extends StatefulWidget {
-  final String selectedCardName;
+  // final String selectedCardName;
 
-  OptionTextButton({
-    required this.selectedCardName,
-  });
+  // OptionTextButton({
+  //   required this.selectedCardName,
+  // });
 
   @override
   _AddCardPagePresetCardState createState() => _AddCardPagePresetCardState();
