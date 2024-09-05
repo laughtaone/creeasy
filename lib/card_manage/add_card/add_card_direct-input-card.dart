@@ -114,8 +114,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(
-                              Icons.credit_card_outlined, 'カード名を入力'),
+                          addButtonPageTitleText(resvIcon: Icons.credit_card_outlined, resvText: 'カード名を入力'),
                           Container(
                             margin: EdgeInsets.all(10),
                             height: 70,
@@ -157,8 +156,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(
-                              Icons.percent_outlined, '基本還元率を入力'),
+                          addButtonPageTitleText(resvIcon: Icons.percent_outlined, resvText: '基本還元率を入力'),
                           // --------------------------- 還元率に設定できる値の注意書き -----------------------------------
                           // miniInfo(passText: '還元率には 0-10[%] の整数or小数が設定可能'),
                           miniInfo(passText: '0-10[%] の 整数または小数 が設定可能'),
@@ -208,8 +206,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(
-                              Icons.event_outlined, '締め日を入力'),
+                          addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText: '締め日を入力'),
                           Container(
                             margin: EdgeInsets.all(5),
                             child: OutlinedButton(
@@ -312,8 +309,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(
-                              Icons.event_outlined, '引き落とし日を入力'),
+                          addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText: '引き落とし日を入力'),
                           Container(
                             margin: EdgeInsets.all(5),
                             child: OutlinedButton(
@@ -416,9 +412,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(
-                              Icons.account_balance_outlined, '引き落とし銀行を入力'),
-
+                          addButtonPageTitleText(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし銀行を入力'),
                           // --------------------------- 「銀行を追加する場合はこちら」 -----------------------------------
                           Container(
                             padding:
@@ -554,7 +548,6 @@ class _AddCardPageDirectInputCardState
                     ),
                     // ====================================================================================================
 
-                    // !NOW!
                     // =============================================== ⑥ポイントアップの選択 ==============================================
                     betweenAddPaymentSection(),
                     Container(
@@ -567,8 +560,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(
-                              Icons.local_offer_outlined, 'ポイントアップの有無'),
+                          addButtonPageTitleText(resvIcon: Icons.local_offer_outlined, resvText: 'ポイントアップの有無'),
                           SizedBox(height: 3),
                           miniInfo(passText: '「ポイントアップ」とは特定の店や日付での利用でポイントが上乗せされることを指します'),
                           miniInfo(

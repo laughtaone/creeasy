@@ -85,9 +85,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(
-                      Icons.credit_card_outlined, '該当カードを選択'
-                    ),
+                    addButtonPageTitleText(resvIcon: Icons.credit_card_outlined, resvText:'該当カードを選択'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(
@@ -183,8 +181,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(
-                        Icons.currency_yen_outlined, '臨時支払い金額を入力'),
+                    addButtonPageTitleText(resvIcon: Icons.currency_yen_outlined, resvText:'currency_yen_outlined'),
                     Container(
                       margin: EdgeInsets.all(5),
                       height: 70,
@@ -228,7 +225,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(Icons.event_outlined, '臨時支払い日を入力'),
+                    addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText:'臨時支払い日を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(

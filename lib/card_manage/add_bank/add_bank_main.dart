@@ -83,8 +83,7 @@ class _AddBankPageState extends State<AddBankPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        addButtonPageTitleText(
-                            Icons.account_balance_outlined, '銀行名を入力'),
+                        addButtonPageTitleText(resvIcon: Icons.account_balance_outlined, resvText:'銀行名を入力'),
                         Container(
                           margin: EdgeInsets.all(10),
                           height: 70,
@@ -128,7 +127,7 @@ class _AddBankPageState extends State<AddBankPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        addButtonPageTitleText(Icons.local_offer_outlined, '銀行のタイプを選択'),
+                        addButtonPageTitleText(resvIcon: Icons.local_offer_outlined, resvText:'銀行のタイプを選択'),
                         SizedBox(height: 3),
                         miniInfo(passText: '通常口座は、一般的なただの銀行の口座を指します'),
                         miniInfo(needsIcon: false, passText: '（例：三井住友銀行 普通口座 ??支店 XXXXXXX）'),

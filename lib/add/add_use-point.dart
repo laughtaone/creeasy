@@ -84,9 +84,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(
-                      Icons.credit_card_outlined, '該当カードを選択'
-                    ),
+                    addButtonPageTitleText(resvIcon: Icons.credit_card_outlined, resvText:'該当カードを選択'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(
@@ -182,9 +180,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(
-                      Icons.stars_outlined, '割当ポイント数を入力'
-                    ),
+                    addButtonPageTitleText(resvIcon: Icons.stars_outlined, resvText:'割当ポイント数を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       height: 70,
@@ -228,7 +224,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(Icons.event_outlined, '割当日を入力'),
+                    addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText:'割当日を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(

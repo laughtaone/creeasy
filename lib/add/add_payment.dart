@@ -84,7 +84,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(Icons.credit_card_outlined, '支払いカードを選択'),
+                    addButtonPageTitleText(resvIcon: Icons.credit_card_outlined, resvText:'支払いカードを選択'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(
@@ -180,7 +180,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(Icons.currency_yen_outlined, '金額を入力'),
+                    addButtonPageTitleText(resvIcon: Icons.currency_yen_outlined, resvText:'金額を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       height: 70,
@@ -224,7 +224,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(Icons.event_outlined, '使用日を入力'),
+                    addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText:'使用日を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(
@@ -276,8 +276,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(
-                        Icons.location_on_outlined, '使用場所を入力'),
+                    addButtonPageTitleText(resvIcon: Icons.location_on_outlined, resvText:'使用場所を入力'),
                     Container(
                       margin: EdgeInsets.all(10),
                       height: 70,
@@ -319,8 +318,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(
-                        Icons.auto_fix_high_outlined, 'オプション'),
+                    addButtonPageTitleText(resvIcon: Icons.auto_fix_high_outlined, resvText:'オプション'),
                     Container(
                       margin: EdgeInsets.all(10),
                       child: Column(

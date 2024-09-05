@@ -3,26 +3,33 @@ import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter/services.dart';
 
 // 追加の各ページのサブタイトル
-Row addButtonPageTitleText(IconData receivedIcon, String originalText) {
+Row addButtonPageTitleText({
+    IconData? resvIcon,
+    String resvText = '',
+    double resvTextSize = 18,
+  }) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
       SizedBox(width: 2),
-      Icon(
-        receivedIcon,
+      (resvIcon != null)
+      ? Icon(
+        resvIcon,
         size: 23,
-      ),
+      )
+      : SizedBox.shrink(),
       SizedBox(width: 5),
       Text(
-        originalText,
+        resvText,
         style: TextStyle(
           fontWeight: FontWeight.w500,
-          fontSize: 18,
+          fontSize: resvTextSize,
         ),
       ),
     ],
   );
 }
+
 
 // 「②金額を入力」の入力フィールドで0を連続して入力できないようにするクラス
 // 整数だけを受け付ける入力フィールドで、最初に0を1つしか最初に入力できないようにするもの
@@ -177,3 +184,79 @@ Container miniInfo({
 // --------------------------------------------------------------------------------------------------------------------------
 
 
+
+// ------------------------------- card_manage/add_card/add_card_preset-card.dartで使用 -------------------------------
+
+class OptionTextButtonOneLine extends StatefulWidget {
+  final List textList;
+  final Function(int?) onItemSelected;
+  final double textFontSize;
+
+  OptionTextButtonOneLine({
+    required this.textList,
+    required this.onItemSelected,
+    this.textFontSize = 15,        // textFonSizeだけデフォ値を設定
+  });
+
+  @override
+  _OptionTextButtonOneLineState createState() => _OptionTextButtonOneLineState();
+}
+
+class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
+  int? selectedIndex; // 選択中の要素のインデックス
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      child: ListView.builder(
+        padding: const EdgeInsets.all(10),
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: widget.textList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: Size(130, 52),
+                backgroundColor: (selectedIndex == index)
+                    ? Color(0xffdedede)
+                    : Color(0xfffefefe),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ).copyWith(
+                overlayColor: MaterialStateProperty.all(Colors.transparent),
+              ),
+              onPressed: () {
+                setState(() {
+                  selectedIndex = index;
+                });
+                widget.onItemSelected(index);
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.check,
+                    color: (selectedIndex == index) ? Colors.black : Colors.white,
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    widget.textList[index],
+                    style: TextStyle(
+                      fontSize: widget.textFontSize,
+                      color: Color(0xff444444),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+// --------------------------------------------------------------------------------------------------------------------------
