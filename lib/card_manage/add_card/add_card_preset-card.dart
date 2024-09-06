@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:creeasy/common_component.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/card_manage/add_bank/select_bank-type_component.dart';
+import 'package:creeasy/card_manage/card_manage_comp.dart';
 
 class AddCardPagePresetCard extends StatefulWidget {
   final String? selectedCardName;
@@ -83,41 +84,10 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
               child: ListView(children: [
                 // =============================================== ⓪ 選択されたカード名 ==============================================
                 SizedBox(height: 5),
-                Container(
-                  padding:
-                      EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xfff8f8f8),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      addButtonPageTitleText(
-                          resvIcon: Icons.credit_card_outlined,
-                          resvText: '選択されたカード名'),
-                      Container(
-                        margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                        height: 30,
-                        child: Text(
-                          widget.selectedCardName ?? '未選択',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                selectedCardIntro(widget.selectedCardName),
                 // =======================================================================================================
 
-                // 「＋」のテキスト
-                Padding(
-                  padding: EdgeInsets.only(top: 7, bottom: 10),
-                  child: Text(
-                    '+',
-                    style: TextStyle(fontSize: 27),
-                    textAlign: TextAlign.center,
-                  )
-                ),
+                betweenIcon(Icons.add_outlined),
 
                 addButtonPageTitleText(resvText: 'カード情報を微調整', resvTextSize: 20),
 

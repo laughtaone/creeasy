@@ -2,6 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:creeasy/common_component.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 
+// ================================================================= 選択されたカード名 ========================================================================
+Container selectedCardIntro(String? cardName) {
+  return Container(
+    padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: Color(0xfff8f8f8),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        addButtonPageTitleText(
+            resvIcon: Icons.credit_card_outlined, resvText: '選択されたカード名'),
+        Container(
+          margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+          height: 30,
+          child: Text(
+            cardName ?? '未選択',
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+// ==========================================================================================================================================================
+
+// ================================================================= 引き落とし口座の選択 =======================================================================
 class PayBankComp extends StatefulWidget {
   final List<String> bankList;
   final int? resvNowSelectingBankIndex;
@@ -16,14 +45,15 @@ class PayBankComp extends StatefulWidget {
 }
 
 class _PayBankCompState extends State<PayBankComp> {
-  // ================================ 変数処理 ================================
+  // -------------------------------- 変数処理 --------------------------------
   int? _newSelectedBankIndex; // 新しく選択した銀行のインデックス番号
 
   @override
   void initState() {
     super.initState();
     _newSelectedBankIndex = widget.resvNowSelectingBankIndex; // 初期化処理
-  }  // =========================================================================
+  }
+  // -------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +109,8 @@ class _PayBankCompState extends State<PayBankComp> {
               ],
             ),
           ),
-          // ---------------------------------------------------------------------------------
-          // --------------------------- 引き落とし口座選択フィールド -----------------------------------
+          // -------------------------------------------------------------------------------
+          // --------------------------- 引き落とし口座選択フィールド ---------------------------
           Container(
             margin: EdgeInsets.all(5),
             child: OutlinedButton(
@@ -92,9 +122,10 @@ class _PayBankCompState extends State<PayBankComp> {
               ),
               child: ListTile(
                 title: Text(
-                  (_newSelectedBankIndex!=null) ?widget.bankList[_newSelectedBankIndex ?? 0]  : '未選択',
-                  style: TextStyle(fontSize: 20)
-                ),
+                    (_newSelectedBankIndex != null)
+                        ? widget.bankList[_newSelectedBankIndex ?? 0]
+                        : '未選択',
+                    style: TextStyle(fontSize: 20)),
                 trailing: Icon(Icons.edit),
               ),
               onPressed: () {
@@ -164,8 +195,4 @@ class _PayBankCompState extends State<PayBankComp> {
     );
   }
 }
-
-
-// ========================================== 引き落とし口座 ==========================================
-
-// ====================================================================================================
+// ==========================================================================================================================================================
