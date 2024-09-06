@@ -103,7 +103,7 @@ class _AddCardPageDirectInputCardState
                 child: ListView(
                   children: [
                     // =============================================== ①カード名 ==============================================
-                    betweenAddPaymentSection(),
+                    betweenSelectField(),
                     Container(
                       padding: EdgeInsets.only(
                           left: 9, right: 9, top: 15, bottom: 15),
@@ -145,7 +145,7 @@ class _AddCardPageDirectInputCardState
                     // =======================================================================================================
 
                     // =============================================== ②通常還元率 ==============================================
-                    betweenAddPaymentSection(),
+                    betweenSelectField(),
                     Container(
                       padding: EdgeInsets.only(
                           left: 9, right: 9, top: 15, bottom: 15),
@@ -195,7 +195,7 @@ class _AddCardPageDirectInputCardState
                     // =======================================================================================================
 
                     // ========================================== ③締め日 ==========================================
-                    betweenAddPaymentSection(),
+                    betweenSelectField(),
                     Container(
                       padding: EdgeInsets.only(
                           left: 9, right: 9, top: 15, bottom: 15),
@@ -298,7 +298,7 @@ class _AddCardPageDirectInputCardState
                     // ====================================================================================================
 
                     // ========================================== ④引き落とし日 ==========================================
-                    betweenAddPaymentSection(),
+                    betweenSelectField(),
                     Container(
                       padding: EdgeInsets.only(
                           left: 9, right: 9, top: 15, bottom: 15),
@@ -401,7 +401,7 @@ class _AddCardPageDirectInputCardState
                     // ====================================================================================================
 
                     // ========================================== ⑤引き落とし口座 ==========================================
-                    betweenAddPaymentSection(),
+                    betweenSelectField(),
                     Container(
                       padding: EdgeInsets.only(
                           left: 9, right: 9, top: 15, bottom: 15),
@@ -549,7 +549,7 @@ class _AddCardPageDirectInputCardState
                     // ====================================================================================================
 
                     // =============================================== ⑥ポイントアップの選択 ==============================================
-                    betweenAddPaymentSection(),
+                    betweenSelectField(),
                     Container(
                       padding: EdgeInsets.only(
                           left: 9, right: 9, top: 15, bottom: 15),

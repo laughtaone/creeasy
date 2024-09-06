@@ -169,7 +169,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // ====================================================================================================
 
               // =============================================== ②金額 ==============================================
-              betweenAddPaymentSection(),
+              betweenSelectField(),
               Container(
                 padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -213,7 +213,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // ====================================================================================================
 
               // =============================================== ③日付 ==============================================
-              betweenAddPaymentSection(),
+              betweenSelectField(),
               Container(
                 padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -265,7 +265,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // ====================================================================================================
 
               // =============================================== ④使用場所 ==============================================
-              betweenAddPaymentSection(),
+              betweenSelectField(),
               Container(
                 padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -307,7 +307,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // =======================================================================================================
 
               // =============================================== ⑤オプション ==============================================
-              betweenAddPaymentSection(),
+              betweenSelectField(),
               Container(
                 padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),

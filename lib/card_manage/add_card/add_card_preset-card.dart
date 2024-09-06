@@ -121,7 +121,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 addButtonPageTitleText(resvText: 'カード情報を微調整', resvTextSize: 20),
 
                 // =============================================== ① 締日/引き落とし日の選択 ==============================================
-                betweenAddPaymentSection(customHeight: 13),
+                betweenSelectField(customHeight: 13),
                 Container(
                   padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -155,7 +155,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 // =======================================================================================================
 
                 // ========================================== ②引き落とし口座 ==========================================
-                betweenAddPaymentSection(),
+                betweenSelectField(),
                 Container(
                   padding:
                       EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -298,7 +298,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 // ====================================================================================================
 
                 // =============================================== ③Vポイントアップの選択 ==============================================
-                betweenAddPaymentSection(),
+                betweenSelectField(),
                 Container(
                   padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 9),
                   decoration: BoxDecoration(
@@ -391,7 +391,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 // =======================================================================================================
 
                 // =============================================== ④学生ポイントの有無 ==============================================
-                betweenAddPaymentSection(),
+                betweenSelectField(),
                 Container(
                   padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 9),
                   decoration: BoxDecoration(

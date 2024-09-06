@@ -170,7 +170,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
               // ====================================================================================================
 
               // =============================================== ②臨時支払い金額 ==============================================
-              betweenAddPaymentSection(),
+              betweenSelectField(),
               Container(
                 padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -214,7 +214,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
               // ====================================================================================================
 
               // =============================================== ③臨時支払い日 ==============================================
-              betweenAddPaymentSection(),
+              betweenSelectField(),
               Container(
                 padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),

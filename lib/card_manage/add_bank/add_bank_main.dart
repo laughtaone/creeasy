@@ -72,7 +72,7 @@ class _AddBankPageState extends State<AddBankPage> {
               child: ListView(
                 children: [
                   // =============================================== ①銀行名 ==============================================
-                  betweenAddPaymentSection(),
+                  betweenSelectField(),
                   Container(
                     padding:
                         EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -116,7 +116,7 @@ class _AddBankPageState extends State<AddBankPage> {
                   SizedBox(height: 20),
 
                   // =============================================== ②銀行タイプ ==============================================
-                  betweenAddPaymentSection(),
+                  betweenSelectField(),
                   Container(
                     padding:
                         EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),

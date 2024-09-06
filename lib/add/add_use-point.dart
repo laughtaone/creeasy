@@ -169,7 +169,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
               // ====================================================================================================
 
               // =============================================== ②割当ポイント数 ==============================================
-              betweenAddPaymentSection(),
+              betweenSelectField(),
               Container(
                 padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
@@ -213,7 +213,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
               // ====================================================================================================
 
               // =============================================== ③割当日 ==============================================
-              betweenAddPaymentSection(),
+              betweenSelectField(),
               Container(
                 padding:
                     EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
