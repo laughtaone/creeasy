@@ -1,9 +1,11 @@
+import 'package:creeasy/common_component.dart';
 import 'package:flutter/material.dart';
 import 'package:creeasy/main.dart';
 import 'package:creeasy/card_manage/add_card/add_card_main.dart';
 import 'package:creeasy/card_manage/card_manage_card-tile.dart';
 import 'package:creeasy/card_manage/card_manage_bank-tile.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
+import 'package:creeasy/card_manage/change_card/change_card.dart';
 
 class CardManagePage extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class CardManagePage extends StatefulWidget {
 }
 
 class _CardManagePageState extends State<CardManagePage>
-    with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
   late TabController _tabController;
   IconData _actionIcon = Icons.credit_card;
 
@@ -115,19 +117,9 @@ class _CardManagePageState extends State<CardManagePage>
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
               child: ListView(children: [
-                Container(
-                  margin: EdgeInsets.only(top: 5, bottom: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.info_outline),
-                      SizedBox(width: 6),
-                      Text(
-                        '編集するには各カードの枠内をタップ',
-                        style: TextStyle(fontWeight: FontWeight.w400),
-                      )
-                    ],
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 6, bottom: 10),
+                  child: miniInfo(passText: '変更がある場合は各カードの枠内をタップして編集', customTextSize: 13, ),
                 ),
                 CardManageCardTile(
                     card_name: '三井住友カード',

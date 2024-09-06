@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 // ================================================================= 追加の各ページのサブタイトル =================================================================
 Row addButtonPageTitleText({
-    IconData? resvIcon,
-    String resvText = '',
-    double resvTextSize = 18,
-  }) {
+  IconData? resvIcon,
+  String resvText = '',
+  double resvTextSize = 18,
+}) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
       SizedBox(width: 2),
       (resvIcon != null)
-      ? Icon(
-        resvIcon,
-        size: 23,
-      )
-      : SizedBox.shrink(),
+          ? Icon(
+              resvIcon,
+              size: 23,
+            )
+          : SizedBox.shrink(),
       SizedBox(width: 5),
       Text(
         resvText,
@@ -32,10 +31,8 @@ Row addButtonPageTitleText({
 }
 // ======================================================================================================================================================
 
-
 // ==
 // 金
-
 
 // ================================= 整数だけを受け付ける入力フィールド(例：「金額を入力」)で最初に0を1つしか入力できないようにするクラス =================================
 class ZeroLimitFormatter extends TextInputFormatter {
@@ -70,14 +67,11 @@ class ZeroLimitFormatter extends TextInputFormatter {
 }
 // ======================================================================================================================================================
 
-
 // ================================================================== 選択フィールド間の余白 ==================================================================
 SizedBox betweenSelectField({double customHeight = 20}) {
   return SizedBox(height: customHeight);
 }
 // =======================================================================================================================================================
-
-
 
 // ==================================== 整数と小数だけを受け付ける入力フィールド(例：「還元率を入力」)で正常に入力できるようにするクラス ====================================
 // 整数と小数を受け取るフォーマッター
@@ -95,6 +89,7 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     return oldValue;
   }
 }
+
 // 整数と小数だけを受け付ける入力フィールドで、最初に0を1つしか最初に入力できないようにするもの
 class ZeroLimitFormatterForDouble extends TextInputFormatter {
   @override
@@ -133,17 +128,15 @@ class ZeroLimitFormatterForDouble extends TextInputFormatter {
 }
 // =======================================================================================================================================================
 
-
 // ============================================================ 各選択フィールドの上の小さい注意書き ============================================================
-Container miniInfo({
-    String passText='',     // 表示するテキスト
-    IconData customIcon = Icons.info_outline,  // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
-    bool needsIcon = true,   // アイコンが必要かどうか
-    Color doukaColor = const Color(0xffededed),   // アイコンが不要な時に背景色と同じにして同化できる色
-    bool needsTBPadding = true,   // topとbottomに余白が必要か
-    double customTextSize = 13,    // テキストサイズ(デフォは13)
-    Color customColor = Colors.black
-  }) {
+Container miniInfo(
+    {String passText = '', // 表示するテキスト
+    IconData customIcon = Icons.info_outline, // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
+    bool needsIcon = true, // アイコンが必要かどうか
+    Color doukaColor = const Color(0xffededed), // アイコンが不要な時に背景色と同じにして同化できる色
+    bool needsTBPadding = true, // topとbottomに余白が必要か
+    double customTextSize = 13, // テキストサイズ(デフォは13)
+    Color customColor = Colors.black}) {
   return Container(
     padding: EdgeInsets.only(
       left: 4,
@@ -159,26 +152,22 @@ Container miniInfo({
           padding: const EdgeInsets.all(2),
           child: Icon(
             customIcon,
-            size: (customTextSize==13) ? 15 : customTextSize*1.1538,
+            size: (customTextSize == 13) ? 15 : customTextSize * 1.1538,
             color: (needsIcon) ? customColor : doukaColor,
           ),
         ),
         SizedBox(width: 4),
-        Flexible(child: Text(
-          passText,
-          style: TextStyle(
-            color: customColor,
-            fontSize: customTextSize,
-          )
-        )),
+        Flexible(
+            child: Text(passText,
+                style: TextStyle(
+                  color: customColor,
+                  fontSize: customTextSize,
+                ))),
       ],
     ),
   );
 }
 // =======================================================================================================================================================
-
-
-
 
 // =========================================================== 縦に並んだ選択肢から選ばせるコンポーネント ===========================================================
 class OptionTextButtonOneLine extends StatefulWidget {
@@ -189,11 +178,12 @@ class OptionTextButtonOneLine extends StatefulWidget {
   OptionTextButtonOneLine({
     required this.textList,
     required this.onItemSelected,
-    this.textFontSize = 15,        // textFonSizeだけデフォ値を設定
+    this.textFontSize = 15, // textFonSizeだけデフォ値を設定
   });
 
   @override
-  _OptionTextButtonOneLineState createState() => _OptionTextButtonOneLineState();
+  _OptionTextButtonOneLineState createState() =>
+      _OptionTextButtonOneLineState();
 }
 
 class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
@@ -209,13 +199,14 @@ class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
         itemCount: widget.textList.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-            padding: EdgeInsets.only(top: (index==0) ? 0 : 7, bottom: 7, right: 10, left: 10),
+            padding: EdgeInsets.only(
+                top: (index == 0) ? 0 : 7, bottom: 7, right: 10, left: 10),
             child: TextButton(
               style: TextButton.styleFrom(
                 minimumSize: Size(130, 58),
                 backgroundColor: (selectedIndex == index)
-                  ? Color(0xffdedede)
-                  : Color(0xfffefefe),
+                    ? Color(0xffdedede)
+                    : Color(0xfffefefe),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),
@@ -233,7 +224,8 @@ class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
                 children: [
                   Icon(
                     Icons.check,
-                    color: (selectedIndex == index) ? Colors.black : Colors.white,
+                    color:
+                        (selectedIndex == index) ? Colors.black : Colors.white,
                   ),
                   SizedBox(width: 6),
                   Text(
@@ -255,7 +247,6 @@ class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
 }
 // =======================================================================================================================================================
 
-
 // =================================================================== URLを受け取り画面遷移 ===================================================================
 Future viewWebsite(String recvUrl) async {
   final url = Uri.parse(recvUrl);
@@ -263,18 +254,17 @@ Future viewWebsite(String recvUrl) async {
 }
 // ==========================================================================================================================================================
 
-
 // =========================================================== 末尾の「こちら」で画面遷移できるminiInfoEndJump ===================================================
 Container miniInfoEndJump({
-    String passText='',     // 表示するテキスト
-    IconData customIcon = Icons.info_outline,  // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
-    bool needsIcon = true,   // アイコンが必要かどうか
-    Color doukaColor = const Color(0xffededed),      // アイコンが不要な時に背景色と同じにして同化できる色
-    bool needsTBPadding = true,   // topとbottomに余白が必要か
-    double customTextSize = 13,    // テキストサイズ(デフォは13)
-    Color customColor = Colors.black,
-    String passUrl = '',     // 遷移したいURL
-  }) {
+  String passText = '', // 表示するテキスト
+  IconData customIcon = Icons.info_outline, // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
+  bool needsIcon = true, // アイコンが必要かどうか
+  Color doukaColor = const Color(0xffededed), // アイコンが不要な時に背景色と同じにして同化できる色
+  bool needsTBPadding = true, // topとbottomに余白が必要か
+  double customTextSize = 13, // テキストサイズ(デフォは13)
+  Color customColor = Colors.black,
+  String passUrl = '', // 遷移したいURL
+}) {
   return Container(
     padding: EdgeInsets.only(
       left: 4,
@@ -290,59 +280,51 @@ Container miniInfoEndJump({
           padding: const EdgeInsets.all(2),
           child: Icon(
             customIcon,
-            size: (customTextSize==13) ? 15 : customTextSize*1.1538,
+            size: (customTextSize == 13) ? 15 : customTextSize * 1.1538,
             color: (needsIcon) ? customColor : doukaColor,
           ),
         ),
         SizedBox(width: 4),
-        Flexible(child: Text(
-          passText,
-          style: TextStyle(
-            color: customColor,
-            fontSize: customTextSize,
-          )
-        )),
+        Flexible(
+            child: Text(passText,
+                style: TextStyle(
+                  color: customColor,
+                  fontSize: customTextSize,
+                ))),
         SizedBox(width: 2),
         RichText(
-          text: TextSpan(children: [
-            WidgetSpan(
-              child: GestureDetector(
-                onTap: () {
-                  // VPAPの公式サイトへ遷移
-                  viewWebsite(passUrl);
-                },
-                child: Text(
-                  'こちら',
-                  style: TextStyle(
+            text: TextSpan(children: [
+          WidgetSpan(
+            child: GestureDetector(
+              onTap: () {
+                // VPAPの公式サイトへ遷移
+                viewWebsite(passUrl);
+              },
+              child: Text(
+                'こちら',
+                style: TextStyle(
                     color: Colors.indigo[500],
                     // decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.w500
-                  ),
-                ),
+                    fontWeight: FontWeight.w500),
               ),
             ),
-          ])
-        ),
+          ),
+        ])),
       ],
     ),
   );
 }
 // ==========================================================================================================================================================
 
-
-
-
-
-
 // ======================================================================= 保存ボタン =======================================================================
 class SaveButtonComp extends StatefulWidget {
   final Function onSave;
   final bool isCanOnpress;
 
-  SaveButtonComp({
-    required this.onSave,
-    this.isCanOnpress = false   // 押せるかどうかの真偽値(デフォでfalse=押せない)
-  });
+  SaveButtonComp(
+      {required this.onSave,
+      this.isCanOnpress = false // 押せるかどうかの真偽値(デフォでfalse=押せない)
+      });
 
   @override
   _SaveButtonCompState createState() => _SaveButtonCompState();
@@ -351,78 +333,99 @@ class SaveButtonComp extends StatefulWidget {
 class _SaveButtonCompState extends State<SaveButtonComp> {
   @override
   Widget build(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 80, bottom: 30),
-    child: Column(
-      children: [
-        Container(
-          margin: EdgeInsets.only(left: 10, right: 10),
-          height: 57,
-          width: double.infinity,
-          child: OutlinedButton(
-            // --------------------------------------- ダイアログ表示 ---------------------------------------
-            onPressed:
-              (widget.isCanOnpress)
-              ? () {
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(
-                        '本当に保存しますか？',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => {Navigator.pop(context)},
-                          child: Text('キャンセル', style: TextStyle(color: Colors.red)),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            widget.onSave();
-                            Navigator.pop(context);
-                          },
-                          child: Text('保存'),
-                        ),
-                      ],
-                    );
-                  }
-                );
-              }
-              : null,
-            // ----------------------------------------------------------------------------------------------
-            style: OutlinedButton.styleFrom(
-              backgroundColor: (widget.isCanOnpress) ? Color(0xfffff0f0) : Color(0xfff0f0f0),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              side: BorderSide(
-                color: (widget.isCanOnpress) ? Color(0xffff6666) : Color(0xff959595),
-                width: 1.7,
-              )
+    return Padding(
+      padding: const EdgeInsets.only(top: 80, bottom: 30),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 10, right: 10),
+            height: 57,
+            width: double.infinity,
+            child: OutlinedButton(
+                // --------------------------------------- ダイアログ表示 ---------------------------------------
+                onPressed: (widget.isCanOnpress)
+                    ? () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  '本当に保存しますか？',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => {Navigator.pop(context)},
+                                    child: Text('キャンセル',
+                                        style: TextStyle(color: Colors.red)),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      widget.onSave();
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('保存'),
+                                  ),
+                                ],
+                              );
+                            });
+                      }
+                    : null,
+                // ----------------------------------------------------------------------------------------------
+                style: OutlinedButton.styleFrom(
+                    backgroundColor: (widget.isCanOnpress)
+                        ? Color(0xfffff0f0)
+                        : Color(0xfff0f0f0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    side: BorderSide(
+                      color: (widget.isCanOnpress)
+                          ? Color(0xffff6666)
+                          : Color(0xff959595),
+                      width: 1.7,
+                    )),
+                child: Text(
+                  '保存して閉じる',
+                  style: TextStyle(
+                      color: (widget.isCanOnpress)
+                          ? Color(0xffff5555)
+                          : Color(0xff909090),
+                      fontSize: 16),
+                )),
+          ),
+          SizedBox(height: 12),
+          Text(
+            '保存せずに閉じるには\n右上の×ボタン or 左上の<ボタン を押してください',
+            style: TextStyle(
+              fontSize: 11.5,
+              color: Colors.black38,
+              fontWeight: FontWeight.w500,
             ),
-            child: Text(
-              '保存して閉じる',
-              style: TextStyle(
-                  color: (widget.isCanOnpress) ? Color(0xffff5555) : Color(0xff909090), fontSize: 16),
-            )
+            textAlign: TextAlign.center,
           ),
-        ),
-        SizedBox(height: 12),
-        Text(
-          '保存せずに閉じるには\n右上の×ボタン or 左上の<ボタン を押してください',
-          style: TextStyle(
-            fontSize: 11.5,
-            color: Colors.black38,
-            fontWeight: FontWeight.w500,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: 24),
-      ],
-    ),
-  );
+          SizedBox(height: 24),
+        ],
+      ),
+    );
+  }
+}
+// ==========================================================================================================================================================
+
+
+
+// ======================================================================= 右上の×ボタン ======================================================================
+class ToprightCloseButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      padding: const EdgeInsets.only(right: 20),
+      icon: const Icon(Icons.close, size: 27),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
   }
 }
 // ==========================================================================================================================================================

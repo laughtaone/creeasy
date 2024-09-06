@@ -1,32 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/card_manage/card_manage.dart';
 import 'package:intl/intl.dart';
+import 'package:creeasy/card_manage/change_card/change_card.dart';
 
-class CardManageCardTile extends StatelessWidget {
-  const CardManageCardTile({
+
+class CardManageCardTile extends StatefulWidget {
+  final String card_name; // カード名
+  final int return_rate_unit; // 還元率計算単位(x円につきx)
+  final double return_rate; // 還元率
+  final String target_range; // 支払対象期間
+  final String pay_date; // 引き落とし日
+  final bool bool_pointup; // ポイントアップあり/なし
+  // final Function cardTileOnpressed;     // カードタイルが押された時の処理
+
+  CardManageCardTile({
     required this.card_name,
     required this.return_rate_unit,
     required this.return_rate,
     required this.target_range,
     required this.pay_date,
     required this.bool_pointup,
+    // required this.cardTileOnpressed
   });
 
-  final String card_name; // カード名
-  final int return_rate_unit; // 還元率計算単位(x円につきのx)
-  final double return_rate; // 還元率
-  final String target_range; // 支払対象期間
-  final String pay_date; // 引き落とし日
-  final bool bool_pointup; // ポイントアップあり/なし
+  @override
+  _CardManageCardTileState createState() => _CardManageCardTileState();
+}
 
-  // final String formatted_return_rate = formatReturnRate(return_rate);
-
+class _CardManageCardTileState extends State<CardManageCardTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 13),
       child: OutlinedButton(
-        onPressed: null,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChangeCardPage(),
+              fullscreenDialog: true,
+            ),
+          );
+        },
         style: OutlinedButton.styleFrom(
             backgroundColor: Color(0xffeeeeee),
             side: BorderSide(color: Colors.black, width: 1),
@@ -44,10 +59,10 @@ class CardManageCardTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    card_name,
+                    widget.card_name,
                     style: TextStyle(color: Colors.black, fontSize: 20),
                   ),
-                  (bool_pointup)
+                  (widget.bool_pointup)
                       ? Container(
                           child: Row(
                             children: [
@@ -87,12 +102,12 @@ class CardManageCardTile extends StatelessWidget {
                         ),
                         Column(
                           children: [
-                            Text('$return_rate_unit円につき',
+                            Text('${widget.return_rate_unit}円につき',
                                 style: TextStyle(
                                   fontSize: 8,
                                   color: Colors.black,
                                 )),
-                            Text('${formatReturnRate(return_rate)}%',
+                            Text('${formatReturnRate(widget.return_rate)}%',
                                 style: TextStyle(
                                   fontSize: 17,
                                   color: Colors.black,
@@ -114,7 +129,7 @@ class CardManageCardTile extends StatelessWidget {
                         ),
                         SizedBox(height: 6),
                         Text(
-                          '$target_range',
+                          '${widget.target_range}',
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w800,
@@ -133,7 +148,7 @@ class CardManageCardTile extends StatelessWidget {
                         ),
                         SizedBox(height: 6),
                         Text(
-                          '$pay_date',
+                          '${widget.pay_date}',
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w800,
