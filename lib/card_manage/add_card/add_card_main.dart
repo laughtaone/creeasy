@@ -177,8 +177,7 @@ class _AddCardPageState extends State<AddCardPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              AddCardPagePresetCard(selectedCardName: _selectedItem),
+                          builder: (context) => AddCardPagePresetCard(selectedCardName: _selectedItem),
                         ),
                       );
                     },

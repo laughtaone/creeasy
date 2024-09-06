@@ -111,12 +111,13 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
                 // 「＋」のテキスト
                 Padding(
-                    padding: EdgeInsets.only(top: 7, bottom: 10),
-                    child: Text(
-                      '+',
-                      style: TextStyle(fontSize: 27),
-                      textAlign: TextAlign.center,
-                    )),
+                  padding: EdgeInsets.only(top: 7, bottom: 10),
+                  child: Text(
+                    '+',
+                    style: TextStyle(fontSize: 27),
+                    textAlign: TextAlign.center,
+                  )
+                ),
 
                 addButtonPageTitleText(resvText: 'カード情報を微調整', resvTextSize: 20),
 

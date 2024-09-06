@@ -37,7 +37,7 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ChangeCardPage(),
+              builder: (context) => ChangeCardPage(selectedCardName: widget.card_name),
               fullscreenDialog: true,
             ),
           );
