@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/main.dart';
 import 'package:creeasy/home/home_card-tile.dart';
+import 'package:creeasy/settings/settings.dart';
+
 
 
 class HomePage extends StatefulWidget {
@@ -31,12 +33,29 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
         child: ListView(
           children: [
-            Text(
-              'こんにちは',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 33,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'こんにちは',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 33,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.settings, size: 27),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SettingsPage(),
+                        fullscreenDialog: true,
+                      ),
+                    );
+                  },
+                )
+              ],
             ),
             SizedBox(height: 10),
             Row(
@@ -56,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             Container(
               alignment: Alignment.center,
               padding: EdgeInsets.all(6),
-              child: Text('全カード合計金額：¥31,289', style: TextStyle(fontSize: 22),)
+              child: Text('全カード合計金額：¥54,289', style: TextStyle(fontSize: 22),)
             ),
             SizedBox(height: 10),
             HomeCardTile(card_name: '三井住友カード', month_price: 2987),

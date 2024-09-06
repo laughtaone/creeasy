@@ -75,8 +75,8 @@ class _CardManagePageState extends State<CardManagePage>
                   context,
                   MaterialPageRoute(
                     builder: (context) => (_tabController.index == 0)
-                        ? AddCardPage()
-                        : AddBankPage(),
+                      ? AddCardPage()
+                      : AddBankPage(),
                     fullscreenDialog: true,
                   ),
                 );

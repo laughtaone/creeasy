@@ -6,7 +6,7 @@ import 'package:creeasy/add/add_payment.dart';
 import 'package:creeasy/add/add_special-payment.dart';
 import 'package:creeasy/add/add_use-point.dart';
 import 'package:creeasy/calender/calender.dart';
-import 'package:creeasy/settings/settings.dart';
+import 'package:creeasy/money_manage/money_manage.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {
@@ -61,8 +61,8 @@ class _StartPageWidgetState extends State<StartPageWidget> {
     HomePage(),
     CardManagePage(),
     AddPaymentPage(),
-    CalenderPage(),
-    SettingsPage()
+    MoneyManagePage(),
+    CalenderPage()
   ];
 
   void _onTap(int index) {
@@ -193,7 +193,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.date_range_outlined,
+              Icons.task_alt_outlined,
               color: (_currentIndex == 3) ? Colors.black : Colors.black26,
               size: (_currentIndex == 3) ? selectedTabIconSize() : unselectedTabIconSize(),
             ),
@@ -201,7 +201,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.settings,
+              Icons.date_range_outlined,
               color: (_currentIndex == 4) ? Colors.black : Colors.black26,
               size: (_currentIndex == 4) ? selectedTabIconSize() : unselectedTabIconSize(),
             ),
