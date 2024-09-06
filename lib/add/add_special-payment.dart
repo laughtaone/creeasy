@@ -181,7 +181,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.currency_yen_outlined, resvText:'currency_yen_outlined'),
+                    addButtonPageTitleText(resvIcon: Icons.currency_yen_outlined, resvText:'臨時支払い金額を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       height: 70,
