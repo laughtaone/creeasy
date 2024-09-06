@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/card_manage/card_manage.dart';
 import 'package:intl/intl.dart';
+import 'package:creeasy/card_manage/change_bank/change_bank.dart';
+
 
 class CardManageBankTile extends StatelessWidget {
   const CardManageBankTile({
@@ -16,7 +18,15 @@ class CardManageBankTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 13),
       child: OutlinedButton(
-        onPressed: null,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChangeBankPage(),
+              fullscreenDialog: true,
+            ),
+          );
+        },
         style: OutlinedButton.styleFrom(
             backgroundColor: Color(0xffeeeeee),
             side: BorderSide(color: Colors.black, width: 1),

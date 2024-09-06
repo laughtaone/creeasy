@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/common_component.dart';
 
-class ChangeCardPage extends StatefulWidget {
+class ChangeBankPage extends StatefulWidget {
   @override
-  _ChangeCardPageState createState() => _ChangeCardPageState();
+  _ChangeBankPageState createState() => _ChangeBankPageState();
 }
 
 
-class _ChangeCardPageState extends State<ChangeCardPage> {
+class _ChangeBankPageState extends State<ChangeBankPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +19,12 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.credit_score_outlined,
+              Icons.assured_workload_outlined,
               color: Colors.black
             ),
             SizedBox(width: 5),
             Text(
-              'カード情報を変更',
+              '銀行情報を変更',
             ),
           ],
         ),
