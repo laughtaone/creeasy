@@ -1,4 +1,4 @@
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 import 'package:flutter/material.dart';
 import 'package:creeasy/main.dart';
 import 'package:creeasy/card_manage/add_card/add_card_main.dart';

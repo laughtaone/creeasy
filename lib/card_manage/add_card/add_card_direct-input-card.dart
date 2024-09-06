@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/card_manage/add_bank/select_bank-type_component.dart';
 
@@ -114,7 +114,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(resvIcon: Icons.credit_card_outlined, resvText: 'カード名を入力'),
+                          titleTextComp(resvIcon: Icons.credit_card_outlined, resvText: 'カード名を入力'),
                           Container(
                             margin: EdgeInsets.all(10),
                             height: 70,
@@ -156,7 +156,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(resvIcon: Icons.percent_outlined, resvText: '基本還元率を入力'),
+                          titleTextComp(resvIcon: Icons.percent_outlined, resvText: '基本還元率を入力'),
                           // --------------------------- 還元率に設定できる値の注意書き -----------------------------------
                           // miniInfo(passText: '還元率には 0-10[%] の整数or小数が設定可能'),
                           miniInfo(passText: '0-10[%] の 整数または小数 が設定可能'),
@@ -206,7 +206,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText: '締め日を入力'),
+                          titleTextComp(resvIcon: Icons.event_outlined, resvText: '締め日を入力'),
                           Container(
                             margin: EdgeInsets.all(5),
                             child: OutlinedButton(
@@ -309,7 +309,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText: '引き落とし日を入力'),
+                          titleTextComp(resvIcon: Icons.event_outlined, resvText: '引き落とし日を入力'),
                           Container(
                             margin: EdgeInsets.all(5),
                             child: OutlinedButton(
@@ -412,7 +412,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
+                          titleTextComp(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
                           // --------------------------- 「銀行を追加する場合はこちら」 -----------------------------------
                           Container(
                             padding:
@@ -560,7 +560,7 @@ class _AddCardPageDirectInputCardState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          addButtonPageTitleText(resvIcon: Icons.local_offer_outlined, resvText: 'ポイントアップの有無'),
+                          titleTextComp(resvIcon: Icons.local_offer_outlined, resvText: 'ポイントアップの有無'),
                           SizedBox(height: 3),
                           miniInfo(passText: '「ポイントアップ」とは特定の店や日付での利用でポイントが上乗せされることを指します'),
                           miniInfo(

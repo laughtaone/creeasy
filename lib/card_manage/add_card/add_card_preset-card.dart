@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/card_manage/add_bank/select_bank-type_component.dart';
 import 'package:creeasy/card_manage/card_manage_comp.dart';
@@ -89,7 +89,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
                 betweenIcon(Icons.add_outlined),
 
-                addButtonPageTitleText(resvText: 'カード情報を微調整', resvTextSize: 20),
+                titleTextComp(resvText: 'カード情報を微調整', resvTextSize: 20),
 
                 // =============================================== ① 締日/引き落とし日の選択 ==============================================
                 betweenSelectField(customHeight: 13),
@@ -103,7 +103,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      addButtonPageTitleText(
+                      titleTextComp(
                           resvIcon: Icons.event_outlined,
                           resvText: '締日/引き落とし日を選択'),
                       SizedBox(height: 3),
@@ -137,7 +137,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      addButtonPageTitleText(
+                      titleTextComp(
                           resvIcon: Icons.account_balance_outlined,
                           resvText: '引き落とし口座を選択'),
                       // --------------------------- 「銀行を追加する場合はこちら」 -----------------------------------
@@ -279,7 +279,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      addButtonPageTitleText(
+                      titleTextComp(
                         resvIcon: Icons.local_offer_outlined,
                         resvText: 'Vポイントアッププログラムの還元率',
                         resvTextSize: 16
@@ -372,7 +372,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      addButtonPageTitleText(resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
+                      titleTextComp(resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
                       SizedBox(height: 3),
                       miniInfoEndJump(passText: '学生ポイントの詳細は', passUrl: 'https://www.smbc-card.com/mem/wp/student-point/index.jsp'),
                       miniInfo(passText: '学生ポイント還元も詳細に管理することが可能'),
@@ -409,7 +409,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                             miniInfo(passText: '・分割払い手数料全額ポイント還元', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
                             // ----------------------------------------------------------------------------------------------
                             SizedBox(height: 10),
-                            addButtonPageTitleText(resvIcon: Icons.event_available_outlined, resvText: '卒業予定年を入力', resvTextSize: 16),
+                            titleTextComp(resvIcon: Icons.event_available_outlined, resvText: '卒業予定年を入力', resvTextSize: 16),
                             miniInfo(passText: '学生ポイントは、卒業予定年の12月末日分までのため、卒業予定の年部分のみを入力'),
                             miniInfo(passText: '例：2020年3月に卒業式を行い卒業する場合は「2020年」を選択', customIcon: Icons.tips_and_updates_outlined),
                             // --------------------------- 引き落とし口座選択フィールド -----------------------------------

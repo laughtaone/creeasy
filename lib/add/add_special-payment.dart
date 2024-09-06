@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/main.dart';
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 import 'package:flutter/services.dart';
 
 
@@ -85,7 +85,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.credit_card_outlined, resvText:'該当カードを選択'),
+                    titleTextComp(resvIcon: Icons.credit_card_outlined, resvText:'該当カードを選択'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(
@@ -181,7 +181,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.currency_yen_outlined, resvText:'臨時支払い金額を入力'),
+                    titleTextComp(resvIcon: Icons.currency_yen_outlined, resvText:'臨時支払い金額を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       height: 70,
@@ -225,7 +225,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText:'臨時支払い日を入力'),
+                    titleTextComp(resvIcon: Icons.event_outlined, resvText:'臨時支払い日を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(

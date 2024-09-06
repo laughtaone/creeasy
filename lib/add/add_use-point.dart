@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/main.dart';
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 import 'package:flutter/services.dart';
 
 
@@ -84,7 +84,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.credit_card_outlined, resvText:'該当カードを選択'),
+                    titleTextComp(resvIcon: Icons.credit_card_outlined, resvText:'該当カードを選択'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(
@@ -180,7 +180,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.stars_outlined, resvText:'割当ポイント数を入力'),
+                    titleTextComp(resvIcon: Icons.stars_outlined, resvText:'割当ポイント数を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       height: 70,
@@ -224,7 +224,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText:'割当日を入力'),
+                    titleTextComp(resvIcon: Icons.event_outlined, resvText:'割当日を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(

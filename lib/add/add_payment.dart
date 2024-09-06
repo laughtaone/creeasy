@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:creeasy/main.dart';
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:creeasy/add/add_payment_option_button/add_payment_option_button.dart';
 
@@ -84,7 +84,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.credit_card_outlined, resvText:'支払いカードを選択'),
+                    titleTextComp(resvIcon: Icons.credit_card_outlined, resvText:'支払いカードを選択'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(
@@ -180,7 +180,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.currency_yen_outlined, resvText:'金額を入力'),
+                    titleTextComp(resvIcon: Icons.currency_yen_outlined, resvText:'金額を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       height: 70,
@@ -224,7 +224,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.event_outlined, resvText:'使用日を入力'),
+                    titleTextComp(resvIcon: Icons.event_outlined, resvText:'使用日を入力'),
                     Container(
                       margin: EdgeInsets.all(5),
                       child: OutlinedButton(
@@ -276,7 +276,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.location_on_outlined, resvText:'使用場所を入力'),
+                    titleTextComp(resvIcon: Icons.location_on_outlined, resvText:'使用場所を入力'),
                     Container(
                       margin: EdgeInsets.all(10),
                       height: 70,
@@ -318,7 +318,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    addButtonPageTitleText(resvIcon: Icons.auto_fix_high_outlined, resvText:'オプション'),
+                    titleTextComp(resvIcon: Icons.auto_fix_high_outlined, resvText:'オプション'),
                     Container(
                       margin: EdgeInsets.all(10),
                       child: Column(

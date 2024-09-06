@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 import 'package:creeasy/card_manage/card_manage_comp.dart';
 
 
@@ -66,7 +66,7 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
                 // =======================================================================================================================================
 
                 SizedBox(height: 12),
-                addButtonPageTitleText(resvText: 'カード情報を編集', resvTextSize: 20),
+                titleTextComp(resvText: 'カード情報を編集', resvTextSize: 20),
                 SizedBox(height: 12),
 
                 // =========================================================== ① 引き落とし口座を選択 ===========================================================

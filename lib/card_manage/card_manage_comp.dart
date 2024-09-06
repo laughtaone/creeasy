@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 
 // ================================================================= 選択されたカード名 ========================================================================
@@ -13,7 +13,7 @@ Container selectedCardIntro(String? cardName) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        addButtonPageTitleText(
+        titleTextComp(
             resvIcon: Icons.credit_card_outlined, resvText: '選択されたカード名'),
         Container(
           margin: EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -66,7 +66,7 @@ class _PayBankCompState extends State<PayBankComp> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          addButtonPageTitleText(
+          titleTextComp(
               resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
           // --------------------------- 「銀行を追加する場合はこちら」 -----------------------------------
           Container(

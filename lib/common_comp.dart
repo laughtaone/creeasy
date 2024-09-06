@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// ================================================================= 追加の各ページのサブタイトル =================================================================
-Row addButtonPageTitleText({
+// =============================================================== サブタイトルのコンポーネント ===============================================================
+Row titleTextComp({
   IconData? resvIcon,
   String resvText = '',
   double resvTextSize = 18,
@@ -439,7 +439,7 @@ Container cautionComp(Column details) {
       ),
       child: Column(
         children: [
-          addButtonPageTitleText(
+          titleTextComp(
               resvText: '注意', resvIcon: Icons.report_problem_outlined),
           details
         ],
@@ -455,4 +455,8 @@ Padding betweenIcon(IconData recvIcon) {
     child: Icon(recvIcon, size: 27)
   );
 }
+// ==========================================================================================================================================================
+
+
+// ================================================================== 何かと何かの間のアイコン ==================================================================
 // ==========================================================================================================================================================

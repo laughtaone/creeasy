@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/common_component.dart';
+import 'package:creeasy/common_comp.dart';
 
 class ChangeBankPage extends StatefulWidget {
   // final String? selectedCardName;
@@ -53,7 +53,7 @@ class _ChangeBankPageState extends State<ChangeBankPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      addButtonPageTitleText(
+                      titleTextComp(
                           resvIcon: Icons.credit_card_outlined,
                           resvText: '選択されたカード名'),
                       Container(
