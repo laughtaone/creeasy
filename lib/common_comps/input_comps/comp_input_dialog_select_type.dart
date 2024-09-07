@@ -10,10 +10,10 @@ class compInputDialogSelectType extends StatefulWidget {
   final int? returnSelectIndex;
 
   compInputDialogSelectType(
-      {required this.elementsList, // 選択する要素を格納したリスト（※必須）
-      required this.resvNowSelectingIndex, // 現在選択中の要素のインデックス番号
-      required this.dialogText, // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
-      required this.returnSelectIndex // 選択した要素のインデックスを格納する変数
+      {required this.elementsList,       // 選択する要素を格納したリスト（※必須）
+      this.resvNowSelectingIndex,        // 現在選択中の要素のインデックス番号
+      required this.dialogText,          // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
+      required this.returnSelectIndex    // 選択した要素のインデックスを格納する変数
       });
 
   @override
@@ -22,7 +22,15 @@ class compInputDialogSelectType extends StatefulWidget {
 }
 
 class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
+  // -------------------------------- 変数処理 --------------------------------
   int? _newSelectIndex; // 選択中の要素のインデックス
+
+  @override
+  void initState() {
+    super.initState();
+    _newSelectIndex = widget.resvNowSelectingIndex;
+  }
+  // -------------------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {

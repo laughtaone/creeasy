@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/common_comps/title_text_comp.dart';
-import 'package:creeasy/common_comps/between_select_field.dart';
-import 'package:creeasy/common_comps/mini_info.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
+import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 
 
 

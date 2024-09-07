@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/card_manage/card_manage_comp.dart';
-import 'package:creeasy/common_comps/title_text_comp.dart';
-import 'package:creeasy/common_comps/topright_close_button.dart';
-import 'package:creeasy/common_comps/between_icon.dart';
-import 'package:creeasy/common_comps/caution_comp.dart';
-import 'package:creeasy/common_comps/mini_info.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
+import 'package:creeasy/COMMON_COMPS/single_button/topright_close_button.dart';
+import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/caution_comp.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 
 
 

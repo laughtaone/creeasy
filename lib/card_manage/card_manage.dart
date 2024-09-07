@@ -3,7 +3,7 @@ import 'package:creeasy/card_manage/add_card/add_card_main.dart';
 import 'package:creeasy/card_manage/card_manage_card-tile.dart';
 import 'package:creeasy/card_manage/card_manage_bank-tile.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
-import 'package:creeasy/common_comps/mini_info.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 
 
 

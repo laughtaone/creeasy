@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:creeasy/common_comps/zero_limit_formatter.dart';
-
+import 'package:creeasy/COMMON_COMPS/formatter/zero_limit_formatter.dart';
 // 入力フィールド(直接/整数形式)単体
 
 
 class compInputIntType extends StatefulWidget {
-  final TextEditingController intInputted;
   final String? prefixText; // 入力フィールドの文字列の前に表示する文字(※任意)
   final String? suffixText; // 入力フィールドの文字列の後に表示する文字(※任意)
+  final int? resvNowInputingInt;     // 入力フィールドの初期値(※任意)
+  final Function(String) argCallback; // コールバック関数
 
   compInputIntType(
-      {required this.intInputted, this.prefixText, this.suffixText});
+      {
+        this.prefixText,
+        this.suffixText,
+        this.resvNowInputingInt,
+        required this.argCallback
+      });
 
   @override
   _compInputIntTypeState createState() => _compInputIntTypeState();
 }
+
 
 class _compInputIntTypeState extends State<compInputIntType> {
   // -------------------------------- 変数処理 --------------------------------
@@ -24,7 +30,12 @@ class _compInputIntTypeState extends State<compInputIntType> {
   @override
   void initState() {
     super.initState();
-    _intInputted = widget.intInputted; // 初期化処理
+    _intInputted = TextEditingController(text: (widget.resvNowInputingInt != null) ? (widget.resvNowInputingInt).toString() : '');
+
+    // 入力が変更されたときにコールバックを呼び出すリスナーを追加
+    _intInputted.addListener(() {
+      widget.argCallback(_intInputted.text); // 入力されたテキストをコールバックで通知
+    });
   }
   // -------------------------------------------------------------------------
 
@@ -47,7 +58,7 @@ class _compInputIntTypeState extends State<compInputIntType> {
           ),
           prefixText: widget.prefixText,
           suffixText: widget.suffixText,
-          fillColor: Color.fromARGB(255, 25, 22, 22),
+          fillColor: Color(0xfffefefe),
           filled: true,
         ),
         keyboardType: TextInputType.number,
