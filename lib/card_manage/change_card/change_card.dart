@@ -58,8 +58,8 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
                     children: [
                       miniInfo(customIcon: Icons.error_outline_outlined, passText: '表示されている項目のみが変更可能です', customTextSize: 14),
                       miniInfo(passText: '以下の項目は変更できません：', customTextSize: 14),
-                      miniInfo(needsIcon: false, doukaColor: Color(0xfffff0f0), passText: '・締日/引き落とし日'),
-                      miniInfo(needsIcon: false, doukaColor: Color(0xfffff0f0), passText: '・基本還元率'),
+                      miniInfo(needsIcon: false, doukaColor: Color(0xffffffe7), passText: '・締日/引き落とし日'),
+                      miniInfo(needsIcon: false, doukaColor: Color(0xffffffe7), passText: '・基本還元率'),
                     ],
                   )
                 ),

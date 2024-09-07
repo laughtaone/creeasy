@@ -31,9 +31,6 @@ Row titleTextComp({
 }
 // ======================================================================================================================================================
 
-// ==
-// 金
-
 // ================================= 整数だけを受け付ける入力フィールド(例：「金額を入力」)で最初に0を1つしか入力できないようにするクラス =================================
 class ZeroLimitFormatter extends TextInputFormatter {
   @override
@@ -451,12 +448,42 @@ Container cautionComp(Column details) {
 // ================================================================== 何かと何かの間のアイコン ==================================================================
 Padding betweenIcon(IconData recvIcon) {
   return Padding(
-    padding: EdgeInsets.only(top: 20, bottom: 20),
-    child: Icon(recvIcon, size: 27)
-  );
+      padding: EdgeInsets.only(top: 20, bottom: 20),
+      child: Icon(recvIcon, size: 27));
 }
 // ==========================================================================================================================================================
 
+// ======================================================================== 選択タイル ========================================================================
+class selectTileComp extends StatefulWidget {
+  final Widget titleComp;
+  final Column? guides;
+  final Container fieldInput;
 
-// ================================================================== 何かと何かの間のアイコン ==================================================================
+  selectTileComp({
+    required this.titleComp,   // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
+    required this.guides,      // ColumnのchildrenでminiInfoを並べる（任意）
+    required this.fieldInput   // ユーザーからの入力フィールドを指定（必須）
+  });
+
+  @override
+  _selectTileCompState createState() => _selectTileCompState();
+}
+
+class _selectTileCompState extends State<selectTileComp> {
+  int? selectedIndex; // 選択中の要素のインデックス
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xffededed),
+      ),
+      child: Column(
+        children: [titleTextComp()],
+      ),
+    );
+  }
+}
 // ==========================================================================================================================================================

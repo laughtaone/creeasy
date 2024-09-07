@@ -10,6 +10,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final String mySnsId = '@******';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +31,11 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         actions: [
           IconButton(
-            padding: EdgeInsets.only(right: 20),
-            icon: Icon(Icons.close, size: 27),
-            onPressed: () {Navigator.of(context).pop();}
-          )
+              padding: EdgeInsets.only(right: 20),
+              icon: Icon(Icons.close, size: 27),
+              onPressed: () {
+                Navigator.of(context).pop();
+              })
         ],
       ),
       body: SettingsList(
@@ -59,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
               SettingsTile.navigation(
                 leading: const FaIcon(FontAwesomeIcons.xTwitter),
                 title: Text('X', style: settingSectionTilesTitleTextSyle()),
-                value: const Text('@suupusoup'),
+                value: Text(mySnsId),
                 onPressed: (BuildContext context) {
                   _launchX();
                 },
@@ -68,7 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: const FaIcon(FontAwesomeIcons.tiktok),
                 title:
                     Text('TikTok', style: settingSectionTilesTitleTextSyle()),
-                value: const Text('@suupusoup'),
+                value:  Text(mySnsId),
                 onPressed: (BuildContext context) {
                   _launchTikTok();
                 },
@@ -77,7 +80,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: const FaIcon(FontAwesomeIcons.youtube),
                 title:
                     Text('YouTube', style: settingSectionTilesTitleTextSyle()),
-                value: const Text('@suupusoup'),
+                value: Text(mySnsId),
                 onPressed: (BuildContext context) {
                   _launchYouTube();
                 },
@@ -86,7 +89,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: const FaIcon(FontAwesomeIcons.instagram),
                 title: Text('Instagram',
                     style: settingSectionTilesTitleTextSyle()),
-                value: const Text('@suupusoup'),
+                value: Text(mySnsId),
                 onPressed: (BuildContext context) {
                   _launchInstagram();
                 },
@@ -95,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: const FaIcon(FontAwesomeIcons.github),
                 title:
                     Text('GitHub', style: settingSectionTilesTitleTextSyle()),
-                value: const Text('@suupusoup'),
+                value: Text(mySnsId),
                 onPressed: (BuildContext context) {
                   _launchGitHub();
                 },
@@ -151,38 +154,38 @@ TextStyle settingSectionTilesTitleTextSyle() {
 }
 
 Future _launchX() async {
-  final url = Uri.parse('https://www.x.com/suupusoup');
+  final url = Uri.parse('https://www.x.com/');
   launchUrl(url);
 }
 
 Future _launchTikTok() async {
-  final url = Uri.parse('https://www.tiktok.com/@suupusoup');
+  final url = Uri.parse('https://www.tiktok.com/');
   launchUrl(url);
 }
 
 Future _launchYouTube() async {
-  final url = Uri.parse('https://www.youtube.com/@suupusoup');
+  final url = Uri.parse('https://www.youtube.com/');
   launchUrl(url);
 }
 
 Future _launchGitHub() async {
-  final url = Uri.parse('https://www.github.com/suupusoup');
+  final url = Uri.parse('https://www.github.com/');
   launchUrl(url);
 }
 
 Future _launchInstagram() async {
-  final url = Uri.parse('https://www.instagram.com/suupusoup');
+  final url = Uri.parse('https://www.instagram.com/');
   launchUrl(url);
 }
 
 Future _launchTerms() async {
   final url = Uri.parse(
-      'https://suupusoup.notion.site/BeRehearsal-765e2ebe610544f78548304326bc8568?pvs=4');
+      'https://www.google.com');
   launchUrl(url);
 }
 
 Future _launchPrivacyPolcy() async {
   final url = Uri.parse(
-      'https://suupusoup.notion.site/BeRehearsal-00b894722e0448909b3ee9d27d607a79?pvs=4');
+      'https://www.google.com');
   launchUrl(url);
 }
