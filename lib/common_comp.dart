@@ -244,15 +244,15 @@ class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
 }
 // =======================================================================================================================================================
 
-// =================================================================== URLを受け取り画面遷移 ===================================================================
+// ===================================================== URLを受け取り画面遷移(直後項のminiInfoEndUrlJumpで使用) ====================================================
 Future viewWebsite(String recvUrl) async {
   final url = Uri.parse(recvUrl);
   launchUrl(url);
 }
 // ==========================================================================================================================================================
 
-// =========================================================== 末尾の「こちら」で画面遷移できるminiInfoEndJump ===================================================
-Container miniInfoEndJump({
+// =========================================================== 末尾の「こちら」で画面遷移できるminiInfoEndUrlJump ===================================================
+Container miniInfoEndUrlJump({
   String passText = '', // 表示するテキスト
   IconData customIcon = Icons.info_outline, // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
   bool needsIcon = true, // アイコンが必要かどうか
@@ -310,6 +310,112 @@ Container miniInfoEndJump({
       ],
     ),
   );
+}
+// ==========================================================================================================================================================
+
+// ==================================================== ページを受け取り画面遷移(直後項のminiInfoEndPageJumpで使用) ===============================================
+Future jumpFromPageToPage(String recvUrl) async {
+  final url = Uri.parse(recvUrl);
+  launchUrl(url);
+}
+// ==========================================================================================================================================================
+
+// ======================================================== 末尾の「こちら」で画面遷移できるminiInfoEndPageJump ===================================================
+class miniInfoEndPageJump extends StatefulWidget {
+  final String passText; // 表示するテキスト
+  final IconData customIcon; // カスタムアイコン(カスタムしない場合はデフォ値のiマーク)
+  final bool needsIcon; // アイコンが必要かどうか
+  final Color doukaColor; // アイコンが不要な時に背景色と同じにして同化できる色
+  final bool needsTBPadding; // topとbottomに余白が必要か
+  final double customTextSize; // テキストサイズ(デフォは13)
+  final Color customColor;
+  final Widget jumpPage; // 遷移したいページ
+
+  miniInfoEndPageJump(
+      {required this.passText,
+      this.customIcon = Icons.info_outline,
+      this.needsIcon = true,
+      this.doukaColor = const Color(0xffededed),
+      this.needsTBPadding = true,
+      this.customTextSize = 13,
+      this.customColor = Colors.black,
+      required this.jumpPage});
+
+  @override
+  _miniInfoEndPageJumpState createState() => _miniInfoEndPageJumpState();
+}
+
+class _miniInfoEndPageJumpState extends State<miniInfoEndPageJump> {
+  // -------------------------------- 変数処理 --------------------------------
+  // int? _newSelectedBankIndex; // 新しく選択した銀行のインデックス番号
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _newSelectedBankIndex = widget.resvNowSelectingBankIndex; // 初期化処理
+  // }
+  // -------------------------------------------------------------------------
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+        left: 4,
+        top: (widget.needsTBPadding) ? 2 : 0,
+        right: 7,
+        bottom: (widget.needsTBPadding) ? 2 : 0,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(2),
+            child: Icon(
+              widget.customIcon,
+              size: (widget.customTextSize == 13)
+                  ? 15
+                  : widget.customTextSize * 1.1538,
+              color:
+                  (widget.needsIcon) ? widget.customColor : widget.doukaColor,
+            ),
+          ),
+          const SizedBox(width: 4),
+          Flexible(
+              child: Text(widget.passText,
+                  style: TextStyle(
+                    color: widget.customColor,
+                    fontSize: widget.customTextSize,
+                  ))),
+          const SizedBox(width: 2),
+          RichText(
+              text: TextSpan(children: [
+            WidgetSpan(
+              child: GestureDetector(
+                onTap: () {
+                  // 指定されたページへ遷移
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => widget.jumpPage,
+                      fullscreenDialog: true,
+                    ),
+                  );
+                },
+                child: Text(
+                  'こちら',
+                  style: TextStyle(
+                      color: Colors.indigo[500],
+                      // decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+          ])),
+        ],
+      ),
+    );
+  }
 }
 // ==========================================================================================================================================================
 
@@ -458,12 +564,14 @@ class selectTileComp extends StatefulWidget {
   final Widget titleComp;
   final Column? guides;
   final Container fieldInput;
+  final Color customBackColor;
 
-  selectTileComp({
-    required this.titleComp,   // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
-    required this.guides,      // ColumnのchildrenでminiInfoを並べる（任意）
-    required this.fieldInput   // ユーザーからの入力フィールドを指定（必須）
-  });
+  selectTileComp(
+      {required this.titleComp, // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
+      this.guides, // ColumnのchildrenでminiInfoを並べる（任意）
+      required this.fieldInput, // ユーザーからの入力フィールドを指定（必須・入力フィールドのコンポーネントの指定を推奨）
+      this.customBackColor = const Color(0xffededed)        // カスタム背景色（任意・デフォで色を設定済み）
+      });
 
   @override
   _selectTileCompState createState() => _selectTileCompState();
@@ -478,10 +586,118 @@ class _selectTileCompState extends State<selectTileComp> {
       padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Color(0xffededed),
+        color: widget.customBackColor,
       ),
       child: Column(
-        children: [titleTextComp()],
+        children: [
+          widget.titleComp,
+          widget.guides ?? const SizedBox(height: 5),
+          widget.fieldInput
+        ],
+      ),
+    );
+  }
+}
+// ==========================================================================================================================================================
+
+// ================================================================ 入力フィールド(選択形式)単体 ================================================================
+class compInputSelectType extends StatefulWidget {
+  final List<String> elementsList;
+  final int? resvNowSelectingIndex;
+  final String dialogText;
+
+  compInputSelectType(
+      {required this.elementsList, // 選択する要素を格納したリスト（※必須）
+      required this.resvNowSelectingIndex, // 現在選択中の要素のインデックス番号
+      required this.dialogText // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
+      });
+
+  @override
+  _compInputSelectType createState() => _compInputSelectType();
+}
+
+class _compInputSelectType extends State<compInputSelectType> {
+  int? _newSelectIndex; // 選択中の要素のインデックス
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(5),
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          fixedSize: Size(double.infinity, 70),
+          backgroundColor: Color(0xfffefefe),
+        ),
+        child: ListTile(
+          title: Text(
+              (_newSelectIndex != null)
+                  ? widget.elementsList[_newSelectIndex ?? 0]
+                  : '未選択',
+              style: TextStyle(fontSize: 20)),
+          trailing: Icon(Icons.edit),
+        ),
+        onPressed: () {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(widget.dialogText),
+                backgroundColor: Color(0xffffffff),
+                content: Container(
+                  width: double.maxFinite,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    // color: Color(0xffdddddd),
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Scrollbar(
+                      thumbVisibility: true,
+                      thickness: 2,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: widget.elementsList.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.only(
+                                top: 5, bottom: 5, right: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7),
+                              color: Color(0xffeeeeee),
+                            ),
+                            child: ListTile(
+                              title: Text(widget.elementsList[index],
+                                  style: TextStyle(fontSize: 18)),
+                              onTap: () {
+                                setState(() {
+                                  _newSelectIndex = index;
+                                });
+                                Navigator.pop(context);
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      'キャンセル',
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        },
       ),
     );
   }

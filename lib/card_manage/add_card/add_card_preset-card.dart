@@ -285,7 +285,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                         resvTextSize: 16
                       ),
                       SizedBox(height: 3),
-                      miniInfoEndJump(
+                      miniInfoEndUrlJump(
                         passText: 'Vポイントアッププログラムの詳細は',
                         passUrl: 'https://www.smbc-card.com/mem/wp/vpoint_up_program/index.jsp'
                       ),
@@ -374,7 +374,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                     children: [
                       titleTextComp(resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
                       SizedBox(height: 3),
-                      miniInfoEndJump(passText: '学生ポイントの詳細は', passUrl: 'https://www.smbc-card.com/mem/wp/student-point/index.jsp'),
+                      miniInfoEndUrlJump(passText: '学生ポイントの詳細は', passUrl: 'https://www.smbc-card.com/mem/wp/student-point/index.jsp'),
                       miniInfo(passText: '学生ポイント還元も詳細に管理することが可能'),
                       miniInfo(passText: '利用金額のみを管理したい場合この設定は不要', customIcon: Icons.tips_and_updates_outlined),
                       miniInfo(passText: 'ポイントも細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined),
