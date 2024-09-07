@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
-import 'package:creeasy/COMMON_COMPS/title_text_comp.dart';
-import 'package:creeasy/COMMON_COMPS/select_tile_comp.dart';
-import 'package:creeasy/COMMON_COMPS/mini_info_end_page_jump.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comp.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_page_jump.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/COMMON_COMPS/input_double_formatter.dart';
+import 'package:creeasy/COMMON_COMPS/formatter/input_double_formatter.dart';
 // 入力フィールド(直接/整数と小数形式)単体
 
 

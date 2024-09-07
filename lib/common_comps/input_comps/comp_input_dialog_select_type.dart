@@ -32,7 +32,6 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
   }
   // -------------------------------------------------------------------------
 
-
   @override
   Widget build(BuildContext context) {
     return Container(

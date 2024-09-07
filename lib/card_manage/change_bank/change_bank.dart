@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/COMMON_COMPS/title_text_comp.dart';
-import 'package:creeasy/COMMON_COMPS/topright_close_button.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
+import 'package:creeasy/COMMON_COMPS/single_button/topright_close_button.dart';
 
 class ChangeBankPage extends StatefulWidget {
   // final String? selectedCardName;

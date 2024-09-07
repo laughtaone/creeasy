@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:creeasy/COMMON_COMPS/title_text_comp.dart';
-import 'package:creeasy/COMMON_COMPS/between_select_field.dart';
-import 'package:creeasy/COMMON_COMPS/zero_limit_formatter.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
+import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
+import 'package:creeasy/COMMON_COMPS/formatter/zero_limit_formatter.dart';
 
 
 
