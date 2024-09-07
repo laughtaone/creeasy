@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/common_comps/input_double_formatter.dart';
+import 'package:creeasy/COMMON_COMPS/input_double_formatter.dart';
 // 入力フィールド(直接/整数と小数形式)単体
 
 
 class compInputDoubleType extends StatefulWidget {
-  final TextEditingController doubleInputted;
-  final String? prefixText; // 入力フィールドの文字列の前に表示する文字(※任意)
-  final String? suffixText; // 入力フィールドの文字列の後に表示する文字(※任意)
+  final String? prefixText;             // 入力フィールドの文字列の前に表示する文字(※任意)
+  final String? suffixText;             // 入力フィールドの文字列の後に表示する文字(※任意)
+  final double? resvNowInputingDouble;     // 入力フィールドの初期値(※任意)
+  final Function(String) argCallback;   // コールバック関数
 
   compInputDoubleType(
-      {required this.doubleInputted, this.prefixText, this.suffixText});
+      {
+        this.prefixText,
+        this.suffixText,
+        this.resvNowInputingDouble,
+        required this.argCallback
+      });
 
   @override
   _compInputDoubleTypeState createState() => _compInputDoubleTypeState();
@@ -22,7 +28,12 @@ class _compInputDoubleTypeState extends State<compInputDoubleType> {
   @override
   void initState() {
     super.initState();
-    _doubleInputted = widget.doubleInputted; // 初期化処理
+    _doubleInputted = TextEditingController(text: (widget.resvNowInputingDouble != null) ? (widget.resvNowInputingDouble).toString() : '');
+
+    // 入力が変更されたときにコールバックを呼び出すリスナーを追加
+    _doubleInputted.addListener(() {
+      widget.argCallback(_doubleInputted.text); // 入力されたテキストをコールバックで通知
+    });
   }
   // -------------------------------------------------------------------------
 

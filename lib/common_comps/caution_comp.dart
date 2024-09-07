@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/common_comps/title_text_comp.dart';
+import 'package:creeasy/COMMON_COMPS/title_text_comp.dart';
 // 注意書き
 
 

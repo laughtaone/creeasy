@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
-import 'package:creeasy/common_comps/title_text_comp.dart';
-import 'package:creeasy/common_comps/between_select_field.dart';
-import 'package:creeasy/common_comps/mini_info.dart';
-import 'package:creeasy/common_comps/input_double_formatter.dart';
+import 'package:creeasy/COMMON_COMPS/title_text_comp.dart';
+import 'package:creeasy/COMMON_COMPS/between_select_field.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info.dart';
+import 'package:creeasy/COMMON_COMPS/input_double_formatter.dart';
 
 
 

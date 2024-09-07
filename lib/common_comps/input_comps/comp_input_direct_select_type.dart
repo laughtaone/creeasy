@@ -6,36 +6,29 @@ class compInputDirectSelectType extends StatefulWidget {
   final List elementsList;
   final int? resvNowSelectingIndex;
   final double customFontSize;
+  final Function(int) argCallback; // コールバック関数
 
-  compInputDirectSelectType(
-      {required this.elementsList,
-      required this.resvNowSelectingIndex,
-      this.customFontSize = 15});
+  compInputDirectSelectType({
+    required this.elementsList,             // 選択する要素を格納したリスト（※必須）
+    this.resvNowSelectingIndex,             // 現在選択中の要素のインデックス番号(デフォでは未選択を示すnull)
+    this.customFontSize = 15,               // 選択要素の文字の大きさをカスタム(デフォは15)
+    required this.argCallback,              // コールバック関数（※必須）
+  });
 
   @override
-  _compInputDirectSelectTypeState createState() =>
-      _compInputDirectSelectTypeState();
+  _compInputDirectSelectTypeState createState() => _compInputDirectSelectTypeState();
 }
 
 class _compInputDirectSelectTypeState extends State<compInputDirectSelectType> {
   // -------------------------------- 変数処理 --------------------------------
-  late int? _selectedIndex; // 新しく選択した要素のインデックス番号
+  int? _newSelectIndex; // 選択中の要素のインデックス
 
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.resvNowSelectingIndex; // 初期化処理
+    _newSelectIndex = widget.resvNowSelectingIndex;
   }
-
-  void _onBoolSelected(int? index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    print("Selected index: $_selectedIndex");
-  }
-
   // -------------------------------------------------------------------------
-  int? selectedIndex; // 選択中の要素のインデックス
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +45,7 @@ class _compInputDirectSelectTypeState extends State<compInputDirectSelectType> {
             child: TextButton(
               style: TextButton.styleFrom(
                 minimumSize: Size(130, 5),
-                backgroundColor: (_selectedIndex == index)
+                backgroundColor: (_newSelectIndex == index)
                     ? Color(0xffdedede)
                     : Color(0xfffefefe),
                 shape: RoundedRectangleBorder(
@@ -63,17 +56,16 @@ class _compInputDirectSelectTypeState extends State<compInputDirectSelectType> {
               ),
               onPressed: () {
                 setState(() {
-                  selectedIndex = index;
+                  _newSelectIndex = index;
                 });
-                // widget.onItemSelected(index);
+                widget.argCallback(index);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.check,
-                    color:
-                        (selectedIndex == index) ? Colors.black : Colors.white,
+                    color: (_newSelectIndex == index) ? Colors.black : Colors.white,
                   ),
                   SizedBox(width: 4),
                   Text(
