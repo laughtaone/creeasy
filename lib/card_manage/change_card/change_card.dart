@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/common_comp.dart';
 import 'package:creeasy/card_manage/card_manage_comp.dart';
+import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
+
 
 
 class ChangeCardPage extends StatefulWidget {
@@ -70,7 +72,7 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
                 SizedBox(height: 12),
 
                 // =========================================================== ① 引き落とし口座を選択 ===========================================================
-                PayBankComp(resvNowSelectingBankIndex: 0, bankList: _bankList)
+                PayBankComp(resvNowSelectingBankIndex: 0, bankList: _bankList),
                 // =======================================================================================================================================
 
 
