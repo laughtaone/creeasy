@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/card_manage/add_card/add_card_preset-card.dart';
-import 'package:creeasy/card_manage/add_card/add_card_direct-input-card.dart';
-import 'package:creeasy/common_comp.dart';
-import 'package:creeasy/card_manage/add_bank/select_bank-type_component.dart';
+import 'package:creeasy/common_comps/title_text_comp.dart';
+import 'package:creeasy/common_comps/between_select_field.dart';
+import 'package:creeasy/common_comps/mini_info.dart';
+
+
 
 class AddBankPage extends StatefulWidget {
   @override
@@ -137,16 +138,16 @@ class _AddBankPageState extends State<AddBankPage> {
                         Container(
                           margin: EdgeInsets.all(10),
                           height: 70,
-                          child: Container(
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(color: Colors.blue),
-                            //   borderRadius: BorderRadius.circular(10), //追加
-                            // ),
-                            child: OptionTextButton(
-                              textList: _bankTypeList,
-                              onItemSelected: _onItemSelected,
-                            ),
-                          ),
+                          // child: Container(
+                          //   // decoration: BoxDecoration(
+                          //   //   border: Border.all(color: Colors.blue),
+                          //   //   borderRadius: BorderRadius.circular(10), //追加
+                          //   // ),
+                          //   child: OptionTextButton(
+                          //     textList: _bankTypeList,
+                          //     onItemSelected: _onItemSelected,
+                          //   ),
+                          // ),
                         ),
                       ],
                     ),

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/common_comp.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
+import 'package:creeasy/common_comps/title_text_comp.dart';
+import 'package:creeasy/common_comps/select_tile_comp.dart';
+import 'package:creeasy/common_comps/mini_info_end_page_jump.dart';
+import 'package:creeasy/common_comps/comp_input_dialog_select_type.dart';
+
+
 
 // ================================================================= 選択されたカード名 ========================================================================
 selectTileComp selectedCardIntro(String? cardName) {
@@ -45,22 +50,24 @@ class _PayBankCompState extends State<PayBankComp> {
   @override
   Widget build(BuildContext context) {
     return selectTileComp(
-        titleComp: titleTextComp(
-            resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
-        guides: Column(
-          children: [
-            miniInfoEndPageJump(
-              passText: '銀行を新規追加する場合は',
-              jumpPage: AddBankPage(),
-            )
-          ],
-        ),
-        fieldInput: Container(
-          child: compInputSelectType(
-              elementsList: widget.bankList,
-              resvNowSelectingIndex: _newSelectedBankIndex,
-              dialogText: '引き落とし銀行を選択：'),
-        ));
+      titleComp: titleTextComp(
+          resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
+      guides: Column(
+        children: [
+          miniInfoEndPageJump(
+            passText: '銀行を新規追加する場合は',
+            jumpPage: AddBankPage(),
+          )
+        ],
+      ),
+      fieldInput: Container()
+      // fieldInput: Container(
+      //   child: compInputDialogSelectType(
+      //       elementsList: widget.bankList,
+      //       resvNowSelectingIndex: _newSelectedBankIndex,
+      //       dialogText: '引き落とし銀行を選択：'),
+      // )
+    );
   }
 }
 // ==========================================================================================================================================================

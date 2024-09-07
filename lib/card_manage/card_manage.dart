@@ -1,11 +1,12 @@
-import 'package:creeasy/common_comp.dart';
 import 'package:flutter/material.dart';
-import 'package:creeasy/main.dart';
 import 'package:creeasy/card_manage/add_card/add_card_main.dart';
 import 'package:creeasy/card_manage/card_manage_card-tile.dart';
 import 'package:creeasy/card_manage/card_manage_bank-tile.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
-import 'package:creeasy/card_manage/change_card/change_card.dart';
+import 'package:creeasy/common_comps/mini_info.dart';
+
+
+
 
 class CardManagePage extends StatefulWidget {
   @override
