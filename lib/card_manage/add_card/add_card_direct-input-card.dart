@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:creeasy/common_comp.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
-import 'package:creeasy/card_manage/add_bank/select_bank-type_component.dart';
+import 'package:creeasy/common_comps/title_text_comp.dart';
+import 'package:creeasy/common_comps/between_select_field.dart';
+import 'package:creeasy/common_comps/mini_info.dart';
+import 'package:creeasy/common_comps/input_double_formatter.dart';
+
+
 
 
 class AddCardPageDirectInputCard extends StatefulWidget {
@@ -582,13 +586,13 @@ class _AddCardPageDirectInputCardState
                           Container(
                             margin: EdgeInsets.all(10),
                             height: 70,
-                            child: Container(
-                              child: OptionTextButton(
-                                textList: _isPointUp,
-                                onItemSelected: _onBoolPointUpSelected,
-                                textFontSize: 17
-                              ),
-                            ),
+                            // child: Container(
+                            //   child: OptionTextButton(
+                            //     textList: _isPointUp,
+                            //     onItemSelected: _onBoolPointUpSelected,
+                            //     textFontSize: 17
+                            //   ),
+                            // ),
                           ),
                         ],
                       ),
