@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 
-class OptionTextButton extends StatefulWidget {
+class SingleOptionTextButton extends StatefulWidget {
   final String upperText;
   final String trueLowerText;
   final String falseLowerText;
   final bool initialBoolLowerText;
 
 
-  OptionTextButton({
+  SingleOptionTextButton({
     required this.upperText,
     required this.trueLowerText,
     required this.falseLowerText,
@@ -17,11 +17,11 @@ class OptionTextButton extends StatefulWidget {
   });
 
   @override
-  _OptionTextButtonState createState() => _OptionTextButtonState();
+  _SingleOptionTextButtonState createState() => _SingleOptionTextButtonState();
 }
 
 
-class _OptionTextButtonState extends State<OptionTextButton> {
+class _SingleOptionTextButtonState extends State<SingleOptionTextButton> {
   late bool isBoolLowerText;
 
   @override

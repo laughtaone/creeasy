@@ -8,7 +8,9 @@ Container miniInfo(
     Color doukaColor = const Color(0xffededed), // アイコンが不要な時に背景色と同じにして同化できる色
     bool needsTBPadding = true, // topとbottomに余白が必要か
     double customTextSize = 13, // テキストサイズ(デフォは13)
-    Color customColor = Colors.black}) {
+    Color customColor = Colors.black,
+    bool placementCenter = false  // 中央寄せかどうか(デフォではfalse、すなわち中央寄せではない)
+  }) {
   return Container(
     padding: EdgeInsets.only(
       left: 4,
@@ -17,7 +19,7 @@ Container miniInfo(
       bottom: (needsTBPadding) ? 2 : 0,
     ),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: (!placementCenter) ? MainAxisAlignment.start : MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(

@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 
 
 // 縦に並んだ選択肢から選ばせるコンポーネント
-class OptionTextButtonOneLine extends StatefulWidget {
+class SingleOptionTextButtonOneLine extends StatefulWidget {
   final List textList;
   final Function(int?) onItemSelected;
   final double textFontSize;
 
-  OptionTextButtonOneLine({
+  SingleOptionTextButtonOneLine({
     required this.textList,
     required this.onItemSelected,
     this.textFontSize = 15, // textFonSizeだけデフォ値を設定
   });
 
   @override
-  _OptionTextButtonOneLineState createState() =>
-      _OptionTextButtonOneLineState();
+  _SingleOptionTextButtonOneLineState createState() =>
+      _SingleOptionTextButtonOneLineState();
 }
 
-class _OptionTextButtonOneLineState extends State<OptionTextButtonOneLine> {
+class _SingleOptionTextButtonOneLineState extends State<SingleOptionTextButtonOneLine> {
   int? selectedIndex; // 選択中の要素のインデックス
 
   @override

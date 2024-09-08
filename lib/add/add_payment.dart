@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:creeasy/add/add_payment_option_button/add_payment_option_button.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
@@ -9,7 +9,11 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.d
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
-import 'package:creeasy/COMMON_COMPS/single_button/save_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/now_return_rate.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new_format.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new.dart';
 
 
 
@@ -29,22 +33,39 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
     'LINEクレカ(P+)',
     'エポスカード'
   ];
+  List<SotbProperties> sampleSotbsList = [
+    SotbProperties(
+      upperText: 'ポイント\n進呈',
+      trueLowerText: '対象',
+      falseLowerText: '対象外',
+      initialBoolLowerText: true,
+      listIndexNum: 0,
+    ),
+    SotbProperties(
+      upperText: 'ポイント\n進呈',
+      trueLowerText: '対象',
+      falseLowerText: '対象外',
+      initialBoolLowerText: false,
+      listIndexNum: 1,
+    ),
+    SotbProperties(
+      upperText: 'LINE Pay\n経由',
+      trueLowerText: '対象',
+      falseLowerText: '対象外',
+      initialBoolLowerText: false,
+      listIndexNum: 2,
+    ),
+  ];
 
   // ================================ 変数処理 ================================
   int? selectedCardIndex;         // ①で選択されたカードのインデックス番号を保持する変数
   String? inputPayPrice = '';     // ②で入力された金額を保持する変数
+  DateTime? _payDate;             // ③で入力された日付を保持する変数
   String? inputPlace = '';        // ④で入力された使用場所の文字列を保持する変数
-  DateTime? _payDate; // ③で入力された日付を保持する変数
 
 
 
-
-  DateTime? _selectedDate; // ③で入力された日付を保持する変数
-
-
-
-  var _isPointTaisho =
-      true; // ⑤でポイント進呈対象外かどうかの真偽値を保持する変数（true: 進呈対象・false: 進呈対象外）
+  final _isPointTaisho = true; // ⑤でポイント進呈対象外かどうかの真偽値を保持する変数（true: 進呈対象・false: 進呈対象外）
   // =========================================================================
 
   @override
@@ -125,10 +146,10 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 fieldInput: Container(
                   child: compInputDateType(
                     dialogText: '日付を選択してね：',
-                    resvNowInputingDate: _selectedDate,
+                    resvNowInputingDate: _payDate,
                     argCallback: (date) {
                       setState(() {
-                        _selectedDate = date;
+                        _payDate = date;
                       });
                     },
                   ),
@@ -155,8 +176,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // =============================================== ⑤オプション ==============================================
               betweenSelectField(),
               Container(
-                padding:
-                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
+                padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Color(0xffededed),
@@ -171,76 +191,71 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                       margin: EdgeInsets.all(10),
                       child: Column(
                         children: [
-                          // ========================= 「還元率?%」の長方形  =========================
+                          // ------------------ 「還元率?%」の長方形  ------------------
+                          nowReturnRate(1.0),
+                          // --------------------------------------------------------
+
+                          SizedBox(height: 12),
+
+                          miniInfo(passText: '支払いにより還元率が異なるため詳細を入力', placementCenter: true),
+
+                          SizedBox(height: 12),
+
                           Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              color: Color(0xffdddddd),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('現在の還元率：',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17)),
-                                Text('1%',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 22))
-                              ],
-                            ),
+                              height: 200, // 適切な高さを設定
+                              child: ListView.builder(
+                                itemCount: sampleSotbsList.length,
+                                itemBuilder: (context, index) {
+                                  return Expanded(
+                                    child: SingleOptionTextButtonNew(
+                                      upperText: sampleSotbsList[index].upperText,
+                                      trueLowerText: sampleSotbsList[index].trueLowerText,
+                                      falseLowerText: sampleSotbsList[index].falseLowerText,
+                                      initialBoolLowerText: sampleSotbsList[index].initialBoolLowerText,
+                                      listIndexNum: sampleSotbsList[index].listIndexNum,
+                                      argCallback: (int index) {
+                                        final bool nowBool = sampleSotbsList[index].initialBoolLowerText;
+                                        setState(() {
+                                          sampleSotbsList[index] = sampleSotbsList[index].copyWith(
+                                            initialBoolLowerText: !nowBool
+                                          );
+                                        });
+                                      }
+                                    ),
+                                  );
+                                }
+                              )
                           ),
-                          // ====================================================================
-
-                          SizedBox(height: 12),
-
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.info_outline,
-                                size: 18,
-                              ),
-                              SizedBox(width: 3),
-                              Text(
-                                '支払いにより還元率が異なるため詳細を入力',
-                                style: TextStyle(fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: 12),
 
                           // =========================== 選択フィールド  ===========================
-                          Row(
-                            children: [
-                              Expanded(
-                                child: OptionTextButton(
-                                  upperText: 'ポイント\n進呈',
-                                  trueLowerText: '対象',
-                                  falseLowerText: '対象外',
-                                  initialBoolLowerText: _isPointTaisho,
-                                ),
-                              ),
-                              Expanded(
-                                child: OptionTextButton(
-                                  upperText: 'VPU\nプログラム',
-                                  trueLowerText: '対象',
-                                  falseLowerText: '対象外',
-                                  initialBoolLowerText: false,
-                                ),
-                              ),
-                              Expanded(
-                                child: OptionTextButton(
-                                  upperText: 'LINE Pay\n経由',
-                                  trueLowerText: '対象',
-                                  falseLowerText: '対象外',
-                                  initialBoolLowerText: false,
-                                ),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   children: [
+                          //     Expanded(
+                          //       child: SingleOptionTextButton(
+                          //         upperText: 'ポイント\n進呈',
+                          //         trueLowerText: '対象',
+                          //         falseLowerText: '対象外',
+                          //         initialBoolLowerText: _isPointTaisho,
+                          //       ),
+                          //     ),
+                          //     Expanded(
+                          //       child: SingleOptionTextButton(
+                          //         upperText: 'VPU\nプログラム',
+                          //         trueLowerText: '対象',
+                          //         falseLowerText: '対象外',
+                          //         initialBoolLowerText: false,
+                          //       ),
+                          //     ),
+                          //     Expanded(
+                          //       child: SingleOptionTextButton(
+                          //         upperText: 'LINE Pay\n経由',
+                          //         trueLowerText: '対象',
+                          //         falseLowerText: '対象外',
+                          //         initialBoolLowerText: false,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
                     ),
