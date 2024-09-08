@@ -14,9 +14,7 @@ import 'package:creeasy/COMMON_COMPS/display_parts/now_return_rate.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new_format.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new.dart';
-
-
-
+import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/sotbn_from_list.dart';
 
 class AddPaymentPage extends StatefulWidget {
   @override
@@ -55,17 +53,20 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
       initialBoolLowerText: false,
       listIndexNum: 2,
     ),
+    SotbProperties(
+      upperText: '対象\nサブスク',
+      trueLowerText: '対象',
+      falseLowerText: '対象外',
+      initialBoolLowerText: false,
+      listIndexNum: 3,
+    ),
   ];
 
   // ================================ 変数処理 ================================
-  int? selectedCardIndex;         // ①で選択されたカードのインデックス番号を保持する変数
-  String? inputPayPrice = '';     // ②で入力された金額を保持する変数
-  DateTime? _payDate;             // ③で入力された日付を保持する変数
-  String? inputPlace = '';        // ④で入力された使用場所の文字列を保持する変数
-
-
-
-  final _isPointTaisho = true; // ⑤でポイント進呈対象外かどうかの真偽値を保持する変数（true: 進呈対象・false: 進呈対象外）
+  int? selectedCardIndex; // ①で選択されたカードのインデックス番号を保持する変数
+  String? inputPayPrice = ''; // ②で入力された金額を保持する変数
+  DateTime? _payDate; // ③で入力された日付を保持する変数
+  String? inputPlace = ''; // ④で入力された使用場所の文字列を保持する変数
   // =========================================================================
 
   @override
@@ -116,6 +117,11 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                     elementsList: _items,
                     dialogText: '支払いカードを選択：',
                     returnSelectIndex: selectedCardIndex,
+                    argCallback: (index) {
+                      setState(() {
+                        selectedCardIndex = index;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -142,104 +148,57 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // =============================================== ③日付 ==============================================
               betweenSelectField(),
               selectTileComp(
-                titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
-                fieldInput: Container(
-                  child: compInputDateType(
-                    dialogText: '日付を選択してね：',
-                    resvNowInputingDate: _payDate,
-                    argCallback: (date) {
-                      setState(() {
-                        _payDate = date;
-                      });
-                    },
-                  ),
-                )
-              ),
+                  titleComp: titleTextComp(
+                      resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
+                  fieldInput: Container(
+                    child: compInputDateType(
+                      dialogText: '日付を選択してね：',
+                      resvNowInputingDate: _payDate,
+                      argCallback: (date) {
+                        setState(() {
+                          _payDate = date;
+                        });
+                      },
+                    ),
+                  )),
               // ====================================================================================================
 
               // =============================================== ④使用場所 ==============================================
               betweenSelectField(),
               selectTileComp(
-                titleComp: titleTextComp(resvIcon: Icons.location_on_outlined, resvText: '使用場所を入力'),
-                fieldInput: Container(
-                  child: compInputStringType(
-                    argCallback: (value) { // コールバックを渡す
+                  titleComp: titleTextComp(
+                      resvIcon: Icons.location_on_outlined,
+                      resvText: '使用場所を入力'),
+                  fieldInput: Container(child: compInputStringType(
+                    argCallback: (value) {
+                      // コールバックを渡す
                       setState(() {
                         inputPlace = value; // コールバックで受け取った値を保持
                       });
                     },
-                  )
-                )
-              ),
+                  ))),
               // =======================================================================================================
 
               // =============================================== ⑤オプション ==============================================
               betweenSelectField(),
               selectTileComp(
-                titleComp: titleTextComp(resvIcon: Icons.auto_fix_high_outlined, resvText: 'オプション'),
-                guides: Column(children: [miniInfo(passText: '支払いにより還元率が異なるため詳細を入力', placementCenter: true)]),
+                titleComp: titleTextComp(
+                    resvIcon: Icons.auto_fix_high_outlined, resvText: 'オプション'),
+                guides: Column(children: [
+                  miniInfo(
+                      passText: '支払いにより還元率が異なるため詳細を入力', placementCenter: true)
+                ]),
                 fieldInput: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(), // スクロールを無効にする
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // 1行に表示する要素数
-                      childAspectRatio: 1.5, // 各要素のアスペクト比を調整 (幅/高さ)
-                    ),
-                    itemCount: sampleSotbsList.length,
-                    itemBuilder: (context, index) {
-                      return SingleOptionTextButtonNew(
-                        upperText: sampleSotbsList[index].upperText,
-                        trueLowerText: sampleSotbsList[index].trueLowerText,
-                        falseLowerText: sampleSotbsList[index].falseLowerText,
-                        initialBoolLowerText: sampleSotbsList[index].initialBoolLowerText,
-                        listIndexNum: sampleSotbsList[index].listIndexNum,
-                        argCallback: (int index) {
-                          final bool nowBool = sampleSotbsList[index].initialBoolLowerText;
-                          setState(() {
-                            sampleSotbsList[index] = sampleSotbsList[index].copyWith(
-                              initialBoolLowerText: !nowBool,
-                            );
-                          });
-                        },
-                      );
-                    },
-                  ),
+                  child: sotbnFromList(
+                    recvSotbsList: sampleSotbsList,
+                    argCallback: (List<SotbProperties> argList) {
+                      setState(() {
+                        sampleSotbsList = argList;
+                      });
+                    }
+                  )
                 ),
               ),
-
-
-                          // =========================== 選択フィールド  ===========================
-                          // Row(
-                          //   children: [
-                          //     Expanded(
-                          //       child: SingleOptionTextButton(
-                          //         upperText: 'ポイント\n進呈',
-                          //         trueLowerText: '対象',
-                          //         falseLowerText: '対象外',
-                          //         initialBoolLowerText: _isPointTaisho,
-                          //       ),
-                          //     ),
-                          //     Expanded(
-                          //       child: SingleOptionTextButton(
-                          //         upperText: 'VPU\nプログラム',
-                          //         trueLowerText: '対象',
-                          //         falseLowerText: '対象外',
-                          //         initialBoolLowerText: false,
-                          //       ),
-                          //     ),
-                          //     Expanded(
-                          //       child: SingleOptionTextButton(
-                          //         upperText: 'LINE Pay\n経由',
-                          //         trueLowerText: '対象',
-                          //         falseLowerText: '対象外',
-                          //         initialBoolLowerText: false,
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-
               // =======================================================================================================
 
               SizedBox(height: 70),
@@ -252,7 +211,6 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 isCanOnpress: true,
               ),
               // =======================================================================================================
-
             ],
           ),
         ),

@@ -37,19 +37,18 @@ class _SingleOptionTextButtonNewState extends State<SingleOptionTextButtonNew> {
     resvIndexNum = widget.listIndexNum;
   }
 
-  void toggleText() {
-    setState(() {
-      newBoolLowerText = !newBoolLowerText;
-    });
-    // widget.argCallback(resvIndexNum, newBoolLowerText);
-    widget.argCallback(resvIndexNum);
-  }
+  // void toggleText() {
+  //   setState(() {
+  //     newBoolLowerText = !newBoolLowerText;
+  //   });
+  //   widget.argCallback(resvIndexNum);
+  // }
 
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 5, right: 5),
+      padding: const EdgeInsets.all(5),
       child: TextButton(
         style: TextButton.styleFrom(
           fixedSize: Size(120, 120),
@@ -64,7 +63,10 @@ class _SingleOptionTextButtonNewState extends State<SingleOptionTextButtonNew> {
           overlayColor: WidgetStateProperty.all(Colors.transparent),
         ),
         onPressed: () {
-          toggleText();
+          setState(() {
+            newBoolLowerText = !newBoolLowerText;
+          });
+          widget.argCallback(resvIndexNum);
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
