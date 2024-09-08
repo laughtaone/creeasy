@@ -85,7 +85,6 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                   child: compInputDialogSelectType(
                     elementsList: _items,
                     dialogText: '該当カードを選択：',
-                    returnSelectIndex: selectedCardIndex,
                     argCallback: (index) {
                       setState(() {
                         selectedCardIndex = index;

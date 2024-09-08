@@ -16,6 +16,9 @@ import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_t
 import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/sotbn_from_list.dart';
 
+
+
+
 class AddPaymentPage extends StatefulWidget {
   @override
   _AddPaymentPageState createState() => _AddPaymentPageState();
@@ -116,7 +119,6 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   child: compInputDialogSelectType(
                     elementsList: _items,
                     dialogText: '支払いカードを選択：',
-                    returnSelectIndex: selectedCardIndex,
                     argCallback: (index) {
                       setState(() {
                         selectedCardIndex = index;

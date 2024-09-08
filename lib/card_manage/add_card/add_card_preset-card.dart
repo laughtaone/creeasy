@@ -9,7 +9,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_column_direct_select
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_url_jump.dart';
 import 'package:creeasy/COMMON_COMPS/formatter/input_double_formatter.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
-
+import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comp.dart';
 
 class AddCardPagePresetCard extends StatefulWidget {
   final String? selectedCardName;
@@ -37,8 +37,13 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
   ];
 
   // ================================ 変数処理 ================================
+  int? _selectedBank; // ②で選択された銀行を保持する変数
+
+  // =========================================================================
+
+  // ================================ 変数処理 ================================
   int? _selectedSmcnlPayRuleIndex; // ①で選択されたポイントアップの有無を保持する変数
-  String? _selectedBank; // ②で選択された銀行を保持する変数
+  // String? _selectedBank; // ②で選択された銀行を保持する変数
   int? _selectedVpupIndex; // ③で入力されたVPUPの有無を保持する変数
   final TextEditingController _inputVpupReturnRate =
       TextEditingController(); // ③で入力された還元率[%]を保持する変数
@@ -107,180 +112,37 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 titleTextComp(resvText: 'カード情報を微調整', resvTextSize: 20),
 
                 // =============================================== ① 締日/引き落とし日の選択 ==============================================
-                betweenSelectField(customHeight: 13),
-                Container(
-                  padding:
-                      EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xffededed),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                selectTileComp(
+                  titleComp: titleTextComp(
+                      resvIcon: Icons.event_outlined, resvText: '締日/引き落とし日を選択'),
+                  guides: Column(
                     children: [
-                      titleTextComp(
-                          resvIcon: Icons.event_outlined,
-                          resvText: '締日/引き落とし日を選択'),
-                      SizedBox(height: 3),
                       miniInfo(passText: '公式サイトの情報を基に作成しています'),
                       miniInfo(
                           passText:
                               '設定できるはずの日付が用意されていない場合は、お手数ですが開発者までご連絡ください'),
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        height: 140,
-                        child: Container(
-                          child: SingleOptionTextButtonOneLine(
-                              textList: _smcnlPayRule,
-                              onItemSelected: _onSelectSmcnlPayRuleIndex,
-                              textFontSize: 17),
-                        ),
-                      ),
                     ],
+                  ),
+                  fieldInput: Container(
+                    margin: EdgeInsets.all(10),
+                    height: 140,
+                    child: SingleOptionTextButtonOneLine(
+                        textList: _smcnlPayRule,
+                        onItemSelected: _onSelectSmcnlPayRuleIndex,
+                        textFontSize: 17),
                   ),
                 ),
                 // =======================================================================================================
 
                 // ========================================== ②引き落とし口座 ==========================================
                 betweenSelectField(),
-                Container(
-                  padding:
-                      EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xffededed),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      titleTextComp(
-                          resvIcon: Icons.account_balance_outlined,
-                          resvText: '引き落とし口座を選択'),
-                      // --------------------------- 「銀行を追加する場合はこちら」 -----------------------------------
-                      Container(
-                        padding: EdgeInsets.only(top: 2, bottom: 5, left: 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(
-                              Icons.info_outline,
-                              size: 15,
-                            ),
-                            SizedBox(width: 4),
-                            Text('銀行を新規追加する場合は ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 13)),
-                            RichText(
-                                text: TextSpan(children: [
-                              WidgetSpan(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    // 銀行新規追加画面へ遷移
-                                    // Navigator.pushAndRemoveUntil(
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AddBankPage(),
-                                        fullscreenDialog: true,
-                                      ),
-                                    );
-                                  },
-                                  child: Text(
-                                    'こちら',
-                                    style: TextStyle(
-                                        color: Colors.indigo[500],
-                                        // decoration: TextDecoration.underline,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
-                            ])),
-                          ],
-                        ),
-                      ),
-                      // ---------------------------------------------------------------------------------
-                      // --------------------------- 引き落とし口座選択フィールド -----------------------------------
-                      Container(
-                        margin: EdgeInsets.all(5),
-                        child: OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            fixedSize: Size(double.infinity, 70),
-                            backgroundColor: Color(0xfffefefe),
-                          ),
-                          child: ListTile(
-                            title: Text('${_selectedBank ?? '未選択'}',
-                                style: TextStyle(fontSize: 20)),
-                            trailing: Icon(Icons.edit),
-                          ),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('引き落とし銀行を選択：'),
-                                  backgroundColor: Color(0xffffffff),
-                                  content: Container(
-                                    width: double.maxFinite,
-                                    height: 300,
-                                    decoration: BoxDecoration(
-                                      // color: Color(0xffdddddd),
-                                      borderRadius: BorderRadius.circular(7),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Scrollbar(
-                                        thumbVisibility: true,
-                                        thickness: 2,
-                                        child: ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: _bankList.length,
-                                          itemBuilder: (context, index) {
-                                            return Container(
-                                              margin: const EdgeInsets.only(
-                                                  top: 5, bottom: 5, right: 10),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(7),
-                                                color: Color(0xffeeeeee),
-                                              ),
-                                              child: ListTile(
-                                                title: Text(_bankList[index],
-                                                    style: TextStyle(
-                                                        fontSize: 18)),
-                                                onTap: () {
-                                                  setState(() {
-                                                    _selectedBank =
-                                                        _bankList[index];
-                                                  });
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text(
-                                        'キャンセル',
-                                        style: TextStyle(color: Colors.red),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
+                PayBankComp(
+                  bankList: _bankList,
+                  argCallback: (int? recvIndex) {
+                    setState(() {
+                      _selectedBank = recvIndex;
+                    });
+                  },
                 ),
                 // ====================================================================================================
 

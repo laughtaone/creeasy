@@ -83,7 +83,6 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
                   child: compInputDialogSelectType(
                     elementsList: _items,
                     dialogText: '該当カードを選択：',
-                    returnSelectIndex: selectedCardIndex,
                     argCallback: (index) {
                       setState(() {
                         selectedCardIndex = index;
