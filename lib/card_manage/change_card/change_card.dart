@@ -6,9 +6,6 @@ import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/caution_comp.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 
-
-
-
 class ChangeCardPage extends StatefulWidget {
   final String? selectedCardName;
   const ChangeCardPage({Key? key, required this.selectedCardName})
@@ -20,6 +17,11 @@ class ChangeCardPage extends StatefulWidget {
 
 class _ChangeCardPageState extends State<ChangeCardPage> {
   final List<String> _bankList = ['三菱UFJ銀行', 'みんなの銀行', '三井住友銀行'];
+
+  // ================================ 変数処理 ================================
+  int? _selectedBank; // ①で選択された銀行を保持する変数
+
+  // =========================================================================
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,14 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
 
                   // =========================================================== ① 引き落とし口座を選択 ===========================================================
                   PayBankComp(
-                      resvNowSelectingBankIndex: 0, bankList: _bankList),
+                    resvNowSelectingBankIndex: 0,
+                    bankList: _bankList,
+                    argCallback: (int? resvIndex) {
+                      setState(() {
+                        _selectedBank = resvIndex;
+                      });
+                    },
+                  ),
                   // =======================================================================================================================================
                 ],
               ),

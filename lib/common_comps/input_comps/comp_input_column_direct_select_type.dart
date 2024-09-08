@@ -3,14 +3,17 @@ import 'package:flutter/material.dart';
 
 // 縦に並んだ選択肢から選ばせるコンポーネント
 class SingleOptionTextButtonOneLine extends StatefulWidget {
-  final List textList;
-  final Function(int?) onItemSelected;
+  final List elementsList;
+  final int? resvNowSelectingIndex;
   final double textFontSize;
+  final Function(int) argCallback;
+
 
   SingleOptionTextButtonOneLine({
-    required this.textList,
-    required this.onItemSelected,
-    this.textFontSize = 15, // textFonSizeだけデフォ値を設定
+    required this.elementsList,            // 選択する要素を格納したリスト（※必須）
+    this.resvNowSelectingIndex,            // 現在選択中の要素のインデックス番号(デフォでは未選択を示すnull)
+    this.textFontSize = 15,                // 選択要素の文字の大きさをカスタム(デフォは15)
+    required this.argCallback,             // コールバック関数（※必須）
   });
 
   @override
@@ -19,7 +22,17 @@ class SingleOptionTextButtonOneLine extends StatefulWidget {
 }
 
 class _SingleOptionTextButtonOneLineState extends State<SingleOptionTextButtonOneLine> {
-  int? selectedIndex; // 選択中の要素のインデックス
+  // -------------------------------- 変数処理 --------------------------------
+  int? _newSelectIndex; // 選択中の要素のインデックス
+
+  @override
+  void initState() {
+    super.initState();
+    _newSelectIndex = widget.resvNowSelectingIndex;
+  }
+  // -------------------------------------------------------------------------
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +41,7 @@ class _SingleOptionTextButtonOneLineState extends State<SingleOptionTextButtonOn
       child: ListView.builder(
         padding: const EdgeInsets.all(10),
         physics: NeverScrollableScrollPhysics(),
-        itemCount: widget.textList.length,
+        itemCount: widget.elementsList.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: EdgeInsets.only(
@@ -36,7 +49,7 @@ class _SingleOptionTextButtonOneLineState extends State<SingleOptionTextButtonOn
             child: TextButton(
               style: TextButton.styleFrom(
                 minimumSize: Size(130, 58),
-                backgroundColor: (selectedIndex == index)
+                backgroundColor: (_newSelectIndex == index)
                     ? Color(0xffdedede)
                     : Color(0xfffefefe),
                 shape: RoundedRectangleBorder(
@@ -47,21 +60,20 @@ class _SingleOptionTextButtonOneLineState extends State<SingleOptionTextButtonOn
               ),
               onPressed: () {
                 setState(() {
-                  selectedIndex = index;
+                  _newSelectIndex = index;
                 });
-                widget.onItemSelected(index);
+                widget.argCallback(index);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.check,
-                    color:
-                        (selectedIndex == index) ? Colors.black : Colors.white,
+                    color: (_newSelectIndex == index) ? Colors.black : Colors.white,
                   ),
                   SizedBox(width: 6),
                   Text(
-                    widget.textList[index],
+                    widget.elementsList[index],
                     style: TextStyle(
                       fontSize: widget.textFontSize,
                       color: Color(0xff444444),

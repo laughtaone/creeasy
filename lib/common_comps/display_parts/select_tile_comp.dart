@@ -7,12 +7,14 @@ class selectTileComp extends StatefulWidget {
   final Column? guides;
   final Container fieldInput;
   final Color customBackColor;
+  final Column? beginningGuides;
 
   selectTileComp(
       {required this.titleComp, // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
       this.guides, // ColumnのchildrenでminiInfoを並べる（任意）
       required this.fieldInput, // ユーザーからの入力フィールドを指定（必須・入力フィールドのコンポーネントの指定を推奨）
-      this.customBackColor = const Color(0xffededed) // カスタム背景色（任意・デフォで色を設定済み）
+      this.customBackColor = const Color(0xffededed), // カスタム背景色（任意・デフォで色を設定済み）
+      this.beginningGuides      // titleCompの前の冒頭にminiInfoのColumn(任意)
       });
 
   @override
@@ -32,6 +34,8 @@ class _selectTileCompState extends State<selectTileComp> {
       ),
       child: Column(
         children: [
+          (widget.beginningGuides) ?? const SizedBox.shrink(),
+          (widget.beginningGuides==null) ? const SizedBox.shrink() : SizedBox(height: 10),
           widget.titleComp,
           widget.guides ?? const SizedBox(height: 5),
           widget.fieldInput

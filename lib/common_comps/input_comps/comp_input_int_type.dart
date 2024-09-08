@@ -51,8 +51,9 @@ class _compInputIntTypeState extends State<compInputIntType> {
         ),
         controller: _intInputted,
         decoration: InputDecoration(
-          labelText: '',
-          contentPadding: EdgeInsets.all(30),
+          hintText: '未入力',
+          hintStyle: TextStyle(fontSize: 20),
+          contentPadding: EdgeInsets.fromLTRB(30, 30, 30, 20),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
