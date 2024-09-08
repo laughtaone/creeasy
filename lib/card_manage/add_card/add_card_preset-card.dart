@@ -41,15 +41,14 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
   // ================================ 変数処理 ================================
   int? _selectedBank; // ②で選択された銀行を保持する変数
   int? _selectedVpupIndex; // ③で入力されたVPUPの有無を保持する変数
+  int? _selectedStudentPointIndex; // ④で入力された学生ポイントの有無を保持する変数
   // =========================================================================
 
   // ================================ 変数処理 ================================
   int? _selectedSmcnlPayRuleIndex; // ①で選択されたポイントアップの有無を保持する変数
-  // String? _selectedBank; // ②で選択された銀行を保持する変数
   // int? _selectedVpupIndex; // ③で入力されたVPUPの有無を保持する変数
   final TextEditingController _inputVpupReturnRate =
       TextEditingController(); // ③で入力された還元率[%]を保持する変数
-  int? _selectedStudentPointIndex; // ③で入力されたVPUPの有無を保持する変数
   String? _selectedGradYear; // ③で選択された銀行を保持する変数
   // =========================================================================
 
@@ -159,14 +158,66 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                   ],),
                   fieldInput: Container(
                     margin: EdgeInsets.all(10),
-                    height: 70,
                     child: Container(
-                      child: compInputDirectSelectType(
-                        elementsList: _isVpup,
-                        customFontSize: 17,
-                        argCallback: (int? recvIndex) {
-                          _selectedVpupIndex = recvIndex;
-                        }
+                      child: Column(
+                        children: [
+                          compInputDirectSelectType(
+                            elementsList: _isVpup,
+                            customFontSize: 17,
+                            argCallback: (int? recvIndex) {
+                              setState(() {
+                                _selectedVpupIndex = recvIndex;
+                              });
+                            }
+                          ),
+                          (_selectedVpupIndex == 1)
+                          ? selectTileComp(
+                            customBackColor: Color(0xffdcdcdc),
+                            titleComp: SizedBox.shrink(),
+                            guides: Column(children: [
+                              // --------------------------- 【展開時】VPUP還元率の注意書き -----------------------------------
+                              miniInfo(passText: 'Vpassアプリに表示されているVポイントアッププログラムの還元率をそのまま入力'),
+                              miniInfo(
+                                passText:'（表示されている還元率は基本還元率0.5%を含みますが、無視してそのまま入力してください）',
+                                customTextSize: 10,
+                                needsIcon: false,
+                                needsTBPadding: false
+                              ),
+                              miniInfo(passText: '0-20[%] の 整数または小数 が設定可能'),
+                              // ----------------------------------------------------------------------------------------------
+                            ],),
+                            fieldInput: Container(
+                              margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                              height: 70,
+                              child: TextField(
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 22,
+                                ),
+                                controller: _inputVpupReturnRate,
+                                decoration: InputDecoration(
+                                  labelText: '',
+                                  contentPadding: EdgeInsets.all(30),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(10),
+                                  ),
+                                  suffixText: '%',
+                                  fillColor: Color(0xfffefefe),
+                                  filled: true,
+                                ),
+                                keyboardType:
+                                    TextInputType.numberWithOptions(
+                                        decimal: true),
+                                inputFormatters: [
+                                  DecimalTextInputFormatter(),
+                                  ZeroLimitFormatterForDouble(),
+                                ],
+                              ),
+                            ),
+                          )
+                          : SizedBox.shrink(),
+                        ],
                       ),
                     ),
                   ),
@@ -175,199 +226,208 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
                 // =============================================== ④学生ポイントの有無 ==============================================
                 betweenSelectField(),
-                Container(
-                  padding:
-                      EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 9),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xffededed),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      titleTextComp(
-                          resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
-                      SizedBox(height: 3),
-                      miniInfoEndUrlJump(
-                          passText: '学生ポイントの詳細は',
-                          passUrl:
-                              'https://www.smbc-card.com/mem/wp/student-point/index.jsp'),
+                selectTileComp(
+                  titleComp: titleTextComp(resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
+                  guides: Column(children: [
+                      miniInfoEndUrlJump(passText: '学生ポイントの詳細は', passUrl:'https://www.smbc-card.com/mem/wp/student-point/index.jsp'),
                       miniInfo(passText: '学生ポイント還元も詳細に管理することが可能'),
-                      miniInfo(
-                          passText: '利用金額のみを管理したい場合この設定は不要',
-                          customIcon: Icons.tips_and_updates_outlined),
-                      miniInfo(
-                          passText: 'ポイントも細かく管理したい方におすすめ',
-                          customIcon: Icons.tips_and_updates_outlined),
-                      // --------------------------- 学生ポイントを設定するかどうかの確認 -----------------------------------
-                      // Container(
-                      //   margin: EdgeInsets.all(10),
-                      //   height: 70,
-                      //   child: Container(
-                      //     child: SingleOptionTextButton(
-                      //       textList: _isStudentPoint,
-                      //       onItemSelected: _onBoolStudentPointSelected,
-                      //       textFontSize: 17
-                      //     ),
-                      //   ),
-                      // ),
-                      // ----------------------------------------------------------------------------------------------
-                      (_selectedStudentPointIndex == 1)
-                          ? Container(
-                              padding: EdgeInsets.all(7),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color(0xffdcdcdc),
-                              ),
-                              child: Column(
-                                children: [
-                                  // --------------------------- 【展開時】学生ポイントの注意書き -----------------------------------
-                                  miniInfo(
-                                      passText: '次のポイントが計算可能です：',
-                                      customIcon: Icons.check),
-                                  miniInfo(
-                                      passText: '・LINE Pay還元(最大+9.5%)',
-                                      needsIcon: false,
-                                      doukaColor: Color(0xffdcdcdc)),
-                                  miniInfo(
-                                      passText: '・対象サブスク還元(最大+9.5%)',
-                                      needsIcon: false,
-                                      doukaColor: Color(0xffdcdcdc)),
-                                  miniInfo(
-                                      passText: '・携帯料金還元(最大+1.5%)',
-                                      needsIcon: false,
-                                      doukaColor: Color(0xffdcdcdc)),
-                                  miniInfo(
-                                      passText: '次のポイントは計算できません：',
-                                      customIcon: Icons.block_outlined),
-                                  miniInfo(
-                                      passText: '・分割払い手数料全額ポイント還元',
-                                      needsIcon: false,
-                                      doukaColor: Color(0xffdcdcdc)),
-                                  // ----------------------------------------------------------------------------------------------
-                                  SizedBox(height: 10),
-                                  titleTextComp(
-                                      resvIcon: Icons.event_available_outlined,
-                                      resvText: '卒業予定年を入力',
-                                      resvTextSize: 16),
-                                  miniInfo(
-                                      passText:
-                                          '学生ポイントは、卒業予定年の12月末日分までのため、卒業予定の年部分のみを入力'),
-                                  miniInfo(
-                                      passText:
-                                          '例：2020年3月に卒業式を行い卒業する場合は「2020年」を選択',
-                                      customIcon:
-                                          Icons.tips_and_updates_outlined),
-                                  // --------------------------- 引き落とし口座選択フィールド -----------------------------------
-                                  Container(
-                                    margin: EdgeInsets.all(5),
-                                    child: OutlinedButton(
-                                      style: OutlinedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        fixedSize: Size(double.infinity, 70),
-                                        backgroundColor: Color(0xfffefefe),
-                                      ),
-                                      child: ListTile(
-                                        title: Text(
-                                            (_selectedGradYear != null)
-                                                ? '${_selectedGradYear}年'
-                                                : '未選択',
-                                            style: TextStyle(fontSize: 20)),
-                                        trailing: Icon(Icons.edit),
-                                      ),
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          barrierDismissible: false,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: Text('卒業予定年を選択：'),
-                                              backgroundColor:
-                                                  Color(0xffffffff),
-                                              content: Container(
-                                                width: double.maxFinite,
-                                                height: 300,
-                                                decoration: BoxDecoration(
-                                                  // color: Color(0xffdddddd),
-                                                  borderRadius:
-                                                      BorderRadius.circular(7),
-                                                ),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Scrollbar(
-                                                    thumbVisibility: true,
-                                                    thickness: 2,
-                                                    child: ListView.builder(
-                                                      shrinkWrap: true,
-                                                      itemCount:
-                                                          _gradYearList.length,
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        return Container(
-                                                          margin:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 5,
-                                                                  bottom: 5,
-                                                                  right: 10),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        7),
-                                                            color: Color(
-                                                                0xffeeeeee),
-                                                          ),
-                                                          child: ListTile(
-                                                            title: Text(
-                                                                _gradYearList[
-                                                                        index] +
-                                                                    '年',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        18)),
-                                                            onTap: () {
-                                                              setState(() {
-                                                                _selectedGradYear =
-                                                                    _gradYearList[
-                                                                        index];
-                                                              });
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(context),
-                                                  child: Text(
-                                                    'キャンセル',
-                                                    style: TextStyle(
-                                                        color: Colors.red),
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
+                      miniInfo(passText: '利用金額のみを管理したい場合この設定は不要', customIcon: Icons.tips_and_updates_outlined),
+                      miniInfo(passText: 'ポイントも細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined),
+                  ],),
+                  fieldInput: Container(
+                    margin: EdgeInsets.all(10),
+                    child: Container(
+                      child: Column(
+                        children: [
+                          compInputDirectSelectType(
+                            elementsList: _isStudentPoint,
+                            customFontSize: 17,
+                            argCallback: (int? recvIndex) {
+                              setState(() {
+                                _selectedStudentPointIndex = recvIndex;
+                              });
+                            },
+                          ),
+                          (_selectedStudentPointIndex == 1)
+                          ? selectTileComp(
+                            customBackColor: Color(0xffdcdcdc),
+                            beginningGuides: Column(children: [
+                              // --------------------------- 【展開時】学生ポイントの注意書き -----------------------------------
+                              miniInfo(passText: '次のポイントが計算可能です：', customIcon: Icons.check),
+                              miniInfo(passText: '・LINE Pay還元(最大+9.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
+                              miniInfo(passText: '・対象サブスク還元(最大+9.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
+                              miniInfo(passText: '・携帯料金還元(最大+1.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
+                              miniInfo(passText: '次のポイントは計算できません：', customIcon: Icons.block_outlined),
+                              miniInfo(passText: '・分割払い手数料全額ポイント還元', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
+                              // ----------------------------------------------------------------------------------------------
+                            ]),
+                            titleComp: titleTextComp(resvIcon: Icons.event_available_outlined, resvText: '卒業予定年を入力', resvTextSize: 16),
+                            guides: Column(children: [
+                              miniInfo(passText: '学生ポイントは、卒業予定年の12月末日分までのため、卒業予定の年部分のみを入力'),
+                              miniInfo(passText: '例：2020年3月に卒業式を行い卒業する場合は「2020年」を選択', customIcon: Icons.tips_and_updates_outlined),
+                            ],),
+                            fieldInput: Container(
+                              // // --------------------------- 卒業予定年 選択フィールド -----------------------------------
+                              // child: ,
+                            ),
+                          )
+                          // ? Container(
+                          //     padding: EdgeInsets.all(7),
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(10),
+                          //       color: Color(0xffdcdcdc),
+                          //     ),
+                          //     child: Column(
+                          //       children: [
+                          //         // --------------------------- 【展開時】学生ポイントの注意書き -----------------------------------
+                          //         miniInfo(
+                          //             passText: '次のポイントが計算可能です：',
+                          //             customIcon: Icons.check),
+                          //         miniInfo(
+                          //             passText: '・LINE Pay還元(最大+9.5%)',
+                          //             needsIcon: false,
+                          //             doukaColor: Color(0xffdcdcdc)),
+                          //         miniInfo(
+                          //             passText: '・対象サブスク還元(最大+9.5%)',
+                          //             needsIcon: false,
+                          //             doukaColor: Color(0xffdcdcdc)),
+                          //         miniInfo(
+                          //             passText: '・携帯料金還元(最大+1.5%)',
+                          //             needsIcon: false,
+                          //             doukaColor: Color(0xffdcdcdc)),
+                          //         miniInfo(
+                          //             passText: '次のポイントは計算できません：',
+                          //             customIcon: Icons.block_outlined),
+                          //         miniInfo(
+                          //             passText: '・分割払い手数料全額ポイント還元',
+                          //             needsIcon: false,
+                          //             doukaColor: Color(0xffdcdcdc)),
+                          //         // ----------------------------------------------------------------------------------------------
+                          //         SizedBox(height: 10),
+                          //         titleTextComp(
+                          //             resvIcon: Icons.event_available_outlined,
+                          //             resvText: '卒業予定年を入力',
+                          //             resvTextSize: 16),
+                          //         miniInfo(
+                          //             passText:
+                          //                 '学生ポイントは、卒業予定年の12月末日分までのため、卒業予定の年部分のみを入力'),
+                          //         miniInfo(
+                          //             passText:
+                          //                 '例：2020年3月に卒業式を行い卒業する場合は「2020年」を選択',
+                          //             customIcon:
+                          //                 Icons.tips_and_updates_outlined),
+                          //         // --------------------------- 引き落とし口座選択フィールド -----------------------------------
+                          //         Container(
+                          //           margin: EdgeInsets.all(5),
+                          //           child: OutlinedButton(
+                          //             style: OutlinedButton.styleFrom(
+                          //               shape: RoundedRectangleBorder(
+                          //                   borderRadius:
+                          //                       BorderRadius.circular(10)),
+                          //               fixedSize: Size(double.infinity, 70),
+                          //               backgroundColor: Color(0xfffefefe),
+                          //             ),
+                          //             child: ListTile(
+                          //               title: Text(
+                          //                   (_selectedGradYear != null)
+                          //                       ? '${_selectedGradYear}年'
+                          //                       : '未選択',
+                          //                   style: TextStyle(fontSize: 20)),
+                          //               trailing: Icon(Icons.edit),
+                          //             ),
+                          //             onPressed: () {
+                          //               showDialog(
+                          //                 context: context,
+                          //                 barrierDismissible: false,
+                          //                 builder: (BuildContext context) {
+                          //                   return AlertDialog(
+                          //                     title: Text('卒業予定年を選択：'),
+                          //                     backgroundColor:
+                          //                         Color(0xffffffff),
+                          //                     content: Container(
+                          //                       width: double.maxFinite,
+                          //                       height: 300,
+                          //                       decoration: BoxDecoration(
+                          //                         // color: Color(0xffdddddd),
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(7),
+                          //                       ),
+                          //                       child: Padding(
+                          //                         padding:
+                          //                             const EdgeInsets.all(8.0),
+                          //                         child: Scrollbar(
+                          //                           thumbVisibility: true,
+                          //                           thickness: 2,
+                          //                           child: ListView.builder(
+                          //                             shrinkWrap: true,
+                          //                             itemCount:
+                          //                                 _gradYearList.length,
+                          //                             itemBuilder:
+                          //                                 (context, index) {
+                          //                               return Container(
+                          //                                 margin:
+                          //                                     const EdgeInsets
+                          //                                         .only(
+                          //                                         top: 5,
+                          //                                         bottom: 5,
+                          //                                         right: 10),
+                          //                                 decoration:
+                          //                                     BoxDecoration(
+                          //                                   borderRadius:
+                          //                                       BorderRadius
+                          //                                           .circular(
+                          //                                               7),
+                          //                                   color: Color(
+                          //                                       0xffeeeeee),
+                          //                                 ),
+                          //                                 child: ListTile(
+                          //                                   title: Text(
+                          //                                       _gradYearList[
+                          //                                               index] +
+                          //                                           '年',
+                          //                                       style: TextStyle(
+                          //                                           fontSize:
+                          //                                               18)),
+                          //                                   onTap: () {
+                          //                                     setState(() {
+                          //                                       _selectedGradYear =
+                          //                                           _gradYearList[
+                          //                                               index];
+                          //                                     });
+                          //                                     Navigator.pop(
+                          //                                         context);
+                          //                                   },
+                          //                                 ),
+                          //                               );
+                          //                             },
+                          //                           ),
+                          //                         ),
+                          //                       ),
+                          //                     ),
+                          //                     actions: [
+                          //                       TextButton(
+                          //                         onPressed: () =>
+                          //                             Navigator.pop(context),
+                          //                         child: Text(
+                          //                           'キャンセル',
+                          //                           style: TextStyle(
+                          //                               color: Colors.red),
+                          //                         ),
+                          //                       ),
+                          //                     ],
+                          //                   );
+                          //                 },
+                          //               );
+                          //             },
+                          //           ),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //   )
                           : SizedBox.shrink(),
-                    ],
+                        ],
+                      ),
+                    ),
                   ),
                 ),
                 // =======================================================================================================
