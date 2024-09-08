@@ -1,3 +1,5 @@
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_double_type.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 import 'package:flutter/material.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/card_manage/card_manage_comp.dart';
@@ -43,7 +45,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
   int? _selectedPayRule; // ①で選択された締日/引き落とし日を保持する変数
   int? _selectedBank; // ②で選択された銀行を保持する変数
   int? _selectedVpupIndex; // ③で入力されたVPUPの有無を保持する変数
-  final TextEditingController _inputVpupReturnRate = TextEditingController(); // ③で入力された還元率[%]を保持する変数
+  String? _inputVpupReturnRate; // ③で入力された還元率[%]を保持する変数
   int? _selectedStudentPointIndex; // ④で入力された学生ポイントの有無を保持する変数
   int? _selectedGradYear;           // ④で入力された卒業予定年のインデックスを保持する変数
   // =========================================================================
@@ -109,6 +111,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                     child: SingleOptionTextButtonOneLine(
                       elementsList: _smcnlPayRule,
                       textFontSize: 17,
+                      resvNowSelectingIndex: _selectedPayRule,
                       argCallback: (int? recvIndex) {
                         setState(() {
                           _selectedPayRule = recvIndex;
@@ -123,6 +126,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 betweenSelectField(),
                 PayBankComp(
                   bankList: _bankList,
+                  resvNowSelectingBankIndex: _selectedBank,
                   argCallback: (int? recvIndex) {
                     setState(() {
                       _selectedBank = recvIndex;
@@ -149,6 +153,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                           compInputDirectSelectType(
                             elementsList: _isVpup,
                             customFontSize: 17,
+                            resvNowSelectingIndex: _selectedVpupIndex,
                             argCallback: (int? recvIndex) {
                               setState(() {
                                 _selectedVpupIndex = recvIndex;
@@ -172,32 +177,16 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                               // ----------------------------------------------------------------------------------------------
                             ],),
                             fieldInput: Container(
-                              margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                              height: 70,
-                              child: TextField(
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 22,
-                                ),
-                                controller: _inputVpupReturnRate,
-                                decoration: InputDecoration(
-                                  labelText: '',
-                                  contentPadding: EdgeInsets.all(30),
-                                  border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(10),
-                                  ),
-                                  suffixText: '%',
-                                  fillColor: Color(0xfffefefe),
-                                  filled: true,
-                                ),
-                                keyboardType:
-                                    TextInputType.numberWithOptions(
-                                        decimal: true),
-                                inputFormatters: [
-                                  DecimalTextInputFormatter(),
-                                  ZeroLimitFormatterForDouble(),
-                                ],
+                              // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                              // height: 70,
+                              child: compInputDoubleType(
+                                suffixText: '%',
+                                resvNowInputingDouble: (_inputVpupReturnRate != null) ? double.tryParse(_inputVpupReturnRate!) : null,
+                                argCallback: (String? recvString) {
+                                  setState(() {
+                                    _inputVpupReturnRate = recvString;
+                                  });
+                                },
                               ),
                             ),
                           )
@@ -227,6 +216,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                           compInputDirectSelectType(
                             elementsList: _isStudentPoint,
                             customFontSize: 17,
+                            resvNowSelectingIndex: _selectedStudentPointIndex,
                             argCallback: (int? recvIndex) {
                               setState(() {
                                 _selectedStudentPointIndex = recvIndex;
@@ -255,6 +245,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                               // // --------------------------- 卒業予定年 選択フィールド -----------------------------------
                               child: compInputDialogSelectType(
                                 elementsList: _gradYearList,
+                                resvNowSelectingIndex: _selectedGradYear,
                                 dialogText: '卒業予定年を選択：',
                                 suffixTanni: '年',
                                 argCallback: (int? recvIndex) {

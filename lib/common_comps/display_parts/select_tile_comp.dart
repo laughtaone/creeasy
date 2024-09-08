@@ -28,6 +28,7 @@ class _selectTileCompState extends State<selectTileComp> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
+      margin: EdgeInsets.only(top: (widget.titleComp==SizedBox.shrink() || widget.beginningGuides==null) ? 0 : 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: widget.customBackColor,
