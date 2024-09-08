@@ -3,6 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/formatter/zero_limit_formatter.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comp.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
+
 
 
 
@@ -23,6 +30,13 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
     'エポスカード'
   ];
 
+  // ================================ 変数処理 New ================================
+  int? selectedCardIndex; // ①で選択されたカードのインデックス番号を保持する変数
+  String? inputSpecialPayPrice = ''; // ②で入力された金額を保持する変数
+  DateTime? _specialPayDate; // ③で入力された日付を保持する変数
+  // =========================================================================
+
+
   // ================================ 変数処理 ================================
   String? _selectedItem; // ①で選択されたカードを保持する変数
 
@@ -31,6 +45,12 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
 
   DateTime? _selectedDate; // ③で入力された日付を保持する変数
   // =========================================================================
+  // // ================================ 変数処理 ================================
+  // int? selectedCardIndex; // ①で選択されたカードのインデックス番号を保持する変数
+  // String? inputPayPrice = ''; // ②で入力された金額を保持する変数
+  // DateTime? _payDate; // ③で入力された日付を保持する変数
+  // String? inputPlace = ''; // ④で入力された使用場所の文字列を保持する変数
+  // // =========================================================================
 
 
 
@@ -75,259 +95,72 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
           child: ListView(
             children: [
               // ========================================== ①該当カード選択 ==========================================
-              SizedBox(height: 5),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffededed),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleTextComp(resvIcon: Icons.credit_card_outlined, resvText:'該当カードを選択'),
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          fixedSize: Size(double.infinity, 70),
-                          backgroundColor: Color(0xfffefefe),
-                        ),
-                        child: ListTile(
-                          title: Text('${_selectedItem ?? '未選択'}',
-                              style: TextStyle(fontSize: 20)),
-                          trailing: Icon(Icons.edit),
-                        ),
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Text('支払いカードを選択：'),
-                                backgroundColor: Color(0xffffffff),
-                                content: Container(
-                                  width: double.maxFinite,
-                                  height: 300,
-                                  decoration: BoxDecoration(
-                                    // color: Color(0xffdddddd),
-                                    borderRadius: BorderRadius.circular(7),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Scrollbar(
-                                      thumbVisibility: true,
-                                      thickness: 2,
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: _items.length,
-                                        itemBuilder: (context, index) {
-                                          return Container(
-                                            margin: const EdgeInsets.only(
-                                                top: 5, bottom: 5, right: 10),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(7),
-                                              color: Color(0xffeeeeee),
-                                            ),
-                                            child: ListTile(
-                                              title: Text(_items[index],
-                                                  style:
-                                                      TextStyle(fontSize: 18)),
-                                              onTap: () {
-                                                setState(() {
-                                                  _selectedItem = _items[index];
-                                                });
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: Text(
-                                      'キャンセル',
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+              const SizedBox(height: 5),
+              selectTileComp(
+                titleComp: titleTextComp(resvIcon: Icons.credit_card_outlined, resvText: '該当カードを選択'),
+                fieldInput: Container(
+                  child: compInputDialogSelectType(
+                    elementsList: _items,
+                    dialogText: '該当カードを選択：',
+                    returnSelectIndex: selectedCardIndex,
+                    argCallback: (index) {
+                      setState(() {
+                        selectedCardIndex = index;
+                      });
+                    },
+                  ),
                 ),
               ),
               // ====================================================================================================
 
+
               // =============================================== ②臨時支払い金額 ==============================================
               betweenSelectField(),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffededed),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleTextComp(resvIcon: Icons.currency_yen_outlined, resvText:'臨時支払い金額を入力'),
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      height: 70,
-                      child: TextField(
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22,
-                        ),
-                        controller: _controller,
-                        decoration: InputDecoration(
-                          labelText: '',
-                          contentPadding: EdgeInsets.all(30),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          prefixText: '¥　',
-                          fillColor: Color(0xfffefefe),
-                          filled: true,
-                        ),
-                        keyboardType: TextInputType.number,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                          ZeroLimitFormatter(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+              selectTileComp(
+                titleComp: titleTextComp(
+                    resvIcon: Icons.currency_yen_outlined, resvText: '臨時支払い金額を入力'),
+                fieldInput: Container(
+                    child: compInputIntType(
+                  prefixText: '¥　',
+                  argCallback: (value) {
+                    // コールバックを渡す
+                    setState(() {
+                      inputSpecialPayPrice = value;
+                    });
+                  },
+                )),
               ),
               // ====================================================================================================
 
               // =============================================== ③臨時支払い日 ==============================================
               betweenSelectField(),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffededed),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleTextComp(resvIcon: Icons.event_outlined, resvText:'臨時支払い日を入力'),
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          fixedSize: Size(double.infinity, 70),
-                          backgroundColor: Color(0xfffefefe),
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            _selectedDate == null
-                                ? '未選択'
-                                : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          trailing: Icon(Icons.edit),
-                        ),
-                        onPressed: () async {
-                          DateTime? date = await showDatePicker(
-                            context: context,
-                            locale: const Locale("ja"),
-                            initialDate: _selectedDate ?? DateTime.now(),
-                            firstDate: DateTime(2023, 1, 1),
-                            lastDate: DateTime.now(),
-                          );
-                          if (date != null) {
-                            setState(() {
-                              _selectedDate = date;
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+              selectTileComp(
+                titleComp: titleTextComp(
+                    resvIcon: Icons.event_outlined, resvText: '臨時支払い日を入力'),
+                fieldInput: Container(
+                  child: compInputDateType(
+                    dialogText: '日付を選択してね：',
+                    resvNowInputingDate: _specialPayDate,
+                    argCallback: (date) {
+                      setState(() {
+                        _specialPayDate = date;
+                      });
+                    },
+                  ),
+                )
               ),
               // ====================================================================================================
 
 
 
-              SizedBox(height: 80),
-
               // =============================================== 保存ボタン ==============================================
-              Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
-                height: 57,
-                child: OutlinedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text(
-                              '本当に保存しますか？',
-                              style: TextStyle(
-                                fontSize: 20,
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text('キャンセル',
-                                    style: TextStyle(color: Colors.red)),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text('保存'),
-                              ),
-                            ],
-                          );
-                      });
-                    },
-                    style: OutlinedButton.styleFrom(
-                        backgroundColor: Color(0xfffff3f3),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        side: BorderSide(
-                          color: Color(0xffff7777),
-                          width: 1.7,
-                        )),
-                    child: Text(
-                      '保存して閉じる',
-                      style: TextStyle(color: Color(0xffff7777), fontSize: 16),
-                    )),
+              SaveButtonComp(
+                onSave: () {
+                  print('保存されました');
+                },
+                isCanOnpress: true,
               ),
               // =======================================================================================================
-
-              SizedBox(height: 12),
-              Text(
-                '保存せずに閉じるには右上の×ボタンを押してください',
-                style: TextStyle(
-                  fontSize: 11.5,
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 24),
 
             ],
           ),
