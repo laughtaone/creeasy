@@ -10,6 +10,8 @@ import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_url_jump.dart';
 import 'package:creeasy/COMMON_COMPS/formatter/input_double_formatter.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comp.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
+
 
 class AddCardPagePresetCard extends StatefulWidget {
   final String? selectedCardName;
@@ -38,13 +40,13 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
   // ================================ 変数処理 ================================
   int? _selectedBank; // ②で選択された銀行を保持する変数
-
+  int? _selectedVpupIndex; // ③で入力されたVPUPの有無を保持する変数
   // =========================================================================
 
   // ================================ 変数処理 ================================
   int? _selectedSmcnlPayRuleIndex; // ①で選択されたポイントアップの有無を保持する変数
   // String? _selectedBank; // ②で選択された銀行を保持する変数
-  int? _selectedVpupIndex; // ③で入力されたVPUPの有無を保持する変数
+  // int? _selectedVpupIndex; // ③で入力されたVPUPの有無を保持する変数
   final TextEditingController _inputVpupReturnRate =
       TextEditingController(); // ③で入力された還元率[%]を保持する変数
   int? _selectedStudentPointIndex; // ③で入力されたVPUPの有無を保持する変数
@@ -101,7 +103,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Padding(
               padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
-              child: ListView(children: [
+              child: ListView(children:[
                 // =============================================== ⓪ 選択されたカード名 ==============================================
                 SizedBox(height: 5),
                 selectedCardIntro(widget.selectedCardName),
@@ -118,18 +120,17 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                   guides: Column(
                     children: [
                       miniInfo(passText: '公式サイトの情報を基に作成しています'),
-                      miniInfo(
-                          passText:
-                              '設定できるはずの日付が用意されていない場合は、お手数ですが開発者までご連絡ください'),
+                      miniInfo(passText: '設定できるはずの日付が用意されていない場合は、お手数ですが開発者までご連絡ください'),
                     ],
                   ),
                   fieldInput: Container(
                     margin: EdgeInsets.all(10),
                     height: 140,
                     child: SingleOptionTextButtonOneLine(
-                        textList: _smcnlPayRule,
-                        onItemSelected: _onSelectSmcnlPayRuleIndex,
-                        textFontSize: 17),
+                      textList: _smcnlPayRule,
+                      onItemSelected: _onSelectSmcnlPayRuleIndex,
+                      textFontSize: 17
+                    ),
                   ),
                 ),
                 // =======================================================================================================
@@ -148,100 +149,26 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
                 // =============================================== ③Vポイントアップの選択 ==============================================
                 betweenSelectField(),
-                Container(
-                  padding:
-                      EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 9),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Color(0xffededed),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      titleTextComp(
-                          resvIcon: Icons.local_offer_outlined,
-                          resvText: 'Vポイントアッププログラムの還元率',
-                          resvTextSize: 16),
-                      SizedBox(height: 3),
-                      miniInfoEndUrlJump(
-                          passText: 'Vポイントアッププログラムの詳細は',
-                          passUrl:
-                              'https://www.smbc-card.com/mem/wp/vpoint_up_program/index.jsp'),
-                      miniInfo(passText: 'ポイント還元も詳細に管理することが可能'),
-                      miniInfo(
-                          passText: '利用金額のみを管理したい場合はこの設定は不要',
-                          customIcon: Icons.tips_and_updates_outlined),
-                      miniInfo(
-                          passText: 'ポイントも細かく管理したい方におすすめ',
-                          customIcon: Icons.tips_and_updates_outlined),
-                      // --------------------------- VPUP還元率を設定するかどうかの確認 -----------------------------------
-                      // Container(
-                      //   margin: EdgeInsets.all(10),
-                      //   height: 70,
-                      //   child: Container(
-                      //     child: SingleOptionTextButton(
-                      //       textList: _isVpup,
-                      //       onItemSelected: _onBoolVpupSelected,
-                      //       textFontSize: 17
-                      //     ),
-                      //   ),
-                      // ),
-                      // ----------------------------------------------------------------------------------------------
-                      (_selectedVpupIndex == 1)
-                          ? Container(
-                              padding: EdgeInsets.all(7),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color(0xffdcdcdc),
-                              ),
-                              child: Column(
-                                children: [
-                                  // --------------------------- 【展開時】VPUP還元率の注意書き -----------------------------------
-                                  miniInfo(
-                                      passText:
-                                          'Vpassアプリに表示されているVポイントアッププログラムの還元率をそのまま入力'),
-                                  miniInfo(
-                                      passText:
-                                          '（表示されている還元率は基本還元率0.5%を含みますが、無視してそのまま入力してください）',
-                                      customTextSize: 10,
-                                      needsIcon: false,
-                                      needsTBPadding: false),
-                                  miniInfo(passText: '0-20[%] の 整数または小数 が設定可能'),
-                                  // ----------------------------------------------------------------------------------------------
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                    height: 70,
-                                    child: TextField(
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 22,
-                                      ),
-                                      controller: _inputVpupReturnRate,
-                                      decoration: InputDecoration(
-                                        labelText: '',
-                                        contentPadding: EdgeInsets.all(30),
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        suffixText: '%',
-                                        fillColor: Color(0xfffefefe),
-                                        filled: true,
-                                      ),
-                                      keyboardType:
-                                          TextInputType.numberWithOptions(
-                                              decimal: true),
-                                      inputFormatters: [
-                                        DecimalTextInputFormatter(),
-                                        ZeroLimitFormatterForDouble(),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          : SizedBox.shrink(),
-                    ],
+                selectTileComp(
+                  titleComp: titleTextComp(resvIcon: Icons.local_offer_outlined, resvText: 'Vポイントアッププログラムの還元率', resvTextSize: 16),
+                  guides: Column(children: [
+                    miniInfoEndUrlJump(passText: 'Vポイントアッププログラムの詳細は', passUrl: 'https://www.smbc-card.com/mem/wp/vpoint_up_program/index.jsp'),
+                    miniInfo(passText: 'ポイント還元も詳細に管理することが可能'),
+                    miniInfo(passText: '利用金額のみを管理したい場合はこの設定は不要', customIcon: Icons.tips_and_updates_outlined),
+                    miniInfo(passText: 'ポイントも細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined),
+                  ],),
+                  fieldInput: Container(
+                    margin: EdgeInsets.all(10),
+                    height: 70,
+                    child: Container(
+                      child: compInputDirectSelectType(
+                        elementsList: _isVpup,
+                        customFontSize: 17,
+                        argCallback: (int? recvIndex) {
+                          _selectedVpupIndex = recvIndex;
+                        }
+                      ),
+                    ),
                   ),
                 ),
                 // =======================================================================================================
