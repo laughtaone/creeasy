@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-// 入力フィールド(直接/文字列)単体
+// 入力フィールド(直接/文字列形式)単体
+
 
 
 class compInputStringType extends StatefulWidget {
-  final TextEditingController stringInputted;
+  final int? resvNowInputingString;     // 入力フィールドの初期値(※任意)
+  final Function(String) argCallback; // コールバック関数
 
-  compInputStringType({required this.stringInputted});
+  compInputStringType(
+      {
+        this.resvNowInputingString,
+        required this.argCallback
+      });
 
   @override
   _compInputStringTypeState createState() => _compInputStringTypeState();
@@ -18,9 +24,15 @@ class _compInputStringTypeState extends State<compInputStringType> {
   @override
   void initState() {
     super.initState();
-    _stringInputted = widget.stringInputted; // 初期化処理
+    _stringInputted = TextEditingController(text: (widget.resvNowInputingString != null) ? (widget.resvNowInputingString).toString() : '');
+
+    // 入力が変更されたときにコールバックを呼び出すリスナーを追加
+    _stringInputted.addListener(() {
+      widget.argCallback(_stringInputted.text); // 入力されたテキストをコールバックで通知
+    });
   }
   // -------------------------------------------------------------------------
+
 
   @override
   Widget build(BuildContext context) {
