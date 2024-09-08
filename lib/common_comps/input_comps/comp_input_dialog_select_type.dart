@@ -8,12 +8,14 @@ class compInputDialogSelectType extends StatefulWidget {
   final int? resvNowSelectingIndex;
   final String dialogText;
   final int? returnSelectIndex;
+  final Function(int?) argCallback; // コールバック関数
 
   compInputDialogSelectType(
       {required this.elementsList,       // 選択する要素を格納したリスト（※必須）
       this.resvNowSelectingIndex,        // 現在選択中の要素のインデックス番号
       required this.dialogText,          // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
-      required this.returnSelectIndex    // 選択した要素のインデックスを格納する変数
+      required this.returnSelectIndex,   // 選択した要素のインデックスを格納する変数
+      required this.argCallback          // コールバック関数
       });
 
   @override
@@ -89,6 +91,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                                 setState(() {
                                   _newSelectIndex = index;
                                 });
+                                widget.argCallback(_newSelectIndex); // コールバックで選択された日付を渡す
                                 Navigator.pop(context);
                               },
                             ),

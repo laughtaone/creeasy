@@ -143,7 +143,7 @@ class _AddBankPageState extends State<AddBankPage> {
                           //   //   border: Border.all(color: Colors.blue),
                           //   //   borderRadius: BorderRadius.circular(10), //追加
                           //   // ),
-                          //   child: OptionTextButton(
+                          //   child: SingleOptionTextButton(
                           //     textList: _bankTypeList,
                           //     onItemSelected: _onItemSelected,
                           //   ),

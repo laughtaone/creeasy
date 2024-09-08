@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-// class OptionTextButton extends StatefulWidget {
+// class SingleOptionTextButton extends StatefulWidget {
 //   final List textList;
 //   final Function(int?) onItemSelected;
 //   final double textFontSize;
 
-//   OptionTextButton({
+//   SingleOptionTextButton({
 //     required this.textList,
 //     required this.onItemSelected,
 //     this.textFontSize = 15,        // textFonSizeだけデフォ値を設定
 //   });
 
 //   @override
-//   _OptionTextButtonState createState() => _OptionTextButtonState();
+//   _SingleOptionTextButtonState createState() => _SingleOptionTextButtonState();
 // }
 
-// class _OptionTextButtonState extends State<OptionTextButton> {
+// class _SingleOptionTextButtonState extends State<SingleOptionTextButton> {
 //   int? selectedIndex; // 選択中の要素のインデックス
 
 //   @override

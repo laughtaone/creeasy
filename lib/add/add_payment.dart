@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:creeasy/add/add_payment_option_button/add_payment_option_button.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
-import 'package:creeasy/COMMON_COMPS/formatter/zero_limit_formatter.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/now_return_rate.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new_format.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/sotbn_from_list.dart';
 
 class AddPaymentPage extends StatefulWidget {
   @override
@@ -24,21 +31,42 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
     'LINEクレカ(P+)',
     'エポスカード'
   ];
+  List<SotbProperties> sampleSotbsList = [
+    SotbProperties(
+      upperText: 'ポイント\n進呈',
+      trueLowerText: '対象',
+      falseLowerText: '対象外',
+      initialBoolLowerText: true,
+      listIndexNum: 0,
+    ),
+    SotbProperties(
+      upperText: 'ポイント\n進呈',
+      trueLowerText: '対象',
+      falseLowerText: '対象外',
+      initialBoolLowerText: false,
+      listIndexNum: 1,
+    ),
+    SotbProperties(
+      upperText: 'LINE Pay\n経由',
+      trueLowerText: '対象',
+      falseLowerText: '対象外',
+      initialBoolLowerText: false,
+      listIndexNum: 2,
+    ),
+    SotbProperties(
+      upperText: '対象\nサブスク',
+      trueLowerText: '対象',
+      falseLowerText: '対象外',
+      initialBoolLowerText: false,
+      listIndexNum: 3,
+    ),
+  ];
 
   // ================================ 変数処理 ================================
   int? selectedCardIndex; // ①で選択されたカードのインデックス番号を保持する変数
-  String? inputPayPrice = '';
-
-  final TextEditingController _controller =
-      TextEditingController(); // ②で入力された金額を保持する変数
-
-  DateTime? _selectedDate; // ③で入力された日付を保持する変数
-
-  final TextEditingController _storeName =
-      TextEditingController(); // ④で入力された使用場所を保持する変数
-
-  var _isPointTaisho =
-      true; // ⑤でポイント進呈対象外かどうかの真偽値を保持する変数（true: 進呈対象・false: 進呈対象外）
+  String? inputPayPrice = ''; // ②で入力された金額を保持する変数
+  DateTime? _payDate; // ③で入力された日付を保持する変数
+  String? inputPlace = ''; // ④で入力された使用場所の文字列を保持する変数
   // =========================================================================
 
   @override
@@ -79,7 +107,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
           child: ListView(
             children: [
               // ========================================== ①支払いカード選択 ==========================================
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               selectTileComp(
                 titleComp: titleTextComp(
                     resvIcon: Icons.credit_card_outlined,
@@ -89,6 +117,11 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                     elementsList: _items,
                     dialogText: '支払いカードを選択：',
                     returnSelectIndex: selectedCardIndex,
+                    argCallback: (index) {
+                      setState(() {
+                        selectedCardIndex = index;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -105,7 +138,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   argCallback: (value) {
                     // コールバックを渡す
                     setState(() {
-                      inputPayPrice = value; // コールバックで受け取った値を保持
+                      inputPayPrice = value;
                     });
                   },
                 )),
@@ -114,258 +147,70 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
 
               // =============================================== ③日付 ==============================================
               betweenSelectField(),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffededed),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleTextComp(
-                        resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          fixedSize: Size(double.infinity, 70),
-                          backgroundColor: Color(0xfffefefe),
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            _selectedDate == null
-                                ? '未選択'
-                                : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          trailing: Icon(Icons.edit),
-                        ),
-                        onPressed: () async {
-                          DateTime? date = await showDatePicker(
-                            context: context,
-                            locale: const Locale("ja"),
-                            initialDate: _selectedDate ?? DateTime.now(),
-                            firstDate: DateTime(2023, 1, 1),
-                            lastDate: DateTime.now(),
-                          );
-                          if (date != null) {
-                            setState(() {
-                              _selectedDate = date;
-                            });
-                          }
-                        },
-                      ),
+              selectTileComp(
+                  titleComp: titleTextComp(
+                      resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
+                  fieldInput: Container(
+                    child: compInputDateType(
+                      dialogText: '日付を選択してね：',
+                      resvNowInputingDate: _payDate,
+                      argCallback: (date) {
+                        setState(() {
+                          _payDate = date;
+                        });
+                      },
                     ),
-                  ],
-                ),
-              ),
+                  )),
               // ====================================================================================================
 
               // =============================================== ④使用場所 ==============================================
               betweenSelectField(),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffededed),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleTextComp(
-                        resvIcon: Icons.location_on_outlined,
-                        resvText: '使用場所を入力'),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      height: 70,
-                      child: TextField(
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 22,
-                        ),
-                        controller: _storeName,
-                        decoration: InputDecoration(
-                          labelText: '',
-                          contentPadding: EdgeInsets.all(30),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          fillColor: Color(0xfffefefe),
-                          filled: true,
-                        ),
-                        keyboardType: TextInputType.text,
-                        // inputFormatters: [
-                        //   FilteringTextInputFormatter.digitsOnly,
-                        // ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              selectTileComp(
+                  titleComp: titleTextComp(
+                      resvIcon: Icons.location_on_outlined,
+                      resvText: '使用場所を入力'),
+                  fieldInput: Container(child: compInputStringType(
+                    argCallback: (value) {
+                      // コールバックを渡す
+                      setState(() {
+                        inputPlace = value; // コールバックで受け取った値を保持
+                      });
+                    },
+                  ))),
               // =======================================================================================================
 
               // =============================================== ⑤オプション ==============================================
               betweenSelectField(),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffededed),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleTextComp(
-                        resvIcon: Icons.auto_fix_high_outlined,
-                        resvText: 'オプション'),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          // ========================= 「還元率?%」の長方形  =========================
-                          Container(
-                            height: 50,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14),
-                              color: Color(0xffdddddd),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('現在の還元率：',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 17)),
-                                Text('1%',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 22))
-                              ],
-                            ),
-                          ),
-                          // ====================================================================
-
-                          SizedBox(height: 12),
-
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.info_outline,
-                                size: 18,
-                              ),
-                              SizedBox(width: 3),
-                              Text(
-                                '支払いにより還元率が異なるため詳細を入力',
-                                style: TextStyle(fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
-
-                          SizedBox(height: 12),
-
-                          // =========================== 選択フィールド  ===========================
-                          Row(
-                            children: [
-                              Expanded(
-                                child: OptionTextButton(
-                                  upperText: 'ポイント\n進呈',
-                                  trueLowerText: '対象',
-                                  falseLowerText: '対象外',
-                                  initialBoolLowerText: _isPointTaisho,
-                                ),
-                              ),
-                              Expanded(
-                                child: OptionTextButton(
-                                  upperText: 'VPU\nプログラム',
-                                  trueLowerText: '対象',
-                                  falseLowerText: '対象外',
-                                  initialBoolLowerText: false,
-                                ),
-                              ),
-                              Expanded(
-                                child: OptionTextButton(
-                                  upperText: 'LINE Pay\n経由',
-                                  trueLowerText: '対象',
-                                  falseLowerText: '対象外',
-                                  initialBoolLowerText: false,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+              selectTileComp(
+                titleComp: titleTextComp(
+                    resvIcon: Icons.auto_fix_high_outlined, resvText: 'オプション'),
+                guides: Column(children: [
+                  miniInfo(
+                      passText: '支払いにより還元率が異なるため詳細を入力', placementCenter: true)
+                ]),
+                fieldInput: Container(
+                  child: sotbnFromList(
+                    recvSotbsList: sampleSotbsList,
+                    argCallback: (List<SotbProperties> argList) {
+                      setState(() {
+                        sampleSotbsList = argList;
+                      });
+                    }
+                  )
                 ),
               ),
               // =======================================================================================================
 
-              SizedBox(height: 80),
+              SizedBox(height: 70),
 
               // =============================================== 保存ボタン ==============================================
-              Container(
-                margin: EdgeInsets.only(left: 10, right: 10),
-                height: 57,
-                child: OutlinedButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text(
-                                '本当に保存しますか？',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text('キャンセル',
-                                      style: TextStyle(color: Colors.red)),
-                                ),
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text('保存'),
-                                ),
-                              ],
-                            );
-                          });
-                    },
-                    style: OutlinedButton.styleFrom(
-                        backgroundColor: Color(0xfffff3f3),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        side: BorderSide(
-                          color: Color(0xffff7777),
-                          width: 1.7,
-                        )),
-                    child: Text(
-                      '保存して閉じる',
-                      style: TextStyle(color: Color(0xffff7777), fontSize: 16),
-                    )),
+              SaveButtonComp(
+                onSave: () {
+                  print('保存されました');
+                },
+                isCanOnpress: true,
               ),
               // =======================================================================================================
-
-              SizedBox(height: 12),
-              Text(
-                '保存せずに閉じるには右上の×ボタンを押してください',
-                style: TextStyle(
-                  fontSize: 11.5,
-                  color: Colors.black38,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 24),
             ],
           ),
         ),

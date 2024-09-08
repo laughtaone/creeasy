@@ -8,7 +8,7 @@ import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_column_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_url_jump.dart';
 import 'package:creeasy/COMMON_COMPS/formatter/input_double_formatter.dart';
-import 'package:creeasy/COMMON_COMPS/single_button/save_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
 
 
 class AddCardPagePresetCard extends StatefulWidget {
@@ -130,7 +130,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                         margin: EdgeInsets.all(10),
                         height: 140,
                         child: Container(
-                          child: OptionTextButtonOneLine(
+                          child: SingleOptionTextButtonOneLine(
                               textList: _smcnlPayRule,
                               onItemSelected: _onSelectSmcnlPayRuleIndex,
                               textFontSize: 17),
@@ -317,7 +317,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                       //   margin: EdgeInsets.all(10),
                       //   height: 70,
                       //   child: Container(
-                      //     child: OptionTextButton(
+                      //     child: SingleOptionTextButton(
                       //       textList: _isVpup,
                       //       onItemSelected: _onBoolVpupSelected,
                       //       textFontSize: 17
@@ -415,7 +415,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                       //   margin: EdgeInsets.all(10),
                       //   height: 70,
                       //   child: Container(
-                      //     child: OptionTextButton(
+                      //     child: SingleOptionTextButton(
                       //       textList: _isStudentPoint,
                       //       onItemSelected: _onBoolStudentPointSelected,
                       //       textFontSize: 17
