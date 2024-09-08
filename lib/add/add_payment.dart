@@ -8,6 +8,7 @@ import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
 import 'package:creeasy/COMMON_COMPS/single_button/save_button_comp.dart';
 
 
@@ -32,7 +33,9 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
   // ================================ 変数処理 ================================
   int? selectedCardIndex;         // ①で選択されたカードのインデックス番号を保持する変数
   String? inputPayPrice = '';     // ②で入力された金額を保持する変数
-  String? inputPlace = '';        // ③で入力された使用場所の文字列を保持する変数
+  String? inputPlace = '';        // ④で入力された使用場所の文字列を保持する変数
+  DateTime? _payDate; // ③で入力された日付を保持する変数
+
 
 
 
@@ -82,7 +85,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
           child: ListView(
             children: [
               // ========================================== ①支払いカード選択 ==========================================
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               selectTileComp(
                 titleComp: titleTextComp(
                     resvIcon: Icons.credit_card_outlined,
@@ -108,7 +111,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                   argCallback: (value) {
                     // コールバックを渡す
                     setState(() {
-                      inputPayPrice = value; // コールバックで受け取った値を保持
+                      inputPayPrice = value;
                     });
                   },
                 )),
@@ -117,54 +120,19 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
 
               // =============================================== ③日付 ==============================================
               betweenSelectField(),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffededed),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleTextComp(
-                        resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
-                    Container(
-                      margin: EdgeInsets.all(5),
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          fixedSize: Size(double.infinity, 70),
-                          backgroundColor: Color(0xfffefefe),
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            _selectedDate == null
-                                ? '未選択'
-                                : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          trailing: Icon(Icons.edit),
-                        ),
-                        onPressed: () async {
-                          DateTime? date = await showDatePicker(
-                            context: context,
-                            locale: const Locale("ja"),
-                            initialDate: _selectedDate ?? DateTime.now(),
-                            firstDate: DateTime(2023, 1, 1),
-                            lastDate: DateTime.now(),
-                          );
-                          if (date != null) {
-                            setState(() {
-                              _selectedDate = date;
-                            });
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+              selectTileComp(
+                titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
+                fieldInput: Container(
+                  child: compInputDateType(
+                    dialogText: '日付を選択してね：',
+                    resvNowInputingDate: _selectedDate,
+                    argCallback: (date) {
+                      setState(() {
+                        _selectedDate = date;
+                      });
+                    },
+                  ),
+                )
               ),
               // ====================================================================================================
 
