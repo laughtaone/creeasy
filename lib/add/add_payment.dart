@@ -175,57 +175,40 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
 
               // =============================================== ⑤オプション ==============================================
               betweenSelectField(),
-              Container(
-                padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xffededed),
+              selectTileComp(
+                titleComp: titleTextComp(resvIcon: Icons.auto_fix_high_outlined, resvText: 'オプション'),
+                guides: Column(children: [miniInfo(passText: '支払いにより還元率が異なるため詳細を入力', placementCenter: true)]),
+                fieldInput: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  child: GridView.builder(
+                    physics: NeverScrollableScrollPhysics(), // スクロールを無効にする
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3, // 1行に表示する要素数
+                      childAspectRatio: 1.5, // 各要素のアスペクト比を調整 (幅/高さ)
+                    ),
+                    itemCount: sampleSotbsList.length,
+                    itemBuilder: (context, index) {
+                      return SingleOptionTextButtonNew(
+                        upperText: sampleSotbsList[index].upperText,
+                        trueLowerText: sampleSotbsList[index].trueLowerText,
+                        falseLowerText: sampleSotbsList[index].falseLowerText,
+                        initialBoolLowerText: sampleSotbsList[index].initialBoolLowerText,
+                        listIndexNum: sampleSotbsList[index].listIndexNum,
+                        argCallback: (int index) {
+                          final bool nowBool = sampleSotbsList[index].initialBoolLowerText;
+                          setState(() {
+                            sampleSotbsList[index] = sampleSotbsList[index].copyWith(
+                              initialBoolLowerText: !nowBool,
+                            );
+                          });
+                        },
+                      );
+                    },
+                  ),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    titleTextComp(
-                        resvIcon: Icons.auto_fix_high_outlined,
-                        resvText: 'オプション'),
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          // ------------------ 「還元率?%」の長方形  ------------------
-                          nowReturnRate(1.0),
-                          // --------------------------------------------------------
+              ),
 
-                          SizedBox(height: 12),
-
-                          miniInfo(passText: '支払いにより還元率が異なるため詳細を入力', placementCenter: true),
-
-                          SizedBox(height: 12),
-
-                          Container(
-                              height: 200, // 適切な高さを設定
-                              child: ListView.builder(
-                                itemCount: sampleSotbsList.length,
-                                itemBuilder: (context, index) {
-                                  return Expanded(
-                                    child: SingleOptionTextButtonNew(
-                                      upperText: sampleSotbsList[index].upperText,
-                                      trueLowerText: sampleSotbsList[index].trueLowerText,
-                                      falseLowerText: sampleSotbsList[index].falseLowerText,
-                                      initialBoolLowerText: sampleSotbsList[index].initialBoolLowerText,
-                                      listIndexNum: sampleSotbsList[index].listIndexNum,
-                                      argCallback: (int index) {
-                                        final bool nowBool = sampleSotbsList[index].initialBoolLowerText;
-                                        setState(() {
-                                          sampleSotbsList[index] = sampleSotbsList[index].copyWith(
-                                            initialBoolLowerText: !nowBool
-                                          );
-                                        });
-                                      }
-                                    ),
-                                  );
-                                }
-                              )
-                          ),
 
                           // =========================== 選択フィールド  ===========================
                           // Row(
@@ -256,12 +239,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                           //     ),
                           //   ],
                           // ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
               // =======================================================================================================
 
               SizedBox(height: 70),
