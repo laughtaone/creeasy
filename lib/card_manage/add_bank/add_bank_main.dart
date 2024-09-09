@@ -104,6 +104,7 @@ class _AddBankPageState extends State<AddBankPage> {
                       height: 140,
                       child: SingleOptionTextButtonOneLine(
                         elementsList: _bankTypeList,
+                        customFontSize: 18,
                         resvNowSelectingIndex: _selectedBankType,
                         argCallback: (int? recvIndex) {
                           setState(() {

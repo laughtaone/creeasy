@@ -159,13 +159,9 @@ class _CardManagePageState extends State<CardManagePage>
                       ],
                     ),
                   ),
-                  CardManageBankTile(bank_name: 'みんなの銀行 - 専用ボックス'),
-                  CardManageBankTile(
-                    bank_name: '三井住友銀行',
-                  ),
-                  CardManageBankTile(
-                    bank_name: '三菱UFJ銀行',
-                  ),
+                  CardManageBankTile(recvBankName: 'みんなの銀行 - 専用ボックスああああああああああああああああああああああああああああああああ', recvBankType: 1),
+                  CardManageBankTile(recvBankName: '三井住友銀行'),
+                  CardManageBankTile(recvBankName: '三菱UFJ銀行'),
                 ],
               ),
             )

@@ -5,6 +5,9 @@ import 'package:creeasy/COMMON_COMPS/buttons/topright_close_button.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/caution_comp.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
+import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
+
 
 class ChangeCardPage extends StatefulWidget {
   final String? selectedCardName;
@@ -52,37 +55,37 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
               child: ListView(
                 children: [
                   // ========================================================== ⓪ 選択されたカード名 ==========================================================
-                  SizedBox(height: 5),
                   selectedCardIntro(widget.selectedCardName),
                   // =======================================================================================================================================
 
                   betweenIcon(Icons.arrow_downward_outlined),
 
                   // ============================================================= ⓪ 注意書き =============================================================
-                  cautionComp(Column(
-                    children: [
-                      miniInfo(
-                          customIcon: Icons.error_outline_outlined,
-                          passText: '表示されている項目のみが変更可能です',
-                          customTextSize: 14),
-                      miniInfo(passText: '以下の項目は変更できません：', customTextSize: 14),
-                      miniInfo(
-                          needsIcon: false,
-                          doukaColor: Color(0xffffffe7),
-                          passText: '・締日/引き落とし日'),
-                      miniInfo(
-                          needsIcon: false,
-                          doukaColor: Color(0xffffffe7),
-                          passText: '・基本還元率'),
-                    ],
-                  )),
+                  cautionComp(Column(children: [
+                    miniInfo(
+                      customIcon: Icons.error_outline_outlined,
+                      passText: '表示されている項目のみが変更可能です',
+                      customTextSize: 14
+                    ),
+                    miniInfo(passText: '以下の項目は変更できません：', customTextSize: 14),
+                    miniInfo(
+                      needsIcon: false,
+                      doukaColor: Color(0xffffffe7),
+                      passText: '・締日/引き落とし日'
+                    ),
+                    miniInfo(
+                      needsIcon: false,
+                      doukaColor: Color(0xffffffe7),
+                      passText: '・基本還元率'
+                    ),
+                  ],)),
                   // =======================================================================================================================================
 
-                  SizedBox(height: 12),
+                  betweenSelectField(customHeight: 15),
                   titleTextComp(resvText: 'カード情報を編集', resvTextSize: 20),
-                  SizedBox(height: 12),
 
                   // =========================================================== ① 引き落とし口座を選択 ===========================================================
+                  betweenSelectField(customHeight: 10),
                   PayBankComp(
                     resvNowSelectingBankIndex: 0,
                     bankList: _bankList,
@@ -93,6 +96,18 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
                     },
                   ),
                   // =======================================================================================================================================
+
+
+
+
+                  // =============================================== 保存ボタン ==============================================
+                  SaveButtonComp(
+                    argCallback: () {
+                      print('保存されました');
+                    },
+                    isCanOnpress: true,
+                  ),
+                  // =======================================================================================================
                 ],
               ),
             )));
