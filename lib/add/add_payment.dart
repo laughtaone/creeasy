@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
-import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
