@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 
 class compInputStringType extends StatefulWidget {
-  final int? resvNowInputingString;     // 入力フィールドの初期値(※任意)
+  final String? resvNowInputingString;     // 入力フィールドの初期値(※任意)
   final Function(String) argCallback; // コールバック関数
 
   compInputStringType(

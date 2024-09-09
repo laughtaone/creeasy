@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
 
 
 // 保存ボタン
 class SaveButtonComp extends StatefulWidget {
-  final Function onSave;
+  final Function argCallback;
   final bool isCanOnpress;
+  final int? messageType;
 
   SaveButtonComp(
-      {required this.onSave,
-      this.isCanOnpress = false // 押せるかどうかの真偽値(デフォでfalse=押せない)
+      {required this.argCallback,
+      this.isCanOnpress = false, // 押せるかどうかの真偽値(デフォでfalse=押せない)
+      this.messageType = 0
       });
 
   @override
@@ -19,7 +22,7 @@ class _SaveButtonCompState extends State<SaveButtonComp> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 80, bottom: 30),
+      padding: const EdgeInsets.only(top: 50, bottom: 30),
       child: Column(
         children: [
           Container(
@@ -47,7 +50,7 @@ class _SaveButtonCompState extends State<SaveButtonComp> {
                                   ),
                                   TextButton(
                                     onPressed: () {
-                                      widget.onSave();
+                                      widget.argCallback();
                                       Navigator.pop(context);
                                     },
                                     child: Text('保存'),
@@ -80,17 +83,9 @@ class _SaveButtonCompState extends State<SaveButtonComp> {
                       fontSize: 16),
                 )),
           ),
-          SizedBox(height: 12),
-          Text(
-            '保存せずに閉じるには\n右上の×ボタン or 左上の<ボタン を押してください',
-            style: TextStyle(
-              fontSize: 11.5,
-              color: Colors.black38,
-              fontWeight: FontWeight.w500,
-            ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 24),
+          (widget.messageType!=-1)
+          ? noSaveCloseComp(messageType: widget.messageType)
+          : SizedBox.shrink(),
         ],
       ),
     );

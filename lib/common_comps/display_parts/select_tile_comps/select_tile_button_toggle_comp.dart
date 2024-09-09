@@ -75,21 +75,25 @@ class _selectTileButtonToggleCompState extends State<selectTileButtonToggleComp>
                   setState(() {
                     _newMainSelectbuttonIndex = recvIndex;
                   });
-                  // あとでコールバック関数記述
                   widget.argMainCallback(_newMainSelectbuttonIndex);
                 }
               ),
               (_newMainSelectbuttonIndex == 1)
-              ? selectTileComp(
-                customBackColor: Color(0xffdcdcdc),
-                beginningGuides: widget.toggleBeginningGuides,
-                titleComp: widget.toggleTitleComp ?? SizedBox.shrink(),
-                guides: widget.toggleGuides,
-                fieldInput: Container(
-                  // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                  // height: 70,
-                  child: widget.toggleFieldInput
-                ),
+              ? Column(
+                children: [
+                  SizedBox(height: 7),
+                  selectTileComp(
+                    customBackColor: Color(0xffdcdcdc),
+                    beginningGuides: widget.toggleBeginningGuides,
+                    titleComp: widget.toggleTitleComp ?? SizedBox.shrink(),
+                    guides: widget.toggleGuides,
+                    fieldInput: Container(
+                      // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                      // height: 70,
+                      child: widget.toggleFieldInput
+                    ),
+                  ),
+                ],
               )
               : SizedBox.shrink(),
             ],

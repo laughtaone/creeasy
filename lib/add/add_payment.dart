@@ -9,7 +9,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.d
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
-import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/now_return_rate.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new_format.dart';
@@ -118,6 +118,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                 fieldInput: Container(
                   child: compInputDialogSelectType(
                     elementsList: _items,
+                    resvNowSelectingIndex: selectedCardIndex,
                     dialogText: '支払いカードを選択：',
                     argCallback: (index) {
                       setState(() {
@@ -150,27 +151,26 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // =============================================== ③日付 ==============================================
               betweenSelectField(),
               selectTileComp(
-                  titleComp: titleTextComp(
-                      resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
-                  fieldInput: Container(
-                    child: compInputDateType(
-                      dialogText: '日付を選択してね：',
-                      resvNowInputingDate: _payDate,
-                      argCallback: (date) {
-                        setState(() {
-                          _payDate = date;
-                        });
-                      },
-                    ),
-                  )),
+                titleComp: titleTextComp(
+                    resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
+                fieldInput: Container(
+                  child: compInputDateType(
+                    dialogText: '使用日を選択：',
+                    resvNowInputingDate: _payDate,
+                    argCallback: (date) {
+                      setState(() {
+                        _payDate = date;
+                      });
+                    },
+                  ),
+                )
+              ),
               // ====================================================================================================
 
               // =============================================== ④使用場所 ==============================================
               betweenSelectField(),
               selectTileComp(
-                  titleComp: titleTextComp(
-                      resvIcon: Icons.location_on_outlined,
-                      resvText: '使用場所を入力'),
+                  titleComp: titleTextComp(resvIcon: Icons.location_on_outlined, resvText: '使用場所を入力'),
                   fieldInput: Container(child: compInputStringType(
                     argCallback: (value) {
                       // コールバックを渡す
@@ -207,7 +207,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
 
               // =============================================== 保存ボタン ==============================================
               SaveButtonComp(
-                onSave: () {
+                argCallback: () {
                   print('保存されました');
                 },
                 isCanOnpress: true,
