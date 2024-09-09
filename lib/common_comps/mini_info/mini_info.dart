@@ -9,17 +9,32 @@ Container miniInfo(
     bool needsTBPadding = true, // topとbottomに余白が必要か
     double customTextSize = 13, // テキストサイズ(デフォは13)
     Color customColor = Colors.black,
-    bool placementCenter = false  // 中央寄せかどうか(デフォではfalse、すなわち中央寄せではない)
+    String? customPlacement,  // 中央寄せかどうか(デフォではfalse、すなわち中央寄せではない)
+    double customTopPadding = 2,
+    double customBottomPadding = 2,
+    bool needsLRPadding = true,
+    double customIconTextPadding = 4
   }) {
   return Container(
+    constraints: BoxConstraints(
+      minWidth: 0,
+      minHeight: 0,
+    ),
     padding: EdgeInsets.only(
-      left: 4,
-      top: (needsTBPadding) ? 2 : 0,
-      right: 7,
-      bottom: (needsTBPadding) ? 2 : 0,
+      left: (needsLRPadding) ?4 :0,
+      top: (needsTBPadding) ? customTopPadding : 0,
+      right: (needsLRPadding) ?4 :7,
+      bottom: (needsTBPadding) ? customBottomPadding : 0,
     ),
     child: Row(
-      mainAxisAlignment: (!placementCenter) ? MainAxisAlignment.start : MainAxisAlignment.center,
+      mainAxisAlignment:
+        (customPlacement==null)
+          ? MainAxisAlignment.start
+          : ((customPlacement=='center')
+            ? MainAxisAlignment.center
+            : ((customPlacement=='end')
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start)),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -30,7 +45,7 @@ Container miniInfo(
             color: (needsIcon) ? customColor : doukaColor,
           ),
         ),
-        SizedBox(width: 4),
+        SizedBox(width: customIconTextPadding),
         Flexible(
             child: Text(passText,
                 style: TextStyle(
