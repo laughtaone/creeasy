@@ -158,7 +158,8 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                       passText:'（表示されている還元率は基本還元率0.5%を含みますが、無視してそのまま入力してください）',
                       customTextSize: 10,
                       needsIcon: false,
-                      needsTBPadding: false
+                      needsTBPadding: false,
+                      doukaColor: Color(0xffdcdcdc)
                     ),
                     miniInfo(passText: '0-20[%] の 整数または小数 が設定可能'),
                     // ----------------------------------------------------------------------------------------------

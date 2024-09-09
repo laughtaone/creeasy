@@ -22,18 +22,21 @@ class CardManageBankTile extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ChangeBankPage(),
+              builder: (context) => ChangeBankPage(
+                selectedBankName: bank_name,
+              ),
               fullscreenDialog: true,
             ),
           );
         },
         style: OutlinedButton.styleFrom(
-            backgroundColor: Color(0xffeeeeee),
-            side: BorderSide(color: Colors.black, width: 1),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
-            ),
-            fixedSize: Size.fromHeight(80)),
+          backgroundColor: Color(0xffeeeeee),
+          side: BorderSide(color: Colors.black, width: 1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
+          fixedSize: Size.fromHeight(80)
+        ),
         child: Align(
           alignment: Alignment.centerLeft,
           child: Column(

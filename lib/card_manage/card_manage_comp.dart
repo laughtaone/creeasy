@@ -6,8 +6,10 @@ import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_page_jump.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 
 // ================================================================= 選択されたカード名 ========================================================================
-selectTileComp selectedCardIntro(String? cardName) {
-  return selectTileComp(
+Container selectedCardIntro(String? cardName) {
+  return Container(
+    margin: EdgeInsets.only(top: 5),
+    child: selectTileComp(
       titleComp: titleTextComp(
           resvIcon: Icons.credit_card_outlined, resvText: '選択されたカード名'),
       fieldInput: Container(
@@ -15,7 +17,9 @@ selectTileComp selectedCardIntro(String? cardName) {
           cardName ?? '未選択',
           style: TextStyle(fontSize: 20),
         ),
-      ));
+      )
+    ),
+  );
 }
 
 // ==========================================================================================================================================================

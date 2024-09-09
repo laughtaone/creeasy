@@ -3,8 +3,12 @@ import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/topright_close_button.dart';
 
 class ChangeBankPage extends StatefulWidget {
-  // final String? selectedCardName;
+  final String? selectedBankName;
   // const ChangeBankPage({Key? key, required this.selectedCardName}): super(key: key);
+
+  ChangeBankPage({
+    required this.selectedBankName
+  });
 
   @override
   _ChangeBankPageState createState() => _ChangeBankPageState();
@@ -49,16 +53,14 @@ class _ChangeBankPageState extends State<ChangeBankPage> {
                       color: Color(0xfff8f8f8),
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        titleTextComp(
-                            resvIcon: Icons.credit_card_outlined,
-                            resvText: '選択されたカード名'),
+                        titleTextComp(resvIcon: Icons.account_balance_outlined, resvText: '選択された銀行名'),
                         Container(
                           margin: EdgeInsets.only(top: 10, left: 10, right: 10),
                           height: 30,
                           child: Text(
-                            '未選択',
+                            widget.selectedBankName ?? '未選択',
                             style: TextStyle(fontSize: 20),
                           ),
                         ),

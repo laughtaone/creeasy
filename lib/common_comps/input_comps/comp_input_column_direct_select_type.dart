@@ -67,21 +67,28 @@ class _SingleOptionTextButtonOneLineState extends State<SingleOptionTextButtonOn
                   widget.argCallback(index);
                 },
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+                    SizedBox(width: 15),
                     Icon(
                       Icons.check,
                       color: (_newSelectIndex == index) ? Colors.black : Colors.white,
                     ),
-                    SizedBox(width: 6),
-                    Text(
-                      widget.elementsList[index],
-                      style: TextStyle(
-                        fontSize: widget.customFontSize,
-                        color: Color(0xff444444),
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [Text(
+                          widget.elementsList[index],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: widget.customFontSize,
+                            color: Color(0xff444444),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )],
                       ),
                     ),
+                    SizedBox(width: 10),
                   ],
                 ),
               ),
