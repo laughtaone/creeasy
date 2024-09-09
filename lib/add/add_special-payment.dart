@@ -8,7 +8,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.d
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
-import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 
 
 
@@ -84,6 +84,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
                 fieldInput: Container(
                   child: compInputDialogSelectType(
                     elementsList: _items,
+                    resvNowSelectingIndex: selectedCardIndex,
                     dialogText: '該当カードを選択：',
                     argCallback: (index) {
                       setState(() {
@@ -137,7 +138,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
 
               // =============================================== 保存ボタン ==============================================
               SaveButtonComp(
-                onSave: () {
+                argCallback: () {
                   print('保存されました');
                 },
                 isCanOnpress: true,

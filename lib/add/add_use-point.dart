@@ -5,7 +5,7 @@ import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
-import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 
 
 
@@ -82,6 +82,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
                 fieldInput: Container(
                   child: compInputDialogSelectType(
                     elementsList: _items,
+                    resvNowSelectingIndex: selectedCardIndex,
                     dialogText: '該当カードを選択：',
                     argCallback: (index) {
                       setState(() {
@@ -133,7 +134,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
 
               // =============================================== 保存ボタン ==============================================
               SaveButtonComp(
-                onSave: () {
+                argCallback: () {
                   print('保存されました');
                 },
                 isCanOnpress: true,

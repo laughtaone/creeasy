@@ -11,7 +11,7 @@ import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_column_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_url_jump.dart';
 import 'package:creeasy/COMMON_COMPS/formatter/input_double_formatter.dart';
-import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
@@ -111,7 +111,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                     height: 140,
                     child: SingleOptionTextButtonOneLine(
                       elementsList: _smcnlPayRule,
-                      textFontSize: 17,
+                      customFontSize: 17,
                       resvNowSelectingIndex: _selectedPayRule,
                       argCallback: (int? recvIndex) {
                         setState(() {
@@ -179,68 +179,6 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
                 // =============================================== ④学生ポイントの有無 ==============================================
                 betweenSelectField(),
-                // selectTileComp(
-                //   titleComp: titleTextComp(resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
-                //   guides: Column(children: [
-                //       miniInfoEndUrlJump(passText: '学生ポイントの詳細は', passUrl:'https://www.smbc-card.com/mem/wp/student-point/index.jsp'),
-                //       miniInfo(passText: '学生ポイント還元も詳細に管理することが可能'),
-                //       miniInfo(passText: '利用金額のみを管理したい場合この設定は不要', customIcon: Icons.tips_and_updates_outlined),
-                //       miniInfo(passText: 'ポイントも細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined),
-                //   ],),
-                //   fieldInput: Container(
-                //     margin: EdgeInsets.all(10),
-                //     child: Container(
-                //       child: Column(
-                //         children: [
-                //           compInputDirectSelectType(
-                //             elementsList: _isStudentPoint,
-                //             customFontSize: 17,
-                //             resvNowSelectingIndex: _selectedStudentPointIndex,
-                //             argCallback: (int? recvIndex) {
-                //               setState(() {
-                //                 _selectedStudentPointIndex = recvIndex;
-                //               });
-                //             },
-                //           ),
-                //           (_selectedStudentPointIndex == 1)
-                //           ? selectTileComp(
-                //             customBackColor: Color(0xffdcdcdc),
-                //             beginningGuides: Column(children: [
-                //               // --------------------------- 【展開時】学生ポイントの注意書き -----------------------------------
-                //               miniInfo(passText: '次のポイントが計算可能です：', customIcon: Icons.check),
-                //               miniInfo(passText: '・LINE Pay還元(最大+9.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
-                //               miniInfo(passText: '・対象サブスク還元(最大+9.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
-                //               miniInfo(passText: '・携帯料金還元(最大+1.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
-                //               miniInfo(passText: '次のポイントは計算できません：', customIcon: Icons.block_outlined),
-                //               miniInfo(passText: '・分割払い手数料全額ポイント還元', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
-                //               // ----------------------------------------------------------------------------------------------
-                //             ]),
-                //             titleComp: titleTextComp(resvIcon: Icons.event_available_outlined, resvText: '卒業予定年を入力', resvTextSize: 16),
-                //             guides: Column(children: [
-                //               miniInfo(passText: '学生ポイントは、卒業予定年の12月末日分までのため、卒業予定の年部分のみを入力'),
-                //               miniInfo(passText: '例：2020年3月に卒業式を行い卒業する場合は「2020年」を選択', customIcon: Icons.tips_and_updates_outlined),
-                //             ],),
-                //             fieldInput: Container(
-                //               // // --------------------------- 卒業予定年 選択フィールド -----------------------------------
-                //               child: compInputDialogSelectType(
-                //                 elementsList: _gradYearList,
-                //                 resvNowSelectingIndex: _selectedGradYear,
-                //                 dialogText: '卒業予定年を選択：',
-                //                 suffixTanni: '年',
-                //                 argCallback: (int? recvIndex) {
-                //                   setState(() {
-                //                     _selectedGradYear = recvIndex;
-                //                   });
-                //                 },
-                //               ),
-                //             ),
-                //           )
-                //           : SizedBox.shrink(),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 selectTileButtonToggleComp(
                   mainTitleComp: titleTextComp(resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
                   mainGuides: Column(children: [
@@ -285,12 +223,14 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 ),
                 // =======================================================================================================
 
+                // =============================================== 保存ボタン ==============================================
                 SaveButtonComp(
-                  onSave: () {
+                  argCallback: () {
                     print('保存されました');
                   },
                   isCanOnpress: true,
                 ),
+                // =======================================================================================================
               ]))),
     );
   }

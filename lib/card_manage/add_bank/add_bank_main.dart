@@ -1,7 +1,14 @@
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_column_direct_select_type.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:flutter/material.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
+
 
 
 
@@ -24,16 +31,9 @@ class _AddBankPageState extends State<AddBankPage> {
   ];
 
   // ================================ 変数処理 ================================
-  final TextEditingController _bankName =
-      TextEditingController(); // ①で入力された銀行名を保持する変数
-  int? selectedItemIndexNum;
+  String? _inputBankName; // ①で入力された銀行名を保持する変数
+  int? _selectedBankType; // ②で選択された銀行タイプ
 
-  void _onItemSelected(int? index) {
-    setState(() {
-      selectedItemIndexNum = index;
-    });
-    print("Selected index: $selectedItemIndexNum");
-  }
 
   // =========================================================================
 
@@ -74,133 +74,56 @@ class _AddBankPageState extends State<AddBankPage> {
                 children: [
                   // =============================================== ①銀行名 ==============================================
                   betweenSelectField(),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffededed),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        titleTextComp(resvIcon: Icons.account_balance_outlined, resvText:'銀行名を入力'),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          height: 70,
-                          child: TextField(
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 22,
-                            ),
-                            controller: _bankName,
-                            decoration: InputDecoration(
-                              labelText: '',
-                              contentPadding: EdgeInsets.all(30),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              fillColor: Color(0xfffefefe),
-                              filled: true,
-                            ),
-                            keyboardType: TextInputType.text,
-                            // inputFormatters: [
-                            //   FilteringTextInputFormatter.digitsOnly,
-                            // ],
-                          ),
-                        ),
-                      ],
-                    ),
+                  selectTileComp(
+                    titleComp: titleTextComp(resvIcon: Icons.account_balance_outlined, resvText:'銀行名を入力'),
+                    fieldInput: Container(child: compInputStringType(
+                      resvNowInputingString: _inputBankName,
+                      argCallback: (recvString) {
+                        // コールバックを渡す
+                        setState(() {
+                          _inputBankName = recvString; // コールバックで受け取った値を保持
+                        });
+                      },
+                    ))
                   ),
                   // =======================================================================================================
 
-                  SizedBox(height: 20),
-
                   // =============================================== ②銀行タイプ ==============================================
                   betweenSelectField(),
-                  Container(
-                    padding:
-                        EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xffededed),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        titleTextComp(resvIcon: Icons.local_offer_outlined, resvText:'銀行のタイプを選択'),
-                        SizedBox(height: 3),
+                  selectTileComp(
+                    titleComp: titleTextComp(resvIcon: Icons.local_offer_outlined, resvText:'銀行のタイプを選択'),
+                    guides: Column(children: [
                         miniInfo(passText: '通常口座は、一般的なただの銀行の口座を指します'),
                         miniInfo(needsIcon: false, passText: '（例：三井住友銀行 普通口座 ??支店 XXXXXXX）'),
                         SizedBox(height: 5),
                         miniInfo(passText: '口座内のボックスは、口座内でさらに分けて管理\nできる貯蓄ボックスを指します'),
                         miniInfo(needsIcon: false, passText: '（例：みんなの銀行 貯蓄預金「ボックス」）'),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          height: 70,
-                          // child: Container(
-                          //   // decoration: BoxDecoration(
-                          //   //   border: Border.all(color: Colors.blue),
-                          //   //   borderRadius: BorderRadius.circular(10), //追加
-                          //   // ),
-                          //   child: SingleOptionTextButton(
-                          //     textList: _bankTypeList,
-                          //     onItemSelected: _onItemSelected,
-                          //   ),
-                          // ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // =======================================================================================================
-
-                  SizedBox(height: 20),
-
-                  // =============================================== 「次へ」ボタン ==============================================
-                  Container(
-                    margin: EdgeInsets.only(left: 10, right: 10),
-                    height: 57,
-                    child: OutlinedButton(
-                        onPressed: () {
-                          //   Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => AddBankPagePresetCard(),
-                          //   ),
-                          // );
+                    ],),
+                    fieldInput: Container(
+                      margin: EdgeInsets.all(10),
+                      height: 140,
+                      child: SingleOptionTextButtonOneLine(
+                        elementsList: _bankTypeList,
+                        resvNowSelectingIndex: _selectedBankType,
+                        argCallback: (int? recvIndex) {
+                          setState(() {
+                            _selectedBankType = recvIndex;
+                          });
                         },
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Color(0xff333333),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          // side: BorderSide(
-                          //   color: Color(0xffff7777),
-                          //   width: 1.7,
-                          // )
-                        ),
-                        child: Text(
-                          '次へ',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
-                        )),
+                      )
+                    )
                   ),
                   // =======================================================================================================
 
-                  SizedBox(height: 16),
 
-                  Text(
-                    '保存せずに閉じるには右上の×ボタンを押してください',
-                    style: TextStyle(
-                      fontSize: 11.5,
-                      color: Colors.black38,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    textAlign: TextAlign.center,
+                  // =============================================== 保存ボタン ==============================================
+                  SaveButtonComp(
+                    argCallback: () {
+                      print('保存されました');
+                    },
+                    isCanOnpress: true,
                   ),
-                  SizedBox(height: 24),
+                  // =======================================================================================================
                 ],
               ),
             )));

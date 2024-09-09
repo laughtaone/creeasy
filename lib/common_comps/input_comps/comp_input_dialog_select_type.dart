@@ -12,7 +12,7 @@ class compInputDialogSelectType extends StatefulWidget {
 
   compInputDialogSelectType(
       {required this.elementsList,       // 選択する要素を格納したリスト（※必須）
-      this.resvNowSelectingIndex,        // 現在選択中の要素のインデックス番号
+      required this.resvNowSelectingIndex,        // 現在選択中の要素のインデックス番号
       required this.dialogText,          // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
       required this.argCallback,         // コールバック関数
       this.suffixTanni                   // 表示するテキストの末尾につける単位

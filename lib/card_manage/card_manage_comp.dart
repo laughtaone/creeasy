@@ -28,7 +28,7 @@ class PayBankComp extends StatefulWidget {
 
   PayBankComp(
       {required this.bankList, // 登録されている銀行のリスト
-      this.resvNowSelectingBankIndex, // 現在選択中の銀行のインデックス番号(カード情報変更時に使用・カード新規追加時には不使用)
+      required this.resvNowSelectingBankIndex, // 現在選択中の銀行のインデックス番号(カード情報変更時に使用・カード新規追加時には不使用)
       required this.argCallback});
 
   @override
