@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class selectTileButtonToggleComp extends StatefulWidget {
   final Widget mainTitleComp;
   final Column? mainGuides;
-  final Container mainFieldInput;
+  // final Container mainFieldInput;
   final Color mainCustomBackColor;
   final Column? beginningMainGuides;
   final Function(int?) argMainCallback;
@@ -19,13 +19,13 @@ class selectTileButtonToggleComp extends StatefulWidget {
   final Widget? toggleTitleComp;
   final Column? toggleGuides;
   final Container? toggleFieldInput;
-  final Function argToggleCallback;
+  // final Function argToggleCallback;
   // -----------------------------------------
 
   selectTileButtonToggleComp({
     required this.mainTitleComp, // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
     this.mainGuides, // ColumnのchildrenでminiInfoを並べる（任意）
-    required this.mainFieldInput, // ユーザーからの入力フィールドを指定（必須・入力フィールドのコンポーネントの指定を推奨）
+    // required this.mainFieldInput, // ユーザーからの入力フィールドを指定（必須・入力フィールドのコンポーネントの指定を推奨）
     this.mainCustomBackColor = const Color(0xffededed), // カスタム背景色（任意・デフォで色を設定済み）
     this.beginningMainGuides,      // mainTitleCompの前の冒頭にminiInfoのColumn(任意)
     required this.argMainCallback,
@@ -37,7 +37,7 @@ class selectTileButtonToggleComp extends StatefulWidget {
     this.toggleTitleComp,
     this.toggleGuides,
     required this.toggleFieldInput,
-    required this.argToggleCallback,
+    // required this.argToggleCallback,
     // -----------------------------------------
   });
 
