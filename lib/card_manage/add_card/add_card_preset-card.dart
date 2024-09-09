@@ -11,7 +11,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_column_direct_select
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_url_jump.dart';
 import 'package:creeasy/COMMON_COMPS/formatter/input_double_formatter.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/save_button_comp.dart';
-import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 
