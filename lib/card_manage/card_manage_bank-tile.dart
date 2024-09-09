@@ -44,7 +44,7 @@ class CardManageBankTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
-              flex: 10,
+              flex: 15,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -58,18 +58,18 @@ class CardManageBankTile extends StatelessWidget {
               ),
             ),
             Flexible(
-              flex: 1,
+              flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     margin: EdgeInsets.only(top: 11),
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: 45,
+                      height: 45,
                       child: Icon(
                         (recvBankType==0) ? Icons.account_balance_outlined : Icons.savings_outlined,
-                        size: 20,
+                        size: 24,
                         color: (recvBankType==0 || recvBankType==1) ? Colors.black : Colors.white
                       ),
                       decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
