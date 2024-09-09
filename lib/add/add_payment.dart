@@ -188,7 +188,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
                     resvIcon: Icons.auto_fix_high_outlined, resvText: 'オプション'),
                 guides: Column(children: [
                   miniInfo(
-                      passText: '支払いにより還元率が異なるため詳細を入力', placementCenter: true)
+                      passText: '支払いにより還元率が異なるため詳細を入力', customPlacement: 'center')
                 ]),
                 fieldInput: Container(
                   child: sotbnFromList(
