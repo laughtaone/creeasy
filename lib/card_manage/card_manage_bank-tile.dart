@@ -63,13 +63,13 @@ class CardManageBankTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 13),
+                    margin: EdgeInsets.only(top: 11),
                     child: Container(
-                      width: 32,
-                      height: 32,
+                      width: 40,
+                      height: 40,
                       child: Icon(
                         (recvBankType==0) ? Icons.account_balance_outlined : Icons.savings_outlined,
-                        size: 21,
+                        size: 20,
                         color: (recvBankType==0 || recvBankType==1) ? Colors.black : Colors.white
                       ),
                       decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
