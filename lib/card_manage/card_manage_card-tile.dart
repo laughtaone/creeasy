@@ -8,7 +8,7 @@ class CardManageCardTile extends StatefulWidget {
   final String card_name; // カード名
   final int return_rate_unit; // 還元率計算単位(x円につきx)
   final double return_rate; // 還元率
-  final String target_range; // 支払対象期間
+  final String target_range; // 引落額集計期間
   final String pay_date; // 引き落とし日
   final bool bool_pointup; // ポイントアップあり/なし
   // final Function cardTileOnpressed;     // カードタイルが押された時の処理
@@ -43,12 +43,13 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
           );
         },
         style: OutlinedButton.styleFrom(
-            backgroundColor: Color(0xffeeeeee),
-            side: BorderSide(color: Colors.black, width: 1),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
-            ),
-            fixedSize: Size.fromHeight(130)),
+          backgroundColor: Color(0xffeeeeee),
+          side: BorderSide(color: Colors.black, width: 1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(6),
+          ),
+          fixedSize: Size.fromHeight(130)
+        ),
         child: Align(
           alignment: Alignment.centerLeft,
           child: Column(
@@ -124,7 +125,7 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          '支払対象期間',
+                          '引落額集計期間',
                           style: TextStyle(color: Colors.black),
                         ),
                         SizedBox(height: 6),
