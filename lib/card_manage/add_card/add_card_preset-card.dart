@@ -106,19 +106,15 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                       miniInfo(passText: '設定できるはずの日付が用意されていない場合は、お手数ですが開発者までご連絡ください'),
                     ],
                   ),
-                  fieldInput: Container(
-                    margin: EdgeInsets.all(10),
-                    height: 140,
-                    child: SingleOptionTextButtonOneLine(
-                      elementsList: _smcnlPayRule,
-                      customFontSize: 17,
-                      resvNowSelectingIndex: _selectedPayRule,
-                      argCallback: (int? recvIndex) {
-                        setState(() {
-                          _selectedPayRule = recvIndex;
-                        });
-                      },
-                    ),
+                  fieldInput: CompInputColumnDirectSelectType(
+                    elementsList: _smcnlPayRule,
+                    customFontSize: 17,
+                    resvNowSelectingIndex: _selectedPayRule,
+                    argCallback: (int? recvIndex) {
+                      setState(() {
+                        _selectedPayRule = recvIndex;
+                      });
+                    },
                   ),
                 ),
                 // =======================================================================================================

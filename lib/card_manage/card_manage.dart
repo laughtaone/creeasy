@@ -5,6 +5,7 @@ import 'package:creeasy/card_manage/card_manage_bank-tile.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/card_manage/bank_example_icon.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 
 
 
@@ -151,15 +152,16 @@ class _CardManagePageState extends State<CardManagePage>
                     customTextSize: 16, customPlacement: 'center', needsTBPadding: true, customTopPadding: 6, customBottomPadding: 10
                   ),
 
-                  bankExampleIcon(),              // 通常口座・口座内ボックス アイコン 凡例
+                  bankExampleIcon(),   // 通常口座・口座内ボックス アイコン 凡例
 
                   CardManageBankTile(recvBankName: 'みんなの銀行 - 専用ボックスああああああああああああああああああああああああああああああああ', recvBankType: 1),
                   CardManageBankTile(recvBankName: '三井住友銀行'),
                   CardManageBankTile(recvBankName: '三菱UFJ銀行'),
                 ],
               ),
-            )
+            ),
             // =======================================================================================
+
           ],
         ),
       ),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class selectTileComp extends StatefulWidget {
   final Widget titleComp;
   final Column? guides;
-  final Container fieldInput;
+  final Widget fieldInput;
   final Color customBackColor;
   final Column? beginningGuides;
 
@@ -27,7 +27,7 @@ class _selectTileCompState extends State<selectTileComp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 15),
+      padding: EdgeInsets.only(left: 9, right: 9, top: 15, bottom: 12),
       margin: EdgeInsets.only(top: (widget.titleComp==SizedBox.shrink() || widget.beginningGuides==null) ? 0 : 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
