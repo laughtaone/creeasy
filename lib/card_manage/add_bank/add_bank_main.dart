@@ -5,26 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
-import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
-import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 
 
 
 
 class AddBankPage extends StatefulWidget {
+  const AddBankPage({super.key});
+
   @override
   _AddBankPageState createState() => _AddBankPageState();
 }
 
 class _AddBankPageState extends State<AddBankPage> {
   // ドロップダウンメニューで選択するアイテムのリスト
-  final List<String> _bankList = [
-    'みんなの銀行',
-    '三菱UFJ銀行',
-    '三井住友銀行',
-  ];
-
   final List<String> _bankTypeList = [
     '通常口座',
     '口座内のボックス',
@@ -33,9 +27,8 @@ class _AddBankPageState extends State<AddBankPage> {
   // ================================ 変数処理 ================================
   String? _inputBankName; // ①で入力された銀行名を保持する変数
   int? _selectedBankType; // ②で選択された銀行タイプ
-
-
   // =========================================================================
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +36,7 @@ class _AddBankPageState extends State<AddBankPage> {
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
-          title: Row(
+          title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -59,7 +52,7 @@ class _AddBankPageState extends State<AddBankPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.close,
                   color: Colors.black,
                 ))
@@ -93,29 +86,24 @@ class _AddBankPageState extends State<AddBankPage> {
                   selectTileComp(
                     titleComp: titleTextComp(resvIcon: Icons.local_offer_outlined, resvText:'銀行のタイプを選択'),
                     guides: Column(children: [
-                        miniInfo(passText: '通常口座は、一般的なただの銀行の口座を指します'),
-                        miniInfo(needsIcon: false, passText: '（例：三井住友銀行 普通口座 ??支店 XXXXXXX）'),
-                        SizedBox(height: 5),
-                        miniInfo(passText: '口座内のボックスは、口座内でさらに分けて管理\nできる貯蓄ボックスを指します'),
-                        miniInfo(needsIcon: false, passText: '（例：みんなの銀行 貯蓄預金「ボックス」）'),
+                      miniInfo(passText: '通常口座は、一般的なただの銀行の口座を指します'),
+                      miniInfo(needsIcon: false, passText: '（例：三井住友銀行 普通口座 ??支店 XXXXXXX）'),
+                      const SizedBox(height: 5),
+                      miniInfo(passText: '口座内のボックスは、口座内でさらに分けて管理\nできる貯蓄ボックスを指します'),
+                      miniInfo(needsIcon: false, passText: '（例：みんなの銀行 貯蓄預金「ボックス」）'),
                     ],),
-                    fieldInput: Container(
-                      margin: EdgeInsets.all(10),
-                      height: 140,
-                      child: SingleOptionTextButtonOneLine(
-                        elementsList: _bankTypeList,
-                        customFontSize: 18,
-                        resvNowSelectingIndex: _selectedBankType,
-                        argCallback: (int? recvIndex) {
-                          setState(() {
-                            _selectedBankType = recvIndex;
-                          });
-                        },
-                      )
+                    fieldInput: CompInputColumnDirectSelectType(
+                      elementsList: _bankTypeList,
+                      customIconSize: 29,
+                      resvNowSelectingIndex: _selectedBankType,
+                      argCallback: (int? recvIndex) {
+                        setState(() {
+                          _selectedBankType = recvIndex;
+                        });
+                      },
                     )
                   ),
                   // =======================================================================================================
-
 
                   // =============================================== 保存ボタン ==============================================
                   SaveButtonComp(

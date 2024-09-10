@@ -10,35 +10,35 @@ import 'package:creeasy/money_manage/money_manage.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {
-  runApp(StartPageHome());
+  runApp(const StartPageHome());
 }
 
 class StartPageHome extends StatelessWidget {
-  const StartPageHome({Key? key}) : super(key: key);
+  const StartPageHome({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: StartPageWidget(),
+      home: const StartPageWidget(),
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
-      supportedLocales: [
-        const Locale("en"),
-        const Locale("ja"),
+      supportedLocales: const [
+        Locale("en"),
+        Locale("ja"),
       ],
       theme: ThemeData(
         brightness: Brightness.light,
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: Color(0xFF0A0E21),
         ),
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Color(0xfff0f0f0),
         ),
         // fontFamily: 'IBM_Plex_Sans_JP',
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Color(0xfff0f0f0),
         ),
         fontFamily: 'MPlus1p',
@@ -48,7 +48,7 @@ class StartPageHome extends StatelessWidget {
 }
 
 class StartPageWidget extends StatefulWidget {
-  const StartPageWidget({Key? key}) : super(key: key);
+  const StartPageWidget({super.key});
 
   @override
   State<StartPageWidget> createState() => _StartPageWidgetState();
@@ -57,12 +57,12 @@ class StartPageWidget extends StatefulWidget {
 class _StartPageWidgetState extends State<StartPageWidget> {
   // const _StartPageWidgetState({Key? key}) : super(key: key);
   var _currentIndex = 0;
-  var _pages = <Widget>[
-    HomePage(),
-    CardManagePage(),
-    AddPaymentPage(),
-    MoneyManagePage(),
-    CalenderPage()
+  final _pages = <Widget>[
+    const HomePage(),
+    const CardManagePage(),
+    const AddPaymentPage(),
+    const MoneyManagePage(),
+    const CalenderPage()
   ];
 
   void _onTap(int index) {
@@ -80,7 +80,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
     showCupertinoModalPopup(
       context: context,
       builder: (context) => CupertinoActionSheet(
-        title: Text(
+        title: const Text(
           '追加する項目を選択：',
           style: TextStyle(
               fontSize: 17, color: Colors.black, fontWeight: FontWeight.w400),
@@ -100,7 +100,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddPaymentPage(),
+                  builder: (context) => const AddPaymentPage(),
                   fullscreenDialog: true,
                 ),
               );
@@ -120,7 +120,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddSpecialPaymentPage(),
+                  builder: (context) => const AddSpecialPaymentPage(),
                   fullscreenDialog: true,
                 ),
               );
@@ -140,7 +140,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => AddUsePointPage(),
+                  builder: (context) => const AddUsePointPage(),
                   fullscreenDialog: true,
                 ),
               );
@@ -149,11 +149,11 @@ class _StartPageWidgetState extends State<StartPageWidget> {
           ),
         ],
         cancelButton: CupertinoActionSheetAction(
-          child: Text('キャンセル'),
           isDestructiveAction: true,
           onPressed: () {
             Navigator.pop(context);
           },
+          child: const Text('キャンセル'),
         ),
       ),
     );
@@ -222,7 +222,7 @@ class _StartPageWidgetState extends State<StartPageWidget> {
 
 // addボタンを押した後の項目のテキスト部分のTextStyle
 TextStyle addButtonItemTextStyle() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 19,
     color: Colors.black,
     fontWeight: FontWeight.w600,
@@ -236,7 +236,7 @@ double addButtonItemIconSize() {
 
 // addボタンを押した後の項目のアイコンとテキストの間隔
 SizedBox addButtonItemBetweenIconText() {
-  return SizedBox(width: 12);
+  return const SizedBox(width: 12);
 }
 
 double selectedTabIconSize() {

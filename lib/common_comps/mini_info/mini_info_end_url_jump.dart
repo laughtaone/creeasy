@@ -39,14 +39,14 @@ Container miniInfoEndUrlJump({
             color: (needsIcon) ? customColor : doukaColor,
           ),
         ),
-        SizedBox(width: 4),
+        const SizedBox(width: 4),
         Flexible(
             child: Text(passText,
                 style: TextStyle(
                   color: customColor,
                   fontSize: customTextSize,
                 ))),
-        SizedBox(width: 2),
+        const SizedBox(width: 2),
         RichText(
             text: TextSpan(children: [
           WidgetSpan(

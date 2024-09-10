@@ -18,11 +18,11 @@ class selectTileButtonToggleComp extends StatefulWidget {
   final Column? toggleBeginningGuides;
   final Widget? toggleTitleComp;
   final Column? toggleGuides;
-  final Container? toggleFieldInput;
+  final Widget toggleFieldInput;
   // final Function argToggleCallback;
   // -----------------------------------------
 
-  selectTileButtonToggleComp({
+  const selectTileButtonToggleComp({super.key, 
     required this.mainTitleComp, // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
     this.mainGuides, // ColumnのchildrenでminiInfoを並べる（任意）
     // required this.mainFieldInput, // ユーザーからの入力フィールドを指定（必須・入力フィールドのコンポーネントの指定を推奨）
@@ -63,41 +63,36 @@ class _selectTileButtonToggleCompState extends State<selectTileButtonToggleComp>
       titleComp: widget.mainTitleComp,
       guides: widget.mainGuides,
       fieldInput: Container(
-        margin: EdgeInsets.all(10),
-        child: Container(
-          child: Column(
-            children: [
-              compInputDirectSelectType(
-                elementsList: widget.mainSelectList,
-                customFontSize: widget.customFontsizeMainSelectButton ?? 15,
-                resvNowSelectingIndex: _newMainSelectbuttonIndex,
-                argCallback: (int? recvIndex) {
-                  setState(() {
-                    _newMainSelectbuttonIndex = recvIndex;
-                  });
-                  widget.argMainCallback(_newMainSelectbuttonIndex);
-                }
-              ),
-              (_newMainSelectbuttonIndex == 1)
-              ? Column(
-                children: [
-                  SizedBox(height: 7),
-                  selectTileComp(
-                    customBackColor: Color(0xffdcdcdc),
-                    beginningGuides: widget.toggleBeginningGuides,
-                    titleComp: widget.toggleTitleComp ?? SizedBox.shrink(),
-                    guides: widget.toggleGuides,
-                    fieldInput: Container(
-                      // margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
-                      // height: 70,
-                      child: widget.toggleFieldInput
-                    ),
-                  ),
-                ],
-              )
-              : SizedBox.shrink(),
-            ],
-          ),
+        // margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(0),
+        child: Column(
+          children: [
+            CompInputRowDirectSelectType(
+              elementsList: widget.mainSelectList,
+              customFontSize: widget.customFontsizeMainSelectButton,
+              resvNowSelectingIndex: _newMainSelectbuttonIndex,
+              argCallback: (int? recvIndex) {
+                setState(() {
+                  _newMainSelectbuttonIndex = recvIndex;
+                });
+                widget.argMainCallback(_newMainSelectbuttonIndex);
+              }
+            ),
+            (_newMainSelectbuttonIndex == 1)
+            ? Column(
+              children: [
+                const SizedBox(height: 7),
+                selectTileComp(
+                  customBackColor: const Color(0xffdcdcdc),
+                  beginningGuides: widget.toggleBeginningGuides,
+                  titleComp: widget.toggleTitleComp ?? const SizedBox.shrink(),
+                  guides: widget.toggleGuides,
+                  fieldInput: widget.toggleFieldInput
+                ),
+              ],
+            )
+            : const SizedBox.shrink(),
+          ],
         ),
       ),
     );

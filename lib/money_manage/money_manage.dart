@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/main.dart';
 
 class MoneyManagePage extends StatefulWidget {
+  const MoneyManagePage({super.key});
+
   @override
   _MoneyManagePageState createState() => _MoneyManagePageState();
 }
@@ -13,7 +14,7 @@ class _MoneyManagePageState extends State<MoneyManagePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -29,8 +30,8 @@ class _MoneyManagePageState extends State<MoneyManagePage> {
         ),
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+      body: const Padding(
+        padding: EdgeInsets.only(left: 20, right: 20, top: 10),
       ),
     );
   }

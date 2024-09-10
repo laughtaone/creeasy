@@ -10,8 +10,8 @@ class compInputDialogSelectType extends StatefulWidget {
   final Function(int?) argCallback; // コールバック関数
   final String? suffixTanni;
 
-  compInputDialogSelectType(
-      {required this.elementsList,       // 選択する要素を格納したリスト（※必須）
+  const compInputDialogSelectType(
+      {super.key, required this.elementsList,       // 選択する要素を格納したリスト（※必須）
       required this.resvNowSelectingIndex,        // 現在選択中の要素のインデックス番号
       required this.dialogText,          // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
       required this.argCallback,         // コールバック関数
@@ -37,21 +37,21 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          fixedSize: Size(double.infinity, 70),
-          backgroundColor: Color(0xfffefefe),
+          fixedSize: const Size(double.infinity, 70),
+          backgroundColor: const Color(0xfffefefe),
         ),
         child: ListTile(
           title: Text(
             (_newSelectIndex != null)
               ? (widget.suffixTanni==null) ? widget.elementsList[_newSelectIndex ?? 0] : '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.suffixTanni}'
               : '未選択',
-            style: TextStyle(fontSize: 20)),
-        trailing: Icon(Icons.edit),
+            style: const TextStyle(fontSize: 20)),
+        trailing: const Icon(Icons.edit),
         ),
         onPressed: () {
           showDialog(
@@ -60,7 +60,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text(widget.dialogText),
-                backgroundColor: Color(0xffffffff),
+                backgroundColor: const Color(0xffffffff),
                 content: Container(
                   width: double.maxFinite,
                   height: 300,
@@ -81,12 +81,12 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                             margin: const EdgeInsets.only(top: 5, bottom: 5, right: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7),
-                              color: Color(0xffeeeeee),
+                              color: const Color(0xffeeeeee),
                             ),
                             child: ListTile(
                               title: Text(
                                 widget.elementsList[index],
-                                style: TextStyle(fontSize: 18)
+                                style: const TextStyle(fontSize: 18)
                               ),
                               onTap: () {
                                 setState(() {
@@ -105,7 +105,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context),
-                    child: Text(
+                    child: const Text(
                       'キャンセル',
                       style: TextStyle(color: Colors.red),
                     ),

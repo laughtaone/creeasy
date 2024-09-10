@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/main.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -18,7 +19,7 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -31,8 +32,8 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         actions: [
           IconButton(
-              padding: EdgeInsets.only(right: 20),
-              icon: Icon(Icons.close, size: 27),
+              padding: const EdgeInsets.only(right: 20),
+              icon: const Icon(Icons.close, size: 27),
               onPressed: () {
                 Navigator.of(context).pop();
               })
@@ -45,12 +46,12 @@ class _SettingsPageState extends State<SettingsPage> {
             title: Text('使い方', style: settingSectionTitleTextSyle()),
             tiles: [
               SettingsTile.navigation(
-                leading: Icon(Icons.language_outlined),
+                leading: const Icon(Icons.language_outlined),
                 title:
                     Text('公式解説サイト', style: settingSectionTilesTitleTextSyle()),
               ),
               SettingsTile.navigation(
-                leading: Icon(Icons.table_rows_outlined),
+                leading: const Icon(Icons.table_rows_outlined),
                 title: Text('Googleスプレッドシート版',
                     style: settingSectionTilesTitleTextSyle()),
               )
@@ -140,14 +141,14 @@ class _SettingsPageState extends State<SettingsPage> {
 }
 
 TextStyle settingSectionTitleTextSyle() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
   );
 }
 
 TextStyle settingSectionTilesTitleTextSyle() {
-  return TextStyle(
+  return const TextStyle(
     fontSize: 17,
     fontWeight: FontWeight.w600,
   );

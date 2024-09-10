@@ -10,6 +10,8 @@ import 'package:creeasy/card_manage/bank_example_icon.dart';
 
 
 class CardManagePage extends StatefulWidget {
+  const CardManagePage({super.key});
+
   @override
   _CardManagePageState createState() => _CardManagePageState();
 }
@@ -51,7 +53,7 @@ class _CardManagePageState extends State<CardManagePage>
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Row(
+          title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -65,7 +67,7 @@ class _CardManagePageState extends State<CardManagePage>
           actions: [
             TextButton(
               child: Row(children: [
-                Icon(
+                const Icon(
                   Icons.add,
                   color: Colors.black,
                 ),
@@ -79,8 +81,8 @@ class _CardManagePageState extends State<CardManagePage>
                   context,
                   MaterialPageRoute(
                     builder: (context) => (_tabController.index == 0)
-                      ? AddCardPage()
-                      : AddBankPage(),
+                      ? const AddCardPage()
+                      : const AddBankPage(),
                     fullscreenDialog: true,
                   ),
                 );
@@ -89,7 +91,7 @@ class _CardManagePageState extends State<CardManagePage>
           ],
           backgroundColor:
               Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
-          bottom: TabBar(controller: _tabController, tabs: [
+          bottom: TabBar(controller: _tabController, tabs: const [
             Tab(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -123,14 +125,14 @@ class _CardManagePageState extends State<CardManagePage>
                   passText: '変更がある場合は各カードの枠内をタップして編集',
                   customTextSize: 13, needsTBPadding: true, customTopPadding: 6, customBottomPadding: 10
                 ),
-                CardManageCardTile(
-                    card_name: '三井住友カード',
+                const CardManageCardTile(
+                    card_name: '三井住友カードaaaaaaaaaaaaaaa',
                     return_rate_unit: 200,
                     return_rate: 0.5,
                     target_range: '1日-末日',
                     pay_date: '翌月26日',
                     bool_pointup: true),
-                CardManageCardTile(
+                const CardManageCardTile(
                     card_name: 'メルカード',
                     return_rate_unit: 100,
                     return_rate: 1,
@@ -146,79 +148,21 @@ class _CardManagePageState extends State<CardManagePage>
               padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
               child: ListView(
                 children: [
-                  // SizedBox(
-                  //   width: double.infinity,
-                  //   height: MediaQuery.of(context).size.height * 0.04,
-                  //   child: miniInfo(passText: '編集するには各銀行の枠内をタップ'),
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     Flexible(flex: 3, child: miniInfo(passText: '編集するには各銀行の枠内をタップ')),
-                  //     Flexible(flex: 1, child: BankExampleIcon())
-                  //   ],
-                  // ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(top: 6, bottom: 4),
-                  //   child: miniInfo(
-                  //     passText: '編集するには各銀行の枠内をタップ',
-                  //     customTextSize: 14,
-                  //     customPlacement: 'center'
-                  //   ),
-                  // ),
                   miniInfo(
                     passText: '編集するには各銀行の枠内をタップ',
-                    customTextSize: 14, customPlacement: 'center', needsTBPadding: true, customTopPadding: 6, customBottomPadding: 10
+                    customTextSize: 16, customPlacement: 'center', needsTBPadding: true, customTopPadding: 6, customBottomPadding: 10
                   ),
 
-                  Align(  // AlignでContainerの幅を制約
-                    alignment: Alignment.centerRight, // 左寄せ（必要に応じてcenterなどに変更可能）
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(9, 2, 3, 2),
-                      margin: EdgeInsets.only(bottom: 15),
-                      decoration: BoxDecoration(
-                        // border: Border.all(
-                        //   color: Colors.black, // 色
-                        //   width: 1, // 太さ
-                        // ),
-                        color: Color(0xfff1f1f1),
-                        borderRadius: BorderRadius.circular(7)
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Text('【アイコン】', style: TextStyle(fontSize: 10),),
-                          SizedBox(
-                            width: 75,  // 固定の幅
-                            child: miniInfo(
-                              passText: '通常口座',
-                              customTextSize: 12,
-                              customIcon: Icons.account_balance_outlined,
-                              needsLRPadding: false,
-                              customIconTextPadding: 1
-                            ),
-                          ),
-                          SizedBox(width: 5),
-                          SizedBox(
-                            width: 126,  // 固定の幅
-                            child: miniInfo(
-                              passText: '口座内のボックス',
-                              customTextSize: 12,
-                              customIcon: Icons.savings_outlined,
-                              needsLRPadding: false,
-                              customIconTextPadding: 1
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  CardManageBankTile(recvBankName: 'みんなの銀行 - 専用ボックスああああああああああああああああああああああああああああああああ', recvBankType: 1),
-                  CardManageBankTile(recvBankName: '三井住友銀行'),
-                  CardManageBankTile(recvBankName: '三菱UFJ銀行'),
+                  bankExampleIcon(),   // 通常口座・口座内ボックス アイコン 凡例
+
+                  const CardManageBankTile(recvBankName: 'みんなの銀行 - 専用ボックスああああああああああああああああああああああああああああああああ', recvBankType: 1),
+                  const CardManageBankTile(recvBankName: '三井住友銀行'),
+                  const CardManageBankTile(recvBankName: '三菱UFJ銀行'),
                 ],
               ),
-            )
+            ),
             // =======================================================================================
+
           ],
         ),
       ),

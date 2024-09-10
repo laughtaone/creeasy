@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/main.dart';
 
 class CalenderPage extends StatefulWidget {
+  const CalenderPage({super.key});
+
   @override
   _CalenderPageState createState() => _CalenderPageState();
 }
@@ -13,7 +14,7 @@ class _CalenderPageState extends State<CalenderPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -30,8 +31,8 @@ class _CalenderPageState extends State<CalenderPage> {
         backgroundColor:
             Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
       ),
-      body: Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 10),),
+      body: const Padding(
+          padding: EdgeInsets.only(left: 20, right: 20, top: 10),),
     );
   }
 }

@@ -8,8 +8,8 @@ class SaveButtonComp extends StatefulWidget {
   final bool isCanOnpress;
   final int? messageType;
 
-  SaveButtonComp(
-      {required this.argCallback,
+  const SaveButtonComp(
+      {super.key, required this.argCallback,
       this.isCanOnpress = false, // 押せるかどうかの真偽値(デフォでfalse=押せない)
       this.messageType = 0
       });
@@ -26,7 +26,7 @@ class _SaveButtonCompState extends State<SaveButtonComp> {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.only(left: 10, right: 10),
+            margin: const EdgeInsets.only(left: 10, right: 10),
             height: 57,
             width: double.infinity,
             child: OutlinedButton(
@@ -38,14 +38,14 @@ class _SaveButtonCompState extends State<SaveButtonComp> {
                             barrierDismissible: false,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text(
+                                title: const Text(
                                   '本当に保存しますか？',
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 actions: [
                                   TextButton(
                                     onPressed: () => {Navigator.pop(context)},
-                                    child: Text('キャンセル',
+                                    child: const Text('キャンセル',
                                         style: TextStyle(color: Colors.red)),
                                   ),
                                   TextButton(
@@ -53,7 +53,7 @@ class _SaveButtonCompState extends State<SaveButtonComp> {
                                       widget.argCallback();
                                       Navigator.pop(context);
                                     },
-                                    child: Text('保存'),
+                                    child: const Text('保存'),
                                   ),
                                 ],
                               );
@@ -63,29 +63,29 @@ class _SaveButtonCompState extends State<SaveButtonComp> {
                 // ----------------------------------------------------------------------------------------------
                 style: OutlinedButton.styleFrom(
                     backgroundColor: (widget.isCanOnpress)
-                        ? Color(0xfffff0f0)
-                        : Color(0xfff0f0f0),
+                        ? const Color(0xfffff0f0)
+                        : const Color(0xfff0f0f0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
                     ),
                     side: BorderSide(
                       color: (widget.isCanOnpress)
-                          ? Color(0xffff6666)
-                          : Color(0xff959595),
+                          ? const Color(0xffff6666)
+                          : const Color(0xff959595),
                       width: 1.7,
                     )),
                 child: Text(
                   '保存して閉じる',
                   style: TextStyle(
                       color: (widget.isCanOnpress)
-                          ? Color(0xffff5555)
-                          : Color(0xff909090),
+                          ? const Color(0xffff5555)
+                          : const Color(0xff909090),
                       fontSize: 16),
                 )),
           ),
           (widget.messageType!=-1)
           ? noSaveCloseComp(messageType: widget.messageType)
-          : SizedBox.shrink(),
+          : const SizedBox.shrink(),
         ],
       ),
     );

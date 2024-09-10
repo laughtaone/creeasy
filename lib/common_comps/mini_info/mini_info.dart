@@ -16,7 +16,7 @@ Container miniInfo(
     double customIconTextPadding = 4
   }) {
   return Container(
-    constraints: BoxConstraints(
+    constraints: const BoxConstraints(
       minWidth: 0,
       minHeight: 0,
     ),

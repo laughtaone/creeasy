@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // 整数と小数だけを受け付ける入力フィールド(例：「還元率を入力」)で正常に入力できるようにするクラス
 

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/home/home.dart';
 import 'package:intl/intl.dart';
 
 class HomeCardTile extends StatelessWidget {
-  const HomeCardTile({
+  const HomeCardTile({super.key, 
     required this.card_name,
     required this.month_price,
   });
@@ -18,12 +17,12 @@ class HomeCardTile extends StatelessWidget {
       child: OutlinedButton(
         onPressed: null,
         style: OutlinedButton.styleFrom(
-          backgroundColor: Color(0xffeeeeee),
-          side: BorderSide(color: Colors.black, width: 1),
+          backgroundColor: const Color(0xffeeeeee),
+          side: const BorderSide(color: Colors.black, width: 1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          fixedSize: Size.fromHeight(80)
+          fixedSize: const Size.fromHeight(80)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,14 +34,14 @@ class HomeCardTile extends StatelessWidget {
                 children: [
                   Text(
                     card_name,
-                    style: TextStyle(color: Colors.black, fontSize: 22),
+                    style: const TextStyle(color: Colors.black, fontSize: 22),
                   ),
                 ],
               ),
             ),
             Text(
               formatYen(month_price),
-              style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w700),
+              style: const TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w700),
             ),
           ],
         ),

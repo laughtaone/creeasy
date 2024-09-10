@@ -7,8 +7,8 @@ class compInputDateType extends StatefulWidget {
   final String? dialogText;
   final Function(DateTime) argCallback; // コールバック関数
 
-  compInputDateType(
-      {
+  const compInputDateType(
+      {super.key, 
         this.resvNowInputingDate,
         this.dialogText,              // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
         required this.argCallback
@@ -40,22 +40,22 @@ class _compInputDateTypeState extends State<compInputDateType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10)),
-          fixedSize: Size(double.infinity, 70),
-          backgroundColor: Color(0xfffefefe),
+          fixedSize: const Size(double.infinity, 70),
+          backgroundColor: const Color(0xfffefefe),
         ),
         child: ListTile(
           title: Text(
             _selectedDate == null
                 ? '未選択'
                 : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
           ),
-          trailing: Icon(Icons.edit),
+          trailing: const Icon(Icons.edit),
         ),
         onPressed: () async {
           DateTime? date = await showDatePicker(

@@ -9,7 +9,7 @@ class SingleOptionTextButton extends StatefulWidget {
   final bool initialBoolLowerText;
 
 
-  SingleOptionTextButton({
+  const SingleOptionTextButton({super.key, 
     required this.upperText,
     required this.trueLowerText,
     required this.falseLowerText,
@@ -43,11 +43,11 @@ class _SingleOptionTextButtonState extends State<SingleOptionTextButton> {
       padding: const EdgeInsets.only(left: 5, right: 5),
       child: TextButton(
         style: TextButton.styleFrom(
-          fixedSize: Size(120, 120),
+          fixedSize: const Size(120, 120),
           backgroundColor:
             (isBoolLowerText)
-            ? Color(0xfffefefe)
-            : Color(0xffdedede),
+            ? const Color(0xfffefefe)
+            : const Color(0xffdedede),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -67,7 +67,7 @@ class _SingleOptionTextButtonState extends State<SingleOptionTextButton> {
               child: Center(
                 child: AutoSizeText(
                   widget.upperText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 17,
                     color: Color(0xff444444),
                     fontWeight: FontWeight.bold,
@@ -90,7 +90,7 @@ class _SingleOptionTextButtonState extends State<SingleOptionTextButton> {
                     flex: 3,
                     child: AutoSizeText(
                       (isBoolLowerText) ? widget.trueLowerText : widget.falseLowerText,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                         fontSize: 30,
@@ -99,7 +99,7 @@ class _SingleOptionTextButtonState extends State<SingleOptionTextButton> {
                       minFontSize: 10, // 最小フォントサイズを設定
                     ),
                   ),
-                  Expanded(
+                  const Expanded(
                     flex: 1,
                     child: Text(
                       'タップして変更',

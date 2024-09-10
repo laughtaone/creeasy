@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 // import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
@@ -10,16 +8,16 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
-import 'package:creeasy/COMMON_COMPS/display_parts/now_return_rate.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new_format.dart';
-import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/single_option_text_button_new.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/option_text_buttons/sotbn_from_list.dart';
 
 
 
 
 class AddPaymentPage extends StatefulWidget {
+  const AddPaymentPage({super.key});
+
   @override
   _AddPaymentPageState createState() => _AddPaymentPageState();
 }
@@ -78,7 +76,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -94,7 +92,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.close,
                 color: Colors.black,
               ))
@@ -203,7 +201,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               ),
               // =======================================================================================================
 
-              SizedBox(height: 70),
+              const SizedBox(height: 70),
 
               // =============================================== 保存ボタン ==============================================
               SaveButtonComp(

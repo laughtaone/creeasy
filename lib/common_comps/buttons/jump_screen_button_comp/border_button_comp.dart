@@ -12,7 +12,7 @@ class BorderButtonComp extends StatefulWidget {
   final double customFontsize;
   final BorderRadiusGeometry customBorderRadius;
 
-  BorderButtonComp({
+  const BorderButtonComp({super.key, 
     required this.buttonText,
     required this.argOnpressed,
     this.customBackColor = const Color(0xffeeeeee),
@@ -31,7 +31,7 @@ class _NoBorderButtonCompState extends State<BorderButtonComp> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10),
+      margin: const EdgeInsets.only(left: 10, right: 10),
       height: 57,
       child: OutlinedButton(
         onPressed: widget.argOnpressed,
