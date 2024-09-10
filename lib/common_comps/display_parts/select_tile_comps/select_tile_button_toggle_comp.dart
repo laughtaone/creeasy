@@ -13,6 +13,7 @@ class selectTileButtonToggleComp extends StatefulWidget {
   final Function(int?) argMainCallback;
   final List<String> mainSelectList;
   final double? customFontsizeMainSelectButton;
+  final double? customIconsizeMainSelectButton;
   final int? nowMainSelectbuttonIndex;
   // ------------ トグルフィールド --------------
   final Column? toggleBeginningGuides;
@@ -31,6 +32,7 @@ class selectTileButtonToggleComp extends StatefulWidget {
     required this.argMainCallback,
     required this.mainSelectList,
     this.customFontsizeMainSelectButton,
+    this.customIconsizeMainSelectButton,
     required this.nowMainSelectbuttonIndex,
     // ------------ トグルフィールド --------------
     this.toggleBeginningGuides,
@@ -70,6 +72,7 @@ class _selectTileButtonToggleCompState extends State<selectTileButtonToggleComp>
             CompInputRowDirectSelectType(
               elementsList: widget.mainSelectList,
               customFontSize: widget.customFontsizeMainSelectButton,
+              customIconSize: widget.customIconsizeMainSelectButton ?? 25,
               resvNowSelectingIndex: _newMainSelectbuttonIndex,
               argCallback: (int? recvIndex) {
                 setState(() {

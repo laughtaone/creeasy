@@ -225,6 +225,8 @@ class _AddCardPageDirectInputCardState
                       nowMainSelectbuttonIndex: _selectedPointUpIndex,
                       mainSelectList: _isPointUp,
                       toggleFieldInput: Container(),
+                      customFontsizeMainSelectButton: 20,
+                      customIconsizeMainSelectButton: 28
                     ),
                     // =======================================================================================================
 

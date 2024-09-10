@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:creeasy/card_manage/change_card/change_card.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/rectangle_icon_text_comp.dart';
 
 
 class CardManageCardTile extends StatefulWidget {
@@ -30,7 +31,7 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 13),
+      padding: const EdgeInsets.only(bottom: 15),
       child: OutlinedButton(
         onPressed: () {
           Navigator.push(
@@ -53,48 +54,29 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
           alignment: Alignment.centerLeft,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 flex: 4,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        widget.card_name,
-                        style: const TextStyle(color: Colors.black, fontSize: 22),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 1),
+                  child: Expanded(
+                    child: Row( // ココ!!
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            widget.card_name,
+                            style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=8) ?22 :19),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        (widget.bool_pointup)
+                          ? rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff555555))
+                          : const SizedBox.shrink()
+                      ],
                     ),
-                    (widget.bool_pointup)
-                      ? Container(
-                          margin: const EdgeInsets.only(left: 5),
-                          padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Row(
-                            children: [
-                              Icon(
-                                Icons.auto_awesome_outlined,
-                                size: 15,
-                                color: Colors.black54,
-                              ),
-                              SizedBox(width: 2),
-                              Text(
-                                'P UPあり',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      : const SizedBox.shrink()
-                  ],
+                  ),
                 ),
               ),
               Expanded(
@@ -155,6 +137,7 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
                       const SizedBox(width: 3),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
                             '引き落とし日',
