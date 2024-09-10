@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
-import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
-import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 
 
 
 
 class AddBankPage extends StatefulWidget {
+  const AddBankPage({super.key});
+
   @override
   _AddBankPageState createState() => _AddBankPageState();
 }
@@ -36,7 +36,7 @@ class _AddBankPageState extends State<AddBankPage> {
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
-          title: Row(
+          title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -52,7 +52,7 @@ class _AddBankPageState extends State<AddBankPage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.close,
                   color: Colors.black,
                 ))
@@ -88,7 +88,7 @@ class _AddBankPageState extends State<AddBankPage> {
                     guides: Column(children: [
                       miniInfo(passText: '通常口座は、一般的なただの銀行の口座を指します'),
                       miniInfo(needsIcon: false, passText: '（例：三井住友銀行 普通口座 ??支店 XXXXXXX）'),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       miniInfo(passText: '口座内のボックスは、口座内でさらに分けて管理\nできる貯蓄ボックスを指します'),
                       miniInfo(needsIcon: false, passText: '（例：みんなの銀行 貯蓄預金「ボックス」）'),
                     ],),

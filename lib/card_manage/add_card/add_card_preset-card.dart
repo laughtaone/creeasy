@@ -1,8 +1,6 @@
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_button_toggle_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_double_type.dart';
-import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 import 'package:flutter/material.dart';
-import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/card_manage/card_manage_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
@@ -10,18 +8,15 @@ import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_column_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_url_jump.dart';
-import 'package:creeasy/COMMON_COMPS/formatter/input_double_formatter.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
-import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 
 
 class AddCardPagePresetCard extends StatefulWidget {
   final String? selectedCardName;
 
-  const AddCardPagePresetCard({Key? key, required this.selectedCardName})
-      : super(key: key);
+  const AddCardPagePresetCard({super.key, required this.selectedCardName});
 
   @override
   _AddCardPagePresetCardState createState() => _AddCardPagePresetCardState();
@@ -59,7 +54,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -75,7 +70,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
               onPressed: () {
                 Navigator.popUntil(context, (route) => route.isFirst);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.close,
                 color: Colors.black,
               ))
@@ -88,7 +83,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
               padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
               child: ListView(children:[
                 // =============================================== ⓪ 選択されたカード名 ==============================================
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 selectedCardIntro(widget.selectedCardName),
                 // =======================================================================================================
 
@@ -155,7 +150,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                       customTextSize: 10,
                       needsIcon: false,
                       needsTBPadding: false,
-                      doukaColor: Color(0xffdcdcdc)
+                      doukaColor: const Color(0xffdcdcdc)
                     ),
                     miniInfo(passText: '0-20[%] の 整数または小数 が設定可能'),
                     // ----------------------------------------------------------------------------------------------
@@ -192,11 +187,11 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                   toggleBeginningGuides: Column(children: [
                     // --------------------------- 【展開時】学生ポイントの注意書き -----------------------------------
                     miniInfo(passText: '次のポイントが計算可能です：', customIcon: Icons.check),
-                    miniInfo(passText: '・LINE Pay還元(最大+9.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
-                    miniInfo(passText: '・対象サブスク還元(最大+9.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
-                    miniInfo(passText: '・携帯料金還元(最大+1.5%)', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
+                    miniInfo(passText: '・LINE Pay還元(最大+9.5%)', needsIcon: false, doukaColor: const Color(0xffdcdcdc)),
+                    miniInfo(passText: '・対象サブスク還元(最大+9.5%)', needsIcon: false, doukaColor: const Color(0xffdcdcdc)),
+                    miniInfo(passText: '・携帯料金還元(最大+1.5%)', needsIcon: false, doukaColor: const Color(0xffdcdcdc)),
                     miniInfo(passText: '次のポイントは計算できません：', customIcon: Icons.block_outlined),
-                    miniInfo(passText: '・分割払い手数料全額ポイント還元', needsIcon: false, doukaColor: Color(0xffdcdcdc)),
+                    miniInfo(passText: '・分割払い手数料全額ポイント還元', needsIcon: false, doukaColor: const Color(0xffdcdcdc)),
                     // ----------------------------------------------------------------------------------------------
                   ]),
                   toggleTitleComp: titleTextComp(resvIcon: Icons.event_available_outlined, resvText: '卒業予定年を入力', resvTextSize: 16),

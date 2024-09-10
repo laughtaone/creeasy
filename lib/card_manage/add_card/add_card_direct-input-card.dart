@@ -2,22 +2,20 @@ import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_button_toggle_comp.dart';
 import 'package:creeasy/card_manage/card_manage_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
-import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_double_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
-import 'package:creeasy/COMMON_COMPS/formatter/input_double_formatter.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 
 
 
 
 class AddCardPageDirectInputCard extends StatefulWidget {
+  const AddCardPageDirectInputCard({super.key});
+
   @override
   _AddCardPageDirectInputCardState createState() =>
       _AddCardPageDirectInputCardState();
@@ -83,7 +81,7 @@ class _AddCardPageDirectInputCardState
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Row(
+          title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -99,7 +97,7 @@ class _AddCardPageDirectInputCardState
                 onPressed: () {
                   Navigator.popUntil(context, (route) => route.isFirst);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.close,
                   color: Colors.black,
                 ))

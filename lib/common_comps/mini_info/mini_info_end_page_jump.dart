@@ -12,8 +12,8 @@ class miniInfoEndPageJump extends StatefulWidget {
   final Color customColor;
   final Widget jumpPage; // 遷移したいページ
 
-  miniInfoEndPageJump(
-      {required this.passText,
+  const miniInfoEndPageJump(
+      {super.key, required this.passText,
       this.customIcon = Icons.info_outline,
       this.needsIcon = true,
       this.doukaColor = const Color(0xffededed),

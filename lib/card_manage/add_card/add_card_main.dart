@@ -1,4 +1,3 @@
-import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/no-border_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
@@ -12,6 +11,8 @@ import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
 
 
 class AddCardPage extends StatefulWidget {
+  const AddCardPage({super.key});
+
   @override
   _AddCardPageState createState() => _AddCardPageState();
 }
@@ -40,7 +41,7 @@ class _AddCardPageState extends State<AddCardPage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -56,7 +57,7 @@ class _AddCardPageState extends State<AddCardPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.close,
                 color: Colors.black,
               ))
@@ -70,13 +71,13 @@ class _AddCardPageState extends State<AddCardPage> {
           child: ListView(
             children: [
               // ========================================== ①支払いカード選択 ==========================================
-              SizedBox(height: 10),
-              Text(
+              const SizedBox(height: 10),
+              const Text(
                 r'\\まずはプリセットに用意されているかチェック//',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               selectTileComp(
                 titleComp: titleText(Icons.credit_card_outlined, '追加するカードを選択'),
                 guides: Column(children: [
@@ -95,7 +96,7 @@ class _AddCardPageState extends State<AddCardPage> {
               ),
               // ====================================================================================================
 
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // =============================================== 「次へ」ボタン ==============================================
               NextButtonComp(
@@ -110,7 +111,7 @@ class _AddCardPageState extends State<AddCardPage> {
               ),
               // =======================================================================================================
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // =============================================== 「直接入力」ボタン ==============================================
               ChokusetsuNyuuryokuButtonComp(
@@ -119,7 +120,7 @@ class _AddCardPageState extends State<AddCardPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          AddCardPageDirectInputCard(),
+                          const AddCardPageDirectInputCard(),
                     ),
                   );
                 },
@@ -140,15 +141,15 @@ Row titleText(IconData receivedIcon, String originalText) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
-      SizedBox(width: 2),
+      const SizedBox(width: 2),
       Icon(
         receivedIcon,
         size: 23,
       ),
-      SizedBox(width: 5),
+      const SizedBox(width: 5),
       Text(
         originalText,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 18,
         ),

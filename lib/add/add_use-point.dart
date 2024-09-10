@@ -10,6 +10,8 @@ import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button
 
 
 class AddUsePointPage extends StatefulWidget {
+  const AddUsePointPage({super.key});
+
   @override
   _AddUsePointPageState createState() => _AddUsePointPageState();
 }
@@ -41,7 +43,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -60,7 +62,7 @@ class _AddUsePointPageState extends State<AddUsePointPage> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.close,
               color: Colors.black,
             ))

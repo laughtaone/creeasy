@@ -22,7 +22,7 @@ class selectTileButtonToggleComp extends StatefulWidget {
   // final Function argToggleCallback;
   // -----------------------------------------
 
-  selectTileButtonToggleComp({
+  const selectTileButtonToggleComp({super.key, 
     required this.mainTitleComp, // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
     this.mainGuides, // ColumnのchildrenでminiInfoを並べる（任意）
     // required this.mainFieldInput, // ユーザーからの入力フィールドを指定（必須・入力フィールドのコンポーネントの指定を推奨）
@@ -64,7 +64,7 @@ class _selectTileButtonToggleCompState extends State<selectTileButtonToggleComp>
       guides: widget.mainGuides,
       fieldInput: Container(
         // margin: EdgeInsets.all(10),
-        margin: EdgeInsets.all(0),
+        margin: const EdgeInsets.all(0),
         child: Column(
           children: [
             CompInputRowDirectSelectType(
@@ -81,17 +81,17 @@ class _selectTileButtonToggleCompState extends State<selectTileButtonToggleComp>
             (_newMainSelectbuttonIndex == 1)
             ? Column(
               children: [
-                SizedBox(height: 7),
+                const SizedBox(height: 7),
                 selectTileComp(
-                  customBackColor: Color(0xffdcdcdc),
+                  customBackColor: const Color(0xffdcdcdc),
                   beginningGuides: widget.toggleBeginningGuides,
-                  titleComp: widget.toggleTitleComp ?? SizedBox.shrink(),
+                  titleComp: widget.toggleTitleComp ?? const SizedBox.shrink(),
                   guides: widget.toggleGuides,
                   fieldInput: widget.toggleFieldInput
                 ),
               ],
             )
-            : SizedBox.shrink(),
+            : const SizedBox.shrink(),
           ],
         ),
       ),

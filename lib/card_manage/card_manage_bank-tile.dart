@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/card_manage/card_manage.dart';
 import 'package:intl/intl.dart';
 import 'package:creeasy/card_manage/change_bank/change_bank.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/circle_icon_comp.dart';
 
 
 class CardManageBankTile extends StatelessWidget {
   final String recvBankName; // 銀行名
   final int recvBankType;    // 銀行のタイプ(0:通常・1:貯蓄ボックス)
 
-  CardManageBankTile({
+  const CardManageBankTile({super.key, 
     required this.recvBankName,
     this.recvBankType = 0
   });
@@ -33,12 +33,12 @@ class CardManageBankTile extends StatelessWidget {
           );
         },
         style: OutlinedButton.styleFrom(
-          backgroundColor: Color(0xffeeeeee),
-          side: BorderSide(color: Colors.black, width: 1),
+          backgroundColor: const Color(0xffeeeeee),
+          side: const BorderSide(color: Colors.black, width: 1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          fixedSize: Size.fromHeight(80)
+          fixedSize: const Size.fromHeight(80)
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,7 +50,7 @@ class CardManageBankTile extends StatelessWidget {
                 children: [
                   Text(
                     recvBankName,
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    style: const TextStyle(color: Colors.black, fontSize: 20),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -63,16 +63,10 @@ class CardManageBankTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(top: 11),
-                    child: Container(
-                      width: 45,
-                      height: 45,
-                      child: Icon(
-                        (recvBankType==0) ? Icons.account_balance_outlined : Icons.savings_outlined,
-                        size: 24,
-                        color: (recvBankType==0 || recvBankType==1) ? Colors.black : Colors.white
-                      ),
-                      decoration: const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                    margin: const EdgeInsets.only(top: 11),
+                    child: circleIconComp(
+                      argIcon: (recvBankType==0) ? Icons.account_balance_outlined : Icons.savings_outlined,
+                      customCircleSize: 47
                     ),
                   ),
                 ],

@@ -7,7 +7,7 @@ class sotbnFromList extends StatefulWidget {
   final List<SotbProperties> recvSotbsList;
   final Function(List<SotbProperties>) argCallback;
 
-  sotbnFromList({required this.recvSotbsList, required this.argCallback});
+  const sotbnFromList({super.key, required this.recvSotbsList, required this.argCallback});
 
   @override
   _sotbnFromListState createState() => _sotbnFromListState();
@@ -25,10 +25,10 @@ class _sotbnFromListState extends State<sotbnFromList> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: EdgeInsets.fromLTRB(10, 15, 10, 15),
-      physics: NeverScrollableScrollPhysics(), // スクロールを無効にする
+      padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
+      physics: const NeverScrollableScrollPhysics(), // スクロールを無効にする
       shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3, // 1行に表示する要素数
         childAspectRatio: 0.85, // 各要素のアスペクト比を調整 (幅/高さ)
       ),

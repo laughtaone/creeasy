@@ -9,8 +9,8 @@ class compInputDoubleType extends StatefulWidget {
   final double? resvNowInputingDouble;     // 入力フィールドの初期値(※任意)
   final Function(String) argCallback;   // コールバック関数
 
-  compInputDoubleType(
-      {
+  const compInputDoubleType(
+      {super.key, 
         this.prefixText,
         this.suffixText,
         this.resvNowInputingDouble,
@@ -40,26 +40,26 @@ class _compInputDoubleTypeState extends State<compInputDoubleType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
+      margin: const EdgeInsets.fromLTRB(10, 5, 10, 10),
       height: 70,
       child: TextField(
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 22,
         ),
         controller: _doubleInputted,
         decoration: InputDecoration(
           labelText: '',
-          contentPadding: EdgeInsets.all(30),
+          contentPadding: const EdgeInsets.all(30),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           prefixText: widget.prefixText,
           suffixText: widget.suffixText,
-          fillColor: Color(0xfffefefe),
+          fillColor: const Color(0xfffefefe),
           filled: true,
         ),
-        keyboardType: TextInputType.numberWithOptions(decimal: true),
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
         inputFormatters: [
           DecimalTextInputFormatter(),
           ZeroLimitFormatterForDouble(),

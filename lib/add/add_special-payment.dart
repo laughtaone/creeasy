@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
-import 'package:creeasy/COMMON_COMPS/formatter/zero_limit_formatter.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
-import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_date_type.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 
@@ -14,6 +11,8 @@ import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button
 
 
 class AddSpecialPaymentPage extends StatefulWidget {
+  const AddSpecialPaymentPage({super.key});
+
   @override
   _AddSpecialPaymentPageState createState() => _AddSpecialPaymentPageState();
 }
@@ -44,7 +43,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
       appBar: AppBar(
         centerTitle: true,
         automaticallyImplyLeading: false,
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -63,7 +62,7 @@ class _AddSpecialPaymentPageState extends State<AddSpecialPaymentPage> {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.close,
               color: Colors.black,
             ))

@@ -10,8 +10,8 @@ class compInputIntType extends StatefulWidget {
   final int? resvNowInputingInt;     // 入力フィールドの初期値(※任意)
   final Function(String) argCallback; // コールバック関数
 
-  compInputIntType(
-      {
+  const compInputIntType(
+      {super.key, 
         this.prefixText,
         this.suffixText,
         this.resvNowInputingInt,
@@ -42,24 +42,24 @@ class _compInputIntTypeState extends State<compInputIntType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(5),
       height: 70,
       child: TextField(
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 22,
         ),
         controller: _intInputted,
         decoration: InputDecoration(
           hintText: '未入力',
-          hintStyle: TextStyle(fontSize: 20),
-          contentPadding: EdgeInsets.fromLTRB(30, 30, 30, 20),
+          hintStyle: const TextStyle(fontSize: 20),
+          contentPadding: const EdgeInsets.fromLTRB(30, 30, 30, 20),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
           prefixText: widget.prefixText,
           suffixText: widget.suffixText,
-          fillColor: Color(0xfffefefe),
+          fillColor: const Color(0xfffefefe),
           filled: true,
         ),
         keyboardType: TextInputType.number,

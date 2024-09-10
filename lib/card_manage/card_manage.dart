@@ -5,12 +5,13 @@ import 'package:creeasy/card_manage/card_manage_bank-tile.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/card_manage/bank_example_icon.dart';
-import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 
 
 
 
 class CardManagePage extends StatefulWidget {
+  const CardManagePage({super.key});
+
   @override
   _CardManagePageState createState() => _CardManagePageState();
 }
@@ -52,7 +53,7 @@ class _CardManagePageState extends State<CardManagePage>
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Row(
+          title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -66,7 +67,7 @@ class _CardManagePageState extends State<CardManagePage>
           actions: [
             TextButton(
               child: Row(children: [
-                Icon(
+                const Icon(
                   Icons.add,
                   color: Colors.black,
                 ),
@@ -80,8 +81,8 @@ class _CardManagePageState extends State<CardManagePage>
                   context,
                   MaterialPageRoute(
                     builder: (context) => (_tabController.index == 0)
-                      ? AddCardPage()
-                      : AddBankPage(),
+                      ? const AddCardPage()
+                      : const AddBankPage(),
                     fullscreenDialog: true,
                   ),
                 );
@@ -90,7 +91,7 @@ class _CardManagePageState extends State<CardManagePage>
           ],
           backgroundColor:
               Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
-          bottom: TabBar(controller: _tabController, tabs: [
+          bottom: TabBar(controller: _tabController, tabs: const [
             Tab(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -124,14 +125,14 @@ class _CardManagePageState extends State<CardManagePage>
                   passText: '変更がある場合は各カードの枠内をタップして編集',
                   customTextSize: 13, needsTBPadding: true, customTopPadding: 6, customBottomPadding: 10
                 ),
-                CardManageCardTile(
-                    card_name: '三井住友カード',
+                const CardManageCardTile(
+                    card_name: '三井住友カードaaaaaaaaaaaaaaa',
                     return_rate_unit: 200,
                     return_rate: 0.5,
                     target_range: '1日-末日',
                     pay_date: '翌月26日',
                     bool_pointup: true),
-                CardManageCardTile(
+                const CardManageCardTile(
                     card_name: 'メルカード',
                     return_rate_unit: 100,
                     return_rate: 1,
@@ -154,9 +155,9 @@ class _CardManagePageState extends State<CardManagePage>
 
                   bankExampleIcon(),   // 通常口座・口座内ボックス アイコン 凡例
 
-                  CardManageBankTile(recvBankName: 'みんなの銀行 - 専用ボックスああああああああああああああああああああああああああああああああ', recvBankType: 1),
-                  CardManageBankTile(recvBankName: '三井住友銀行'),
-                  CardManageBankTile(recvBankName: '三菱UFJ銀行'),
+                  const CardManageBankTile(recvBankName: 'みんなの銀行 - 専用ボックスああああああああああああああああああああああああああああああああ', recvBankType: 1),
+                  const CardManageBankTile(recvBankName: '三井住友銀行'),
+                  const CardManageBankTile(recvBankName: '三菱UFJ銀行'),
                 ],
               ),
             ),

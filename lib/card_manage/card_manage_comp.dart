@@ -8,14 +8,14 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.d
 // ================================================================= 選択されたカード名 ========================================================================
 Container selectedCardIntro(String? cardName) {
   return Container(
-    margin: EdgeInsets.only(top: 5),
+    margin: const EdgeInsets.only(top: 5),
     child: selectTileComp(
       titleComp: titleTextComp(
           resvIcon: Icons.credit_card_outlined, resvText: '選択されたカード名'),
       fieldInput: Container(
         child: Text(
           cardName ?? '未選択',
-          style: TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20),
         ),
       )
     ),
@@ -30,8 +30,8 @@ class PayBankComp extends StatefulWidget {
   final int? resvNowSelectingBankIndex;
   final Function(int?) argCallback;
 
-  PayBankComp(
-      {required this.bankList, // 登録されている銀行のリスト
+  const PayBankComp(
+      {super.key, required this.bankList, // 登録されている銀行のリスト
       required this.resvNowSelectingBankIndex, // 現在選択中の銀行のインデックス番号(カード情報変更時に使用・カード新規追加時には不使用)
       required this.argCallback});
 
@@ -55,7 +55,7 @@ class _PayBankCompState extends State<PayBankComp> {
     return selectTileComp(
         titleComp: titleTextComp(
             resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
-        guides: Column(
+        guides: const Column(
           children: [
             miniInfoEndPageJump(
               passText: '銀行を新規追加する場合は',

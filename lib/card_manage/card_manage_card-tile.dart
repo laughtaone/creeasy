@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/card_manage/card_manage.dart';
 import 'package:intl/intl.dart';
 import 'package:creeasy/card_manage/change_card/change_card.dart';
 
@@ -13,7 +12,7 @@ class CardManageCardTile extends StatefulWidget {
   final bool bool_pointup; // ポイントアップあり/なし
   // final Function cardTileOnpressed;     // カードタイルが押された時の処理
 
-  CardManageCardTile({
+  const CardManageCardTile({super.key, 
     required this.card_name,
     required this.return_rate_unit,
     required this.return_rate,
@@ -43,29 +42,40 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
           );
         },
         style: OutlinedButton.styleFrom(
-          backgroundColor: Color(0xffeeeeee),
-          side: BorderSide(color: Colors.black, width: 1),
+          backgroundColor: const Color(0xffeeeeee),
+          side: const BorderSide(color: Colors.black, width: 1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          fixedSize: Size.fromHeight(130)
+          fixedSize: const Size.fromHeight(130)
         ),
         child: Align(
           alignment: Alignment.centerLeft,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.card_name,
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                  (widget.bool_pointup)
+              Expanded(
+                flex: 4,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.card_name,
+                        style: const TextStyle(color: Colors.black, fontSize: 22),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    (widget.bool_pointup)
                       ? Container(
-                          child: Row(
+                          margin: const EdgeInsets.only(left: 5),
+                          padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Row(
                             children: [
                               Icon(
                                 Icons.auto_awesome_outlined,
@@ -74,7 +84,7 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
                               ),
                               SizedBox(width: 2),
                               Text(
-                                'ポイントアップあり',
+                                'P UPあり',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.black54,
@@ -82,82 +92,87 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
                               )
                             ],
                           ),
-                          padding: EdgeInsets.fromLTRB(6, 4, 6, 4),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
                         )
-                      : SizedBox.shrink()
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 5),
-                child: Row(
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          '基本還元率',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Column(
-                          children: [
-                            Text('${widget.return_rate_unit}円につき',
-                                style: TextStyle(
-                                  fontSize: 8,
-                                  color: Colors.black,
-                                )),
-                            Text('${formatReturnRate(widget.return_rate)}%',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w800,
-                                )),
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(width: 5),
-                    Container(height: 60, child: VerticalDivider()),
-                    SizedBox(width: 5),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          '引落額集計期間',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          '${widget.target_range}',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 17),
-                        )
-                      ],
-                    ),
-                    SizedBox(width: 5),
-                    Container(height: 60, child: VerticalDivider()),
-                    SizedBox(width: 5),
-                    Column(
-                      children: [
-                        Text(
-                          '引き落とし日',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        SizedBox(height: 6),
-                        Text(
-                          '${widget.pay_date}',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 17),
-                        )
-                      ],
-                    ),
+                      : const SizedBox.shrink()
                   ],
+                ),
+              ),
+              Expanded(
+                flex: 7,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              '基本還元率',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            Column(
+                              children: [
+                                Text('${widget.return_rate_unit}円につき',
+                                  style: const TextStyle(
+                                    fontSize: 8,
+                                    color: Colors.black,
+                                  )),
+                                Text('${formatReturnRate(widget.return_rate)}%',
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w800,
+                                    )),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 3),
+                      const SizedBox(height: 60, child: VerticalDivider()),
+                      const SizedBox(width: 3),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            '引落額集計期間',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            widget.target_range,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 17
+                            ),
+                          )
+                        ],
+                      ),
+                      const SizedBox(width: 3),
+                      const SizedBox(height: 60, child: VerticalDivider()),
+                      const SizedBox(width: 3),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            '引き落とし日',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            widget.pay_date,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 17
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

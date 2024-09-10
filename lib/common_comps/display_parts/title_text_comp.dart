@@ -9,14 +9,14 @@ Row titleTextComp({
   return Row(
     mainAxisAlignment: MainAxisAlignment.start,
     children: [
-      SizedBox(width: 2),
+      const SizedBox(width: 2),
       (resvIcon != null)
           ? Icon(
               resvIcon,
               size: 23,
             )
-          : SizedBox.shrink(),
-      SizedBox(width: 5),
+          : const SizedBox.shrink(),
+      const SizedBox(width: 5),
       Text(
         resvText,
         style: TextStyle(

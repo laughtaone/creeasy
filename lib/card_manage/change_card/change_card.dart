@@ -11,8 +11,7 @@ import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button
 
 class ChangeCardPage extends StatefulWidget {
   final String? selectedCardName;
-  const ChangeCardPage({Key? key, required this.selectedCardName})
-      : super(key: key);
+  const ChangeCardPage({super.key, required this.selectedCardName});
 
   @override
   _ChangeCardPageState createState() => _ChangeCardPageState();
@@ -32,7 +31,7 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
         appBar: AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
-          title: Row(
+          title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -45,7 +44,7 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
           ),
           backgroundColor:
               Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
-          actions: [ToprightCloseButton()],
+          actions: const [ToprightCloseButton()],
         ),
         body: GestureDetector(
             behavior: HitTestBehavior.opaque,
@@ -70,12 +69,12 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
                     miniInfo(passText: '以下の項目は変更できません：', customTextSize: 14),
                     miniInfo(
                       needsIcon: false,
-                      doukaColor: Color(0xffffffe7),
+                      doukaColor: const Color(0xffffffe7),
                       passText: '・締日/引き落とし日'
                     ),
                     miniInfo(
                       needsIcon: false,
-                      doukaColor: Color(0xffffffe7),
+                      doukaColor: const Color(0xffffffe7),
                       passText: '・基本還元率'
                     ),
                   ],)),

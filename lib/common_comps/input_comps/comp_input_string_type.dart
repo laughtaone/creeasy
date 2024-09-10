@@ -7,8 +7,8 @@ class compInputStringType extends StatefulWidget {
   final String? resvNowInputingString;     // 入力フィールドの初期値(※任意)
   final Function(String) argCallback; // コールバック関数
 
-  compInputStringType(
-      {
+  const compInputStringType(
+      {super.key, 
         this.resvNowInputingString,
         required this.argCallback
       });
@@ -37,21 +37,21 @@ class _compInputStringTypeState extends State<compInputStringType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       height: 70,
       child: TextField(
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.w500,
           fontSize: 22,
         ),
         controller: _stringInputted,
         decoration: InputDecoration(
           labelText: '',
-          contentPadding: EdgeInsets.all(30),
+          contentPadding: const EdgeInsets.all(30),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          fillColor: Color(0xfffefefe),
+          fillColor: const Color(0xfffefefe),
           filled: true,
         ),
         keyboardType: TextInputType.text,

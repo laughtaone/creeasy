@@ -11,7 +11,7 @@ class CompInputRowDirectSelectType extends StatefulWidget {
   final Function(int) argCallback; // コールバック関数
   final double customHeight;
 
-  CompInputRowDirectSelectType({
+  const CompInputRowDirectSelectType({super.key, 
     required this.elementsList,             // 選択する要素を格納したリスト（※必須）
     this.resvNowSelectingIndex,             // 現在選択中の要素のインデックス番号(デフォでは未選択を示すnull)
     this.customFontSize = 20,               // 選択要素の文字の大きさをカスタム(デフォは20)
@@ -43,23 +43,23 @@ class _CompInputRowDirectSelectTypeState extends State<CompInputRowDirectSelectT
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: widget.elementsList.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: EdgeInsets.only(right: (index!=(widget.elementsList).length-1) ?18 :0),
             child: TextButton(
               style: TextButton.styleFrom(
-                minimumSize: Size(140, 60),
+                minimumSize: const Size(140, 60),
                 backgroundColor: (_newSelectIndex == index)
-                    ? Color(0xffdedede)
-                    : Color(0xfffefefe),
+                    ? const Color(0xffdedede)
+                    : const Color(0xfffefefe),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
                 // padding: EdgeInsets.only(left: 2, right: 2)
               ).copyWith(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
               ),
               onPressed: () {
                 setState(() {
@@ -75,13 +75,13 @@ class _CompInputRowDirectSelectTypeState extends State<CompInputRowDirectSelectT
                     color: (_newSelectIndex == index) ? Colors.black : Colors.white,
                     size: widget.customIconSize,
                   ),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     widget.elementsList[index],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: widget.customFontSize,
-                      color: Color(0xff444444),
+                      color: const Color(0xff444444),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
