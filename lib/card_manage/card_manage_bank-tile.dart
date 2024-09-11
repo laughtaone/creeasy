@@ -13,8 +13,6 @@ class CardManageBankTile extends StatelessWidget {
     this.recvBankType = 0
   });
 
- 
-
 
   @override
   Widget build(BuildContext context) {
