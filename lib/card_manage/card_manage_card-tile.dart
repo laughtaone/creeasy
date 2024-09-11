@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:creeasy/card_manage/change_card/change_card.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/rectangle_icon_text_comp.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 
 class CardManageCardTile extends StatefulWidget {
@@ -57,26 +58,21 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
             children: [
               Expanded(
                 flex: 4,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 1),
-                  child: Expanded(
-                    child: Row( // ココ!!
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            widget.card_name,
-                            style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=8) ?22 :19),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        (widget.bool_pointup)
-                          ? rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff555555))
-                          : const SizedBox.shrink()
-                      ],
+                child: Row( // ココ!!
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        widget.card_name,
+                        style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=8) ?22 :19),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                  ),
+                    (widget.bool_pointup)
+                      ? rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff555555))
+                      : const SizedBox.shrink()
+                  ],
                 ),
               ),
               Expanded(
@@ -86,26 +82,34 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
                   child: Row(
                     children: [
                       Expanded(
+                        flex: 6,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            const AutoSizeText(
                               '基本還元率',
                               style: TextStyle(color: Colors.black),
                             ),
                             Column(
                               children: [
-                                Text('${widget.return_rate_unit}円につき',
+                                AutoSizeText(
+                                  '${widget.return_rate_unit}円につき',
                                   style: const TextStyle(
                                     fontSize: 8,
                                     color: Colors.black,
-                                  )),
-                                Text('${formatReturnRate(widget.return_rate)}%',
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w800,
-                                    )),
+                                  ),
+                                  maxLines: 1,
+                                  minFontSize: 8,
+                                ),
+                                AutoSizeText(
+                                  '${formatReturnRate(widget.return_rate)}%',
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                  maxLines: 1,
+                                ),
                               ],
                             )
                           ],
@@ -114,45 +118,55 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
                       const SizedBox(width: 3),
                       const SizedBox(height: 60, child: VerticalDivider()),
                       const SizedBox(width: 3),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            '引落額集計期間',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            widget.target_range,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 17
+                      Expanded(
+                        flex: 8,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const AutoSizeText(
+                              '引落額集計期間',
+                              style: TextStyle(color: Colors.black),
+                              maxLines: 1,
                             ),
-                          )
-                        ],
+                            const SizedBox(height: 6),
+                            AutoSizeText(
+                              widget.target_range,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 17
+                              ),
+                              maxLines: 1,
+                            )
+                          ],
+                        ),
                       ),
                       const SizedBox(width: 3),
                       const SizedBox(height: 60, child: VerticalDivider()),
                       const SizedBox(width: 3),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text(
-                            '引き落とし日',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            widget.pay_date,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 17
+                      Expanded(
+                        flex: 7,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const AutoSizeText(
+                              '引き落とし日',
+                              style: TextStyle(color: Colors.black),
+                              maxLines: 1,
                             ),
-                          )
-                        ],
+                            const SizedBox(height: 6),
+                            AutoSizeText(
+                              widget.pay_date,
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 17
+                              ),
+                              maxLines: 1,
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
