@@ -51,129 +51,122 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
           ),
           fixedSize: const Size.fromHeight(130)
         ),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 4,
-                child: Row( // ココ!!
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        widget.card_name,
-                        style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=8) ?22 :19),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 4,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,        // これが効かない
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.card_name,
+                      style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=8) ?22 :19),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    (widget.bool_pointup)
-                      ? rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff555555))
-                      : const SizedBox.shrink()
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 7,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 6,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const AutoSizeText(
-                              '基本還元率',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            Column(
-                              children: [
-                                AutoSizeText(
-                                  '${widget.return_rate_unit}円につき',
-                                  style: const TextStyle(
-                                    fontSize: 8,
-                                    color: Colors.black,
-                                  ),
-                                  maxLines: 1,
-                                  minFontSize: 8,
-                                ),
-                                AutoSizeText(
-                                  '${formatReturnRate(widget.return_rate)}%',
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                  maxLines: 1,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 3),
-                      const SizedBox(height: 60, child: VerticalDivider()),
-                      const SizedBox(width: 3),
-                      Expanded(
-                        flex: 8,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const AutoSizeText(
-                              '引落額集計期間',
-                              style: TextStyle(color: Colors.black),
-                              maxLines: 1,
-                            ),
-                            const SizedBox(height: 6),
-                            AutoSizeText(
-                              widget.target_range,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 17
-                              ),
-                              maxLines: 1,
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 3),
-                      const SizedBox(height: 60, child: VerticalDivider()),
-                      const SizedBox(width: 3),
-                      Expanded(
-                        flex: 7,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const AutoSizeText(
-                              '引き落とし日',
-                              style: TextStyle(color: Colors.black),
-                              maxLines: 1,
-                            ),
-                            const SizedBox(height: 6),
-                            AutoSizeText(
-                              widget.pay_date,
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w800,
-                                fontSize: 17
-                              ),
-                              maxLines: 1,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
                   ),
-                ),
+                  (widget.bool_pointup)
+                    ? rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff555555))
+                    : const SizedBox.shrink()
+                ],
               ),
-            ],
-          ),
+            ),
+            Expanded( // q
+              flex: 7,
+              child: Row( // r
+                children: [
+                  Expanded( // s1
+                    flex: 6,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const AutoSizeText(
+                          '基本還元率',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        Column(
+                          children: [
+                            AutoSizeText(
+                              '${widget.return_rate_unit}円につき',
+                              style: const TextStyle(
+                                fontSize: 8,
+                                color: Colors.black,
+                              ),
+                              maxLines: 1,
+                              minFontSize: 8,
+                            ),
+                            AutoSizeText(
+                              '${formatReturnRate(widget.return_rate)}%',
+                              style: const TextStyle(
+                                fontSize: 17,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w800,
+                              ),
+                              maxLines: 1,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 3),
+                  const SizedBox(height: 60, child: VerticalDivider()),
+                  const SizedBox(width: 3),
+                  Expanded( // s2
+                    flex: 8,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const AutoSizeText(
+                          '引落額集計期間',
+                          style: TextStyle(color: Colors.black),
+                          maxLines: 1,
+                        ),
+                        const SizedBox(height: 6),
+                        AutoSizeText(
+                          widget.target_range,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17
+                          ),
+                          maxLines: 1,
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 3),
+                  const SizedBox(height: 60, child: VerticalDivider()),
+                  const SizedBox(width: 3),
+                  Expanded( // s3
+                    flex: 7,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const AutoSizeText(
+                          '引き落とし日',
+                          style: TextStyle(color: Colors.black),
+                          maxLines: 1,
+                        ),
+                        const SizedBox(height: 6),
+                        AutoSizeText(
+                          widget.pay_date,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w800,
+                            fontSize: 17
+                          ),
+                          maxLines: 1,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
