@@ -25,8 +25,6 @@ class AddCardPagePresetCard extends StatefulWidget {
 class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
   final List<String> _smcnlPayRule = ['15日締め / 翌月10日払い', '月末締め / 翌月26日払い'];
   final List<String> _bankList = ['三菱UFJ銀行', 'みんなの銀行', '三井住友銀行'];
-  final List<String> _isVpup = ['設定しない', '設定する'];
-  final List<String> _isStudentPoint = ['設定しない', '設定する'];
   final List<String> _gradYearList = [
     '2024',
     '2025',
@@ -137,7 +135,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                     miniInfo(passText: '利用金額のみを管理したい場合はこの設定は不要', customIcon: Icons.tips_and_updates_outlined),
                     miniInfo(passText: 'ポイントも細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined),
                   ],),
-                  mainSelectList: _isVpup,
+                  mainSelectList: const ['設定しない', '設定する'],
                   argMainCallback: (int? resvIndex) {
                     _selectedVpupIndex = resvIndex;
                   },
@@ -179,7 +177,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                       miniInfo(passText: '利用金額のみを管理したい場合この設定は不要', customIcon: Icons.tips_and_updates_outlined),
                       miniInfo(passText: 'ポイントも細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined),
                   ],),
-                  mainSelectList: _isStudentPoint,
+                  mainSelectList: const ['設定しない', '設定する'],
                   argMainCallback: (int? resvIndex) {
                     _selectedStudentPointIndex = resvIndex;
                   },

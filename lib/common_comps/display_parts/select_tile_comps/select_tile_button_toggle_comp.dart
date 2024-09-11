@@ -12,9 +12,10 @@ class selectTileButtonToggleComp extends StatefulWidget {
   final Column? beginningMainGuides;
   final Function(int?) argMainCallback;
   final List<String> mainSelectList;
-  final double? customFontsizeMainSelectButton;
-  final double? customIconsizeMainSelectButton;
+  final double customFontsizeMainSelectButton;
+  final double customIconsizeMainSelectButton;
   final int? nowMainSelectbuttonIndex;
+  final double customSelectButtonHeight;
   // ------------ トグルフィールド --------------
   final Column? toggleBeginningGuides;
   final Widget? toggleTitleComp;
@@ -23,7 +24,7 @@ class selectTileButtonToggleComp extends StatefulWidget {
   // final Function argToggleCallback;
   // -----------------------------------------
 
-  const selectTileButtonToggleComp({super.key, 
+  const selectTileButtonToggleComp({super.key,
     required this.mainTitleComp, // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
     this.mainGuides, // ColumnのchildrenでminiInfoを並べる（任意）
     // required this.mainFieldInput, // ユーザーからの入力フィールドを指定（必須・入力フィールドのコンポーネントの指定を推奨）
@@ -31,9 +32,10 @@ class selectTileButtonToggleComp extends StatefulWidget {
     this.beginningMainGuides,      // mainTitleCompの前の冒頭にminiInfoのColumn(任意)
     required this.argMainCallback,
     required this.mainSelectList,
-    this.customFontsizeMainSelectButton,
-    this.customIconsizeMainSelectButton,
+    this.customFontsizeMainSelectButton = 17,
+    this.customIconsizeMainSelectButton = 24,
     required this.nowMainSelectbuttonIndex,
+    this.customSelectButtonHeight = 60,
     // ------------ トグルフィールド --------------
     this.toggleBeginningGuides,
     this.toggleTitleComp,
@@ -72,14 +74,15 @@ class _selectTileButtonToggleCompState extends State<selectTileButtonToggleComp>
             CompInputRowDirectSelectType(
               elementsList: widget.mainSelectList,
               customFontSize: widget.customFontsizeMainSelectButton,
-              customIconSize: widget.customIconsizeMainSelectButton ?? 25,
+              customIconSize: widget.customIconsizeMainSelectButton,
               resvNowSelectingIndex: _newMainSelectbuttonIndex,
               argCallback: (int? recvIndex) {
                 setState(() {
                   _newMainSelectbuttonIndex = recvIndex;
                 });
                 widget.argMainCallback(_newMainSelectbuttonIndex);
-              }
+              },
+              customHeight: widget.customSelectButtonHeight,
             ),
             (_newMainSelectbuttonIndex == 1)
             ? Column(
