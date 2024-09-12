@@ -4,27 +4,11 @@ import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_page_jump.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
+// 引き落とし口座の選択(資金ボックスで管理するかどうかは聞かない)
+// import文：import 'package:creeasy/card_manage/card_manage_COMPS/pay_bank_comp.dart';
 
-// ================================================================= 選択されたカード名 ========================================================================
-Container selectedCardIntro(String? cardName) {
-  return Container(
-    margin: const EdgeInsets.only(top: 5),
-    child: selectTileComp(
-      titleComp: titleTextComp(
-          resvIcon: Icons.credit_card_outlined, resvText: '選択されたカード名'),
-      fieldInput: Container(
-        child: Text(
-          cardName ?? '未選択',
-          style: const TextStyle(fontSize: 20),
-        ),
-      )
-    ),
-  );
-}
 
-// ==========================================================================================================================================================
 
-// ================================================================= 引き落とし口座の選択 =======================================================================
 class PayBankComp extends StatefulWidget {
   final List<String> bankList;
   final int? resvNowSelectingBankIndex;
