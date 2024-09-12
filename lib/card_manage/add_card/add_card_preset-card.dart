@@ -87,7 +87,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
                 betweenIcon(Icons.add_outlined),
 
-                titleTextComp(resvText: 'カード情報を微調整', resvTextSize: 20),
+                titleTextComp(resvText: 'カード情報を微調整', hTextType: 1),
 
                 // =============================================== ① 締日/引き落とし日の選択 ==============================================
                 selectTileComp(
