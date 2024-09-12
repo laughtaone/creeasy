@@ -13,7 +13,8 @@ Container miniInfo(
     double customTopPadding = 2,
     double customBottomPadding = 2,
     bool needsLRPadding = true,
-    double customIconTextPadding = 4
+    double customIconTextPadding = 4,
+    bool boolMainAxisSize = false
   }) {
   return Container(
     constraints: const BoxConstraints(
@@ -27,6 +28,7 @@ Container miniInfo(
       bottom: (needsTBPadding) ? customBottomPadding : 0,
     ),
     child: Row(
+      mainAxisSize: (boolMainAxisSize) ?MainAxisSize.min :MainAxisSize.max,
       mainAxisAlignment:
         (customPlacement==null)
           ? MainAxisAlignment.start
@@ -46,12 +48,11 @@ Container miniInfo(
           ),
         ),
         SizedBox(width: customIconTextPadding),
-        Flexible(
-            child: Text(passText,
-                style: TextStyle(
-                  color: customColor,
-                  fontSize: customTextSize,
-                ))),
+        Flexible(child: Text(
+          passText,
+          style: TextStyle(color: customColor, fontSize: customTextSize),
+          overflow: TextOverflow.ellipsis,
+        )),
       ],
     ),
   );

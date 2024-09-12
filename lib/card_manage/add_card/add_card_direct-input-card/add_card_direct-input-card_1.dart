@@ -175,28 +175,29 @@ class _AddCardPageDirectInputCard1State
                     // ------------------------------------------------------------------------
                     // ------------------------- ④引き落とし口座の選択 ----------------------------
                     betweenSelectField(),
-                    // titleTextComp(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
-                    // selectTileComp(
-                    //   titleComp: titleTextComp(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
-                    //   fieldInput: fieldInput
-                    // ),
                     PayBankAndSavingBoxComp(
                       // ------------ 引き落とし口座選択フィールド ------------
                       bankList: _bankList,
                       resvNowSelectingBankIndex: _selectedBoolSavingboxIndex,
                       argMainCallback: (int? resvIndex) {
-                        _selectedBankIndex = resvIndex;
+                        setState(() {
+                          _selectedBankIndex = resvIndex;
+                        });
                       },
                       // --------- 資金ボックスで一旦管理選択フィールド ---------
                       resvNowSelectingSub1: _selectedSavingboxIndex,
                       argSub1Callback: (int? resvIndex) {
-                        _selectedBoolSavingboxIndex = resvIndex;
+                        setState(() {
+                          _selectedBoolSavingboxIndex = resvIndex;
+                        });
                       },
                       // ------------- 資金ボックス選択フィールド -------------
                       savingboxList: _savingboxList,
                       resvNowSelectingSub2: _selectedSavingboxIndex,
                       argSub2Callback: (int? resvIndex) {
-                        _selectedSavingboxIndex = resvIndex;
+                        setState(() {
+                          _selectedSavingboxIndex = resvIndex;
+                        });
                       },
                     ),
                     // ------------------------------------------------------------------------

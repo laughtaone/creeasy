@@ -14,22 +14,21 @@ import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile
 import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
-import 'package:creeasy/card_manage/add_card/add_card_direct-input-card/add_card_direct-input-card_3.dart';
+import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
 
 
 
 
 
-
-class AddCardPageDirectInputCard2 extends StatefulWidget {
-  const AddCardPageDirectInputCard2({super.key});
+class AddCardPageDirectInputCard3 extends StatefulWidget {
+  const AddCardPageDirectInputCard3({super.key});
 
   @override
-  _AddCardPageDirectInputCard2State createState() =>
-      _AddCardPageDirectInputCard2State();
+  _AddCardPageDirectInputCard3State createState() =>
+      _AddCardPageDirectInputCard3State();
 }
 
-class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard2> {
+class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard3> {
   // ================================ 変数処理 ================================
   int? _isSpecialPayment;
   // =========================================================================
@@ -69,8 +68,42 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
                 padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
                 child: ListView(
                   children: [
-                    // ================================================ 2.支払い額について =================================================
-                    titleTextComp(resvText: 'Step2：支払い額について', hTextType: 1, customBottomMargin: 15),
+                    // ================================================ 3.管理項目について =================================================
+                    // --------------------------- ⓪必須項目 ----------------------------
+                    titleTextComp(resvText: 'Step3：管理項目について', hTextType: 1, customBottomMargin: 15),
+                    selectTileComp(
+                      customBackColor: const Color(0xfff2f2f2),
+                      titleComp: titleTextComp(resvText: '必須項目', resvTextSize: 20),
+                      fieldInput: Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+                        child: Column(children: [
+                          const Text('次の2つの項目はデフォルトで管理され、この項目を削除することはできません。', style: TextStyle(fontSize: 15)),
+                          const SizedBox(height: 8),
+                          Container(
+                            decoration: BoxDecoration(
+                              // color: const Color(0xffe8e8e8),
+                              color: const Color(0xffffffff),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Align(child: SizedBox(
+                              width: 160,
+                              height: 80,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  miniInfo(passText: '使用金額', customIcon: Icons.currency_yen_outlined, customTextSize: 16),
+                                  miniInfo(passText: '口座残高の確保', customIcon: Icons.account_balance_wallet_outlined, customTextSize: 16),
+                                ],
+                              ),
+                            )),
+                          ),
+                        ]),
+                      )
+                    ),
+                    // ------------------------------------------------------------------------
+
+                    betweenIcon(Icons.add),
+
                     // --------------------------- ①臨時支払いの有無 ----------------------------
                     selectTileComp(
                       titleComp: titleTextComp(resvIcon: Icons.published_with_changes_outlined, resvText: '繰り上げ返済の有無'),

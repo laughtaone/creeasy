@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 Padding betweenIcon(IconData recvIcon) {
   return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 20),
-      child: Icon(recvIcon, size: 27));
+    padding: const EdgeInsets.only(top: 20, bottom: 20),
+    child: Icon(recvIcon, size: 27)
+  );
 }
