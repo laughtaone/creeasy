@@ -41,11 +41,15 @@ Container miniInfoEndUrlJump({
         ),
         const SizedBox(width: 4),
         Flexible(
-            child: Text(passText,
-                style: TextStyle(
-                  color: customColor,
-                  fontSize: customTextSize,
-                ))),
+          child: Text(
+            passText,
+            style: TextStyle(
+              color: customColor,
+              fontSize: customTextSize,
+            ),
+            overflow: TextOverflow.ellipsis,
+          )
+        ),
         const SizedBox(width: 2),
         RichText(
             text: TextSpan(children: [

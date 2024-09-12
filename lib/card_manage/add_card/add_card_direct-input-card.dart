@@ -1,5 +1,7 @@
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_button_toggle_comp.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_page_jump.dart';
+import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_url_jump.dart';
 import 'package:creeasy/card_manage/card_manage_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_double_type.dart';
@@ -9,6 +11,9 @@ import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
+import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
+import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
+
 
 
 
@@ -63,10 +68,12 @@ class _AddCardPageDirectInputCardState
   // ================================ 変数処理 ================================
   String? _inputCardName;
   String? _inputReturnRate;
+  int? _isSpecialPayment;
   int? _closingDate; // ③で入力された締め日を保持する変数
   int? _payDate; // ④で入力された引き落とし日を保持する変数
   int? _selectedBank; // ⑤で選択された銀行を保持する変数
   int? _selectedPointUpIndex;   // ⑥で選択されたポイントアップの有無を保持する変数
+
 
   void _onBoolPointUpSelected(int? index) {
     setState(() {
@@ -110,6 +117,111 @@ class _AddCardPageDirectInputCardState
                 padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
                 child: ListView(
                   children: [
+                    // ==================================================== 1.基本項目 ====================================================
+                    titleTextComp(resvText: '基本項目', hTextType: 1),
+                    // ------------------------------- ①カード名 -------------------------------
+                    selectTileComp(
+                      titleComp: titleTextComp(resvIcon: Icons.credit_card_outlined, resvText: 'カード名を入力'),
+                      fieldInput: Container(child: compInputStringType(
+                        resvNowInputingString: _inputCardName,
+                        argCallback: (recvString) {
+                          setState(() {
+                            _inputCardName = recvString; // コールバックで受け取った値を保持
+                          });
+                        },
+                      ))
+                    ),
+                    // ------------------------------------------------------------------------
+                    // ------------------------------- ②締め日 -------------------------------
+                    betweenSelectField(),
+                    selectTileComp(
+                      titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '締め日を入力'),
+                      fieldInput: Container(
+                        child: compInputDialogSelectType(
+                          dialogText: '締日を選択：',
+                          suffixTanni: '日',
+                          elementsList: _dayList,
+                          resvNowSelectingIndex: _closingDate,
+                          argCallback: (date) {
+                            setState(() {
+                              _closingDate = date;
+                            });
+                          },
+                        ),
+                      )
+                    ),
+                    // ------------------------------------------------------------------------
+                    // ------------------------------- ③引き落とし日 -------------------------------
+                    betweenSelectField(),
+                    selectTileComp(
+                      titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '引き落とし日を入力'),
+                      fieldInput: Container(
+                        child: compInputDialogSelectType(
+                          dialogText: '引き落とし日を選択：',
+                          suffixTanni: '日',
+                          elementsList: _dayList,
+                          resvNowSelectingIndex: _payDate,
+                          argCallback: (date) {
+                            setState(() {
+                              _payDate = date;
+                            });
+                          },
+                        ),
+                      )
+                    ),
+                    // ------------------------------------------------------------------------
+                    // ==================================================================================================================
+
+
+                    betweenIcon(Icons.add),
+
+
+                    // ================================================ 2.支払い額について =================================================
+                    titleTextComp(resvText: '支払い額について', hTextType: 1),
+                    // --------------------------- ①臨時支払いの有無 ----------------------------
+                    selectTileComp(
+                      titleComp: titleTextComp(resvIcon: Icons.published_with_changes_outlined, resvText: '繰り上げ返済の有無'),
+                      fieldInput: CompInputRowDirectSelectType(
+                        elementsList: const ['ない', 'ある'],
+                        argCallback: (int resvIndex) {
+                          setState(() {
+                            _isSpecialPayment = resvIndex;
+                          });
+                        },
+                      ),
+                    ),
+                    // ------------------------------------------------------------------------
+                    // --------------------------- ②ポイント割当の有無 ----------------------------
+                    betweenSelectField(),
+                    selectTileComp(
+                      titleComp: titleTextComp(resvIcon: Icons.shopping_cart_checkout_outlined, resvText: 'ポイント割当の有無'),
+                      guides: Column(
+                        children: [
+                          miniInfoEndUrlJump(passText: '繰り上げ返済とは、利用額を引き落とし日よりも前に支払うことです。詳しくは', passUrl: 'https://www.jcb.co.jp/ordercard/special/prepayment.html',)
+                        ],
+                      ),
+                      fieldInput: CompInputRowDirectSelectType(
+                        elementsList: const ['ない', 'ある'],
+                        argCallback: (int resvIndex) {
+                          setState(() {
+                            _isSpecialPayment = resvIndex;
+                          });
+                        },
+                      ),
+                    ),
+                    // ------------------------------------------------------------------------
+                    // ==================================================================================================================
+
+
+
+
+
+
+
+
+
+
+                    const SizedBox(height: 500),
                     // =============================================== ①カード名 ==============================================
                     betweenSelectField(),
                     selectTileComp(

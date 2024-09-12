@@ -13,7 +13,7 @@ Row titleTextComp({
   } else{
     switch (hTextType) {
       case 1:
-        _finalTextSize = 20;
+        _finalTextSize = 21;
         break;
       case null || 2:
         _finalTextSize = 18;
@@ -32,10 +32,7 @@ Row titleTextComp({
     children: [
       const SizedBox(width: 2),
       (resvIcon != null)
-        ? Icon(
-            resvIcon,
-            size: 23,
-          )
+        ? Icon(resvIcon, size: 23)
         : const SizedBox.shrink(),
       const SizedBox(width: 5),
       Text(
@@ -45,6 +42,7 @@ Row titleTextComp({
           fontSize: _finalTextSize,
         ),
       ),
+      const SizedBox(width: 2),
     ],
   );
 }

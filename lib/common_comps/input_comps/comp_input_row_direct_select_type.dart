@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // 入力フィールド(選択/横直表示形式)単体
 // 横に並んだ選択肢から選ばせるコンポーネント
+// インポート文：import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 
 
 class CompInputRowDirectSelectType extends StatefulWidget {
