@@ -64,8 +64,7 @@ class _AddCardPageDirectInputCard1State
   ];
 
   final List<String> _bankList = ['三菱UFJ銀行', 'みんなの銀行', '三井住友銀行'];
-
-  final List<String> _isPointUp = ['なし', 'あり'];
+  final List<String> _savingboxList = ['みんなの銀行 - 三井住友カード', 'みんなの銀行 - ビューカード'];
 
   // ================================ 変数処理 ================================
   String? _inputCardName;
@@ -75,6 +74,8 @@ class _AddCardPageDirectInputCard1State
   int? _payDate; // ④で入力された引き落とし日を保持する変数
   int? _selectedBankIndex; // ⑤で選択された銀行を保持する変数
   int? _selectedPointUpIndex;   // ⑥で選択されたポイントアップの有無を保持する変数
+  int? _selectedBoolSavingboxIndex;
+  int? _selectedSavingboxIndex;
 
 
   void _onBoolPointUpSelected(int? index) {
@@ -179,6 +180,25 @@ class _AddCardPageDirectInputCard1State
                     //   titleComp: titleTextComp(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
                     //   fieldInput: fieldInput
                     // ),
+                    PayBankAndSavingBoxComp(
+                      // ------------ 引き落とし口座選択フィールド ------------
+                      bankList: _bankList,
+                      resvNowSelectingBankIndex: _selectedBoolSavingboxIndex,
+                      argMainCallback: (int? resvIndex) {
+                        _selectedBankIndex = resvIndex;
+                      },
+                      // --------- 資金ボックスで一旦管理選択フィールド ---------
+                      resvNowSelectingSub1: _selectedSavingboxIndex,
+                      argSub1Callback: (int? resvIndex) {
+                        _selectedBoolSavingboxIndex = resvIndex;
+                      },
+                      // ------------- 資金ボックス選択フィールド -------------
+                      savingboxList: _savingboxList,
+                      resvNowSelectingSub2: _selectedSavingboxIndex,
+                      argSub2Callback: (int? resvIndex) {
+                        _selectedSavingboxIndex = resvIndex;
+                      },
+                    ),
                     // ------------------------------------------------------------------------
                     // ==================================================================================================================
 

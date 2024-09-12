@@ -11,6 +11,8 @@ class CompInputRowDirectSelectType extends StatefulWidget {
   final double customIconSize;
   final Function(int) argCallback; // コールバック関数
   final double customHeight;
+  final Color customSelectedColor;
+  final Color customNonselectedColor;
 
   const CompInputRowDirectSelectType({super.key, 
     required this.elementsList,             // 選択する要素を格納したリスト（※必須）
@@ -18,7 +20,9 @@ class CompInputRowDirectSelectType extends StatefulWidget {
     this.customFontSize = 20,               // 選択要素の文字の大きさをカスタム(デフォは20)
     this.customIconSize = 27,
     required this.argCallback,              // コールバック関数（※必須）
-    this.customHeight = 62
+    this.customHeight = 62,
+    this.customSelectedColor = const Color(0xffdedede),
+    this.customNonselectedColor = const Color(0xfffefefe),
   });
 
   @override
@@ -53,8 +57,8 @@ class _CompInputRowDirectSelectTypeState extends State<CompInputRowDirectSelectT
               style: TextButton.styleFrom(
                 minimumSize: const Size(140, 60),
                 backgroundColor: (_newSelectIndex == index)
-                    ? const Color(0xffdedede)
-                    : const Color(0xfffefefe),
+                    ? widget.customSelectedColor
+                    : widget.customNonselectedColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
@@ -73,7 +77,7 @@ class _CompInputRowDirectSelectTypeState extends State<CompInputRowDirectSelectT
                 children: [
                   Icon(
                     Icons.check,
-                    color: (_newSelectIndex == index) ? Colors.black : Colors.white,
+                    color: (_newSelectIndex == index) ? Colors.black : widget.customNonselectedColor,
                     size: widget.customIconSize,
                   ),
                   const SizedBox(width: 8),

@@ -2,6 +2,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_ty
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:flutter/material.dart';
 // 選択タイル
+// import文：import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_button_toggle_comp.dart';
 
 
 class selectTileButtonToggleComp extends StatefulWidget {
