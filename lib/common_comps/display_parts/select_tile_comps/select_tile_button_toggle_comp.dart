@@ -16,6 +16,7 @@ class selectTileButtonToggleComp extends StatefulWidget {
   final double customIconsizeMainSelectButton;
   final int? nowMainSelectbuttonIndex;
   final double customSelectButtonHeight;
+  final bool defalutOpenToggle;
   // ------------ トグルフィールド --------------
   final Column? toggleBeginningGuides;
   final Widget? toggleTitleComp;
@@ -36,6 +37,7 @@ class selectTileButtonToggleComp extends StatefulWidget {
     this.customIconsizeMainSelectButton = 24,
     required this.nowMainSelectbuttonIndex,
     this.customSelectButtonHeight = 60,
+    this.defalutOpenToggle = false,
     // ------------ トグルフィールド --------------
     this.toggleBeginningGuides,
     this.toggleTitleComp,
@@ -84,7 +86,7 @@ class _selectTileButtonToggleCompState extends State<selectTileButtonToggleComp>
               },
               customHeight: widget.customSelectButtonHeight,
             ),
-            (_newMainSelectbuttonIndex == 1)
+            (_newMainSelectbuttonIndex == 1 || widget.defalutOpenToggle==true)
             ? Column(
               children: [
                 const SizedBox(height: 7),

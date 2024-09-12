@@ -16,7 +16,7 @@ class CompInputRowDirectSelectType extends StatefulWidget {
     required this.elementsList,             // 選択する要素を格納したリスト（※必須）
     this.resvNowSelectingIndex,             // 現在選択中の要素のインデックス番号(デフォでは未選択を示すnull)
     this.customFontSize = 20,               // 選択要素の文字の大きさをカスタム(デフォは20)
-    this.customIconSize = 25,
+    this.customIconSize = 27,
     required this.argCallback,              // コールバック関数（※必須）
     this.customHeight = 62
   });
@@ -40,7 +40,7 @@ class _CompInputRowDirectSelectTypeState extends State<CompInputRowDirectSelectT
   Widget build(BuildContext context) {
     return Container(
       height: widget.customHeight,
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.fromLTRB(10,12,10,10),
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,

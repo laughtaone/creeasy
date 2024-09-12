@@ -3,7 +3,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.d
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:flutter/material.dart';
 import 'package:creeasy/card_manage/add_card/add_card_preset-card.dart';
-import 'package:creeasy/card_manage/add_card/add_card_direct-input-card.dart';
+import 'package:creeasy/card_manage/add_card/add_card_direct-input-card/add_card_direct-input-card_1.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/chokusetsunyuuryou_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
@@ -119,8 +119,7 @@ class _AddCardPageState extends State<AddCardPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          const AddCardPageDirectInputCard(),
+                      builder: (context) => const AddCardPageDirectInputCard1(),
                     ),
                   );
                 },

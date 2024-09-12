@@ -53,8 +53,7 @@ class _PayBankCompState extends State<PayBankComp> {
   @override
   Widget build(BuildContext context) {
     return selectTileComp(
-        titleComp: titleTextComp(
-            resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
+        titleComp: titleTextComp(resvIcon: Icons.account_balance_outlined, resvText: '引き落とし口座を選択'),
         guides: const Column(
           children: [
             miniInfoEndPageJump(

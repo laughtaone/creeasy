@@ -16,16 +16,17 @@ Container miniInfoEndUrlJump({
   bool needsIcon = true, // アイコンが必要かどうか
   Color doukaColor = const Color(0xffededed), // アイコンが不要な時に背景色と同じにして同化できる色
   bool needsTBPadding = true, // topとbottomに余白が必要か
-  double customTextSize = 13, // テキストサイズ(デフォは13)
+  double customTextSize = 14, // テキストサイズ(デフォは13)
   Color customColor = Colors.black,
   String passUrl = '', // 遷移したいURL
+  String? endText,
 }) {
   return Container(
     padding: EdgeInsets.only(
       left: 4,
-      top: (needsTBPadding) ? 2 : 0,
+      top: (needsTBPadding) ? 3 : 0,
       right: 7,
-      bottom: (needsTBPadding) ? 2 : 0,
+      bottom: (needsTBPadding) ? 3 : 0,
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -39,36 +40,38 @@ Container miniInfoEndUrlJump({
             color: (needsIcon) ? customColor : doukaColor,
           ),
         ),
-        const SizedBox(width: 4),
-        Flexible(
-          child: Text(
-            passText,
-            style: TextStyle(
-              color: customColor,
-              fontSize: customTextSize,
-            ),
-            overflow: TextOverflow.ellipsis,
-          )
-        ),
         const SizedBox(width: 2),
-        RichText(
-            text: TextSpan(children: [
-          WidgetSpan(
-            child: GestureDetector(
-              onTap: () {
-                // VPAPの公式サイトへ遷移
-                viewWebsite(passUrl);
-              },
-              child: Text(
-                'こちら',
-                style: TextStyle(
-                    color: Colors.indigo[500],
-                    // decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.w500),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: RichText(
+              text: TextSpan(
+                style: TextStyle(color: Colors.black, height: 1.2, fontSize: customTextSize),
+                children: [
+                  TextSpan(text: passText),
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.baseline,
+                    baseline: TextBaseline.alphabetic,
+                    child: GestureDetector(
+                      onTap: () {viewWebsite(passUrl);},
+                      child: Text(
+                        ' こちら',
+                        style: TextStyle(
+                          color: Colors.indigo[500],
+                          // decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.w500,
+                          fontSize: customTextSize,
+                          height: 1.2
+                        ),
+                      ),
+                    ),
+                  ),
+                  TextSpan(text: (endText!=null) ?' $endText' : '')
+                ],
               ),
             ),
           ),
-        ])),
+        ),
       ],
     ),
   );

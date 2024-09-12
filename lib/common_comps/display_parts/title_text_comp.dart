@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 // サブタイトルのコンポーネント
 
-Row titleTextComp({
+Padding titleTextComp({
   IconData? resvIcon,
   String resvText = '',
   double? resvTextSize,
   int? hTextType,         // 1:h1(20px), 2:h2(18px), 3:h3(16px), null:h2(18px) / ※resvTextSize が指定されている場合はそっちが優先される
+  double customTopMargin = 2,
+  double customBottomMargin = 2,
 }) {
   late double _finalTextSize;
   if (resvTextSize!=null) {
@@ -26,23 +28,24 @@ Row titleTextComp({
     }
   }
 
-
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      const SizedBox(width: 2),
-      (resvIcon != null)
-        ? Icon(resvIcon, size: 23)
-        : const SizedBox.shrink(),
-      const SizedBox(width: 5),
-      Text(
-        resvText,
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: _finalTextSize,
+  return Padding(
+    padding: EdgeInsets.only(top: customTopMargin, bottom: customBottomMargin),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        (resvIcon != null)
+          ? Icon(resvIcon, size: 23)
+          : const SizedBox.shrink(),
+        const SizedBox(width: 5),
+        Text(
+          resvText,
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: _finalTextSize,
+          ),
         ),
-      ),
-      const SizedBox(width: 2),
-    ],
+      ],
+    ),
   );
 }
