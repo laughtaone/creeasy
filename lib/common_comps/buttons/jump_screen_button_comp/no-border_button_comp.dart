@@ -10,14 +10,16 @@ class NoBorderButtonComp extends StatefulWidget {
   final Color customTextColor;
   final double customFontsize;
   final BorderRadiusGeometry customBorderRadius;
+  final bool isCanPressNextButton;
 
-  const NoBorderButtonComp({super.key, 
+  const NoBorderButtonComp({super.key,
     required this.buttonText,
     required this.argOnpressed,
     this.customBackColor = const Color(0xff333333),
     this.customTextColor = Colors.white,
     this.customFontsize = 20.0,
     this.customBorderRadius = const BorderRadius.all(Radius.circular(15)),
+    this.isCanPressNextButton = false,
   });
 
   @override
@@ -30,11 +32,11 @@ class _NoBorderButtonCompState extends State<NoBorderButtonComp> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 10, right: 10),
-      height: 57,
-      child: OutlinedButton(
-        onPressed: widget.argOnpressed,
-        style: OutlinedButton.styleFrom(
-          backgroundColor: widget.customBackColor,
+      height: 58,
+      child: TextButton(
+        onPressed: (widget.isCanPressNextButton) ?widget.argOnpressed :null,
+        style: TextButton.styleFrom(
+          backgroundColor: (widget.isCanPressNextButton) ?widget.customBackColor :const Color(0xffdddddd),
           shape: RoundedRectangleBorder(
             borderRadius: widget.customBorderRadius,
           ),

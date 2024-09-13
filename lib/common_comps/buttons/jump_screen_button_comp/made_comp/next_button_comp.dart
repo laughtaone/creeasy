@@ -3,7 +3,12 @@ import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/no-border_b
 
 
 NoBorderButtonComp NextButtonComp({
+  required bool isCanPressNextButton,
   VoidCallback? argOnpressed
 }) {
-  return NoBorderButtonComp(buttonText: '次へ', argOnpressed: argOnpressed);
+  return NoBorderButtonComp(
+    buttonText: '次へ',
+    argOnpressed: argOnpressed,
+    isCanPressNextButton: isCanPressNextButton,
+  );
 }

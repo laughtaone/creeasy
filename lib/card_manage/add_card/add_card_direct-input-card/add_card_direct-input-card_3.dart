@@ -17,6 +17,7 @@ import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/n
 import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_twolayers_button_toggle_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
+import 'package:creeasy/COMMON_COMPS/function/judge_all_notnull.dart';
 
 
 
@@ -34,8 +35,11 @@ class AddCardPageDirectInputCard3 extends StatefulWidget {
 
 class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard3> {
   // ================================ 変数処理 ================================
-  int? _isManageReturnRate;
+  // ------------ 基本還元ポイント ------------
+  int? _isExistBasicReturn;
+  int? _isManageBasicReturn;
   double? _inputtedReturnRate;
+  // ------------- ポイントアップ -------------
   int? _isExistPointup;
   int? _isManagePointup;
   // =========================================================================
@@ -121,19 +125,18 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
                   miniInfo(needsIcon: false, customTextSize: 15, customTopPadding: 10, passText: '基本還元分のポイントがありますか？'),
                 ]),
                 mainSelectList: const ['ない', 'ある'],
-                nowMainSelectButtonIndex: _isExistPointup,
+                nowMainSelectButtonIndex: _isExistBasicReturn,
                 argMainCallback: (int? resvIndex) {
-                  setState(() {
-                    _isManageReturnRate = resvIndex;
-                  });
+                  _isExistBasicReturn = resvIndex;
+                  setState(() {_isExistBasicReturn = resvIndex;});
                 },
                 subTitleComp: titleTextComp(resvText: '基本還元分のポイントまで管理しますか？',),
                 subGuides: Column(children: [miniInfo(passText: '細かく管理したい方におすすめ', customIcon: Icons.tips_and_updates_outlined)]),
                 sub1SelectList: const ['しない', 'する'],
-                nowSub1SelectButtonIndex: _isManageReturnRate,
+                nowSub1SelectButtonIndex: _isManageBasicReturn,
                 argSub1Callback: (int? resvIndex) {
-                  // _isManagePointup = resvIndex;
-                  setState(() {_isManageReturnRate = resvIndex;});
+                  _isManageBasicReturn = resvIndex;
+                  setState(() {_isManageBasicReturn = resvIndex;});
                 },
                 sub2FieldInput: selectTileComp(
                   customBackColor: const Color(0xffc0c0c0),
@@ -146,11 +149,13 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
                     argCallback: (String? recvReturnRate) {
                       switch (recvReturnRate) {
                         case ''||null:
+                          _inputtedReturnRate = null;
                           setState(() {
                             _inputtedReturnRate = null;
                           });
                           break;
                         default:
+                          _inputtedReturnRate = double.parse(recvReturnRate);
                           setState(() {
                             _inputtedReturnRate = double.parse(recvReturnRate);
                           });
@@ -164,7 +169,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
 
               betweenIcon(Icons.add),
 
-              // --------------------------- ボーナスポイント ----------------------------
+              // --------------------------- ②ボーナスポイント ----------------------------
               SelectTileTwolayersButtonToggleComp(
                 mainTitleComp: titleTextComp(resvIcon: Icons.auto_awesome_outlined, resvText: 'ポイントアップ分の管理'),
                 mainGuides: Column(children: [
@@ -193,6 +198,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
                 mainSelectList: const ['ない', 'ある'],
                 nowMainSelectButtonIndex: _isExistPointup,
                 argMainCallback: (int? resvIndex) {
+                  _isExistPointup = resvIndex;
                   setState(() {_isExistPointup = resvIndex;});
                 },
                 subTitleComp: titleTextComp(resvText: 'ポイントアップ分のポイントまで管理しますか？',),
@@ -209,7 +215,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
                 sub1SelectList: const ['しない', 'する'],
                 nowSub1SelectButtonIndex: _isManagePointup,
                 argSub1Callback: (int? resvIndex) {
-                  // _isManagePointup = resvIndex;
+                  _isManagePointup = resvIndex;
                   setState(() {_isManagePointup = resvIndex;});
                 },
                 sub2FieldInput: compInputDoubleType(
@@ -235,7 +241,14 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
 
               // =============================================== 「次へ」ボタン ==============================================
               betweenSelectField(customHeight: 40),
+
+              Text('_isExistBasicReturn：${_isExistBasicReturn.toString()}'),
+              Text('_isManageBasicReturn：$_isManageBasicReturn'),
+              Text('_isExistPointup：${_isExistPointup.toString()}'),
+              Text('_isManagePointup：${_isManagePointup.toString()}'),
+
               NextButtonComp(
+                isCanPressNextButton: (judgeAllNotnull(rectList: [_isExistPointup, _isExistPointup])) ?true :false,
                 argOnpressed: () {
                   Navigator.push(
                     context,

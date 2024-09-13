@@ -16,6 +16,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_ty
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
 import 'package:creeasy/card_manage/add_card/add_card_direct-input-card/add_card_direct-input-card_3.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
+import 'package:creeasy/COMMON_COMPS/function/judge_all_notnull.dart';
 
 
 
@@ -33,6 +34,7 @@ class AddCardPageDirectInputCard2 extends StatefulWidget {
 class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard2> {
   // ================================ 変数処理 ================================
   int? _isSpecialPayment;
+  int? _isCanUsePoint;
   // =========================================================================
 
 
@@ -84,7 +86,9 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
                       )]),
                       fieldInput: CompInputRowDirectSelectType(
                         elementsList: const ['ない', 'ある'],
+                        resvNowSelectingIndex: _isSpecialPayment,
                         argCallback: (int resvIndex) {
+                          _isSpecialPayment = resvIndex;
                           setState(() {
                             _isSpecialPayment = resvIndex;
                           });
@@ -103,9 +107,11 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
                       )],),
                       fieldInput: CompInputRowDirectSelectType(
                         elementsList: const ['ない', 'ある'],
+                        resvNowSelectingIndex: _isCanUsePoint,
                         argCallback: (int resvIndex) {
+                          _isCanUsePoint = resvIndex;
                           setState(() {
-                            _isSpecialPayment = resvIndex;
+                            _isCanUsePoint = resvIndex;
                           });
                         },
                       ),
@@ -116,7 +122,10 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
 
                     // =============================================== 「次へ」ボタン ==============================================
                     betweenSelectField(customHeight: 20),
+
                     NextButtonComp(
+                      isCanPressNextButton: (judgeAllNotnull(rectList: [_isSpecialPayment, _isCanUsePoint])) ?true :false,
+
                       argOnpressed: () {
                         Navigator.push(
                           context,

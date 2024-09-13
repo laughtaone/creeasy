@@ -16,6 +16,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_ty
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
 import 'package:creeasy/card_manage/add_card/add_card_direct-input-card/add_card_direct-input-card_2.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
+import 'package:creeasy/COMMON_COMPS/function/judge_all_notnull.dart';
 
 
 
@@ -130,6 +131,7 @@ class _AddCardPageDirectInputCard1State
                       fieldInput: Container(child: compInputStringType(
                         resvNowInputingString: _inputCardName,
                         argCallback: (recvString) {
+                          _inputCardName = recvString;
                           setState(() {
                             _inputCardName = recvString; // コールバックで受け取った値を保持
                           });
@@ -148,6 +150,7 @@ class _AddCardPageDirectInputCard1State
                           elementsList: _dayList,
                           resvNowSelectingIndex: _closingDate,
                           argCallback: (date) {
+                            _closingDate = date;
                             setState(() {
                               _closingDate = date;
                             });
@@ -167,6 +170,7 @@ class _AddCardPageDirectInputCard1State
                           elementsList: _dayList,
                           resvNowSelectingIndex: _payDate,
                           argCallback: (date) {
+                            _payDate = date;
                             setState(() {
                               _payDate = date;
                             });
@@ -182,6 +186,7 @@ class _AddCardPageDirectInputCard1State
                       bankList: _bankList,
                       resvNowSelectingBankIndex: _selectedBoolSavingboxIndex,
                       argMainCallback: (int? resvIndex) {
+                        _selectedBankIndex = resvIndex;
                         setState(() {
                           _selectedBankIndex = resvIndex;
                         });
@@ -189,6 +194,7 @@ class _AddCardPageDirectInputCard1State
                       // --------- 資金ボックスで一旦管理選択フィールド ---------
                       resvNowSelectingSub1: _selectedSavingboxIndex,
                       argSub1Callback: (int? resvIndex) {
+                        _selectedBoolSavingboxIndex = resvIndex;
                         setState(() {
                           _selectedBoolSavingboxIndex = resvIndex;
                         });
@@ -197,6 +203,7 @@ class _AddCardPageDirectInputCard1State
                       savingboxList: _savingboxList,
                       resvNowSelectingSub2: _selectedSavingboxIndex,
                       argSub2Callback: (int? resvIndex) {
+                        _selectedSavingboxIndex = resvIndex;
                         setState(() {
                           _selectedSavingboxIndex = resvIndex;
                         });
@@ -209,6 +216,7 @@ class _AddCardPageDirectInputCard1State
                     // =============================================== 「次へ」ボタン ==============================================
                     betweenSelectField(customHeight: 20),
                     NextButtonComp(
+                      isCanPressNextButton: (judgeAllNotnull(rectList: [_inputCardName, _closingDate, _payDate, _selectedSavingboxIndex])) ?true :false,
                       argOnpressed: () {
                         Navigator.push(
                           context,
@@ -218,6 +226,7 @@ class _AddCardPageDirectInputCard1State
                         );
                       },
                     ),
+                    betweenSelectField(customHeight: 50),
                     // =======================================================================================================
                   ],
                 ))));

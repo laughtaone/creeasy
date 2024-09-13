@@ -33,6 +33,7 @@ class _AddCardPageState extends State<AddCardPage> {
   // ================================ 変数処理 ================================
   String? _selectedItem; // ①で選択されたカードを保持する変数
   int? _selectedCardIndex;  // 選択されたカード
+  bool _isCanPressNextButton = false;
   // =========================================================================
 
   @override
@@ -89,7 +90,9 @@ class _AddCardPageState extends State<AddCardPage> {
                     resvNowSelectingIndex: _selectedCardIndex,
                     dialogText: 'プリセット済カード一覧：',
                     argCallback: (int? resvIndex) {
-                      _selectedCardIndex = resvIndex;
+                      setState(() {
+                        _selectedCardIndex = resvIndex;
+                      });
                     },
                   ),
                 ),
@@ -100,13 +103,17 @@ class _AddCardPageState extends State<AddCardPage> {
 
               // =============================================== 「次へ」ボタン ==============================================
               NextButtonComp(
+                isCanPressNextButton: (_selectedCardIndex!=null) ?true :false,
                 argOnpressed: () {
-                  Navigator.push(
+                  (_selectedCardIndex!=null)
+                  ? Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => AddCardPagePresetCard(selectedCardName: _selectedItem),
                     ),
-                  );
+                  )
+                  : null
+                  ;
                 },
               ),
               // =======================================================================================================
@@ -115,6 +122,7 @@ class _AddCardPageState extends State<AddCardPage> {
 
               // =============================================== 「直接入力」ボタン ==============================================
               ChokusetsuNyuuryokuButtonComp(
+                // _isCanPressNextButton
                 argOnpressed: () {
                   Navigator.push(
                     context,
