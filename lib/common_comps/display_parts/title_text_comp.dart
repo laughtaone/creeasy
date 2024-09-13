@@ -38,11 +38,13 @@ Padding titleTextComp({
           ? Icon(resvIcon, size: 23)
           : const SizedBox.shrink(),
         const SizedBox(width: 5),
-        Text(
-          resvText,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: _finalTextSize,
+        Flexible(
+          child: Text(
+            resvText,
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: _finalTextSize,
+            ),
           ),
         ),
       ],

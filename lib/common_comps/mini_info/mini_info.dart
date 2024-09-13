@@ -14,7 +14,8 @@ Container miniInfo(
     double customBottomPadding = 2,
     bool needsLRPadding = true,
     double customIconTextPadding = 4,
-    bool boolMainAxisSize = false
+    bool boolMainAxisSize = false,
+    bool isLimitOneline = false
   }) {
   return Container(
     constraints: const BoxConstraints(
@@ -51,7 +52,7 @@ Container miniInfo(
         Flexible(child: Text(
           passText,
           style: TextStyle(color: customColor, fontSize: customTextSize),
-          overflow: TextOverflow.ellipsis,
+          overflow: (isLimitOneline) ?TextOverflow.ellipsis :null,
         )),
       ],
     ),

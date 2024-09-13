@@ -9,13 +9,12 @@ class compInputDoubleType extends StatefulWidget {
   final double? resvNowInputingDouble;     // 入力フィールドの初期値(※任意)
   final Function(String) argCallback;   // コールバック関数
 
-  const compInputDoubleType(
-      {super.key, 
-        this.prefixText,
-        this.suffixText,
-        this.resvNowInputingDouble,
-        required this.argCallback
-      });
+  const compInputDoubleType({super.key,
+    this.prefixText,
+    this.suffixText,
+    required this.resvNowInputingDouble,
+    required this.argCallback
+  });
 
   @override
   _compInputDoubleTypeState createState() => _compInputDoubleTypeState();

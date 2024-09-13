@@ -20,6 +20,7 @@ import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.d
 
 
 
+
 class AddCardPageDirectInputCard3 extends StatefulWidget {
   const AddCardPageDirectInputCard3({super.key});
 
@@ -30,7 +31,10 @@ class AddCardPageDirectInputCard3 extends StatefulWidget {
 
 class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard3> {
   // ================================ 変数処理 ================================
-  int? _isSpecialPayment;
+  int? _isManageReturnRate;
+  double? _inputtedReturnRate;
+  int? _isExistPointup;
+  int? _isManagePointup;
   // =========================================================================
 
 
@@ -86,13 +90,13 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Align(child: SizedBox(
-                              width: 160,
+                              width: 170,
                               height: 80,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  miniInfo(passText: '使用金額', customIcon: Icons.currency_yen_outlined, customTextSize: 16),
-                                  miniInfo(passText: '口座残高の確保', customIcon: Icons.account_balance_wallet_outlined, customTextSize: 16),
+                                  miniInfo(passText: '使用金額', customIcon: Icons.currency_yen_outlined, customTextSize: 17, isLimitOneline: true),
+                                  miniInfo(passText: '口座残高の確保', customIcon: Icons.account_balance_wallet_outlined, customTextSize: 17, isLimitOneline: true),
                                 ],
                               ),
                             )),
@@ -104,41 +108,118 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
 
                     betweenIcon(Icons.add),
 
-                    // --------------------------- ①臨時支払いの有無 ----------------------------
-                    selectTileComp(
-                      titleComp: titleTextComp(resvIcon: Icons.published_with_changes_outlined, resvText: '繰り上げ返済の有無'),
-                      guides: Column(children: [miniInfoEndUrlJump(
-                        passText: '「繰り上げ返済」とは、利用額を引き落とし日よりも前に支払うことです。詳しくは',
-                        passUrl: 'https://www.jcb.co.jp/ordercard/special/prepayment.html',
-                        endText: '（JCBの解説サイト）'
+                    // --------------------------- ①基本還元率 ----------------------------
+                    selectTileButtonToggleComp(
+                      mainTitleComp: titleTextComp(resvIcon: Icons.soap_outlined, resvText: '基本還元ポイントの管理'),
+                      mainGuides: Column(children: [miniInfo(
+                        passText: '基本還元分のポイントを管理しますか？',
+                        needsIcon: false,
+                        customTextSize: 15,
+                        customTopPadding: 5
                       )]),
-                      fieldInput: CompInputRowDirectSelectType(
-                        elementsList: const ['ない', 'ある'],
-                        argCallback: (int resvIndex) {
-                          setState(() {
-                            _isSpecialPayment = resvIndex;
-                          });
+                      mainSelectList: const ['しない', 'する'],
+                      argMainCallback: (int? resvIndex) {
+                        setState(() {
+                          _isManageReturnRate = resvIndex;
+                        });
+                      },
+                      nowMainSelectbuttonIndex: _isManageReturnRate,
+                      customFontsizeMainSelectButton: 20,
+                      customIconsizeMainSelectButton: 28,
+                      toggleTitleComp: titleTextComp(resvIcon: Icons.percent_outlined, resvText: '基本還元率を入力'),
+                      toggleFieldInput: compInputDoubleType(
+                        resvNowInputingDouble: _inputtedReturnRate,
+                        suffixText: '%',
+                        argCallback: (String? recvReturnRate) {
+                          switch (recvReturnRate) {
+                            case ''||null:
+                              setState(() {
+                                _inputtedReturnRate = null;
+                              });
+                              break;
+                            default:
+                              setState(() {
+                                _inputtedReturnRate = double.parse(recvReturnRate);
+                              });
+                              break;
+                          }
                         },
-                      ),
+                      )
                     ),
                     // ------------------------------------------------------------------------
-                    // --------------------------- ②ポイント割当の有無 ----------------------------
-                    betweenSelectField(),
-                    selectTileComp(
-                      titleComp: titleTextComp(resvIcon: Icons.offline_bolt_outlined, resvText: 'ポイント割当の有無'),
-                      guides: Column(children: [miniInfoEndUrlJump(
-                        passText: '「ポイント割当」とは、その名の通りポイントを支払い金額に割り当てることです。これにより引き落とし額を安くすることができます。詳しくは',
-                        passUrl: 'https://www.smbc-card.com/mem/addcard/cashback.jsp',
-                        endText: '(←例として三井住友カードの場合)'
-                      )],),
-                      fieldInput: CompInputRowDirectSelectType(
-                        elementsList: const ['ない', 'ある'],
-                        argCallback: (int resvIndex) {
-                          setState(() {
-                            _isSpecialPayment = resvIndex;
-                          });
+
+                    betweenIcon(Icons.add),
+
+                    // --------------------------- ボーナスポイント ----------------------------
+                    selectTileButtonToggleComp(
+                      mainTitleComp: titleTextComp(resvIcon: Icons.switch_access_shortcut_add_outlined, resvText: 'ポイントアップ分の管理'),
+                      mainGuides: Column(children: [
+                        miniInfo(passText: '「ポイントアップ」とは特定の店や日付での利用でポイントが上乗せされることを指します'),
+                        miniInfo(
+                          passText: '例：三井住友カードは「ポイントアッププログラム」があるので「あり」を選択 *1',
+                          needsTBPadding: false,
+                          customIcon: Icons.tips_and_updates_outlined
+                        ),
+                        miniInfo(
+                          passText: '例：Paidyカードはポイントアップがないので「ない」を選択  *1',
+                          needsTBPadding: false,
+                          customIcon: Icons.tips_and_updates_outlined
+                        ),
+                        miniInfo(
+                          passText: '*1 2024年9月5日調べ・各カードを批判/優遇/宣伝する意図は無くあくまで例として列挙',
+                          customTextSize: 9,
+                          needsIcon: false,
+                          customColor: Colors.black54
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Text('ポイントアップ分のポイントがありますか？', style: TextStyle(fontSize: 16)),
+                        ),
+                      ]),
+                      mainSelectList: const ['ない', 'ある'],
+                      argMainCallback: (int? resvIndex) {
+                        setState(() {
+                          _isExistPointup = resvIndex;
+                        });
+                      },
+                      nowMainSelectbuttonIndex: _isExistPointup,
+                      customFontsizeMainSelectButton: 20,
+                      customIconsizeMainSelectButton: 28,
+                      toggleTitleComp: titleTextComp(resvText: 'ポイントアップ分のポイントまで管理しますか？',),
+                      toggleFieldInput: selectTileButtonToggleComp(
+                        mainTitleComp: miniInfo(passText: 'ポイントアップ分のポイントまで管理しますか？'),
+                        mainSelectList: const ['管理しない', '管理する'],
+                        nowMainSelectbuttonIndex: _isManagePointup,
+                        argMainCallback: (int? resvIndex) {
+                          _isManagePointup = resvIndex;
                         },
+                        toggleTitleComp: miniInfo(
+                          passText: 'ポイントアップの情報を入力',
+                          needsIcon: false,
+                          customTextSize: 17,
+                        ),
+                        toggleFieldInput: Container(
+                          child: Text('あああ'),
+                        ),
                       ),
+                      // toggleFieldInput: compInputDoubleType(
+                      //   resvNowInputingDouble: _inputtedReturnRate,
+                      //   suffixText: '%',
+                      //   argCallback: (String? recvReturnRate) {
+                      //     switch (recvReturnRate) {
+                      //       case ''||null:
+                      //         setState(() {
+                      //           _inputtedReturnRate = null;
+                      //         });
+                      //         break;
+                      //       default:
+                      //         setState(() {
+                      //           _inputtedReturnRate = double.parse(recvReturnRate);
+                      //         });
+                      //         break;
+                      //     }
+                      //   },
+                      // )
                     ),
                     // ------------------------------------------------------------------------
                     // ==================================================================================================================
