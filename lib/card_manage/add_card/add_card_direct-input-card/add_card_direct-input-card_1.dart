@@ -15,6 +15,7 @@ import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
 import 'package:creeasy/card_manage/add_card/add_card_direct-input-card/add_card_direct-input-card_2.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
 
 
 
@@ -120,6 +121,7 @@ class _AddCardPageDirectInputCard1State
                 padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
                 child: ListView(
                   children: [
+                    progressBarComp(ratioProg: 1, ratioNotprog: 2),
                     // ==================================================== 1.基本項目 ====================================================
                     titleTextComp(resvText: 'Step1：基本項目', hTextType: 1, customBottomMargin: 15),
                     // ------------------------------- ①カード名 -------------------------------

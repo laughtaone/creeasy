@@ -16,6 +16,7 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_ty
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
 import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_twolayers_button_toggle_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
 
 
 
@@ -74,6 +75,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
           padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
           child: ListView(
             children: [
+              progressBarComp(ratioProg: 3, ratioNotprog: 0),
               // ================================================ 3.管理項目 =================================================
               // --------------------------- ⓪必須項目 ----------------------------
               titleTextComp(resvText: 'Step3：管理項目', hTextType: 1, customBottomMargin: 15),

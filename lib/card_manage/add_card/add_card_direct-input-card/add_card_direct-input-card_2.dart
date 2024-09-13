@@ -15,6 +15,7 @@ import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
 import 'package:creeasy/card_manage/add_card/add_card_direct-input-card/add_card_direct-input-card_3.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
 
 
 
@@ -70,6 +71,7 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
                 child: ListView(
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
+                    progressBarComp(ratioProg: 2, ratioNotprog: 1),
                     // ================================================ 2.支払い額について =================================================
                     titleTextComp(resvText: 'Step2：支払い額について', hTextType: 1, customBottomMargin: 15),
                     // --------------------------- ①臨時支払いの有無 ----------------------------
