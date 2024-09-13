@@ -204,7 +204,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                       elementsList: _gradYearList,
                       resvNowSelectingIndex: _selectedGradYear,
                       dialogText: '卒業予定年を選択：',
-                      suffixTanni: '年',
+                      mainSuffixText: '年',
                       argCallback: (int? recvIndex) {
                         setState(() {
                           _selectedGradYear = recvIndex;

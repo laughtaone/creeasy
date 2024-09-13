@@ -143,20 +143,20 @@ class _AddCardPageDirectInputCard1State
                     betweenSelectField(),
                     selectTileComp(
                       titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '締め日を入力'),
-                      fieldInput: Container(
-                        child: compInputDialogSelectType(
-                          dialogText: '締日を選択：',
-                          suffixTanni: '日',
-                          elementsList: _dayList,
-                          resvNowSelectingIndex: _closingDate,
-                          argCallback: (date) {
+                      fieldInput: compInputDialogSelectType(
+                        dialogText: '締日を選択：',
+                        mainPrefixText: '毎月',
+                        mainSuffixText: (_closingDate!=_dayList.length-1) ?'日' :null,
+                        dialogSuffixText: '日',
+                        elementsList: _dayList,
+                        resvNowSelectingIndex: _closingDate,
+                        argCallback: (date) {
+                          _closingDate = date;
+                          setState(() {
                             _closingDate = date;
-                            setState(() {
-                              _closingDate = date;
-                            });
-                          },
-                        ),
-                      )
+                          });
+                        },
+                      ),
                     ),
                     // ------------------------------------------------------------------------
                     // ------------------------------- ③引き落とし日 -------------------------------
@@ -166,7 +166,7 @@ class _AddCardPageDirectInputCard1State
                       fieldInput: Container(
                         child: compInputDialogSelectType(
                           dialogText: '引き落とし日を選択：',
-                          suffixTanni: '日',
+                          mainSuffixText: '日',
                           elementsList: _dayList,
                           resvNowSelectingIndex: _payDate,
                           argCallback: (date) {

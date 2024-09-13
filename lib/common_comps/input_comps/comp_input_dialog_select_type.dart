@@ -9,16 +9,24 @@ class compInputDialogSelectType extends StatefulWidget {
   final int? resvNowSelectingIndex;
   final String dialogText;
   final Function(int?) argCallback; // コールバック関数
-  final String? suffixTanni;
+  final String? mainPrefixText;
+  final String? mainSuffixText;
   final Color customBackColor;
+  final String? dialogPrefixText;
+  final String? dialogSuffixText;
+  final List<int>? indexLisNotneedsDialogSuffixText;
 
   const compInputDialogSelectType(
       {super.key, required this.elementsList,       // 選択する要素を格納したリスト（※必須）
       required this.resvNowSelectingIndex,        // 現在選択中の要素のインデックス番号
       required this.dialogText,          // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
       required this.argCallback,         // コールバック関数
-      this.suffixTanni,                  // 表示するテキストの末尾につける単位
+      this.mainPrefixText,
+      this.mainSuffixText,                  // 表示するテキストの末尾につける単位
       this.customBackColor = Colors.white,
+      this.dialogPrefixText,
+      this.dialogSuffixText,
+      this.indexLisNotneedsDialogSuffixText,
       });
 
   @override
@@ -29,12 +37,25 @@ class compInputDialogSelectType extends StatefulWidget {
 class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
   // -------------------------------- 変数処理 --------------------------------
   int? _newSelectIndex; // 選択中の要素のインデックス
+  late String _dialogElementText;
 
   @override
   void initState() {
     super.initState();
     _newSelectIndex = widget.resvNowSelectingIndex;
   }
+  // -------------------------------------------------------------------------
+  // ------------------- ダイアログ表示時の各要素のText部分の処理 -------------------
+  if (widget.dialogPrefixText == null && widget.dialogSuffixText==null) {
+    return 
+  }
+  // (widget.dialogPrefixText == null && widget.dialogSuffixText==null)
+  //  ? widget.elementsList[index]
+  //  : (widget.dialogPrefixText==null && widget.dialogSuffixText != null)
+  //    ? '${widget.elementsList[index]} ${widget.dialogSuffixText}'
+  //    : (widget.dialogPrefixText!=null && widget.dialogSuffixText == null)
+  //      ? '${widget.dialogPrefixText} ${widget.elementsList[index]}'
+  //      : '${widget.dialogPrefixText} ${widget.elementsList[index]} ${widget.dialogSuffixText}'
   // -------------------------------------------------------------------------
 
   @override
@@ -50,7 +71,13 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
         child: ListTile(
           title: Text(
             (_newSelectIndex != null)
-              ? (widget.suffixTanni==null) ? widget.elementsList[_newSelectIndex ?? 0] : '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.suffixTanni}'
+              ? (widget.mainPrefixText == null && widget.mainSuffixText==null)
+                ? widget.elementsList[_newSelectIndex ?? 0]
+                : (widget.mainPrefixText==null && widget.mainSuffixText != null)
+                  ? '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                  : (widget.mainPrefixText!=null && widget.mainSuffixText == null)
+                    ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
+                    : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
               : '未選択',
             style: const TextStyle(fontSize: 20)),
         trailing: const Icon(Icons.edit),
@@ -87,7 +114,14 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                             ),
                             child: ListTile(
                               title: Text(
-                                widget.elementsList[index],
+                                (widget.dialogPrefixText == null && widget.dialogSuffixText==null)
+                                  ? widget.elementsList[index]
+                                  : (widget.dialogPrefixText==null && widget.dialogSuffixText != null)
+                                    ? '${widget.elementsList[index]} ${widget.dialogSuffixText}'
+                                    : (widget.dialogPrefixText!=null && widget.dialogSuffixText == null)
+                                      ? '${widget.dialogPrefixText} ${widget.elementsList[index]}'
+                                      : '${widget.dialogPrefixText} ${widget.elementsList[index]} ${widget.dialogSuffixText}'
+                                ,
                                 style: const TextStyle(fontSize: 18)
                               ),
                               onTap: () {
