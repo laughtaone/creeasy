@@ -152,7 +152,6 @@ class _PayBankAndSavingBoxCompState extends State<PayBankAndSavingBoxComp> {
                                   resvNowSelectingIndex: _newSelectSub2Index,
                                   dialogText: '資金ボックスを選択',
                                   argCallback: widget.argSub2Callback,
-                                  customBackColor: const Color(0xfff0f0f0),
                                 ),
                               ),
                             )

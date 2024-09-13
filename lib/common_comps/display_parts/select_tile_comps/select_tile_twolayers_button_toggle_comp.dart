@@ -1,3 +1,4 @@
+import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:flutter/material.dart';
@@ -8,45 +9,69 @@ import 'package:flutter/material.dart';
 
 
 class SelectTileTwolayersButtonToggleComp extends StatefulWidget {
+  // ================== メインフィールド(必須) ==================
   final Widget mainTitleComp;
   final Column? mainGuides;
-  // final Container mainFieldInput;
+  // ------------ メインの入力欄 ------------
+  final List<String> mainSelectList;
+  final int? nowMainSelectButtonIndex;
+  final Function(int?) argMainCallback;
+  final double customMainSelectHeight;
+  // ================ メインフィールド(カスタム) ================
+  final Column? mainBeginningGuides;
   final Color mainCustomBackColor;
   final Column? beginningMainGuides;
-  final Function(int?) argMainCallback;
-  final List<String> mainSelectList;
-  final double customFontsizeMainSelectButton;
-  final double customIconsizeMainSelectButton;
-  final int? nowMainSelectbuttonIndex;
-  final double customSelectButtonHeight;
-  final bool defalutOpenToggle;
-  // ------------ トグルフィールド --------------
-  final Column? toggleBeginningGuides;
-  final Widget? toggleTitleComp;
-  final Column? toggleGuides;
-  final Widget toggleFieldInput;
+  final double customFontsizeMainButton;
+  final double customIconsizeMainButton;
+  // ===================== サブフィールド ======================
+  final bool defaultOpenSub;
+  final Column? subBeginningGuides;
+  final Widget subTitleComp;
+  final Column? subGuides;
+  // ----------- サブ1の横並びボタン -----------
+  final List<String> sub1SelectList;
+  final int? nowSub1SelectButtonIndex;
+  final Function(int?) argSub1Callback;
+  final double customFontsizeSub1Button;
+  final double customIconsizeSub1Button;
+  final double customSub1Height;
+  // ---------- サブ2の入力フィールド ----------
+  final bool defaultOpenSub2Toggle;
+  final Widget sub2FieldInput;
   // final Function argToggleCallback;
   // -----------------------------------------
 
   const SelectTileTwolayersButtonToggleComp({super.key,
-    required this.mainTitleComp, // コンポーネントtitleTextCompを指定（必須・引数  IconData? resvIcon, String resvText(デフォは''), double resvTextSize(デフォは18)）
-    this.mainGuides, // ColumnのchildrenでminiInfoを並べる（任意）
-    // required this.mainFieldInput, // ユーザーからの入力フィールドを指定（必須・入力フィールドのコンポーネントの指定を推奨）
-    this.mainCustomBackColor = const Color(0xffededed), // カスタム背景色（任意・デフォで色を設定済み）
-    this.beginningMainGuides,      // mainTitleCompの前の冒頭にminiInfoのColumn(任意)
-    required this.argMainCallback,
+    // ================== メインフィールド(必須) ==================
+    required this.mainTitleComp,
+    this.mainGuides,
+    // ------------ メインの入力欄 ------------
     required this.mainSelectList,
-    this.customFontsizeMainSelectButton = 17,
-    this.customIconsizeMainSelectButton = 24,
-    required this.nowMainSelectbuttonIndex,
-    this.customSelectButtonHeight = 60,
-    this.defalutOpenToggle = false,
-    // ------------ トグルフィールド --------------
-    this.toggleBeginningGuides,
-    this.toggleTitleComp,
-    this.toggleGuides,
-    required this.toggleFieldInput,
-    // required this.argToggleCallback,
+    required this.nowMainSelectButtonIndex,
+    required this.argMainCallback,
+    this.customMainSelectHeight = 60,
+    // ================ メインフィールド(カスタム) ================
+    this.mainBeginningGuides,
+    this.mainCustomBackColor = const Color(0xffededed),
+    this.beginningMainGuides,
+    this.customFontsizeMainButton = 20,
+    this.customIconsizeMainButton = 28,
+    // ===================== サブフィールド ======================
+    this.defaultOpenSub = false,
+    this.subBeginningGuides,
+    required this.subTitleComp,
+    this.subGuides,
+    // ----------- サブ1の横並びボタン -----------
+    required this.sub1SelectList,
+    required this.nowSub1SelectButtonIndex,
+    required this.argSub1Callback,
+    this.customFontsizeSub1Button = 20,
+    this.customIconsizeSub1Button = 28,
+    this.customSub1Height = 60,
+    // ---------- サブ2の入力フィールド ----------
+    this.defaultOpenSub2Toggle = false,
+    required this.sub2FieldInput,
+    // final Function argToggleCallback;
     // -----------------------------------------
   });
 
@@ -57,11 +82,13 @@ class SelectTileTwolayersButtonToggleComp extends StatefulWidget {
 class _SelectTileTwolayersButtonToggleCompState extends State<SelectTileTwolayersButtonToggleComp> {
   // -------------------------------- 変数処理 --------------------------------
   int? _newMainSelectbuttonIndex; // 選択中の要素のインデックス
+  int? _newSub1SelectButtonIndex;
 
   @override
   void initState() {
     super.initState();
-    _newMainSelectbuttonIndex = widget.nowMainSelectbuttonIndex;
+    _newMainSelectbuttonIndex = widget.nowMainSelectButtonIndex;
+    _newSub1SelectButtonIndex = widget.nowSub1SelectButtonIndex;
   }
   // -------------------------------------------------------------------------
 
@@ -72,14 +99,13 @@ class _SelectTileTwolayersButtonToggleCompState extends State<SelectTileTwolayer
       titleComp: widget.mainTitleComp,
       guides: widget.mainGuides,
       fieldInput: Container(
-        // margin: EdgeInsets.all(10),
         margin: const EdgeInsets.all(0),
         child: Column(
           children: [
             CompInputRowDirectSelectType(
               elementsList: widget.mainSelectList,
-              customFontSize: widget.customFontsizeMainSelectButton,
-              customIconSize: widget.customIconsizeMainSelectButton,
+              customFontSize: widget.customFontsizeMainButton,
+              customIconSize: widget.customIconsizeMainButton,
               resvNowSelectingIndex: _newMainSelectbuttonIndex,
               argCallback: (int? recvIndex) {
                 setState(() {
@@ -87,18 +113,40 @@ class _SelectTileTwolayersButtonToggleCompState extends State<SelectTileTwolayer
                 });
                 widget.argMainCallback(_newMainSelectbuttonIndex);
               },
-              customHeight: widget.customSelectButtonHeight,
+              customHeight: widget.customMainSelectHeight,
             ),
-            (_newMainSelectbuttonIndex == 1 || widget.defalutOpenToggle==true)
+            (_newMainSelectbuttonIndex == 1 || widget.defaultOpenSub==true)
             ? Column(
               children: [
                 const SizedBox(height: 7),
                 selectTileComp(
                   customBackColor: const Color(0xffdcdcdc),
-                  beginningGuides: widget.toggleBeginningGuides,
-                  titleComp: widget.toggleTitleComp ?? const SizedBox.shrink(),
-                  guides: widget.toggleGuides,
-                  fieldInput: widget.toggleFieldInput
+                  beginningGuides: widget.subBeginningGuides,
+                  titleComp: widget.subTitleComp,
+                  guides: widget.subGuides,
+                  fieldInput: Container(
+                    child: Column(
+                      children: [
+                        CompInputRowDirectSelectType(
+                          elementsList: widget.sub1SelectList,
+                          customFontSize: widget.customFontsizeSub1Button,
+                          customIconSize: widget.customIconsizeSub1Button,
+                          resvNowSelectingIndex: _newSub1SelectButtonIndex,
+                          argCallback: (int? recvIndex) {
+                            setState(() {
+                              _newSub1SelectButtonIndex = recvIndex;
+                            });
+                            widget.argSub1Callback(_newSub1SelectButtonIndex);
+                          },
+                          customHeight: widget.customSub1Height,
+                          customSelectedColor: const Color(0xffc4c4c4),
+                        ),
+                        (_newSub1SelectButtonIndex == 1 || widget.defaultOpenSub2Toggle==true)
+                          ? widget.sub2FieldInput
+                          : const SizedBox.shrink()
+                      ],
+                    ),
+                  )
                 ),
               ],
             )

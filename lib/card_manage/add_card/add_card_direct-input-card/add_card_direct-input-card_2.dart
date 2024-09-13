@@ -68,6 +68,7 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
             child: Padding(
                 padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
                 child: ListView(
+                  physics: const NeverScrollableScrollPhysics(),
                   children: [
                     // ================================================ 2.支払い額について =================================================
                     titleTextComp(resvText: 'Step2：支払い額について', hTextType: 1, customBottomMargin: 15),

@@ -8,12 +8,14 @@ class compInputDoubleType extends StatefulWidget {
   final String? suffixText;             // 入力フィールドの文字列の後に表示する文字(※任意)
   final double? resvNowInputingDouble;     // 入力フィールドの初期値(※任意)
   final Function(String) argCallback;   // コールバック関数
+  final Color customBackColor;
 
   const compInputDoubleType({super.key,
     this.prefixText,
     this.suffixText,
     required this.resvNowInputingDouble,
-    required this.argCallback
+    required this.argCallback,
+    this.customBackColor = const Color(0xfffefefe),
   });
 
   @override
@@ -55,7 +57,7 @@ class _compInputDoubleTypeState extends State<compInputDoubleType> {
           ),
           prefixText: widget.prefixText,
           suffixText: widget.suffixText,
-          fillColor: const Color(0xfffefefe),
+          fillColor: widget.customBackColor,
           filled: true,
         ),
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
