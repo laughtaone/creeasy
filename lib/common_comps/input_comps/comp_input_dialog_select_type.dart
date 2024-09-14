@@ -152,6 +152,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               onTap: () {
+                                _newSelectIndex = index;
                                 setState(() {
                                   _newSelectIndex = index;
                                 });

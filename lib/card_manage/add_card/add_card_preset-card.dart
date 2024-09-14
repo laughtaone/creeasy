@@ -13,6 +13,9 @@ import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.d
 import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
 import 'package:creeasy/card_manage/card_manage_COMPS/pay_bank_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
+import 'package:creeasy/card_manage/card_manage_COMPS/pay_bank_and_saving_box_comp.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/function/judge_all_notnull.dart';
 
 
 
@@ -26,8 +29,7 @@ class AddCardPagePresetCard extends StatefulWidget {
 }
 
 class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
-  final List<String> _smcnlPayRule = ['15日締め / 翌月10日払い', '月末締め / 翌月26日払い'];
-  final List<String> _bankList = ['三菱UFJ銀行', 'みんなの銀行', '三井住友銀行'];
+  
   final List<String> _gradYearList = [
     '2024',
     '2025',
@@ -39,7 +41,18 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
   ];
 
   // ================================ 変数処理 ================================
+  // --------- 締日・引落日 ---------
   int? _selectedPayRule; // ①で選択された締日/引き落とし日を保持する変数
+  final List<String> _smcnlPayRule = ['15日締め / 翌月10日払い', '月末締め / 翌月26日払い'];
+  // ---------- 引落口座 -----------
+  int? _selectedBankIndex;
+  int? _selectedBoolSavingboxIndex;
+
+  int? _selectedSavingboxIndex;
+  final List<String> _bankList = ['三菱UFJ銀行', 'みんなの銀行', '三井住友銀行'];
+  final List<String> _savingboxList = ['みんなの銀行1 - 三井住友カード', 'みんなの銀行2 - ビューカード'];
+
+
   int? _selectedBank; // ②で選択された銀行を保持する変数
   int? _selectedVpupIndex; // ③で入力されたVPUPの有無を保持する変数
   String? _inputVpupReturnRate; // ③で入力された還元率[%]を保持する変数
@@ -91,9 +104,8 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
                 betweenIcon(recvIcon: Icons.add_outlined),
 
-                titleTextComp(resvText: 'カード情報を微調整', hTextType: 1),
-
                 // =============================================== ① 締日/引き落とし日の選択 ==============================================
+                titleTextComp(resvText: 'Step1：基本項目', hTextType: 1, customBottomMargin: 15),
                 selectTileComp(
                   titleComp: titleTextComp(
                       resvIcon: Icons.event_outlined, resvText: '締日/引き落とし日を選択'),
@@ -118,16 +130,58 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
 
                 // ========================================== ②引き落とし口座 ==========================================
                 betweenSelectField(),
-                PayBankComp(
+                Text(_selectedSavingboxIndex.toString()),
+                PayBankAndSavingBoxComp(
+                  // ------------ 引き落とし口座選択フィールド ------------
                   bankList: _bankList,
-                  resvNowSelectingBankIndex: _selectedBank,
-                  argCallback: (int? recvIndex) {
+                  resvNowSelectingBankIndex: _selectedBankIndex,
+                  argMainCallback: (int? resvIndex) {
+                    _selectedBankIndex = resvIndex;
                     setState(() {
-                      _selectedBank = recvIndex;
+                      _selectedBankIndex = resvIndex;
+                    });
+                  },
+                  // --------- 資金ボックスで一旦管理選択フィールド ---------
+                  resvNowSelectingSub1: _selectedBoolSavingboxIndex,
+                  argSub1Callback: (int? resvIndex) {
+                    _selectedBoolSavingboxIndex = resvIndex;
+                    setState(() {
+                      _selectedBoolSavingboxIndex = resvIndex;
+                    });
+                  },
+                  // ------------- 資金ボックス選択フィールド -------------
+                  savingboxList: _savingboxList,
+                  resvNowSelectingSub2: _selectedSavingboxIndex,
+                  argSub2Callback: (int? resvIndex) {
+                    _selectedSavingboxIndex = resvIndex;
+                    setState(() {
+                      _selectedSavingboxIndex = resvIndex;
                     });
                   },
                 ),
                 // ====================================================================================================
+
+                // =============================================== 「次へ」ボタン ==============================================
+                betweenSelectField(customHeight: 40),
+                NextButtonComp(
+                  isCanPressNextButton: (judgeAllNotnull(rectList: [
+                    _selectedPayRule,
+                    _selectedBankIndex,
+                    _selectedBoolSavingboxIndex,
+                    // isInputToggleAllField(_selectedBoolSavingboxIndex, _selectedSavingboxIndex)
+                  ])) ?true :false,
+                  argOnpressed: () {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const AddCardPageDirectInputCard2(),
+                    //   ),
+                    // );
+                  },
+                ),
+                betweenSelectField(customHeight: 50),
+                // =======================================================================================================
+
 
                 // =============================================== ③Vポイントアップの選択 ==============================================
                 betweenSelectField(),
