@@ -28,6 +28,7 @@ class SelectTileTwolayersButtonToggleComp extends StatefulWidget {
   final Column? subBeginningGuides;
   final Widget subTitleComp;
   final Column? subGuides;
+  final double? customBetweenSub1And2;
   // ----------- サブ1の横並びボタン -----------
   final List<String> sub1SelectList;
   final int? nowSub1SelectButtonIndex;
@@ -61,6 +62,7 @@ class SelectTileTwolayersButtonToggleComp extends StatefulWidget {
     this.subBeginningGuides,
     required this.subTitleComp,
     this.subGuides,
+    this.customBetweenSub1And2,
     // ----------- サブ1の横並びボタン -----------
     required this.sub1SelectList,
     required this.nowSub1SelectButtonIndex,
@@ -141,6 +143,7 @@ class _SelectTileTwolayersButtonToggleCompState extends State<SelectTileTwolayer
                           customHeight: widget.customSub1Height,
                           customSelectedColor: const Color(0xffc4c4c4),
                         ),
+                        SizedBox(height: widget.customBetweenSub1And2),
                         (_newSub1SelectButtonIndex == 1 || widget.defaultOpenSub2Toggle==true)
                           ? widget.sub2FieldInput
                           : const SizedBox.shrink()
