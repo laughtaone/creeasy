@@ -73,6 +73,7 @@ class _AddCardPageDirectInputCard1State
   String? _inputReturnRate;
   int? _isSpecialPayment;
   int? _closingDate; // ③で入力された締め日を保持する変数
+  int? __payMonth;
   int? _payDate; // ④で入力された引き落とし日を保持する変数
   int? _selectedBankIndex; // ⑤で選択された銀行を保持する変数
   int? _selectedPointUpIndex;   // ⑥で選択されたポイントアップの有無を保持する変数
@@ -146,8 +147,10 @@ class _AddCardPageDirectInputCard1State
                       fieldInput: compInputDialogSelectType(
                         dialogText: '締日を選択：',
                         mainPrefixText: '毎月',
-                        mainSuffixText: (_closingDate!=_dayList.length-1) ?'日' :null,
+                        mainSuffixText: '日',
                         dialogSuffixText: '日',
+                        indexListNotneedsDialogSuffixText: [_dayList.length-1],
+                        indexListNotneedsMainSuffixText: [_dayList.length-1],
                         elementsList: _dayList,
                         resvNowSelectingIndex: _closingDate,
                         argCallback: (date) {
@@ -163,10 +166,13 @@ class _AddCardPageDirectInputCard1State
                     betweenSelectField(),
                     selectTileComp(
                       titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '引き落とし日を入力'),
-                      fieldInput: Container(
-                        child: compInputDialogSelectType(
+                      fieldInput: Column(children: [
+                        compInputDialogSelectType(
                           dialogText: '引き落とし日を選択：',
                           mainSuffixText: '日',
+                          dialogSuffixText: '日',
+                          // indexListNotneedsDialogSuffixText: [_dayList.length-1],
+                          // indexListNotneedsMainSuffixText: [_dayList.length-1],
                           elementsList: _dayList,
                           resvNowSelectingIndex: _payDate,
                           argCallback: (date) {
@@ -175,8 +181,8 @@ class _AddCardPageDirectInputCard1State
                               _payDate = date;
                             });
                           },
-                        ),
-                      )
+                        )
+                      ])
                     ),
                     // ------------------------------------------------------------------------
                     // ------------------------- ④引き落とし口座の選択 ----------------------------

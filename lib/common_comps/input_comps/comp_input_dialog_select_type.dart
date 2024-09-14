@@ -14,7 +14,8 @@ class compInputDialogSelectType extends StatefulWidget {
   final Color customBackColor;
   final String? dialogPrefixText;
   final String? dialogSuffixText;
-  final List<int>? indexLisNotneedsDialogSuffixText;
+  final List<int>? indexListNotneedsDialogSuffixText;
+  final List<int>? indexListNotneedsMainSuffixText;
 
   const compInputDialogSelectType(
       {super.key, required this.elementsList,       // 選択する要素を格納したリスト（※必須）
@@ -26,7 +27,8 @@ class compInputDialogSelectType extends StatefulWidget {
       this.customBackColor = Colors.white,
       this.dialogPrefixText,
       this.dialogSuffixText,
-      this.indexLisNotneedsDialogSuffixText,
+      this.indexListNotneedsDialogSuffixText,
+      this.indexListNotneedsMainSuffixText,
       });
 
   @override
@@ -37,7 +39,6 @@ class compInputDialogSelectType extends StatefulWidget {
 class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
   // -------------------------------- 変数処理 --------------------------------
   int? _newSelectIndex; // 選択中の要素のインデックス
-  late String _dialogElementText;
 
   @override
   void initState() {
@@ -45,18 +46,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
     _newSelectIndex = widget.resvNowSelectingIndex;
   }
   // -------------------------------------------------------------------------
-  // ------------------- ダイアログ表示時の各要素のText部分の処理 -------------------
-  if (widget.dialogPrefixText == null && widget.dialogSuffixText==null) {
-    return 
-  }
-  // (widget.dialogPrefixText == null && widget.dialogSuffixText==null)
-  //  ? widget.elementsList[index]
-  //  : (widget.dialogPrefixText==null && widget.dialogSuffixText != null)
-  //    ? '${widget.elementsList[index]} ${widget.dialogSuffixText}'
-  //    : (widget.dialogPrefixText!=null && widget.dialogSuffixText == null)
-  //      ? '${widget.dialogPrefixText} ${widget.elementsList[index]}'
-  //      : '${widget.dialogPrefixText} ${widget.elementsList[index]} ${widget.dialogSuffixText}'
-  // -------------------------------------------------------------------------
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +63,23 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
             (_newSelectIndex != null)
               ? (widget.mainPrefixText == null && widget.mainSuffixText==null)
                 ? widget.elementsList[_newSelectIndex ?? 0]
-                : (widget.mainPrefixText==null && widget.mainSuffixText != null)
-                  ? '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
-                  : (widget.mainPrefixText!=null && widget.mainSuffixText == null)
-                    ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
-                    : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                : (widget.mainPrefixText!=null && widget.mainSuffixText == null)
+                  ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
+                  : (widget.mainPrefixText==null && widget.mainSuffixText != null)
+                    ? (widget.indexListNotneedsMainSuffixText!=null)
+                      ? (widget.indexListNotneedsMainSuffixText?.contains(_newSelectIndex)==false)
+                        ? '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                        : widget.elementsList[_newSelectIndex ?? 0]
+                      : '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                    : (widget.indexListNotneedsMainSuffixText!=null)
+                      ? (widget.indexListNotneedsMainSuffixText?.contains(_newSelectIndex)==false)
+                        ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                        : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
+                      : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
               : '未選択',
-            style: const TextStyle(fontSize: 20)),
-        trailing: const Icon(Icons.edit),
+            style: const TextStyle(fontSize: 20)
+          ),
+          trailing: const Icon(Icons.edit),
         ),
         onPressed: () {
           showDialog(
@@ -116,10 +115,14 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                               title: Text(
                                 (widget.dialogPrefixText == null && widget.dialogSuffixText==null)
                                   ? widget.elementsList[index]
-                                  : (widget.dialogPrefixText==null && widget.dialogSuffixText != null)
-                                    ? '${widget.elementsList[index]} ${widget.dialogSuffixText}'
-                                    : (widget.dialogPrefixText!=null && widget.dialogSuffixText == null)
-                                      ? '${widget.dialogPrefixText} ${widget.elementsList[index]}'
+                                  : (widget.dialogPrefixText!=null && widget.dialogSuffixText == null)
+                                    ? '${widget.dialogPrefixText} ${widget.elementsList[index]}'
+                                    : (widget.dialogPrefixText==null && widget.dialogSuffixText != null)
+                                      ? (widget.indexListNotneedsDialogSuffixText!=null)
+                                        ? (widget.indexListNotneedsDialogSuffixText?.contains(index) == false)
+                                          ? '${widget.elementsList[index]} ${widget.dialogSuffixText}'
+                                          : widget.elementsList[index]
+                                        : '${widget.elementsList[index]} ${widget.dialogSuffixText}'
                                       : '${widget.dialogPrefixText} ${widget.elementsList[index]} ${widget.dialogSuffixText}'
                                 ,
                                 style: const TextStyle(fontSize: 18)
