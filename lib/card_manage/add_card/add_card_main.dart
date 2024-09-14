@@ -51,9 +51,8 @@ class _AddCardPageState extends State<AddCardPage> {
   String? _selectedItem; // ①で選択されたカードを保持する変数
   int? _selectedCardBrandIndex;
   int? _selectedCardIndex;  // 選択されたカード
-
-
   // =========================================================================
+
 
   @override
   Widget build(BuildContext context) {
@@ -116,8 +115,8 @@ class _AddCardPageState extends State<AddCardPage> {
                       Align(alignment: Alignment.centerRight, child: Text(_selectedCardBrandIndex.toString())),
                       // -------------------------------------- ブランド --------------------------------------
                       selectTileComp(
-                        // customBackColor: const Color(0xffe3e3e3),
-                        customBackColor: const Color(0xffd5d5d5),
+                        customBackColor: const Color(0xffe3e3e3),
+                        // customBackColor: const Color(0xffd5d5d5),
                         customTBPadding: const [5, 5],
                         titleComp: titleTextComp(resvIcon: Icons.local_offer_outlined, resvText: 'ブランドを選択', customIconSize: 20, customBetweenIT: 3),
                         fieldInput: compInputDialogSelectType(
@@ -128,12 +127,14 @@ class _AddCardPageState extends State<AddCardPage> {
                           resvNowSelectingIndex: _selectedCardBrandIndex,
                           dialogText: 'ブランド一覧：',
                           argCallback: (int? resvIndex) {
-                            _selectedCardBrandIndex = resvIndex;
-                            _selectedCardIndex = null;
-                            setState(() {
-                              _selectedCardIndex = null;
+                            if (_selectedCardBrandIndex != resvIndex) {
                               _selectedCardBrandIndex = resvIndex;
-                            });
+                              _selectedCardIndex = null;
+                              setState(() {
+                                _selectedCardIndex = null;
+                                _selectedCardBrandIndex = resvIndex;
+                              });
+                            }
                           },
                         ),
                       ),
@@ -152,11 +153,13 @@ class _AddCardPageState extends State<AddCardPage> {
                           customTBMargin: const [5, 3],
                           customMainTextSize: 17,
                           canTapField: (_selectedCardBrandIndex!=null),
-                          elementsList: (_selectedCardBrandIndex!=null) ?_presetCardList[_selectedCardBrandIndex!]: [''*_presetCardBrandList.length],
+                          // elementsList: (_selectedCardBrandIndex!=null) ?_presetCardList[_selectedCardBrandIndex!]: [''*_presetCardBrandList.length],
+                          elementsList: (_selectedCardBrandIndex != null && _presetCardList.length > _selectedCardBrandIndex!)
+                            ? _presetCardList[_selectedCardBrandIndex!]
+                            : [],
                           resvNowSelectingIndex: _selectedCardIndex,
                           dialogText: 'ブランド一覧：',
                           argCallback: (int? resvIndex) {
-                            _selectedCardIndex = resvIndex;
                             setState(() {
                               _selectedCardIndex = resvIndex;
                             });

@@ -56,7 +56,6 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
     super.initState();
     _newSelectIndex = widget.resvNowSelectingIndex;
   }
-  // -------------------------------------------------------------------------
 
 
   @override
@@ -72,23 +71,24 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
         color: Colors.white,
       ),
       child: ListTile(
+        // title: Text(widget.resvNowSelectingIndex.toString()),
         title: Text(
-          (_newSelectIndex != null)
+          (widget.resvNowSelectingIndex != null)
             ? (widget.mainPrefixText == null && widget.mainSuffixText==null)
-              ? widget.elementsList[_newSelectIndex ?? 0]
+              ? widget.elementsList[widget.resvNowSelectingIndex ?? 0]
               : (widget.mainPrefixText!=null && widget.mainSuffixText == null)
-                ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
+                ? '${widget.mainPrefixText} ${widget.elementsList[widget.resvNowSelectingIndex ?? 0]}'
                 : (widget.mainPrefixText==null && widget.mainSuffixText != null)
                   ? (widget.indexListNotneedsMainSuffixText!=null)
-                    ? (widget.indexListNotneedsMainSuffixText?.contains(_newSelectIndex)==false)
-                      ? '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
-                      : widget.elementsList[_newSelectIndex ?? 0]
-                    : '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                    ? (widget.indexListNotneedsMainSuffixText?.contains(widget.resvNowSelectingIndex)==false)
+                      ? '${widget.elementsList[widget.resvNowSelectingIndex ?? 0]} ${widget.mainSuffixText}'
+                      : widget.elementsList[widget.resvNowSelectingIndex ?? 0]
+                    : '${widget.elementsList[widget.resvNowSelectingIndex ?? 0]} ${widget.mainSuffixText}'
                   : (widget.indexListNotneedsMainSuffixText!=null)
-                    ? (widget.indexListNotneedsMainSuffixText?.contains(_newSelectIndex)==false)
-                      ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
-                      : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
-                    : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                    ? (widget.indexListNotneedsMainSuffixText?.contains(widget.resvNowSelectingIndex)==false)
+                      ? '${widget.mainPrefixText} ${widget.elementsList[widget.resvNowSelectingIndex ?? 0]} ${widget.mainSuffixText}'
+                      : '${widget.mainPrefixText} ${widget.elementsList[widget.resvNowSelectingIndex ?? 0]}'
+                    : '${widget.mainPrefixText} ${widget.elementsList[widget.resvNowSelectingIndex ?? 0]} ${widget.mainSuffixText}'
             : '未選択',
           style: TextStyle(fontSize: widget.customMainTextSize),
           overflow: TextOverflow.ellipsis
@@ -145,7 +145,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                                 setState(() {
                                   _newSelectIndex = index;
                                 });
-                                widget.argCallback(_newSelectIndex); // コールバックで選択された日付を渡す
+                                widget.argCallback(_newSelectIndex);
                                 Navigator.pop(context);
                               },
                             ),
