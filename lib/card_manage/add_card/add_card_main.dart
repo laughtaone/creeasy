@@ -85,15 +85,31 @@ class _AddCardPageState extends State<AddCardPage> {
                   miniInfo(passText: 'プリセットされているカードは、管理できる項目がそのカードに特化しているため、非常に管理がしやすいメリットがあります')
                 ]),
                 fieldInput: Container(
-                  child: compInputDialogSelectType(
-                    elementsList: _presetCardList,
-                    resvNowSelectingIndex: _selectedCardIndex,
-                    dialogText: 'プリセット済カード一覧：',
-                    argCallback: (int? resvIndex) {
-                      setState(() {
-                        _selectedCardIndex = resvIndex;
-                      });
-                    },
+                  margin: const EdgeInsets.only(top: 3, bottom: 3),
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color(0xffd5d5d5),
+                  ),
+                  child: Row(
+                    children: [
+                      const Text('追加する\nカード', textAlign: TextAlign.center,),
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: compInputDialogSelectType(
+                          customHeight: 60,
+                          customMainTextSize: 17,
+                          elementsList: _presetCardList,
+                          resvNowSelectingIndex: _selectedCardIndex,
+                          dialogText: 'プリセット済カード一覧：',
+                          argCallback: (int? resvIndex) {
+                            setState(() {
+                              _selectedCardIndex = resvIndex;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -16,20 +16,24 @@ class compInputDialogSelectType extends StatefulWidget {
   final String? dialogSuffixText;
   final List<int>? indexListNotneedsDialogSuffixText;
   final List<int>? indexListNotneedsMainSuffixText;
+  final double customHeight;
+  final double customMainTextSize;
 
-  const compInputDialogSelectType(
-      {super.key, required this.elementsList,       // 選択する要素を格納したリスト（※必須）
-      required this.resvNowSelectingIndex,        // 現在選択中の要素のインデックス番号
-      required this.dialogText,          // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
-      required this.argCallback,         // コールバック関数
-      this.mainPrefixText,
-      this.mainSuffixText,                  // 表示するテキストの末尾につける単位
-      this.customBackColor = Colors.white,
-      this.dialogPrefixText,
-      this.dialogSuffixText,
-      this.indexListNotneedsDialogSuffixText,
-      this.indexListNotneedsMainSuffixText,
-      });
+  const compInputDialogSelectType({super.key,
+    required this.elementsList,       // 選択する要素を格納したリスト（※必須）
+    required this.resvNowSelectingIndex,        // 現在選択中の要素のインデックス番号
+    required this.dialogText,          // 例えば「◯◯の選択：」のようにダイアログ表示時のテキスト
+    required this.argCallback,         // コールバック関数
+    this.mainPrefixText,
+    this.mainSuffixText,                  // 表示するテキストの末尾につける単位
+    this.customBackColor = Colors.white,
+    this.dialogPrefixText,
+    this.dialogSuffixText,
+    this.indexListNotneedsDialogSuffixText,
+    this.indexListNotneedsMainSuffixText,
+    this.customHeight = 70,
+    this.customMainTextSize = 20,
+  });
 
   @override
   _compInputDialogSelectTypeState createState() =>
@@ -55,7 +59,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
           shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          fixedSize: const Size(double.infinity, 70),
+          fixedSize: Size(double.infinity, widget.customHeight),
           backgroundColor: widget.customBackColor,
         ),
         child: ListTile(
@@ -77,7 +81,8 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                         : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
                       : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
               : '未選択',
-            style: const TextStyle(fontSize: 20)
+            style: TextStyle(fontSize: widget.customMainTextSize),
+            overflow: TextOverflow.ellipsis
           ),
           trailing: const Icon(Icons.edit),
         ),
@@ -125,7 +130,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                                         : '${widget.elementsList[index]} ${widget.dialogSuffixText}'
                                       : '${widget.dialogPrefixText} ${widget.elementsList[index]} ${widget.dialogSuffixText}'
                                 ,
-                                style: const TextStyle(fontSize: 18)
+                                style: const TextStyle(fontSize: 18),
                               ),
                               onTap: () {
                                 setState(() {

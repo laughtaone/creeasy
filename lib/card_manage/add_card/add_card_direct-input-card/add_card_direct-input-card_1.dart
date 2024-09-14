@@ -223,8 +223,6 @@ class _AddCardPageDirectInputCard1State
 
                     // =============================================== 「次へ」ボタン ==============================================
                     betweenSelectField(customHeight: 20),
-                    Text(_selectedBoolSavingboxIndex.toString()),
-                    Text(_selectedSavingboxIndex.toString()),
                     NextButtonComp(
                       isCanPressNextButton: (judgeAllNotnull(rectList: [
                         _inputCardName,
