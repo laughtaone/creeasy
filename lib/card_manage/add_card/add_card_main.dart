@@ -1,4 +1,6 @@
+import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:flutter/material.dart';
@@ -21,21 +23,36 @@ class AddCardPage extends StatefulWidget {
 
 class _AddCardPageState extends State<AddCardPage> {
   // ドロップダウンメニューで選択するアイテムのリスト
-  final List<String> _presetCardList = [
+  final List<String> _presetCardBrandList = [
     '三井住友カード',
-    'メルカード',
+    'メルカリ',
     'ビューカード',
-    'PayPayカード',
-    'LINEクレカ(P+)',
-    'エポスカード',
-    'auPAYカード',
-    'dカード'
+    'PayPay',
+    'LINE',
+    'エポス',
+    'auPAY',
+    'dカード',
   ];
+  final List<List<String>> _presetCardList = [
+    ['三井住友カード(NL)', '三井住友カード(CL)', '三井住友カード ゴールド(NL)'],
+    ['メルカード'],
+    ['JREカード', 'ビックSuicaカード'],
+    ['PayPayカード', 'PayPayカード ゴールド'],
+    ['LINEクレカ', 'LINEクレカ(P+)'],
+    ['エポスカードVisa', 'エポスゴールドカード'],
+    ['auPAYカード', 'auPAYゴールドカード'],
+    ['dカード', 'dカードゴールド'],
+  ];
+
+
+
 
   // ================================ 変数処理 ================================
   String? _selectedItem; // ①で選択されたカードを保持する変数
+  int? _selectedCardBrandIndex;
   int? _selectedCardIndex;  // 選択されたカード
-  bool _isCanPressNextButton = false;
+
+
   // =========================================================================
 
   @override
@@ -87,56 +104,66 @@ class _AddCardPageState extends State<AddCardPage> {
                   miniInfo(passText: 'プリセットされているカードは、管理できる項目がそのカードに特化しているため、非常に管理がしやすいメリットがあります')
                 ]),
                 fieldInput: Container(
-                  margin: const EdgeInsets.only(top: 3, bottom: 3),
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  margin: const EdgeInsets.only(top: 3),
+                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xffd5d5d5),
                   ),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          const SizedBox(width: 57, child: Text('カード\n会社', textAlign: TextAlign.center,)),
-                          const SizedBox(width: 5),
-                          Expanded(
-                            child: compInputDialogSelectType(
-                              customTBPadding: 0,
-                              customMainTextSize: 17,
-                              elementsList: _presetCardList,
-                              resvNowSelectingIndex: _selectedCardIndex,
-                              dialogText: 'プリセット済カード一覧：',
-                              argCallback: (int? resvIndex) {
-                                setState(() {
-                                  _selectedCardIndex = resvIndex;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
+                      titleTextComp(resvIcon: Icons.search, resvText: 'カードを探す', customFontWeight: FontWeight.w700),
+                      Align(alignment: Alignment.centerRight, child: Text(_selectedCardBrandIndex.toString())),
+                      // -------------------------------------- ブランド --------------------------------------
+                      selectTileComp(
+                        // customBackColor: const Color(0xffe3e3e3),
+                        customBackColor: const Color(0xffd5d5d5),
+                        customTBPadding: const [5, 5],
+                        titleComp: titleTextComp(resvIcon: Icons.local_offer_outlined, resvText: 'ブランドを選択', customIconSize: 20, customBetweenIT: 3),
+                        fieldInput: compInputDialogSelectType(
+                          customTBPadding: 0,
+                          customTBMargin: const [5, 3],
+                          customMainTextSize: 17,
+                          elementsList: _presetCardBrandList,
+                          resvNowSelectingIndex: _selectedCardBrandIndex,
+                          dialogText: 'ブランド一覧：',
+                          argCallback: (int? resvIndex) {
+                            _selectedCardBrandIndex = resvIndex;
+                            _selectedCardIndex = null;
+                            setState(() {
+                              _selectedCardIndex = null;
+                              _selectedCardBrandIndex = resvIndex;
+                            });
+                          },
+                        ),
                       ),
-                      Row(
-                        children: [
-                          const SizedBox(width: 57, child:
-                            AutoSizeText('追加する\nカード', textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis),
-                          ),
-                          const SizedBox(width: 5),
-                          Expanded(
-                            child: compInputDialogSelectType(
-                              customTBPadding: 0,
-                              customMainTextSize: 17,
-                              elementsList: _presetCardList,
-                              resvNowSelectingIndex: _selectedCardIndex,
-                              dialogText: 'プリセット済カード一覧：',
-                              argCallback: (int? resvIndex) {
-                                setState(() {
-                                  _selectedCardIndex = resvIndex;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
+                      // ------------------------------------------------------------------------------------
+
+                      betweenIcon(recvIcon: Icons.arrow_downward, customTBPadding: [10, 10]),
+
+                      Align(alignment: Alignment.centerRight, child: Text(_selectedCardIndex.toString())),
+                      // ---------------------------------- 追加するカードを表示 ----------------------------------
+                      selectTileComp(
+                        customBackColor: const Color(0xffd5d5d5),
+                        customTBPadding: const [5, 5],
+                        titleComp: titleTextComp(resvText: '追加するカード'),
+                        fieldInput: compInputDialogSelectType(
+                          customTBPadding: 0,
+                          customTBMargin: const [5, 3],
+                          customMainTextSize: 17,
+                          canTapField: (_selectedCardBrandIndex!=null),
+                          elementsList: (_selectedCardBrandIndex!=null) ?_presetCardList[_selectedCardBrandIndex!]: [''*_presetCardBrandList.length],
+                          resvNowSelectingIndex: _selectedCardIndex,
+                          dialogText: 'ブランド一覧：',
+                          argCallback: (int? resvIndex) {
+                            _selectedCardIndex = resvIndex;
+                            setState(() {
+                              _selectedCardIndex = resvIndex;
+                            });
+                          },
+                        ),
                       ),
+                      // ------------------------------------------------------------------------------------
                     ],
                   ),
                 ),

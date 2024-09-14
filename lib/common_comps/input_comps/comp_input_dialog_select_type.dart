@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 // 入力フィールド(選択/ダイアログ形式)単体
 // import文：import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 
@@ -17,7 +18,10 @@ class compInputDialogSelectType extends StatefulWidget {
   final List<int>? indexListNotneedsDialogSuffixText;
   final List<int>? indexListNotneedsMainSuffixText;
   final double customTBPadding;
+  final List<double> customTBMargin;
   final double customMainTextSize;
+  final bool canTapField;
+  final String customCannotTapFieldDialog;
 
   const compInputDialogSelectType({super.key,
     required this.elementsList,       // 選択する要素を格納したリスト（※必須）
@@ -32,7 +36,10 @@ class compInputDialogSelectType extends StatefulWidget {
     this.indexListNotneedsDialogSuffixText,
     this.indexListNotneedsMainSuffixText,
     this.customTBPadding = 8,
+    this.customTBMargin = const [10, 10],
     this.customMainTextSize = 20,
+    this.canTapField = true,
+    this.customCannotTapFieldDialog = '',
   });
 
   @override
@@ -55,7 +62,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      margin: EdgeInsets.fromLTRB(10, widget.customTBMargin[0], 10, widget.customTBMargin[1]),
       padding: EdgeInsets.fromLTRB(12, widget.customTBPadding, 12, widget.customTBPadding),
       decoration: BoxDecoration(
         border: Border.all(
@@ -87,7 +94,8 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
           overflow: TextOverflow.ellipsis
         ),
         trailing: const Icon(Icons.edit),
-        onTap: () {
+        onTap: (widget.canTapField)
+        ? () {
           showDialog(
             context: context,
             barrierDismissible: false,
@@ -158,6 +166,26 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                 ],
               );
             },
+          );
+        }
+        : () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return CupertinoAlertDialog(
+                title: const Text('エラー', style: TextStyle(fontSize: 22)),
+                content: const Padding(
+                  padding: EdgeInsets.only(top: 7, bottom: 7),
+                  child: Text('ブランドが未選択です\nブランドを選択してから\n再度試行してください', style: TextStyle(fontSize: 17)),
+                ),
+                actions: [
+                  CupertinoDialogAction(
+                    child: Text('OK'),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              );
+            }
           );
         },
       ),

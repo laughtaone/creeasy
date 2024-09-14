@@ -113,7 +113,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
               ),
               // ------------------------------------------------------------------------
 
-              betweenIcon(Icons.add),
+              betweenIcon(recvIcon: Icons.add),
 
               // --------------------------- ①基本還元率 ----------------------------
               SelectTileTwolayersButtonToggleComp(
@@ -166,7 +166,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
               ),
               // ------------------------------------------------------------------------
 
-              betweenIcon(Icons.add),
+              betweenIcon(recvIcon: Icons.add),
 
               // --------------------------- ②ボーナスポイント ----------------------------
               SelectTileTwolayersButtonToggleComp(

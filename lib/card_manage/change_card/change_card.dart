@@ -59,7 +59,7 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
                   selectedCardIntro(widget.selectedCardName),
                   // =======================================================================================================================================
 
-                  betweenIcon(Icons.arrow_downward_outlined),
+                  betweenIcon(recvIcon: Icons.arrow_downward_outlined),
 
                   // ============================================================= ⓪ 注意書き =============================================================
                   cautionComp(Column(children: [

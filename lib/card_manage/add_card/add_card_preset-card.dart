@@ -87,7 +87,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
                 selectedCardIntro(widget.selectedCardName),
                 // =======================================================================================================
 
-                betweenIcon(Icons.add_outlined),
+                betweenIcon(recvIcon: Icons.add_outlined),
 
                 titleTextComp(resvText: 'カード情報を微調整', hTextType: 1),
 
