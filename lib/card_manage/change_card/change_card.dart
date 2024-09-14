@@ -50,7 +50,7 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
         ),
         body: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => FocusScope.of(context).unfocus(),
+            onTap: () => primaryFocus?.unfocus(),
             child: Padding(
               padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
               child: ListView(
@@ -59,7 +59,7 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
                   selectedCardIntro(widget.selectedCardName),
                   // =======================================================================================================================================
 
-                  betweenIcon(Icons.arrow_downward_outlined),
+                  betweenIcon(recvIcon: Icons.arrow_downward_outlined),
 
                   // ============================================================= ⓪ 注意書き =============================================================
                   cautionComp(Column(children: [

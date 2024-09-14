@@ -113,7 +113,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
               ),
               // ------------------------------------------------------------------------
 
-              betweenIcon(Icons.add),
+              betweenIcon(recvIcon: Icons.add),
 
               // --------------------------- ①基本還元率 ----------------------------
               SelectTileTwolayersButtonToggleComp(
@@ -166,7 +166,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
               ),
               // ------------------------------------------------------------------------
 
-              betweenIcon(Icons.add),
+              betweenIcon(recvIcon: Icons.add),
 
               // --------------------------- ②ボーナスポイント ----------------------------
               SelectTileTwolayersButtonToggleComp(
@@ -240,11 +240,6 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
 
               // =============================================== 「次へ」ボタン ==============================================
               betweenSelectField(customHeight: 40),
-
-              Text('_isExistBasicReturn：${_isExistBasicReturn.toString()}'),
-              Text('_isManageBasicReturn：$_isManageBasicReturn'),
-              Text('_isExistPointup：${_isExistPointup.toString()}'),
-              Text('_isManagePointup：${_isManagePointup.toString()}'),
 
               NextButtonComp(
                 isCanPressNextButton: (judgeAllNotnull(rectList: [

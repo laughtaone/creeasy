@@ -95,7 +95,7 @@ class _PayBankAndSavingBoxCompState extends State<PayBankAndSavingBoxComp> {
             // ================================ 引き落とし口座選択フィールド ================================
             compInputDialogSelectType(
               elementsList: widget.bankList,
-              resvNowSelectingIndex: _newMainSelectbuttonIndex,
+              resvNowSelectingIndex: widget.resvNowSelectingBankIndex,
               dialogText: '引き落とし口座を選択',
               argCallback: widget.argMainCallback,
             ),
@@ -142,7 +142,7 @@ class _PayBankAndSavingBoxCompState extends State<PayBankAndSavingBoxComp> {
                                 titleComp: titleTextComp(resvText: '資金ボックスを選択'),
                                 fieldInput: compInputDialogSelectType(
                                   elementsList: widget.savingboxList ?? [''],
-                                  resvNowSelectingIndex: _newSelectSub2Index,
+                                  resvNowSelectingIndex: widget.resvNowSelectingSub2,
                                   dialogText: '資金ボックスを選択',
                                   argCallback: widget.argSub2Callback,
                                 ),

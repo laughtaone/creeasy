@@ -38,7 +38,7 @@ class _ChangeBankPageState extends State<ChangeBankPage> {
         ),
         body: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => FocusScope.of(context).unfocus(),
+            onTap: () => primaryFocus?.unfocus(),
             child: Padding(
               padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
               child: ListView(

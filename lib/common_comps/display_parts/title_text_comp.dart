@@ -6,8 +6,11 @@ Padding titleTextComp({
   String resvText = '',
   double? resvTextSize,
   int? hTextType,         // 1:h1(20px), 2:h2(18px), 3:h3(16px), null:h2(18px) / ※resvTextSize が指定されている場合はそっちが優先される
+  double customIconSize = 23,
   double customTopMargin = 2,
   double customBottomMargin = 2,
+  FontWeight customFontWeight = FontWeight.w500,
+  double customBetweenIT = 5,
 }) {
   late double _finalTextSize;
   if (resvTextSize!=null) {
@@ -35,14 +38,14 @@ Padding titleTextComp({
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         (resvIcon != null)
-          ? Icon(resvIcon, size: 23)
+          ? Icon(resvIcon, size: customIconSize)
           : const SizedBox.shrink(),
-        const SizedBox(width: 5),
+        SizedBox(width: customBetweenIT),
         Flexible(
           child: Text(
             resvText,
             style: TextStyle(
-              fontWeight: FontWeight.w500,
+              fontWeight: customFontWeight,
               fontSize: _finalTextSize,
             ),
           ),

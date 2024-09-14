@@ -113,7 +113,7 @@ class _AddCardPageDirectInputCard1State
         ),
         body: GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: () => FocusScope.of(context).unfocus(),
+            onTap: () => primaryFocus?.unfocus(),
             child: Padding(
                 padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
                 child: ListView(
@@ -123,7 +123,7 @@ class _AddCardPageDirectInputCard1State
                     titleTextComp(resvText: 'Step1：基本項目', hTextType: 1, customBottomMargin: 15),
                     // ------------------------------- ①カード名 -------------------------------
                     selectTileComp(
-                      titleComp: titleTextComp(resvIcon: Icons.credit_card_outlined, resvText: 'カード名を入力'),
+                      titleComp: titleTextComp(resvIcon: Icons.credit_card_outlined, resvText: 'カード名入力'),
                       fieldInput: compInputStringType(
                         resvNowInputingString: _inputCardName,
                         argCallback: (recvString) {
@@ -223,8 +223,6 @@ class _AddCardPageDirectInputCard1State
 
                     // =============================================== 「次へ」ボタン ==============================================
                     betweenSelectField(customHeight: 20),
-                    Text(_selectedBoolSavingboxIndex.toString()),
-                    Text(_selectedSavingboxIndex.toString()),
                     NextButtonComp(
                       isCanPressNextButton: (judgeAllNotnull(rectList: [
                         _inputCardName,
