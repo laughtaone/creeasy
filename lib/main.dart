@@ -22,6 +22,7 @@ class StartPageHome extends StatelessWidget {
       home: const StartPageWidget(),
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
+        GlobalCupertinoLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],

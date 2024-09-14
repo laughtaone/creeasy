@@ -55,38 +55,39 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(5),
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          fixedSize: Size(double.infinity, widget.customHeight),
-          backgroundColor: widget.customBackColor,
+      margin: const EdgeInsets.fromLTRB(5, 10, 5, 5),
+      padding: const EdgeInsets.fromLTRB(10, 8, 5, 8),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black,
+          width: 1.0),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: ListTile(
+        title: Text(
+          (_newSelectIndex != null)
+            ? (widget.mainPrefixText == null && widget.mainSuffixText==null)
+              ? widget.elementsList[_newSelectIndex ?? 0]
+              : (widget.mainPrefixText!=null && widget.mainSuffixText == null)
+                ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
+                : (widget.mainPrefixText==null && widget.mainSuffixText != null)
+                  ? (widget.indexListNotneedsMainSuffixText!=null)
+                    ? (widget.indexListNotneedsMainSuffixText?.contains(_newSelectIndex)==false)
+                      ? '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                      : widget.elementsList[_newSelectIndex ?? 0]
+                    : '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                  : (widget.indexListNotneedsMainSuffixText!=null)
+                    ? (widget.indexListNotneedsMainSuffixText?.contains(_newSelectIndex)==false)
+                      ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+                      : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
+                    : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
+            : '未選択',
+          style: TextStyle(fontSize: widget.customMainTextSize),
+          overflow: TextOverflow.ellipsis
         ),
-        child: ListTile(
-          title: Text(
-            (_newSelectIndex != null)
-              ? (widget.mainPrefixText == null && widget.mainSuffixText==null)
-                ? widget.elementsList[_newSelectIndex ?? 0]
-                : (widget.mainPrefixText!=null && widget.mainSuffixText == null)
-                  ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
-                  : (widget.mainPrefixText==null && widget.mainSuffixText != null)
-                    ? (widget.indexListNotneedsMainSuffixText!=null)
-                      ? (widget.indexListNotneedsMainSuffixText?.contains(_newSelectIndex)==false)
-                        ? '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
-                        : widget.elementsList[_newSelectIndex ?? 0]
-                      : '${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
-                    : (widget.indexListNotneedsMainSuffixText!=null)
-                      ? (widget.indexListNotneedsMainSuffixText?.contains(_newSelectIndex)==false)
-                        ? '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
-                        : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]}'
-                      : '${widget.mainPrefixText} ${widget.elementsList[_newSelectIndex ?? 0]} ${widget.mainSuffixText}'
-              : '未選択',
-            style: TextStyle(fontSize: widget.customMainTextSize),
-            overflow: TextOverflow.ellipsis
-          ),
-          trailing: const Icon(Icons.edit),
-        ),
-        onPressed: () {
+        trailing: const Icon(Icons.edit),
+        onTap: () {
           showDialog(
             context: context,
             barrierDismissible: false,

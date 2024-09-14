@@ -40,24 +40,24 @@ class _compInputDateTypeState extends State<compInputDateType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(5),
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10)),
-          fixedSize: const Size(double.infinity, 70),
-          backgroundColor: const Color(0xfffefefe),
+      margin: const EdgeInsets.fromLTRB(5, 10, 5, 5),
+      padding: const EdgeInsets.fromLTRB(10, 8, 5, 8),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black,
+          width: 1.0),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: ListTile(
+        title: Text(
+          _selectedDate == null
+              ? '未選択'
+              : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
+          style: const TextStyle(fontSize: 20),
         ),
-        child: ListTile(
-          title: Text(
-            _selectedDate == null
-                ? '未選択'
-                : '${_selectedDate?.year}年${_selectedDate?.month}月${_selectedDate?.day}日',
-            style: const TextStyle(fontSize: 20),
-          ),
-          trailing: const Icon(Icons.edit),
-        ),
-        onPressed: () async {
+        trailing: const Icon(Icons.edit),
+        onTap: () async {
           DateTime? date = await showDatePicker(
             context: context,
             locale: const Locale("ja"),
@@ -72,7 +72,7 @@ class _compInputDateTypeState extends State<compInputDateType> {
             widget.argCallback(date); // コールバックで選択された日付を渡す
           }
         },
-      ),
+      )
     );
   }
 }
