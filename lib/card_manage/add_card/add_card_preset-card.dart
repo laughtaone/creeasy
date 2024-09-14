@@ -12,6 +12,7 @@ import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
 import 'package:creeasy/card_manage/card_manage_COMPS/pay_bank_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
 
 
 
@@ -82,6 +83,7 @@ class _AddCardPagePresetCardState extends State<AddCardPagePresetCard> {
           child: Padding(
               padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
               child: ListView(children:[
+                progressBarComp(ratioProg: 1, ratioNotprog: 1),
                 // =============================================== ⓪ 選択されたカード名 ==============================================
                 const SizedBox(height: 5),
                 selectedCardIntro(widget.selectedCardName),

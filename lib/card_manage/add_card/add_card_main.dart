@@ -24,7 +24,7 @@ class AddCardPage extends StatefulWidget {
 class _AddCardPageState extends State<AddCardPage> {
   // ドロップダウンメニューで選択するアイテムのリスト
   final List<String> _presetCardBrandList = [
-    '三井住友カード',
+    '三井住友カード三井住友カード三井住友カード三井住友カード三井住友カード',
     'メルカリ',
     'ビューカード',
     'PayPay',
@@ -90,109 +90,118 @@ class _AddCardPageState extends State<AddCardPage> {
           child: ListView(
             children: [
               // ========================================== ①支払いカード選択 ==========================================
-              const SizedBox(height: 10),
-              const Text(
+              const SizedBox(height: 14),
+              const AutoSizeText(
                 r'\\まずはプリセットに用意されているかチェック//',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                 textAlign: TextAlign.center
               ),
-              const SizedBox(height: 5),
+              const SizedBox(height: 10),
               selectTileComp(
+                customBackColor: const Color(0xffe6e6e6),    // 大きい側の色
                 titleComp: titleText(Icons.credit_card_outlined, '追加するカードを選択'),
                 guides: Column(children: [
                   miniInfo(passText: 'プリセットされているカードは、管理できる項目がそのカードに特化しているため、非常に管理がしやすいメリットがあります')
                 ]),
-                fieldInput: Container(
-                  margin: const EdgeInsets.only(top: 3),
-                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color(0xffd5d5d5),
-                  ),
-                  child: Column(
-                    children: [
-                      titleTextComp(resvIcon: Icons.search, resvText: 'カードを探す', customFontWeight: FontWeight.w700),
-                      Align(alignment: Alignment.centerRight, child: Text(_selectedCardBrandIndex.toString())),
-                      // -------------------------------------- ブランド --------------------------------------
-                      selectTileComp(
-                        customBackColor: const Color(0xffe3e3e3),
-                        // customBackColor: const Color(0xffd5d5d5),
-                        customTBPadding: const [5, 5],
-                        titleComp: titleTextComp(resvIcon: Icons.local_offer_outlined, resvText: 'ブランドを選択', customIconSize: 20, customBetweenIT: 3),
-                        fieldInput: compInputDialogSelectType(
-                          customTBPadding: 0,
-                          customTBMargin: const [5, 3],
-                          customMainTextSize: 17,
-                          elementsList: _presetCardBrandList,
-                          resvNowSelectingIndex: _selectedCardBrandIndex,
-                          dialogText: 'ブランド一覧：',
-                          argCallback: (int? resvIndex) {
-                            if (_selectedCardBrandIndex != resvIndex) {
-                              _selectedCardBrandIndex = resvIndex;
-                              _selectedCardIndex = null;
-                              setState(() {
-                                _selectedCardIndex = null;
-                                _selectedCardBrandIndex = resvIndex;
-                              });
-                            }
-                          },
-                        ),
+                fieldInput: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 3),
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: const Color(0xffd1d1d1),
                       ),
-                      // ------------------------------------------------------------------------------------
+                      child: Column(
+                        children: [
+                          titleTextComp(resvIcon: Icons.search, resvText: 'カードを探す', customFontWeight: FontWeight.w700),
+                          // -------------------------------------- ブランド --------------------------------------
+                          selectTileComp(
+                            // customBackColor: const Color(0xffdcdcdc),
+                            customBackColor: const Color(0xffd1d1d1),
+                            customTBPadding: const [5, 5],
+                            titleComp: titleTextComp(resvIcon: Icons.local_offer_outlined, resvText: 'ブランドを選択', customIconSize: 20, customBetweenIT: 3),
+                            fieldInput: compInputDialogSelectType(
+                              customTBPadding: 0,
+                              customTBMargin: const [5, 3],
+                              customMainTextSize: 17,
+                              isRedTextUnselect: true,
+                              elementsList: _presetCardBrandList,
+                              resvNowSelectingIndex: _selectedCardBrandIndex,
+                              dialogText: 'ブランド一覧：',
+                              argCallback: (int? resvIndex) {
+                                if (_selectedCardBrandIndex != resvIndex) {
+                                  _selectedCardBrandIndex = resvIndex;
+                                  _selectedCardIndex = null;
+                                  setState(() {
+                                    _selectedCardIndex = null;
+                                    _selectedCardBrandIndex = resvIndex;
+                                  });
+                                }
+                              },
+                            ),
+                          ),
+                          // ------------------------------------------------------------------------------------
 
-                      betweenIcon(recvIcon: Icons.arrow_downward, customTBPadding: [10, 10]),
+                          betweenIcon(recvIcon: Icons.arrow_downward, customTBPadding: [0, 0]),
 
-                      Align(alignment: Alignment.centerRight, child: Text(_selectedCardIndex.toString())),
-                      // ---------------------------------- 追加するカードを表示 ----------------------------------
-                      selectTileComp(
-                        customBackColor: const Color(0xffd5d5d5),
-                        customTBPadding: const [5, 5],
-                        titleComp: titleTextComp(resvText: '追加するカード'),
-                        fieldInput: compInputDialogSelectType(
-                          customTBPadding: 0,
-                          customTBMargin: const [5, 3],
-                          customMainTextSize: 17,
-                          canTapField: (_selectedCardBrandIndex!=null),
-                          // elementsList: (_selectedCardBrandIndex!=null) ?_presetCardList[_selectedCardBrandIndex!]: [''*_presetCardBrandList.length],
-                          elementsList: (_selectedCardBrandIndex != null && _presetCardList.length > _selectedCardBrandIndex!)
-                            ? _presetCardList[_selectedCardBrandIndex!]
-                            : [],
-                          resvNowSelectingIndex: _selectedCardIndex,
-                          dialogText: 'ブランド一覧：',
-                          argCallback: (int? resvIndex) {
-                            setState(() {
-                              _selectedCardIndex = resvIndex;
-                            });
-                          },
-                        ),
+                          // ---------------------------------- 追加するカードを表示 ----------------------------------
+                          selectTileComp(
+                            customBackColor: const Color(0xffd1d1d1),
+                            customTBPadding: const [5, 5],
+                            titleComp: titleTextComp(resvText: '追加するカード', resvIcon: Icons.verified_outlined),
+                            fieldInput: compInputDialogSelectType(
+                              customTBPadding: 0,
+                              customTBMargin: const [5, 3],
+                              customMainTextSize: 17,
+                              isRedTextUnselect: true,
+                              canTapField: (_selectedCardBrandIndex!=null),
+                              // elementsList: (_selectedCardBrandIndex!=null) ?_presetCardList[_selectedCardBrandIndex!]: [''*_presetCardBrandList.length],
+                              elementsList: (_selectedCardBrandIndex != null && _presetCardList.length > _selectedCardBrandIndex!)
+                                ? _presetCardList[_selectedCardBrandIndex!]
+                                : [],
+                              resvNowSelectingIndex: _selectedCardIndex,
+                              dialogText: 'ブランド一覧：',
+                              argCallback: (int? resvIndex) {
+                                setState(() {
+                                  _selectedCardIndex = resvIndex;
+                                });
+                              },
+                            ),
+                          ),
+                          // ------------------------------------------------------------------------------------
+                        ],
                       ),
-                      // ------------------------------------------------------------------------------------
-                    ],
-                  ),
+                    ),
+
+                    const SizedBox(height: 15),
+
+                    // ----------------------------------- 「次へ」ボタン -----------------------------------
+                    SizedBox(
+                      width: double.infinity,
+                      child: NextButtonComp(
+                        isCanPressNextButton: (_selectedCardIndex!=null) ?true :false,
+                        argOnpressed: () {
+                          (_selectedCardIndex!=null)
+                          ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddCardPagePresetCard(selectedCardName: _presetCardList[_selectedCardBrandIndex!][_selectedCardIndex!]),
+                            ),
+                          )
+                          : null
+                          ;
+                        },
+                      ),
+                    ),
+                    // ------------------------------------------------------------------------------------
+                  ],
                 ),
               ),
               // ====================================================================================================
 
-              const SizedBox(height: 20),
 
-              // =============================================== 「次へ」ボタン ==============================================
-              NextButtonComp(
-                isCanPressNextButton: (_selectedCardIndex!=null) ?true :false,
-                argOnpressed: () {
-                  (_selectedCardIndex!=null)
-                  ? Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddCardPagePresetCard(selectedCardName: _selectedItem),
-                    ),
-                  )
-                  : null
-                  ;
-                },
-              ),
-              // =======================================================================================================
-
-              const SizedBox(height: 16),
+              const SizedBox(height: 35),
 
               // =============================================== 「直接入力」ボタン ==============================================
               ChokusetsuNyuuryokuButtonComp(

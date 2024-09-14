@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 // 入力フィールド(選択/ダイアログ形式)単体
@@ -22,6 +23,7 @@ class compInputDialogSelectType extends StatefulWidget {
   final double customMainTextSize;
   final bool canTapField;
   final String customCannotTapFieldDialog;
+  final bool isRedTextUnselect;
 
   const compInputDialogSelectType({super.key,
     required this.elementsList,       // 選択する要素を格納したリスト（※必須）
@@ -40,6 +42,7 @@ class compInputDialogSelectType extends StatefulWidget {
     this.customMainTextSize = 20,
     this.canTapField = true,
     this.customCannotTapFieldDialog = '',
+    this.isRedTextUnselect = false,
   });
 
   @override
@@ -90,7 +93,10 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                       : '${widget.mainPrefixText} ${widget.elementsList[widget.resvNowSelectingIndex ?? 0]}'
                     : '${widget.mainPrefixText} ${widget.elementsList[widget.resvNowSelectingIndex ?? 0]} ${widget.mainSuffixText}'
             : '未選択',
-          style: TextStyle(fontSize: widget.customMainTextSize),
+          style: TextStyle(
+            fontSize: widget.customMainTextSize,
+            color: (widget.resvNowSelectingIndex == null && widget.isRedTextUnselect==true) ? Colors.red :null
+          ),
           overflow: TextOverflow.ellipsis
         ),
         trailing: const Icon(Icons.edit),
@@ -101,6 +107,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
             barrierDismissible: false,
             builder: (BuildContext context) {
               return AlertDialog(
+                insetPadding: const EdgeInsets.only(left: 35, right: 35),
                 title: Text(widget.dialogText),
                 backgroundColor: const Color(0xffffffff),
                 content: Container(
@@ -111,7 +118,7 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                     borderRadius: BorderRadius.circular(7),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(left: 5, right: 5),
                     child: Scrollbar(
                       thumbVisibility: true,
                       thickness: 2,
@@ -120,11 +127,13 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                         itemCount: widget.elementsList.length,
                         itemBuilder: (context, index) {
                           return Container(
-                            margin: const EdgeInsets.only(top: 5, bottom: 5, right: 10),
+                            height: 60,
+                            margin: const EdgeInsets.only(top: 6, bottom: 6, right: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7),
                               color: const Color(0xffeeeeee),
                             ),
+                            alignment: Alignment.center,
                             child: ListTile(
                               title: Text(
                                 (widget.dialogPrefixText == null && widget.dialogSuffixText==null)
@@ -139,7 +148,8 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
                                         : '${widget.elementsList[index]} ${widget.dialogSuffixText}'
                                       : '${widget.dialogPrefixText} ${widget.elementsList[index]} ${widget.dialogSuffixText}'
                                 ,
-                                style: const TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: (widget.elementsList[index].length>=12) ?15 :19),
+                                overflow: TextOverflow.ellipsis,
                               ),
                               onTap: () {
                                 setState(() {
