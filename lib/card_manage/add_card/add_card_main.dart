@@ -7,6 +7,8 @@ import 'package:creeasy/card_manage/add_card/add_card_direct-input-card/add_card
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/chokusetsunyuuryou_button_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 
 
 
@@ -91,23 +93,49 @@ class _AddCardPageState extends State<AddCardPage> {
                     borderRadius: BorderRadius.circular(10),
                     color: const Color(0xffd5d5d5),
                   ),
-                  child: Row(
+                  child: Column(
                     children: [
-                      const Text('追加する\nカード', textAlign: TextAlign.center,),
-                      const SizedBox(width: 5),
-                      Expanded(
-                        child: compInputDialogSelectType(
-                          customHeight: 60,
-                          customMainTextSize: 17,
-                          elementsList: _presetCardList,
-                          resvNowSelectingIndex: _selectedCardIndex,
-                          dialogText: 'プリセット済カード一覧：',
-                          argCallback: (int? resvIndex) {
-                            setState(() {
-                              _selectedCardIndex = resvIndex;
-                            });
-                          },
-                        ),
+                      Row(
+                        children: [
+                          const SizedBox(width: 57, child: Text('カード\n会社', textAlign: TextAlign.center,)),
+                          const SizedBox(width: 5),
+                          Expanded(
+                            child: compInputDialogSelectType(
+                              customTBPadding: 0,
+                              customMainTextSize: 17,
+                              elementsList: _presetCardList,
+                              resvNowSelectingIndex: _selectedCardIndex,
+                              dialogText: 'プリセット済カード一覧：',
+                              argCallback: (int? resvIndex) {
+                                setState(() {
+                                  _selectedCardIndex = resvIndex;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const SizedBox(width: 57, child:
+                            AutoSizeText('追加する\nカード', textAlign: TextAlign.center, maxLines: 2, overflow: TextOverflow.ellipsis),
+                          ),
+                          const SizedBox(width: 5),
+                          Expanded(
+                            child: compInputDialogSelectType(
+                              customTBPadding: 0,
+                              customMainTextSize: 17,
+                              elementsList: _presetCardList,
+                              resvNowSelectingIndex: _selectedCardIndex,
+                              dialogText: 'プリセット済カード一覧：',
+                              argCallback: (int? resvIndex) {
+                                setState(() {
+                                  _selectedCardIndex = resvIndex;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

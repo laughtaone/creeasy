@@ -16,7 +16,7 @@ class compInputDialogSelectType extends StatefulWidget {
   final String? dialogSuffixText;
   final List<int>? indexListNotneedsDialogSuffixText;
   final List<int>? indexListNotneedsMainSuffixText;
-  final double customHeight;
+  final double customTBPadding;
   final double customMainTextSize;
 
   const compInputDialogSelectType({super.key,
@@ -31,7 +31,7 @@ class compInputDialogSelectType extends StatefulWidget {
     this.dialogSuffixText,
     this.indexListNotneedsDialogSuffixText,
     this.indexListNotneedsMainSuffixText,
-    this.customHeight = 70,
+    this.customTBPadding = 8,
     this.customMainTextSize = 20,
   });
 
@@ -55,8 +55,8 @@ class _compInputDialogSelectTypeState extends State<compInputDialogSelectType> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(5, 10, 5, 5),
-      padding: const EdgeInsets.fromLTRB(10, 8, 5, 8),
+      margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      padding: EdgeInsets.fromLTRB(12, widget.customTBPadding, 12, widget.customTBPadding),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black,
