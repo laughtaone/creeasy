@@ -117,14 +117,7 @@ class _PayBankAndSavingBoxCompState extends State<PayBankAndSavingBoxComp> {
                             customSelectedColor: const Color(0xffc4c4c4),
                             customNonselectedColor: const Color(0xfff1f1f1),
                             elementsList: const ['する', 'しない'],
-                            //   argCallback: (int? recvIndex) {
-                            //     setState(() {
-                            //       _newMainSelectbuttonIndex = recvIndex;
-                            //     });
-                            //     widget.argMainCallback(_newMainSelectbuttonIndex);
-                            //   },
-
-                            // argCallback: widget.argSub1Callback,
+                            resvNowSelectingIndex: (_newSelectSub1Index==0) ?1 :(_newSelectSub1Index==1) ?0 :null,
                             argCallback: (int resvIndex) {
                               setState(() {
                                 switch (resvIndex) {

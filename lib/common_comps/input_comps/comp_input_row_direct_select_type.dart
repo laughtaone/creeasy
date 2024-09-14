@@ -14,9 +14,9 @@ class CompInputRowDirectSelectType extends StatefulWidget {
   final Color customSelectedColor;
   final Color customNonselectedColor;
 
-  const CompInputRowDirectSelectType({super.key, 
+  const CompInputRowDirectSelectType({super.key,
     required this.elementsList,             // 選択する要素を格納したリスト（※必須）
-    this.resvNowSelectingIndex,             // 現在選択中の要素のインデックス番号(デフォでは未選択を示すnull)
+    required this.resvNowSelectingIndex,             // 現在選択中の要素のインデックス番号(デフォでは未選択を示すnull)
     this.customFontSize = 20,               // 選択要素の文字の大きさをカスタム(デフォは20)
     this.customIconSize = 27,
     required this.argCallback,              // コールバック関数（※必須）

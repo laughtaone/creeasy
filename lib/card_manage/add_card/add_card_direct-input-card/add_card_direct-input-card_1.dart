@@ -17,6 +17,7 @@ import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/n
 import 'package:creeasy/card_manage/add_card/add_card_direct-input-card/add_card_direct-input-card_2.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
 import 'package:creeasy/COMMON_COMPS/function/judge_all_notnull.dart';
+import 'package:creeasy/COMMON_COMPS/function/is_input_toggle_all_field.dart';
 
 
 
@@ -81,12 +82,6 @@ class _AddCardPageDirectInputCard1State
   int? _selectedSavingboxIndex;
 
 
-  void _onBoolPointUpSelected(int? index) {
-    setState(() {
-      _selectedPointUpIndex = index;
-    });
-    print("Selected index: $_selectedPointUpIndex");
-  }
   // =========================================================================
 
   @override
@@ -129,7 +124,7 @@ class _AddCardPageDirectInputCard1State
                     // ------------------------------- ①カード名 -------------------------------
                     selectTileComp(
                       titleComp: titleTextComp(resvIcon: Icons.credit_card_outlined, resvText: 'カード名を入力'),
-                      fieldInput: Container(child: compInputStringType(
+                      fieldInput: compInputStringType(
                         resvNowInputingString: _inputCardName,
                         argCallback: (recvString) {
                           _inputCardName = recvString;
@@ -137,7 +132,7 @@ class _AddCardPageDirectInputCard1State
                             _inputCardName = recvString; // コールバックで受け取った値を保持
                           });
                         },
-                      ))
+                      )
                     ),
                     // ------------------------------------------------------------------------
                     // ------------------------------- ②締め日 -------------------------------
@@ -167,12 +162,19 @@ class _AddCardPageDirectInputCard1State
                     selectTileComp(
                       titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '引き落とし日を入力'),
                       fieldInput: Column(children: [
+                        CompInputRowDirectSelectType(
+                          elementsList: const ['翌月', '翌々月'],
+                          resvNowSelectingIndex: __payMonth,
+                          argCallback: (int? resvMonthIndex) {
+                            __payMonth = resvMonthIndex;
+                          }
+                        ),
                         compInputDialogSelectType(
                           dialogText: '引き落とし日を選択：',
                           mainSuffixText: '日',
                           dialogSuffixText: '日',
-                          // indexListNotneedsDialogSuffixText: [_dayList.length-1],
-                          // indexListNotneedsMainSuffixText: [_dayList.length-1],
+                          indexListNotneedsDialogSuffixText: [_dayList.length-1],
+                          indexListNotneedsMainSuffixText: [_dayList.length-1],
                           elementsList: _dayList,
                           resvNowSelectingIndex: _payDate,
                           argCallback: (date) {
@@ -221,8 +223,17 @@ class _AddCardPageDirectInputCard1State
 
                     // =============================================== 「次へ」ボタン ==============================================
                     betweenSelectField(customHeight: 20),
+                    Text(_selectedBoolSavingboxIndex.toString()),
+                    Text(_selectedSavingboxIndex.toString()),
                     NextButtonComp(
-                      isCanPressNextButton: (judgeAllNotnull(rectList: [_inputCardName, _closingDate, _payDate, _selectedSavingboxIndex])) ?true :false,
+                      isCanPressNextButton: (judgeAllNotnull(rectList: [
+                        _inputCardName,
+                        _closingDate,
+                        __payMonth,
+                        _payDate,
+                        _selectedBankIndex,
+                        isInputToggleAllField(_selectedBoolSavingboxIndex, _selectedSavingboxIndex)
+                      ])) ?true :false,
                       argOnpressed: () {
                         Navigator.push(
                           context,

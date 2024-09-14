@@ -5,13 +5,12 @@ import 'package:flutter/material.dart';
 
 class compInputStringType extends StatefulWidget {
   final String? resvNowInputingString;     // 入力フィールドの初期値(※任意)
-  final Function(String) argCallback; // コールバック関数
+  final Function(String?) argCallback; // コールバック関数
 
-  const compInputStringType(
-      {super.key, 
-        this.resvNowInputingString,
-        required this.argCallback
-      });
+  const compInputStringType({super.key,
+    this.resvNowInputingString,
+    required this.argCallback
+  });
 
   @override
   _compInputStringTypeState createState() => _compInputStringTypeState();
@@ -24,11 +23,11 @@ class _compInputStringTypeState extends State<compInputStringType> {
   @override
   void initState() {
     super.initState();
-    _stringInputted = TextEditingController(text: (widget.resvNowInputingString != null) ? (widget.resvNowInputingString).toString() : '');
+    _stringInputted = TextEditingController(text: widget.resvNowInputingString ?? '');
 
-    // 入力が変更されたときにコールバックを呼び出すリスナーを追加
     _stringInputted.addListener(() {
-      widget.argCallback(_stringInputted.text); // 入力されたテキストをコールバックで通知
+      String inputText = _stringInputted.text;
+      widget.argCallback(inputText.isEmpty ? null : inputText);
     });
   }
   // -------------------------------------------------------------------------

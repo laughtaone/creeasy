@@ -18,6 +18,7 @@ import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.d
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_twolayers_button_toggle_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
 import 'package:creeasy/COMMON_COMPS/function/judge_all_notnull.dart';
+import 'package:creeasy/COMMON_COMPS/function/is_input_toggle_all_field.dart';
 
 
 
@@ -56,9 +57,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
           children: [
             Icon(Icons.add_card_outlined, color: Colors.black),
             SizedBox(width: 5),
-            Text(
-              'カードを追加',
-            ),
+            Text('カードを追加'),
           ],
         ),
         actions: [
@@ -248,7 +247,10 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
               Text('_isManagePointup：${_isManagePointup.toString()}'),
 
               NextButtonComp(
-                isCanPressNextButton: (judgeAllNotnull(rectList: [_isExistPointup, _isExistPointup])) ?true :false,
+                isCanPressNextButton: (judgeAllNotnull(rectList: [
+                  isInputToggleAllField(_isExistBasicReturn, isInputToggleAllField(_isManageBasicReturn, _inputtedReturnRate)),
+                  isInputToggleAllField(_isExistPointup, isInputToggleAllField(_isManagePointup, _inputtedReturnRate)),
+                ])) ?true :false,
                 argOnpressed: () {
                   Navigator.push(
                     context,
@@ -258,6 +260,7 @@ class _AddCardPageDirectInputCard3State extends State<AddCardPageDirectInputCard
                   );
                 },
               ),
+              betweenSelectField(customHeight: 40),
               // ===========================================================================================================
             ],
           )
