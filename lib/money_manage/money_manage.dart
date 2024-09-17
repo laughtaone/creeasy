@@ -24,7 +24,7 @@ class _MoneyManagePageState extends State<MoneyManagePage> {
             ),
             SizedBox(width: 5),
             Text(
-              '使用履歴管理',
+              '利用履歴管理',
             ),
           ],
         ),

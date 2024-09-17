@@ -150,10 +150,10 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               betweenSelectField(),
               selectTileComp(
                 titleComp: titleTextComp(
-                    resvIcon: Icons.event_outlined, resvText: '使用日を入力'),
+                    resvIcon: Icons.event_outlined, resvText: '利用日を入力'),
                 fieldInput: Container(
                   child: compInputDateType(
-                    dialogText: '使用日を選択：',
+                    dialogText: '利用日を選択：',
                     resvNowInputingDate: _payDate,
                     argCallback: (date) {
                       setState(() {
@@ -165,10 +165,10 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               ),
               // ====================================================================================================
 
-              // =============================================== ④使用場所 ==============================================
+              // =============================================== ④利用場所 ==============================================
               betweenSelectField(),
               selectTileComp(
-                  titleComp: titleTextComp(resvIcon: Icons.location_on_outlined, resvText: '使用場所を入力'),
+                  titleComp: titleTextComp(resvIcon: Icons.location_on_outlined, resvText: '利用場所を入力'),
                   fieldInput: Container(child: compInputStringType(
                     argCallback: (value) {
                       // コールバックを渡す

@@ -49,7 +49,7 @@ class _PayBankCompState extends State<PayBankComp> {
         fieldInput: Container(
           child: compInputDialogSelectType(
             elementsList: widget.bankList,
-            resvNowSelectingIndex: _newSelectedBankIndex,
+            resvNowSelectingIndex: widget.resvNowSelectingBankIndex,
             dialogText: '引き落とし銀行を選択：',
             argCallback: widget.argCallback,
           ),

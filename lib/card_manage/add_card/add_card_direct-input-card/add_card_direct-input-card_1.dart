@@ -192,7 +192,7 @@ class _AddCardPageDirectInputCard1State
                     PayBankAndSavingBoxComp(
                       // ------------ 引き落とし口座選択フィールド ------------
                       bankList: _bankList,
-                      resvNowSelectingBankIndex: _selectedBoolSavingboxIndex,
+                      resvNowSelectingBankIndex: _selectedBankIndex,
                       argMainCallback: (int? resvIndex) {
                         _selectedBankIndex = resvIndex;
                         setState(() {
