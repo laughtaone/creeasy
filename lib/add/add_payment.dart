@@ -82,23 +82,18 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
           children: [
             Icon(Icons.credit_score_outlined, color: Colors.black),
             SizedBox(width: 5),
-            Text(
-              '利用履歴を追加',
-            ),
+            Text('利用履歴を追加'),
           ],
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.close,
-                color: Colors.black,
-              ))
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.close, color: Colors.black)
+          )
         ],
-        backgroundColor:
-            Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -131,8 +126,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // =============================================== ②金額 ==============================================
               betweenSelectField(),
               selectTileComp(
-                titleComp: titleTextComp(
-                    resvIcon: Icons.currency_yen_outlined, resvText: '金額を入力'),
+                titleComp: titleTextComp(resvIcon: Icons.currency_yen_outlined, resvText: '金額を入力'),
                 fieldInput: Container(
                     child: compInputIntType(
                   prefixText: '¥　',
@@ -149,8 +143,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
               // =============================================== ③日付 ==============================================
               betweenSelectField(),
               selectTileComp(
-                titleComp: titleTextComp(
-                    resvIcon: Icons.event_outlined, resvText: '利用日を入力'),
+                titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '利用日を入力'),
                 fieldInput: Container(
                   child: compInputDateType(
                     dialogText: '利用日を選択：',

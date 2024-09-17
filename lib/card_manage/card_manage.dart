@@ -16,8 +16,7 @@ class CardManagePage extends StatefulWidget {
   _CardManagePageState createState() => _CardManagePageState();
 }
 
-class _CardManagePageState extends State<CardManagePage>
-  with SingleTickerProviderStateMixin {
+class _CardManagePageState extends State<CardManagePage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
   IconData _actionIcon = Icons.credit_card;
 
