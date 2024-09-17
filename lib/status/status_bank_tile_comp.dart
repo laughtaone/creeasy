@@ -29,12 +29,12 @@ class StatusBankTileComp extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          fixedSize: const Size.fromHeight(160)
+          fixedSize: const Size.fromHeight(165)
         ),
         child: Column(
           children: [
             // --------------------------------------------- 上部分 ---------------------------------------------
-            Flexible(
+            Expanded(
               flex: 3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,9 +66,10 @@ class StatusBankTileComp extends StatelessWidget {
             // -------------------------------------------------------------------------------------------------
 
             const Divider(height: 2, color: Colors.black),
+            const SizedBox(height: 3),
 
             // --------------------------------------------- 下部分 ---------------------------------------------
-            Flexible(
+            Expanded(
               flex: 5,
               child: Column(
                 children: [
@@ -85,11 +86,13 @@ class StatusBankTileComp extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
                       child: SizedBox(
                         width: double.infinity,
+                        height: 50,
                         child: Wrap(
-                          // alignment: WrapAlignment.center,
+                          alignment: WrapAlignment.start,
+                          crossAxisAlignment: WrapCrossAlignment.start,
                           spacing: 0, // アイテム間の水平スペース
                           runSpacing: 3.0, // アイテム間の垂直スペース
-                          children: gaitoCard.map((cardName) => cardIconNameComp(cardName)).toList(),
+                          children: gaitoCard.take(5).map((cardName) => cardIconNameComp(cardName)).toList(),
                         ),
                       ),
                     ),
