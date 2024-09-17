@@ -77,8 +77,14 @@ class StatusBankTileComp extends StatelessWidget {
                     flex: 1,
                     child: Container(
                       color: Colors.amberAccent,
-                      // alignment: Alignment.centerLeft,
-                      child: Text('該当カード', style: TextStyle(fontSize: 13, color: Colors.black),)
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('該当カード', style: TextStyle(fontSize: 13, color: Colors.black),),
+                          Text('他枚', style: TextStyle(fontSize: 13, color: Colors.black),),
+                        ],
+                      )
                     )
                   ),
                   Expanded(
@@ -99,7 +105,7 @@ class StatusBankTileComp extends StatelessWidget {
                             crossAxisAlignment: WrapCrossAlignment.start,
                             spacing: 0, // アイテム間の水平スペース
                             runSpacing: 3.0, // アイテム間の垂直スペース
-                            children: gaitoCard.take(4).map((cardName) => cardIconNameComp(cardName)).toList(),
+                            children: gaitoCard.take(2).map((cardName) => cardIconNameComp(cardName)).toList(),
                           ),
                         ),
                       ),
