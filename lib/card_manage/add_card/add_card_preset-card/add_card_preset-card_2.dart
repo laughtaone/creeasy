@@ -21,6 +21,8 @@ import 'package:creeasy/COMMON_COMPS/function/judge_all_notnull.dart';
 import 'package:creeasy/card_manage/card_manage_COMPS/must_manage_lists_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_twolayers_button_toggle_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/basic_text.dart';
+import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/confirm_button_comp.dart';
+import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
 
 
 
@@ -108,15 +110,15 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
           child: Padding(
               padding: const EdgeInsets.only(left: 17, right: 17, top: 10),
               child: ListView(children:[
-                progressBarComp(ratioProg: 1, ratioNotprog: 1),
-                // --------------------------- ⓪必須項目 ----------------------------
+                progressBarComp(ratioProg: 1, ratioNotprog: 0),
+                // =============================================== ⓪必須項目 ===============================================
                 titleTextComp(resvText: 'Step2：管理項目', hTextType: 1, customBottomMargin: 15),
                 mustManageListComp(),
-                // ------------------------------------------------------------------------
+                // ========================================================================================================
 
                 betweenIcon(recvIcon: Icons.add_outlined),
 
-                // --------------------------- ①基本還元率 ----------------------------
+                // =============================================== ①基本還元率 =============================================
                 selectTileComp(
                   titleComp: titleTextComp(resvIcon: Icons.card_giftcard_outlined, resvText: '基本還元ポイントの管理'),
                   guides: Column(children: [
@@ -132,9 +134,9 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
                     }
                   ),
                 ),
-                // ------------------------------------------------------------------------
+                // ========================================================================================================
 
-                // ---------------------------- ②VPUP ------------------------------------
+                // ================================================ ②VPUP ================================================
                 betweenSelectField(),
                 selectTileButtonToggleComp(
                   mainTitleComp: titleTextComp(resvIcon: Icons.local_offer_outlined, resvText: 'Vポイントアッププログラムの管理', resvTextSize: 17),
@@ -175,9 +177,9 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
                     ),
                   ),
                 ),
-                // ------------------------------------------------------------------------
+                // ========================================================================================================
 
-                // =============================================== 学生ポイント ==============================================
+                // ============================================== ③学生ポイント ============================================
                 betweenSelectField(),
                 SelectTileTwolayersButtonToggleComp(
                   mainTitleComp: titleTextComp(resvIcon: Icons.school_outlined, resvText: '学生ポイント'),
@@ -232,18 +234,19 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
                     ),
                   )
                 ),
-                // =======================================================================================================
+                // ========================================================================================================
 
 
-                // =============================================== 「次へ」ボタン ==============================================
+                // =============================================== 確認ボタン ==============================================
                 betweenSelectField(customHeight: 40),
-                NextButtonComp(
-                  isCanPressNextButton: (judgeAllNotnull(rectList: [
-                    _selectedPayRule,
-                    _selectedBankIndex,
-                    _selectedBoolSavingboxIndex,
-                    // isInputToggleAllField(_selectedBoolSavingboxIndex, _selectedSavingboxIndex)
-                  ])) ?true :false,
+                confirmButtonComp(
+                  // isCanPressNextButton: (judgeAllNotnull(rectList: [
+                  //   _selectedPayRule,
+                  //   _selectedBankIndex,
+                  //   _selectedBoolSavingboxIndex,
+                  //   // isInputToggleAllField(_selectedBoolSavingboxIndex, _selectedSavingboxIndex)
+                  // ])) ?true :false,
+                  isCanPressNextButton: true,
                   argOnpressed: () {
                     // Navigator.push(
                     //   context,
@@ -253,18 +256,16 @@ class _AddCardPageDirectInputCard2State extends State<AddCardPageDirectInputCard
                     // );
                   },
                 ),
-                betweenSelectField(customHeight: 50),
+                noSaveCloseComp(),
+                betweenSelectField(customHeight: 40),
                 // =======================================================================================================
 
-
-                // =============================================== 保存ボタン ==============================================
-                SaveButtonComp(
-                  argCallback: () {
-                    print('保存されました');
-                  },
-                  isCanOnpress: true,
-                ),
-                // =======================================================================================================
+                // SaveButtonComp(
+                //   argCallback: () {
+                //     print('保存されました');
+                //   },
+                //   isCanOnpress: true,
+                // ),
               ]))),
     );
   }

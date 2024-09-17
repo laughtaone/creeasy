@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import文：import 'package:creeasy/COMMON_COMPS/display_parts/no_save_close_comp.dart';
 
 
 Padding noSaveCloseComp({int? messageType = 0}) {

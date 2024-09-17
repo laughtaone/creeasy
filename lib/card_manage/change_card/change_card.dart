@@ -88,9 +88,10 @@ class _ChangeCardPageState extends State<ChangeCardPage> {
                   // =========================================================== ① 引き落とし口座を選択 ===========================================================
                   betweenSelectField(customHeight: 10),
                   PayBankComp(
-                    resvNowSelectingBankIndex: 0,
                     bankList: _bankList,
+                    resvNowSelectingBankIndex: _selectedBank,
                     argCallback: (int? resvIndex) {
+                      _selectedBank = resvIndex;
                       setState(() {
                         _selectedBank = resvIndex;
                       });
