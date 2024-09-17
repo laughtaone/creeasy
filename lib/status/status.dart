@@ -1,6 +1,6 @@
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:flutter/material.dart';
-import 'package:creeasy/status/status_bank_tile_comps.dart';
+import 'package:creeasy/status/status_bank_tile_comp.dart';
 
 
 class StatusPage extends StatefulWidget {
@@ -137,6 +137,7 @@ class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateM
                     return StatusBankTileComp(
                       bankName: _statusBankList[index][0],
                       bankBalance: _statusBankList[index][1],
+                      gaitoCard: ['三井住友カード', 'PayPayカード', '楽天カード', 'auPAYカード', 'dカード'],
                     );
                   }
                 )

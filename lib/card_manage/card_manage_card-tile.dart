@@ -64,7 +64,7 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
                 color: (_debugBackColor) ?Colors.blue[100] :null,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,        // これが効かない
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
                       child: Text(
