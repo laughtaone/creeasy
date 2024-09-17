@@ -137,7 +137,7 @@ class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateM
                     return StatusBankTileComp(
                       bankName: _statusBankList[index][0],
                       bankBalance: _statusBankList[index][1],
-                      gaitoCard: ['三井住友カード', 'PayPayカード', '楽天カード', 'auPAYカード', 'dカード'],
+                      gaitoCard: ['三井住友カード三井住友カード', 'PayPayカード', '楽天カード', 'auPAYカード', 'dカード'],
                     );
                   }
                 )

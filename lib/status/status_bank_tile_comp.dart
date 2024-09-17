@@ -73,26 +73,34 @@ class StatusBankTileComp extends StatelessWidget {
               flex: 5,
               child: Column(
                 children: [
-                  const Flexible(
+                  Expanded(
                     flex: 1,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
+                    child: Container(
+                      color: Colors.amberAccent,
+                      // alignment: Alignment.centerLeft,
                       child: Text('該当カード', style: TextStyle(fontSize: 13, color: Colors.black),)
                     )
                   ),
-                  Flexible(
+                  Expanded(
                     flex: 5,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
-                      child: SizedBox(
+                      child: Container(
+                        color: Colors.amberAccent,
+                        // 外側のContainerに制約を設ける
+                        constraints: BoxConstraints(
+                          maxHeight: 200, // 必要に応じて高さを調整
+                        ),
                         width: double.infinity,
-                        height: 50,
-                        child: Wrap(
-                          alignment: WrapAlignment.start,
-                          crossAxisAlignment: WrapCrossAlignment.start,
-                          spacing: 0, // アイテム間の水平スペース
-                          runSpacing: 3.0, // アイテム間の垂直スペース
-                          children: gaitoCard.take(5).map((cardName) => cardIconNameComp(cardName)).toList(),
+                        child: SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          child: Wrap(
+                            alignment: WrapAlignment.start,
+                            crossAxisAlignment: WrapCrossAlignment.start,
+                            spacing: 0, // アイテム間の水平スペース
+                            runSpacing: 3.0, // アイテム間の垂直スペース
+                            children: gaitoCard.take(4).map((cardName) => cardIconNameComp(cardName)).toList(),
+                          ),
                         ),
                       ),
                     ),
