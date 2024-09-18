@@ -83,13 +83,13 @@ class _PayHistoryTileCompState extends State<PayHistoryTileComp> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          fixedSize: const Size.fromHeight(160)
+          fixedSize: const Size.fromHeight(155)
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(
-              flex: 5,
+              flex: 20,
               child: Container(
                 color: (_debugBackColor) ?Colors.blue[100] :null,
                 child: Row(
@@ -97,38 +97,31 @@ class _PayHistoryTileCompState extends State<PayHistoryTileComp> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
+                      flex: 4,
                       child: Text(
                         widget.payCardName,
                         style: TextStyle(color: Colors.black, fontSize: (widget.payCardName.length<=8) ?23 :20),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    (widget.isSetureMoney)
-                      ? Container(
-                          margin: const EdgeInsets.only(left: 5),
-                          padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
+                    (!widget.isSetureMoney)
+                      ? Flexible(
+                        flex: 3,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.fromLTRB(10, 11, 10, 11),
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
                           ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.check_circle_outlined,
-                                size: 19,
-                                color: Colors.black,
-                              ),
-                              const SizedBox(width: 2),
-                              Text(
-                                '💰確保済にする',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black,
-                                ),
-                              )
-                            ],
-                          ),
-                        )
+                          onPressed: () {},
+                          child: const Text(
+                            '💰確保済にする',
+                            style: TextStyle(fontSize: 16, color: Colors.black,),
+                          )
+                        ),
+                      )
                       : const SizedBox.shrink()
                   ],
                 ),
@@ -136,42 +129,42 @@ class _PayHistoryTileCompState extends State<PayHistoryTileComp> {
             ),
             const Flexible(flex: 1, child: SizedBox(height: double.infinity,)),
             Flexible( // q
-              flex: 8,
-              child: Container(
-                color: Colors.yellow[100],
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 7,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          rectangleIconTextComp(argIcon: Icons.today_outlined, argText: _finalPayDate, isMinMainAxisSize: true, customBackColor: const Color(0xffeeeeee), customBetween: 6, customIconSize: 17, customTextSize: 15, customMaxLines: 1),
-                          rectangleIconTextComp(argIcon: Icons.credit_card, argText: widget.payCardName, isMinMainAxisSize: true, customBackColor: const Color(0xffeeeeee), customBetween: 6, customIconSize: 17, customTextSize: 15, customMaxLines: 1),
-                          rectangleIconTextComp(argIcon: Icons.account_balance_outlined, argText: widget.connectBank, isMinMainAxisSize: true, customBackColor: const Color(0xffeeeeee), customBetween: 6, customIconSize: 17, customTextSize: 15, customMaxLines: 1),
-                        ],
-                      ),
+              flex: 32,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        rectangleIconTextComp(argIcon: Icons.today_outlined, argText: _finalPayDate, isMinMainAxisSize: true, customBackColor: const Color(0xffeeeeee), customBetween: 6, customIconSize: 17, customTextSize: 15, customMaxLines: 1),
+                        rectangleIconTextComp(argIcon: Icons.credit_card, argText: widget.payCardName, isMinMainAxisSize: true, customBackColor: const Color(0xffeeeeee), customBetween: 6, customIconSize: 17, customTextSize: 15, customMaxLines: 1),
+                        rectangleIconTextComp(argIcon: Icons.account_balance_outlined, argText: widget.connectBank, isMinMainAxisSize: true, customBackColor: const Color(0xffeeeeee), customBetween: 6, customIconSize: 17, customTextSize: 15, customMaxLines: 1),
+                      ],
                     ),
-                    Expanded(
-                      flex: 4,
-                      child: Text(
-                        formatYen(widget.payPrice),
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize:
-                            (widget.payPrice.toString().length<6)
-                              ?27
-                              :(widget.payPrice.toString().length<8)
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Text(
+                      formatYen(widget.payPrice),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize:
+                          (widget.payPrice.toString().length<6)
+                            ?27
+                            : (widget.payPrice.toString().length==6)
+                              ?23
+                              :(widget.payPrice.toString().length==7)
                                 ?23
-                                :17
-                        ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis
-                      )
+                                :20
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis
                     )
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
           ],

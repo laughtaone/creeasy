@@ -70,12 +70,12 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
                       flex: 4,
                       child: Text(
                         widget.card_name,
-                        style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=10) ?23 :20),
+                        style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=10) ?23 :18),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     (widget.bool_pointup)
-                      ? Flexible(flex: 2, child: rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff555555)))
+                      ? Flexible(flex: 2, child: rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff333333), customHeight: 32))
                       : const SizedBox.shrink()
                   ],
                 ),
