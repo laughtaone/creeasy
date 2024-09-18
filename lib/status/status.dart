@@ -130,7 +130,7 @@ class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateM
         body: TabBarView(
           controller: _tabController,
           children: [
-            // ===================================== カード タブ =========================================
+            // ===================================== 銀行タブ =========================================
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
               child: ListView(children: [
@@ -153,7 +153,7 @@ class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateM
             ),
             // =======================================================================================
 
-            // ===================================== 銀行 タブ =========================================
+            // ================================== 資金ボックスタブ ======================================
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
               child: ListView(children: [
