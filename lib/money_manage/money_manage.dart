@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:creeasy/COMMON_COMPS/appbar/common_appbar_comp.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 
 
@@ -13,15 +14,18 @@ class MoneyManagePage extends StatefulWidget {
 
 
 class _MoneyManagePageState extends State<MoneyManagePage> with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-  List<dynamic> _statusBankList = [
-    ['三井住友銀行', 102314, ['三井住友カード']],
-    ['三菱UFJ銀行', 9102, ['PayPayカード', 'ビューSuicaカード']],
-    ['楽天銀行', 9102, ['楽天カード', 'セブンカードプラス', 'リクルートカード']],
-    ['ゆうちょ銀行', 9102, ['auPAYカード', 'dカード', 'エポスカード', 'メルカード']],
-    ['みずほああああああああaaaaaaaaaあああああああああ銀行', 9102, ['auPAYカードaaaaaaaaaaaaaaaaaaaaa', 'dカード', 'エポスカード', 'メルカード', 'P-oneカード']]
+  List<Map<String, dynamic>> _payHistories = [
+    {'day': '9/5', 'place': 'セブン', 'cardName': '三井住友カード', 'price': 392, 'isKeepMoney': true},
+    {'day': '9/11', 'place': 'Suicaチャージ', 'cardName': 'ビックSuicaカード', 'price': 1000, 'isKeepMoney': false},
+    {'day': '12/25', 'place': 'Suicaチャージ', 'cardName': 'ビックSuicaカード', 'price': 1000, 'isKeepMoney': false},
   ];
 
+
+  Color gusuColumnColor = const Color(0xffe0e0e0);
+  Color kisuColumnColor = const Color(0xfff3f3f3);
+
+
+  late TabController _tabController;
   @override
   void initState() {
     super.initState();
@@ -58,88 +62,216 @@ class _MoneyManagePageState extends State<MoneyManagePage> with SingleTickerProv
       //   recvText: '利用履歴管理'
       // ),
       appBar: AppBar(
-          centerTitle: true,
-          title: const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(Icons.task_alt_outlined, color: Colors.black),
-              SizedBox(width: 5),
-              Text('利用履歴管理'),
-            ],
-          ),
-          // actions: [
-          //   TextButton(
-          //     child: Row(children: [
-          //       const Icon(
-          //         Icons.add,
-          //         color: Colors.black,
-          //       ),
-          //       Icon(
-          //         _actionIcon,
-          //         color: Colors.black,
-          //       ),
-          //     ]),
-          //     onPressed: () {
-          //       Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => (_tabController.index == 0)
-          //             ? const AddCardPage()
-          //             : const AddBankPage(),
-          //           fullscreenDialog: true,
-          //         ),
-          //       );
-          //     },
-          //   )
-          // ],
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
-          bottom: TabBar(controller: _tabController, tabs: const [
-            Tab(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.account_balance_outlined),
-                  SizedBox(width: 5),
-                  Text('銀行'),
-                ],
-              ),
-            ),
-            Tab(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.savings_outlined),
-                  SizedBox(width: 5),
-                  Text('口座内のボックス'),
-                ],
-              ),
-            )
-          ]),
-        ),
-      body: TabBarView(
-          controller: _tabController,
+        centerTitle: true,
+        title: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            // ===================================== 銀行タブ =========================================
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-              child: ListView(children: [
-                miniInfo(passText: '以下の金額は、各口座で想定される必要最低限の残高を示しています', customTextSize: 14, customTopPadding: 7, customBottomPadding: 17),
-              ]),
-            ),
-            // =======================================================================================
-
-            // ================================== 資金ボックスタブ ======================================
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-              child: ListView(children: [
-                miniInfo(passText: '以下の金額は、各口座で想定される必要最低限の残高を示しています', customTextSize: 14, customTopPadding: 7, customBottomPadding: 17),
-              ]),
-            ),
-            // =======================================================================================
-
+            Icon(Icons.task_alt_outlined, color: Colors.black),
+            SizedBox(width: 5),
+            Text('利用履歴管理'),
           ],
         ),
+        // actions: [
+        //   TextButton(
+        //     child: Row(children: [
+        //       const Icon(
+        //         Icons.add,
+        //         color: Colors.black,
+        //       ),
+        //       Icon(
+        //         _actionIcon,
+        //         color: Colors.black,
+        //       ),
+        //     ]),
+        //     onPressed: () {
+        //       Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (context) => (_tabController.index == 0)
+        //             ? const AddCardPage()
+        //             : const AddBankPage(),
+        //           fullscreenDialog: true,
+        //         ),
+        //       );
+        //     },
+        //   )
+        // ],
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor, // Themeから色を取得
+        bottom: TabBar(controller: _tabController, tabs: const [
+          Tab(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.unpublished_outlined),
+                SizedBox(width: 5),
+                Text('資金未確保'),
+              ],
+            ),
+          ),
+          Tab(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.check_circle_outlined),
+                SizedBox(width: 5),
+                Text('資金確保済'),
+              ],
+            ),
+          )
+        ]),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10),
+        child: TabBarView(
+            controller: _tabController,
+            children: [
+              // ===================================== 資金未確保タブ =========================================
+              Container(
+                width: double.infinity,
+                child: DataTable(
+                  columnSpacing: 0,
+                  horizontalMargin: 0,
+                  columns: <DataColumn>[
+                    DataColumn(
+                      label: Expanded(
+                        child: Container(
+                          width: 45,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text('利用日'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Container(
+                          width: 75,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text('利用場所'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Container(
+                          width: 75,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text('利用カード'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Container(
+                          width: 45,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text('利用額'),
+                          ),
+                        ),
+                      ),
+                    ),
+                    DataColumn(
+                      label: Expanded(
+                        child: Container(
+                          width: 45,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text('💰済？'),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                  rows: _payHistories.map((singlePayHistory) {
+                    return DataRow(
+                      cells: <DataCell>[
+                        DataCell(
+                          Container(
+                            width: 45,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                singlePayHistory['day'],
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            width: 75,
+                            child: AutoSizeText(
+                              singlePayHistory['place'],
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              minFontSize: 10,
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            width: 75,
+                            child: AutoSizeText(
+                              singlePayHistory['cardName'],
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              minFontSize: 10,
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                            width: 45,
+                            child: Text(
+                              singlePayHistory['price'].toString(),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                        DataCell(
+                          Container(
+                              width: 45,
+                              child: Text(
+                                singlePayHistory['isKeepMoney'] ? '済' : '未',
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+              // =======================================================================================
+        
+              // ================================== 資金ボックスタブ ======================================
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                child: ListView(children: [
+                ]),
+              ),
+              // =======================================================================================
+        
+            ],
+          ),
+      ),
       );
   }
+}
+
+
+class SinglePayHistory {
+  final String place;
+  final int price;
+
+  SinglePayHistory(this.place, this.price);
 }
