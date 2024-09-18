@@ -142,6 +142,7 @@ class _AddPaymentPageState extends State<AddPaymentPage> {
 
               // =============================================== ③日付 ==============================================
               betweenSelectField(),
+              Text(_payDate.toString()),
               selectTileComp(
                 titleComp: titleTextComp(resvIcon: Icons.event_outlined, resvText: '利用日を入力'),
                 fieldInput: Container(

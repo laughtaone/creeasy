@@ -61,20 +61,21 @@ class _CardManageCardTileState extends State<CardManageCardTile> {
             Flexible(
               flex: 5,
               child: Container(
-                color: (_debugBackColor) ?Colors.blue[100] :null,
+                // color: (_debugBackColor) ?Colors.blue[100] :null,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Flexible(
+                      flex: 4,
                       child: Text(
                         widget.card_name,
-                        style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=8) ?23 :20),
+                        style: TextStyle(color: Colors.black, fontSize: (widget.card_name.length<=10) ?23 :20),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     (widget.bool_pointup)
-                      ? rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff555555))
+                      ? Flexible(flex: 2, child: rectangleIconTextComp(argIcon: Icons.auto_awesome_outlined, argText: 'Pアップ有', customElementColor: const Color(0xff555555)))
                       : const SizedBox.shrink()
                   ],
                 ),

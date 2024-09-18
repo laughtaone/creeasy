@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:creeasy/COMMON_COMPS/appbar/common_appbar_comp.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:creeasy/money_manage/pay_history_tile_comp.dart';
 
 
 
@@ -15,9 +16,11 @@ class MoneyManagePage extends StatefulWidget {
 
 class _MoneyManagePageState extends State<MoneyManagePage> with SingleTickerProviderStateMixin {
   List<Map<String, dynamic>> _payHistories = [
-    {'day': '9/5', 'place': 'セブン', 'cardName': '三井住友カード', 'price': 392, 'isKeepMoney': true},
-    {'day': '9/11', 'place': 'Suicaチャージ', 'cardName': 'ビックSuicaカード', 'price': 1000, 'isKeepMoney': false},
-    {'day': '12/25', 'place': 'Suicaチャージ', 'cardName': 'ビックSuicaカード', 'price': 1000, 'isKeepMoney': false},
+    {'payDate': DateTime(2024, 9, 5), 'payPlace': 'セブン', 'payCardName': '三井住友カード', 'connectBank': '三菱UFJ銀行', 'payPrice': 392, 'isSetureMoney': true},
+    {'payDate': DateTime(2024, 9, 12), 'payPlace': 'Suicaチャージ', 'payCardName': 'ビックSuicaカード', 'connectBank': 'ゆうちょ銀行', 'payPrice': 1000, 'isSetureMoney': false},
+    {'payDate': DateTime(2024, 9, 12), 'payPlace': 'Suicaチャージ', 'payCardName': 'ビックSuicaカード', 'connectBank': 'ゆうちょ銀行', 'payPrice': 10000, 'isSetureMoney': false},
+    {'payDate': DateTime(2024, 9, 12), 'payPlace': 'Suicaチャージ', 'payCardName': 'ビックSuicaカードビックSuicaカード', 'connectBank': 'ゆうちょ銀行', 'payPrice': 100000, 'isSetureMoney': false},
+    {'payDate': DateTime(2024, 9, 15), 'payPlace': 'AppleStore', 'payCardName': 'メルカード', 'connectBank': 'ゆうちょ銀行', 'payPrice': 1000000, 'isSetureMoney': false},
   ];
 
 
@@ -121,150 +124,32 @@ class _MoneyManagePageState extends State<MoneyManagePage> with SingleTickerProv
           )
         ]),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 10, right: 10),
-        child: TabBarView(
-            controller: _tabController,
-            children: [
-              // ===================================== 資金未確保タブ =========================================
-              Container(
-                width: double.infinity,
-                child: DataTable(
-                  columnSpacing: 0,
-                  horizontalMargin: 0,
-                  columns: <DataColumn>[
-                    DataColumn(
-                      label: Expanded(
-                        child: Container(
-                          width: 45,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text('利用日'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Container(
-                          width: 75,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text('利用場所'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Container(
-                          width: 75,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text('利用カード'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Container(
-                          width: 45,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text('利用額'),
-                          ),
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Container(
-                          width: 45,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text('💰済？'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                  rows: _payHistories.map((singlePayHistory) {
-                    return DataRow(
-                      cells: <DataCell>[
-                        DataCell(
-                          Container(
-                            width: 45,
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                singlePayHistory['day'],
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Container(
-                            width: 75,
-                            child: AutoSizeText(
-                              singlePayHistory['place'],
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              minFontSize: 10,
-                              style: TextStyle(fontSize: 14),
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Container(
-                            width: 75,
-                            child: AutoSizeText(
-                              singlePayHistory['cardName'],
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              minFontSize: 10,
-                              style: TextStyle(fontSize: 12),
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Container(
-                            width: 45,
-                            child: Text(
-                              singlePayHistory['price'].toString(),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Container(
-                              width: 45,
-                              child: Text(
-                                singlePayHistory['isKeepMoney'] ? '済' : '未',
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                        ),
-                      ],
-                    );
-                  }).toList(),
-                ),
-              ),
-              // =======================================================================================
-        
-              // ================================== 資金ボックスタブ ======================================
-              Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-                child: ListView(children: [
-                ]),
-              ),
-              // =======================================================================================
-        
-            ],
+      body: TabBarView(
+        controller: _tabController,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: ListView.builder(
+              itemCount: _payHistories.length,
+              itemBuilder: (context, index) {
+                return PayHistoryTileComp(
+                  payPlace: _payHistories[index]['payPlace'],
+                  payDate: _payHistories[index]['payDate'],
+                  payCardName: _payHistories[index]['payCardName'],
+                  connectBank: _payHistories[index]['connectBank'],
+                  payPrice: _payHistories[index]['payPrice'],
+                  isSetureMoney: _payHistories[index]['isSetureMoney'],
+                );
+              },
+            ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child:  Text('a')
+          )
+        ]
       ),
-      );
+    );
   }
 }
 

@@ -125,19 +125,21 @@ class _CardManagePageState extends State<CardManagePage> with SingleTickerProvid
                   customTextSize: 13, needsTBPadding: true, customTopPadding: 6, customBottomPadding: 10
                 ),
                 const CardManageCardTile(
-                    card_name: '三井住友カードaaaaaaaaaaaaaaa',
-                    return_rate_unit: 200,
-                    return_rate: 0.5,
-                    target_range: '1日-末日',
-                    pay_date: '翌月26日',
-                    bool_pointup: true),
+                  card_name: '三井住友カードaaaaaaaaaaaaaaa',
+                  return_rate_unit: 200,
+                  return_rate: 0.5,
+                  target_range: '1日-末日',
+                  pay_date: '翌月26日',
+                  bool_pointup: true
+                ),
                 const CardManageCardTile(
-                    card_name: 'メルカード',
-                    return_rate_unit: 100,
-                    return_rate: 1,
-                    target_range: '1日-末日',
-                    pay_date: '自由',
-                    bool_pointup: false),
+                  card_name: 'メルカード',
+                  return_rate_unit: 100,
+                  return_rate: 1,
+                  target_range: '1日-末日',
+                  pay_date: '自由',
+                  bool_pointup: false
+                ),
               ]),
             ),
             // =======================================================================================
