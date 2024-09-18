@@ -29,7 +29,7 @@ class StatusBankTileComp extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          fixedSize: const Size.fromHeight(165)
+          fixedSize: const Size.fromHeight(180)
         ),
         child: Column(
           children: [
@@ -70,51 +70,47 @@ class StatusBankTileComp extends StatelessWidget {
 
             // --------------------------------------------- 下部分 ---------------------------------------------
             Expanded(
-              flex: 5,
+              flex: 6,
               child: Column(
                 children: [
                   Expanded(
                     flex: 1,
                     child: Container(
-                      color: Colors.amberAccent,
+                      // color: Colors.amberAccent,
                       alignment: Alignment.centerLeft,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('該当カード', style: TextStyle(fontSize: 13, color: Colors.black),),
-                          Text('他枚', style: TextStyle(fontSize: 13, color: Colors.black),),
+                          const Text('該当カード', style: TextStyle(fontSize: 14, color: Colors.black),),
+                          (gaitoCard.length > 4)
+                            ? Text('他${gaitoCard.length > 4 ? gaitoCard.length - 4 : 0}枚 | 計${gaitoCard.length}枚', style: const TextStyle(fontSize: 13, color: Colors.black),)
+                            : Text('計${gaitoCard.length}枚', style: const TextStyle(fontSize: 13, color: Colors.black),)
                         ],
                       )
                     )
                   ),
                   Expanded(
-                    flex: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
-                      child: Container(
-                        color: Colors.amberAccent,
-                        // 外側のContainerに制約を設ける
-                        constraints: BoxConstraints(
-                          maxHeight: 200, // 必要に応じて高さを調整
-                        ),
-                        width: double.infinity,
-                        child: SingleChildScrollView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          child: Wrap(
-                            alignment: WrapAlignment.start,
-                            crossAxisAlignment: WrapCrossAlignment.start,
-                            spacing: 0, // アイテム間の水平スペース
-                            runSpacing: 3.0, // アイテム間の垂直スペース
-                            children: gaitoCard.take(2).map((cardName) => cardIconNameComp(cardName)).toList(),
-                          ),
+                    flex: 6,
+                    child: Container(
+                      // color: Colors.amberAccent,
+                      width: double.infinity,
+                      child: Center(
+                        child: Wrap(
+                          alignment: WrapAlignment.center,
+                          crossAxisAlignment: WrapCrossAlignment.start,
+                          spacing: 0, // アイテム間の水平スペース
+                          runSpacing: 3.0, // アイテム間の垂直スペース
+                          children: gaitoCard.take(4).map((cardName) => cardIconNameComp(cardName)).toList(),
                         ),
                       ),
                     ),
                   )
                 ],
               ),
-            )
+            ),
             // -------------------------------------------------------------------------------------------------
+
+            const SizedBox(height: 3),
           ],
         ),
       ),

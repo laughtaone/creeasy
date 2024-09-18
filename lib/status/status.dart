@@ -29,7 +29,13 @@ class StatusPage extends StatefulWidget {
 
 class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  List<dynamic> _statusBankList = [['三井住友銀行', 102314], ['三菱UFJ銀行', 9102]];
+  List<dynamic> _statusBankList = [
+    ['三井住友銀行', 102314, ['三井住友カード']],
+    ['三菱UFJ銀行', 9102, ['PayPayカード', 'ビューSuicaカード']],
+    ['楽天銀行', 9102, ['楽天カード', 'セブンカードプラス', 'リクルートカード']],
+    ['ゆうちょ銀行', 9102, ['auPAYカード', 'dカード', 'エポスカード', 'メルカード']],
+    ['みずほああああああああaaaaaaaaaあああああああああ銀行', 9102, ['auPAYカードaaaaaaaaaaaaaaaaaaaaa', 'dカード', 'エポスカード', 'メルカード', 'P-oneカード']]
+  ];
 
   @override
   void initState() {
@@ -131,13 +137,14 @@ class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateM
                 miniInfo(passText: '以下の金額は、各口座で想定される必要最低限の残高を示しています', customTextSize: 14, customTopPadding: 7, customBottomPadding: 17),
                 ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: _statusBankList.length,
                   itemBuilder: (BuildContext context, int index) {
                     return StatusBankTileComp(
                       bankName: _statusBankList[index][0],
                       bankBalance: _statusBankList[index][1],
-                      gaitoCard: ['三井住友カード三井住友カード', 'PayPayカード', '楽天カード', 'auPAYカード', 'dカード'],
+                      gaitoCard: _statusBankList[index][2],
+
                     );
                   }
                 )
@@ -149,11 +156,23 @@ class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateM
             // ===================================== 銀行 タブ =========================================
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
-              child: ListView(
-                children: [
+              child: ListView(children: [
+                miniInfo(passText: '以下の金額は、各口座で想定される必要最低限の残高を示しています', customTextSize: 14, customTopPadding: 7, customBottomPadding: 17),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: _statusBankList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return StatusBankTileComp(
+                      bankName: _statusBankList[index][0],
+                      bankBalance: _statusBankList[index][1],
+                      gaitoCard: _statusBankList[index][2],
 
-                ],
-              ),
+                    );
+                  }
+                )
+
+              ]),
             ),
             // =======================================================================================
 
