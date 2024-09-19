@@ -11,6 +11,7 @@ Padding titleTextComp({
   double customBottomMargin = 2,
   FontWeight customFontWeight = FontWeight.w500,
   double customBetweenIT = 5,
+  bool placementCenter = false
 }) {
   late double _finalTextSize;
   if (resvTextSize!=null) {
@@ -34,7 +35,7 @@ Padding titleTextComp({
   return Padding(
     padding: EdgeInsets.only(top: customTopMargin, bottom: customBottomMargin),
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: (!placementCenter) ?MainAxisAlignment.start :MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         (resvIcon != null)

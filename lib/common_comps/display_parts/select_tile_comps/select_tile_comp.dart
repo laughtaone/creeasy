@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 // 選択タイル
+// import文：import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 
 
 class selectTileComp extends StatefulWidget {

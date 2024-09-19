@@ -1,6 +1,8 @@
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:flutter/material.dart';
 import 'package:creeasy/status/status_bank_tile_comp.dart';
+import 'package:creeasy/status/status_fundbox_tile_comp.dart';
+
 
 
 class StatusPage extends StatefulWidget {
@@ -36,6 +38,14 @@ class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateM
     ['ゆうちょ銀行', 9102, ['auPAYカード', 'dカード', 'エポスカード', 'メルカード']],
     ['みずほああああああああaaaaaaaaaあああああああああ銀行', 9102, ['auPAYカードaaaaaaaaaaaaaaaaaaaaa', 'dカード', 'エポスカード', 'メルカード', 'P-oneカード']]
   ];
+  List<dynamic> _statusFundboxList = [
+    ['みんなの銀行 - 三井カード', 102314, ['三井住友カード']],
+    ['みんなの銀行 - レギュラーカード', 9102, ['PayPayカード', 'ビューSuicaカード']],
+    ['みんなの銀行 - 準レギュラーカード', 9102, ['楽天カード', 'セブンカードプラス', 'リクルートカード']],
+    ['みんなの銀行 - 使わないカード', 9102, ['auPAYカード', 'dカード', 'エポスカード', 'メルカード']],
+    ['みんなの銀行 - もうすぐ解約するカード', 9102, ['auPAYカードaaaaaaaaaaaaaaaaaaaaa', 'dカード', 'エポスカード', 'メルカード', 'P-oneカード']]
+  ];
+
 
   @override
   void initState() {
@@ -157,16 +167,17 @@ class _StatusPageState extends State<StatusPage> with SingleTickerProviderStateM
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
               child: ListView(children: [
-                miniInfo(passText: '以下の金額は、各口座で想定される必要最低限の残高を示しています', customTextSize: 14, customTopPadding: 7, customBottomPadding: 17),
+                miniInfo(passText: '以下の金額は、各口座で想定される必要最低限の残高を示しています', customTextSize: 14, customTopPadding: 7, customBottomPadding: 4),
+                miniInfo(passText: '各ボックスを押すと、ボックスから銀行への送金履歴を記録することが可能です', customTextSize: 14, customTopPadding: 4, customBottomPadding: 17),
                 ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _statusBankList.length,
+                  itemCount: _statusFundboxList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return StatusBankTileComp(
-                      bankName: _statusBankList[index][0],
-                      bankBalance: _statusBankList[index][1],
-                      gaitoCard: _statusBankList[index][2],
+                    return StatusFundboxTileComp(
+                      fundboxName: _statusFundboxList[index][0],
+                      fundboxBalance: _statusFundboxList[index][1],
+                      gaitoCard: _statusFundboxList[index][2],
 
                     );
                   }

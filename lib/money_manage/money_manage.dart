@@ -127,6 +127,7 @@ class _MoneyManagePageState extends State<MoneyManagePage> with SingleTickerProv
       body: TabBarView(
         controller: _tabController,
         children: [
+          // ================================== 資金未確保 タブ ======================================
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: ListView.builder(
@@ -143,10 +144,15 @@ class _MoneyManagePageState extends State<MoneyManagePage> with SingleTickerProv
               },
             ),
           ),
+          // =======================================================================================
+
+
+          // ================================== 資金確保済 タブ =======================================
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child:  Text('a')
           )
+          // =======================================================================================
         ]
       ),
     );

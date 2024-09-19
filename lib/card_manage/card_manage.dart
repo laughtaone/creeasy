@@ -5,6 +5,7 @@ import 'package:creeasy/card_manage/card_manage_bank-tile.dart';
 import 'package:creeasy/card_manage/add_bank/add_bank_main.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/card_manage/bank_example_icon.dart';
+import 'package:creeasy/status/status_fundbox_tile_comp.dart';
 
 
 

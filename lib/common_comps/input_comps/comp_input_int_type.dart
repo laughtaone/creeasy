@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:creeasy/COMMON_COMPS/formatter/zero_limit_formatter.dart';
 // 入力フィールド(直接/整数形式)単体
+// import文：import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';
 
 
 class compInputIntType extends StatefulWidget {
