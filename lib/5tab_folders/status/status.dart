@@ -1,7 +1,7 @@
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:flutter/material.dart';
-import 'package:creeasy/status/status_bank_tile_comp.dart';
-import 'package:creeasy/status/status_fundbox_tile_comp.dart';
+import 'package:creeasy/5tab_folders/status/status_bank_tile_comp.dart';
+import 'package:creeasy/5tab_folders/status/status_fundbox_tile_comp.dart';
 
 
 

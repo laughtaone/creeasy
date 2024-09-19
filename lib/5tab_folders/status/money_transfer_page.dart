@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:creeasy/card_manage/card_manage_COMPS/pay_bank_and_saving_box_comp.dart';
+import 'package:creeasy/5tab_folders/card_manage/card_manage_COMPS/pay_bank_and_saving_box_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/title_text_comp.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/topright_close_button.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
@@ -8,8 +8,8 @@ import 'package:creeasy/COMMON_COMPS/display_parts/caution_comp.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:creeasy/COMMON_COMPS/between/between_select_field.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button_comp.dart';
-import 'package:creeasy/card_manage/card_manage_COMPS/pay_bank_comp.dart';
-import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
+import 'package:creeasy/5tab_folders/card_manage/card_manage_COMPS/pay_bank_comp.dart';
+import 'package:creeasy/5tab_folders/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_int_type.dart';

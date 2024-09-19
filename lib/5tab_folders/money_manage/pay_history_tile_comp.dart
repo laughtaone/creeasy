@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:creeasy/card_manage/change_card/change_card.dart';
+import 'package:creeasy/5tab_folders/card_manage/change_card/change_card.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/rectangle_icon_text_comp.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 

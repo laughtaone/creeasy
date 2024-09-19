@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:creeasy/status/mini_card_comp.dart';
-import 'package:creeasy/status/money_transfer_page.dart';
+import 'package:creeasy/5tab_folders/status/mini_card_comp.dart';
+import 'package:creeasy/5tab_folders/status/money_transfer_page.dart';
 // import文：import 'package:creeasy/status/status_fundbox_tile_comp.dart';
 
 

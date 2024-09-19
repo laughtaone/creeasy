@@ -3,7 +3,7 @@ import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/save_button
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_button_toggle_comp.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_page_jump.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info_end_url_jump.dart';
-import 'package:creeasy/card_manage/card_manage_COMPS/pay_bank_and_saving_box_comp.dart';
+import 'package:creeasy/5tab_folders/card_manage/card_manage_COMPS/pay_bank_and_saving_box_comp.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_dialog_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_double_type.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_string_type.dart';
@@ -14,12 +14,12 @@ import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile
 import 'package:creeasy/COMMON_COMPS/between/between_icon.dart';
 import 'package:creeasy/COMMON_COMPS/input_comps/comp_input_row_direct_select_type.dart';
 import 'package:creeasy/COMMON_COMPS/buttons/jump_screen_button_comp/made_comp/next_button_comp.dart';
-import 'package:creeasy/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
+import 'package:creeasy/5tab_folders/card_manage/card_manage_COMPS/selected_card_intro_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/select_tile_comps/select_tile_twolayers_button_toggle_comp.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/progress_bar_comp.dart';
 import 'package:creeasy/COMMON_COMPS/function/judge_all_notnull.dart';
 import 'package:creeasy/COMMON_COMPS/function/is_input_toggle_all_field.dart';
-import 'package:creeasy/card_manage/card_manage_COMPS/must_manage_lists_comp.dart';
+import 'package:creeasy/5tab_folders/card_manage/card_manage_COMPS/must_manage_lists_comp.dart';
 
 
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:creeasy/home/home.dart';
-import 'package:creeasy/card_manage/card_manage.dart';
-import 'package:creeasy/add/add_payment.dart';
-import 'package:creeasy/add/add_special-payment.dart';
-import 'package:creeasy/add/add_use-point.dart';
-import 'package:creeasy/status/status.dart';
-import 'package:creeasy/money_manage/money_manage.dart';
+import 'package:creeasy/5tab_folders/home/home.dart';
+import 'package:creeasy/5tab_folders/card_manage/card_manage.dart';
+import 'package:creeasy/5tab_folders/add/add_payment.dart';
+import 'package:creeasy/5tab_folders/add/add_special-payment.dart';
+import 'package:creeasy/5tab_folders/add/add_use-point.dart';
+import 'package:creeasy/5tab_folders/status/status.dart';
+import 'package:creeasy/5tab_folders/money_manage/money_manage.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() {

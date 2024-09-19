@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:creeasy/home/home_card-tile.dart';
-import 'package:creeasy/settings/settings.dart';
+import 'package:creeasy/5tab_folders/home/home_card-tile.dart';
+import 'package:creeasy/5tab_folders/home/settings/settings.dart';
 
 
 

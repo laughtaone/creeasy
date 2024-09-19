@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:creeasy/card_manage/change_bank/change_bank.dart';
+import 'package:creeasy/5tab_folders/card_manage/change_bank/change_bank.dart';
 import 'package:creeasy/COMMON_COMPS/display_parts/circle_icon_comp.dart';
 
 

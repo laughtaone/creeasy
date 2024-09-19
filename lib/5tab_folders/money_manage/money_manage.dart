@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:creeasy/COMMON_COMPS/appbar/common_appbar_comp.dart';
 import 'package:creeasy/COMMON_COMPS/mini_info/mini_info.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:creeasy/money_manage/pay_history_tile_comp.dart';
+import 'package:creeasy/5tab_folders/money_manage/pay_history_tile_comp.dart';
 
 
 
