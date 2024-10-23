@@ -83,7 +83,8 @@ class _PayHistoryTileCompState extends State<PayHistoryTileComp> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(6),
           ),
-          fixedSize: const Size.fromHeight(155)
+          fixedSize: const Size.fromHeight(155),
+          padding: const EdgeInsets.only(left: 25, right: 25)
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -99,7 +100,7 @@ class _PayHistoryTileCompState extends State<PayHistoryTileComp> {
                     Flexible(
                       flex: 4,
                       child: Text(
-                        widget.payCardName,
+                        widget.payPlace,
                         style: TextStyle(color: Colors.black, fontSize: (widget.payCardName.length<=8) ?23 :20),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -109,7 +110,7 @@ class _PayHistoryTileCompState extends State<PayHistoryTileComp> {
                         flex: 3,
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            padding: EdgeInsets.fromLTRB(10, 11, 10, 11),
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),

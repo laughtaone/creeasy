@@ -34,30 +34,31 @@ class _SaveButtonCompState extends State<SaveButtonComp> {
                 onPressed: (widget.isCanOnpress)
                     ? () {
                         showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text(
-                                  '本当に保存しますか？',
-                                  style: TextStyle(fontSize: 20),
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text(
+                                '本当に保存しますか？',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => {Navigator.pop(context)},
+                                  child: const Text('キャンセル',
+                                      style: TextStyle(color: Colors.red)),
                                 ),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () => {Navigator.pop(context)},
-                                    child: const Text('キャンセル',
-                                        style: TextStyle(color: Colors.red)),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      widget.argCallback();
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('保存'),
-                                  ),
-                                ],
-                              );
-                            });
+                                TextButton(
+                                  onPressed: () {
+                                    widget.argCallback();
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('保存'),
+                                ),
+                              ],
+                            );
+                          }
+                        );
                       }
                     : null,
                 // ----------------------------------------------------------------------------------------------

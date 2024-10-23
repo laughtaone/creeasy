@@ -9,10 +9,16 @@ import 'package:creeasy/5tab_folders/status/status.dart';
 import 'package:creeasy/5tab_folders/money_manage/money_manage.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:convert';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
-void main() {
-  runApp(const StartPageHome());
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    const ProviderScope(
+      child: StartPageHome()
+    )
+  );
 }
 
 class StartPageHome extends StatelessWidget {
